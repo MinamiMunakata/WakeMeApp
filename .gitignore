@@ -67,3 +67,6 @@ fastlane/readme.md
 # mac
 .DS_Store
 
+# key word
+app/src/main/res/values/strings.xml
+
