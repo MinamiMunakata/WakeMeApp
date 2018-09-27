@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WakeUpYouSleepyhead.iml" filepath="$PROJECT_DIR$/WakeUpYouSleepyhead.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WakeMeApp.iml" filepath="$PROJECT_DIR$/WakeMeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakeupyousleepyhead;
+package com.minami_m.project.android.wakemeapp;
 
 import org.junit.Test;
 

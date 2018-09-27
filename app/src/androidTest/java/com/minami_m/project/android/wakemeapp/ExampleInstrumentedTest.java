@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakeupyousleepyhead;
+package com.minami_m.project.android.wakemeapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.minami_m.project.android.wakeupyousleepyhead", appContext.getPackageName());
+        assertEquals("com.minami_m.project.android.wakemeapp", appContext.getPackageName());
     }
 }
