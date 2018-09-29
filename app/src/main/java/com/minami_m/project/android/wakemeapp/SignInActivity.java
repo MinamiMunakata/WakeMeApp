@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,15 +13,15 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class FirebaseUIActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
-    private static final String TAG = "FirebaseUIActivity";
+    private static final String TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_firebase_ui);
+        setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_signin);
 
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
