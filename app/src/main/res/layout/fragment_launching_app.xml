@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LaunchingAppFragment"
+    android:gravity="center"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:textSize="@dimen/text_h1"
+        android:textStyle="bold"
+        android:textColor="@color/colorMyAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"/>
+
+</LinearLayout>

@@ -3,5 +3,7 @@
     <dimen name="radius">10dp</dimen>
     <dimen name="basic_space">10dp</dimen>
     <dimen name="basic_margin">20dp</dimen>
-    <dimen name="text_strong">20sp</dimen>
+    <dimen name="text_h1">40sp</dimen>
+    <dimen name="text_h2">30sp</dimen>
+    <dimen name="text_h3">20sp</dimen>
 </resources>
