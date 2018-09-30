@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // supporting svc data
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -43,6 +45,9 @@ dependencies {
 
     // chatkit
     implementation 'com.github.stfalcon:chatkit:0.3.1'
+
+    // supporting svc data
+    implementation 'com.android.support:appcompat-v7:26.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
