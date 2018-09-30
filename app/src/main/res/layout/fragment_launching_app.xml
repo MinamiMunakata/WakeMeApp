@@ -9,12 +9,30 @@
     android:gravity="center"
     android:background="@color/colorBackground">
 
-    <TextView
-        android:textSize="@dimen/text_h1"
-        android:textStyle="bold"
-        android:textColor="@color/colorMyAccent"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/text_h1"
+            android:textStyle="bold"
+            android:textColor="@color/colorMyAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_margin="@dimen/basic_margin"/>
+        <Button
+            android:id="@+id/signin_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="@dimen/basic_margin"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/text_h3"
+            android:onClick="signIn"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

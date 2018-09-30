@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -18,6 +19,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
     private static final String TAG = "SignInActivity";
+    private List<AuthUI.IdpConfig> providers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         // Choose authentication providers
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
+        providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.FacebookBuilder().build());
 
@@ -96,5 +98,16 @@ public class SignInActivity extends AppCompatActivity {
                 Log.e(TAG, "onActivityResult: ", response.getError());
             }
         }
+    }
+
+    public void signIn(View view) {
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setIsSmartLockEnabled(false)
+                        .setAvailableProviders(providers)
+                        .build(),
+                RC_SIGN_IN);
     }
 }
