@@ -12,7 +12,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/basic_margin">
+        android:layout_marginLeft="@dimen/space30"
+        android:layout_marginRight="@dimen/space30"
+        android:layout_marginTop="@dimen/space10">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,8 +31,8 @@
             android:layout_height="100dp"
             android:src="@drawable/user_icon"
             android:textColor="@color/colorMyAccent"
-            android:layout_marginTop="@dimen/basic_space"
-            android:layout_marginBottom="@dimen/basic_space"/>
+            android:layout_marginTop="@dimen/space10"
+            android:layout_marginBottom="@dimen/space10"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/basic_space"
+            android:layout_marginTop="@dimen/space10"
             android:background="@drawable/rounded_button"
             android:text="@string/sign_up"
             android:textColor="@color/white"/>
