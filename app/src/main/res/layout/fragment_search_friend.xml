@@ -9,7 +9,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/space_both_edges"
         android:layout_marginLeft="@dimen/space_both_edges"
         android:layout_marginTop="@dimen/vertical_space_bw_items">
@@ -30,12 +30,6 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_field"
             android:layout_marginBottom="@dimen/vertical_space_bw_items"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button"
-            android:text="@string/search_email"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_button" />
     </LinearLayout>
 
 

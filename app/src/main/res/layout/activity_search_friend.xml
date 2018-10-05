@@ -9,9 +9,16 @@
     <FrameLayout
         android:id="@+id/input_email_container"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="wrap_content">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.minami_m.project.android.wakemeapp.SearchFriendFragment"
+            tools:layout="@layout/fragment_search_friend"/>
+    </FrameLayout>
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:name="com.minami_m.project.android.wakemeapp.NewFriendButton"
+        tools:layout="@layout/fragment_new_friend_button"/>
 </LinearLayout>
