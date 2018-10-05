@@ -9,37 +9,33 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginRight="@dimen/space30"
-        android:layout_marginLeft="@dimen/space30"
-        android:layout_marginTop="@dimen/space10"
-        android:weightSum="10"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/space_both_edges"
+        android:layout_marginLeft="@dimen/space_both_edges"
+        android:layout_marginTop="@dimen/vertical_space_bw_items">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/enter_email_to_search"
-            android:layout_weight="2"
-            android:textSize="@dimen/text_h3"/>
+            android:textSize="@dimen/input_title"
+            android:layout_marginBottom="@dimen/input_header"/>
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/button"
             android:ems="10"
             android:hint="@string/hint_email"
-            android:padding="@dimen/space10"
+            android:padding="@dimen/input_padding"
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_field"
-            android:layout_weight="4"
-            android:layout_marginTop="@dimen/space10"
-            android:layout_marginBottom="@dimen/space10"/>
+            android:layout_marginBottom="@dimen/vertical_space_bw_items"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Search Email"
-            android:background="@drawable/rounded_button"
-            android:layout_weight="4"/>
+            android:layout_height="@dimen/button"
+            android:text="@string/search_email"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_button" />
     </LinearLayout>
 
 

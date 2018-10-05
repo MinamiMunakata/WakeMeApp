@@ -12,9 +12,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/space30"
-        android:layout_marginRight="@dimen/space30"
-        android:layout_marginTop="@dimen/space10">
+        android:layout_marginLeft="@dimen/space_both_edges"
+        android:layout_marginRight="@dimen/space_both_edges"
+        android:layout_marginTop="@dimen/signup_top">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,28 +29,17 @@
             android:id="@+id/user_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
             android:src="@drawable/user_icon"
             android:textColor="@color/colorMyAccent"
-            android:layout_marginTop="@dimen/space10"
-            android:layout_marginBottom="@dimen/space10"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textColor="@color/colorMyAccent"/>
+            />
 
-        <EditText
-            android:id="@+id/editName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:backgroundTint="@color/colorMyAccent"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nickname"
+            android:layout_marginTop="@dimen/input_header"
             android:textColor="@color/colorMyAccent"/>
 
         <EditText
@@ -62,6 +51,7 @@
             android:backgroundTint="@color/colorMyAccent"/>
 
         <TextView
+            android:layout_marginTop="@dimen/input_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
@@ -76,6 +66,7 @@
             android:backgroundTint="@color/colorMyAccent"/>
 
         <TextView
+            android:layout_marginTop="@dimen/input_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
@@ -92,9 +83,9 @@
         <Button
             android:id="@+id/signup_or_update_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/space10"
+            android:layout_marginTop="@dimen/vertical_space_bw_items"
             android:background="@drawable/rounded_button"
             android:text="@string/sign_up"
             android:textColor="@color/white"/>

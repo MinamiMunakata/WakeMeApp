@@ -36,13 +36,6 @@ public class SignInActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-
-            // Create a new Fragment to be placed in the activity layout
-            LaunchingAppFragment launchingAppFragment = new LaunchingAppFragment();
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.signin_container, launchingAppFragment).commit();
         }
 
         // Choose authentication providers
@@ -81,9 +74,9 @@ public class SignInActivity extends AppCompatActivity {
 
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack so the user can navigate back
-                transaction.replace(R.id.signin_container, profileFragment);
-                // TODO: Remove addToBackStack()
-                transaction.addToBackStack(null);
+                transaction.add(R.id.signin_container, profileFragment);
+//                // TODO: Remove addToBackStack()
+//                transaction.addToBackStack(null);
 
                 // Commit the transaction
                 transaction.commit();
@@ -100,14 +93,4 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    public void signIn(View view) {
-        // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setIsSmartLockEnabled(false)
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
-    }
 }

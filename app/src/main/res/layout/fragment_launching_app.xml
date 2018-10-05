@@ -19,17 +19,14 @@
             android:textColor="@color/colorMyAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:layout_margin="@dimen/space20"/>
+            android:text="@string/app_name" />
         <Button
             android:id="@+id/signin_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
-            android:layout_margin="@dimen/space20"
             android:text="@string/sign_in"
-            android:textSize="@dimen/text_h3"
-            android:onClick="signIn"/>
+            android:textSize="@dimen/text_h3" />
 
     </LinearLayout>
 
