@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -69,12 +68,12 @@ public class SignInActivity extends AppCompatActivity {
 
                 // Change the UI
                 // Create fragment and give it an argument specifying the article it should show
-                ProfileFragment profileFragment = new ProfileFragment();
+                SignUpFragment signUpFragment = new SignUpFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack so the user can navigate back
-                transaction.add(R.id.signin_container, profileFragment);
+                transaction.add(R.id.signin_container, signUpFragment);
 //                // TODO: Remove addToBackStack()
 //                transaction.addToBackStack(null);
 

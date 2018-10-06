@@ -13,4 +13,5 @@
     <dimen name="input_header">10dp</dimen>
     <dimen name="signup_top">30dp</dimen>
     <dimen name="small_vertical_space_bw_item">12dp</dimen>
+    <dimen name="semicircle_radius">200dp</dimen>
 </resources>
