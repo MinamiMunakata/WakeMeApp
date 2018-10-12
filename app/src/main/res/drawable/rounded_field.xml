@@ -3,4 +3,8 @@
     android:shape="rectangle">
     <solid android:color="@color/white"/>
     <corners android:radius="@dimen/radius_btn"/>
+    <padding android:top="@dimen/padding_rounded_field"
+        android:bottom="@dimen/padding_rounded_field"
+        android:right="@dimen/padding_rounded_field"
+        android:left="@dimen/padding_rounded_field"/>
 </shape>
