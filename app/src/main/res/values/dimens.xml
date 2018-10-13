@@ -20,4 +20,9 @@
     <dimen name="card_view_height">120dp</dimen>
     <dimen name="padding_send_icon">10dp</dimen>
     <dimen name="input_message_box_margin">8dp</dimen>
+    <dimen name="message_text_size">18sp</dimen>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="padding_bubbles">10dp</dimen>
+    <dimen name="pudding_bubbles_to_wall">15dp</dimen>
+    <dimen name="padding_bubbles_to_the_other_side">60dp</dimen>
 </resources>
