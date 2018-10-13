@@ -25,4 +25,7 @@
     <dimen name="padding_bubbles">10dp</dimen>
     <dimen name="pudding_bubbles_to_wall">15dp</dimen>
     <dimen name="padding_bubbles_to_the_other_side">60dp</dimen>
+    <dimen name="message_avatar">34dp</dimen>
+    <dimen name="margin_bw_items">10dp</dimen>
+    <dimen name="padding_inside_bubble">13dp</dimen>
 </resources>

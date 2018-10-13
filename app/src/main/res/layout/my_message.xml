@@ -7,15 +7,29 @@
     android:paddingRight="@dimen/pudding_bubbles_to_wall"
     android:paddingLeft="@dimen/padding_bubbles_to_the_other_side"
     android:clipToPadding="false">
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/message_bubble"
+        android:orientation="horizontal"
+        android:id="@+id/my_bubble"
         android:background="@drawable/my_message"
         android:layout_alignParentRight="true"
-        android:text="test test test"
-        android:padding="@dimen/input_padding"
-        android:elevation="@dimen/elevation"
-        android:textSize="@dimen/message_text_size"/>
+        android:padding="@dimen/padding_inside_bubble">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="test test test test test test test test test"
+            android:elevation="@dimen/elevation"
+            android:textSize="@dimen/message_text_size"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seen"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/colorMyAccent"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
