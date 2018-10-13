@@ -19,6 +19,6 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.minami_m.project.android.wakemeapp.NewFriendButton"
+        android:name="com.minami_m.project.android.wakemeapp.NewFriendButtonFragment"
         tools:layout="@layout/fragment_new_friend_button"/>
 </LinearLayout>

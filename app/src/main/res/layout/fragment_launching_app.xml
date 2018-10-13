@@ -13,18 +13,71 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TextView
-            android:textSize="@dimen/text_h1"
-            android:textStyle="bold"
-            android:textColor="@color/colorMyAccent"
+        <ImageView
+            android:layout_marginBottom="@dimen/vertical_space_bw_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name" />
+            android:src="@drawable/img_logo"
+            android:background="@drawable/logo_bubble" />
+        <LinearLayout
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_rounded_field">
+            <FrameLayout
+                android:layout_width="26dp"
+                android:layout_height="26dp">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_email" />
+
+            </FrameLayout>
+            <EditText
+                android:hint="Email"
+                android:paddingHorizontal="@dimen/input_padding"
+                android:textSize="@dimen/text_size_sign_in_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:background="@color/fui_transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_rounded_field">
+            <FrameLayout
+                android:layout_width="26dp"
+                android:layout_height="26dp">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_password"/>
+            </FrameLayout>
+            <EditText
+                android:paddingHorizontal="@dimen/input_padding"
+                android:textSize="@dimen/text_size_sign_in_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@color/fui_transparent"
+                android:hint="Password"/>
+        </LinearLayout>
+
+
         <Button
-            android:id="@+id/signin_btn"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
             android:text="@string/sign_in"
             android:textSize="@dimen/text_h3" />
 
