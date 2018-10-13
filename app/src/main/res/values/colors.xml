@@ -6,4 +6,6 @@
     <color name="colorBackground">#f8e7c1</color>
     <color name="colorMyAccent">#db8623</color>
     <color name="colorLightBackground">#fbf3e0</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#808080</color>
 </resources>
