@@ -36,60 +36,6 @@ public class SignInActivity extends AppCompatActivity {
                 return;
             }
         }
-
-        // Choose authentication providers
-        providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.FacebookBuilder().build());
-
-        // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setIsSmartLockEnabled(false)
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                // TODO: Check if the user is new
-                // TODO: Show the sign up page and create an account
-
-                // Change the UI
-                // Create fragment and give it an argument specifying the article it should show
-                SignUpFragment signUpFragment = new SignUpFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                // Replace whatever is in the fragment_container view with this fragment,
-                // and add the transaction to the back stack so the user can navigate back
-                transaction.add(R.id.signin_container, signUpFragment);
-//                // TODO: Remove addToBackStack()
-//                transaction.addToBackStack(null);
-
-                // Commit the transaction
-                transaction.commit();
-
-                // TODO: If the user already has an account, jump to a dialog page
-
-            } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
-                Log.e(TAG, "onActivityResult: ", response.getError());
-            }
-        }
     }
 
 }
