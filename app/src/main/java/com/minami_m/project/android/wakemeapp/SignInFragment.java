@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +29,11 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 public class SignInFragment extends Fragment implements View.OnClickListener, inputValidationHandler {
 
     private FirebaseAuth mAuth;
-    private Button sign_in_btn;
-    private EditText editText_email;
-    private EditText editText_pw;
-    private TextView sign_up_link;
-    private TextView error_msg;
+    private Button signInBtn;
+    private EditText editTextEmail;
+    private EditText editTextPw;
+    private TextView signUpLink;
+    private TextView errorMsg;
 
     public SignInFragment() {
         // Required empty public constructor
@@ -47,11 +46,11 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         // Initialize Firebase Auth
-        sign_in_btn = view.findViewById(R.id.sign_in_btn);
-        editText_email = view.findViewById(R.id.edit_text_email_for_sign_in);
-        editText_pw = view.findViewById(R.id.edit_text_password_for_sign_in);
-        sign_up_link = view.findViewById(R.id.sign_up_link);
-        error_msg = view.findViewById(R.id.sign_in_error);
+        signInBtn = view.findViewById(R.id.sign_in_btn);
+        editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);
+        editTextPw = view.findViewById(R.id.edit_text_password_for_sign_in);
+        signUpLink = view.findViewById(R.id.sign_up_link);
+        errorMsg = view.findViewById(R.id.sign_in_error);
 
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
@@ -59,7 +58,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    launchMainActivity();
+                    ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
                     Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "onAuthStateChanged: " + user.getUid() + " : " + user.getDisplayName() + " : " + user.getEmail());
                     return;
@@ -75,8 +74,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
     @Override
     public void onStart() {
         super.onStart();
-        sign_in_btn.setOnClickListener(this);
-        sign_up_link.setOnClickListener(new View.OnClickListener() {
+        signInBtn.setOnClickListener(this);
+        signUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateUI(false);
@@ -87,8 +86,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
     @Override
     public void onClick(View view) {
         if (isValidInput()) {
-            String email = editText_email.getText().toString(),
-                    password = editText_pw.getText().toString();
+            String email = editTextEmail.getText().toString(),
+                    password = editTextPw.getText().toString();
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -100,7 +99,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
-                        error_msg.setText(task.getException().getMessage());
+                        errorMsg.setText(task.getException().getMessage());
                         return;
                     }
                 }
@@ -113,7 +112,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
 
     private void updateUI(Boolean hasAccount) {
         if (hasAccount) {
-            launchMainActivity();
+            ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
         } else {
             displaySignUpForm();
         }
@@ -125,15 +124,10 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         fragmentChangeListener.replaceFragment(signUpFragment);
     }
 
-    private void launchMainActivity() {
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean isValidInput() {
-        if (!InputHandler.isValidFormEmail(editText_email)) return false;
-        if (!InputHandler.isValidFormPW(editText_pw)) return false;
+        if (!InputHandler.isValidFormEmail(editTextEmail)) return false;
+        if (!InputHandler.isValidFormPW(editTextPw)) return false;
         return true;
     }
 }

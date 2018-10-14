@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,7 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignInActivity extends AppCompatActivity implements FragmentChangeListener {
+public class SignInActivity extends AppCompatActivity implements FragmentChangeListener, ActivityChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +53,15 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
         // Commit the transaction
         transaction.commit();
+    }
+
+    @Override
+    public void launchActivity(Class nextActivity) {
+        Intent intent = new Intent(this, nextActivity);
+        startActivity(intent);
+    }
+
+    public void test(){
+
     }
 }
