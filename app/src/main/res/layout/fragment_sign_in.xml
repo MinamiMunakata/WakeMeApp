@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LaunchingAppFragment"
+    tools:context=".SignInFragment"
     android:gravity="center"
     android:background="@color/colorBackground">
 
@@ -33,10 +33,11 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_email" />
+                    android:src="@drawable/ico_email_gray" />
 
             </FrameLayout>
             <EditText
+                android:id="@+id/edit_text_email_for_sign_in"
                 android:hint="Email"
                 android:paddingHorizontal="@dimen/input_padding"
                 android:textSize="@dimen/text_size_sign_in_input"
@@ -58,9 +59,10 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_password"/>
+                    android:src="@drawable/ico_password_gray"/>
             </FrameLayout>
             <EditText
+                android:id="@+id/edit_text_password_for_sign_in"
                 android:paddingHorizontal="@dimen/input_padding"
                 android:textSize="@dimen/text_size_sign_in_input"
                 android:layout_width="match_parent"
