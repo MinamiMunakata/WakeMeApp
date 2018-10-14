@@ -30,20 +30,19 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="@dimen/small_vertical_space_bw_item"
-            android:src="@drawable/user_icon"
-            android:textColor="@color/colorMyAccent"
-            />
+            android:src="@drawable/img_picture"
+            android:textColor="@color/colorMyAccent" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nickname"
+            android:text="Name"
             android:layout_marginTop="@dimen/input_header"
             android:textColor="@color/colorMyAccent"/>
 
         <EditText
-            android:id="@+id/editNickname"
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -58,7 +57,7 @@
             android:textColor="@color/colorMyAccent"/>
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -73,7 +72,7 @@
             android:textColor="@color/colorMyAccent"/>
 
         <EditText
-            android:id="@+id/editPW"
+            android:id="@+id/edit_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

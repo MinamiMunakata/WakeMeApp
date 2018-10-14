@@ -12,7 +12,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
         <ImageView
             android:layout_marginBottom="@dimen/vertical_space_bw_items"
             android:layout_width="wrap_content"
@@ -74,7 +75,7 @@
 
 
         <Button
-            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
             android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,6 +83,31 @@
             android:textColor="@color/white"
             android:text="@string/sign_in"
             android:textSize="@dimen/text_h3" />
+        <TextView
+            android:id="@+id/sign_in_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account?"
+                android:padding="@dimen/small_padding_text"/>
+            <TextView
+                android:id="@+id/sign_up_link"
+                android:textColor="@color/colorMyAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up_under_line"
+                android:textStyle="bold"
+                android:padding="@dimen/small_padding_text"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
