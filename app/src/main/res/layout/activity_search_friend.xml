@@ -12,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <fragment
+            android:id="@+id/search_friend_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="com.minami_m.project.android.wakemeapp.SearchFriendFragment"
             tools:layout="@layout/fragment_search_friend"/>
     </FrameLayout>
     <fragment
+        android:id="@+id/search_friend_button_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.minami_m.project.android.wakemeapp.SearchFriendButtonFragment"

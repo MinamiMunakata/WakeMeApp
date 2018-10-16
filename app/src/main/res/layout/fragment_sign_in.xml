@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/sign_in_fragment"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -72,38 +73,27 @@
                 android:background="@color/fui_transparent"
                 android:hint="Password"/>
         </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation="vertical"
+        <Button
+            android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
-            android:weightSum="2">
-            <Button
-                android:id="@+id/sign_in_btn"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/rounded_button"
-                android:textColor="@color/white"
-                android:text="@string/sign_in"
-                android:textSize="@dimen/text_h3"
-                android:layout_weight="1"/>
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/text_h3"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"/>
 
-            <com.facebook.login.widget.LoginButton
-
-                android:id="@+id/fb_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:textSize="@dimen/text_h3"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/sign_in_btn"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/fb_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_h3"
+            android:textColor="@color/white"
+            android:text="Facebook Login"
+            android:background="@drawable/rounded_button"/>
 
         <TextView
+            android:paddingTop="2dp"
             android:id="@+id/sign_in_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

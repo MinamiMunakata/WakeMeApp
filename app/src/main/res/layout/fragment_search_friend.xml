@@ -21,7 +21,7 @@
             android:layout_marginBottom="@dimen/input_header"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/search_by_email_text_field"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button"
             android:ems="10"
