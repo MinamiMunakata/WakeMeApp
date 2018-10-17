@@ -90,7 +90,7 @@
             android:textSize="@dimen/text_h3"
             android:textColor="@color/white"
             android:text="Facebook Login"
-            android:background="@drawable/rounded_button"/>
+            android:background="@drawable/facebook_login_btn"/>
 
         <TextView
             android:paddingTop="2dp"
