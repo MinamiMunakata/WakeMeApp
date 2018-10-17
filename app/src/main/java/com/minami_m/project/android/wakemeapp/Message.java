@@ -8,4 +8,7 @@ public class Message {
     private String autor;
     private Date createdAt;
     private boolean isSeen;
+
+    public Message() {
+    }
 }
