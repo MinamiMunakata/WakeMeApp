@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:paddingVertical="@dimen/vertical_space_bw_items"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFriendResultFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".SearchFriendResultFragment"
+    android:background="@color/colorBackground"
+    android:gravity="center_horizontal">
+    <ImageView
+        android:background="@drawable/circle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/img_picture"
+        android:layout_marginVertical="@dimen/vertical_space_bw_items"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name Name"/>
 
-</FrameLayout>
+
+</LinearLayout>
