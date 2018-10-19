@@ -1,5 +1,7 @@
 package com.minami_m.project.android.wakemeapp;
 
+import java.util.Date;
+
 public class User {
     private String id;
     private String name;
@@ -14,9 +16,22 @@ public class User {
     public User() {
     }
 
+    public User(String id, String name, String nickName, String avatar, String email) {
+        this.id = id;
+        this.name = name;
+        this.nickName = nickName;
+        this.avatar = avatar;
+        this.email = email;
+        this.lastLogin = new Date().getTime();
+    }
 
-
-
+    public User(String id, String name, String nickName, String email) {
+        this.id = id;
+        this.name = name;
+        this.nickName = nickName;
+        this.email = email;
+        this.lastLogin = new Date().getTime();
+    }
 
     public String getId() {
         return id;
