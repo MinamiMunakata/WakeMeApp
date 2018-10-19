@@ -54,6 +54,7 @@ public class SignUpFragment extends Fragment
     private Uri filePath;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
+    private Uri downloadedIconUri;
 
 
 
@@ -101,7 +102,7 @@ public class SignUpFragment extends Fragment
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
             StorageReference ref = storageReference;
-            StorageReference icon = ref
+            final StorageReference icon = ref
                     .child("users")
                     .child(userId)
                     .child("icon/" + userId);
@@ -120,6 +121,10 @@ public class SignUpFragment extends Fragment
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+                            downloadedIconUri = taskSnapshot.getUploadSessionUri();
+                            Log.i(TAG, "onSuccess: 12345 "+ downloadedIconUri);
+                            Log.i(TAG, "onSuccess: 123456 " + icon.getDownloadUrl());
+
                             Toast.makeText(getContext(),
                                     "Successfully Uploaded",
                                     Toast.LENGTH_SHORT).show();
