@@ -25,13 +25,12 @@
             android:textSize="@dimen/text_h2"
             android:textStyle="bold" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
             android:src="@drawable/img_picture"
-            android:textColor="@color/colorMyAccent" />
+            android:layout_marginTop="@dimen/small_vertical_space_bw_item"/>
 
 
         <TextView
