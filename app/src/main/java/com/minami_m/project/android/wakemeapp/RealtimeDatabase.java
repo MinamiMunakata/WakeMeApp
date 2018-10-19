@@ -9,4 +9,8 @@ public class RealtimeDatabase {
     public static final DatabaseReference MESSAGES_REF = FIREBASE_DATABASE.getReference("Messages");
     public static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
 
+    public static void writeNewUser(User newUser) {
+        USERS_REF.child(newUser.getId()).setValue(newUser);
+    }
+
 }

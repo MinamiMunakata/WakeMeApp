@@ -83,6 +83,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.i(TAG, "onSuccess: 123456");
+
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 launchActivity(MainActivity.class);
             }
@@ -155,6 +156,13 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            // Check if the usr sign in for the first time.
+                            boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                            if (isNewUser) {
+                                // TODO: get avatar from facebook
+                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail());
+                                RealtimeDatabase.writeNewUser(newUser);
+                            }
 
 //                            updateUI(user);
                         } else {
