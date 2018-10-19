@@ -23,6 +23,8 @@ android {
 dependencies {
     //  connect to firebase
     implementation 'com.google.firebase:firebase-core:16.0.4'
+    // firebase storage
+    implementation 'com.google.firebase:firebase-storage:16.0.3'
     // firebase realtime database
     implementation 'com.google.firebase:firebase-database:16.0.3'
     //    // facebook login
@@ -45,4 +47,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
 }
 // TODO: Delete it in the end
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
