@@ -21,6 +21,8 @@ android {
 }
 
 dependencies {
+    // CircleImageView - http://www.apache.org/licenses/LICENSE-2.0
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
     //  connect to firebase
     implementation 'com.google.firebase:firebase-core:16.0.4'
     // firebase storage
