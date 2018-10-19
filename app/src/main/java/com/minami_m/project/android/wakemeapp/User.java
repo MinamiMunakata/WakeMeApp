@@ -15,22 +15,19 @@ public class User {
     private long lastLogin;
     private long alarmTime;
 
-    public User() {
-    }
-
-    public User(String id, String name, String nickName, Uri avatar, String email) {
+    public User(String id, String name, String email, Uri avatar) {
         this.id = id;
         this.name = name;
-        this.nickName = nickName;
+        this.nickName = name;
         this.avatar = avatar;
         this.email = email;
         this.lastLogin = new Date().getTime();
     }
 
-    public User(String id, String name, String nickName, String email) {
+    public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.nickName = nickName;
+        this.nickName = name;
         this.email = email;
         this.lastLogin = new Date().getTime();
     }
