@@ -1,12 +1,14 @@
 package com.minami_m.project.android.wakemeapp;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 public class User {
     private String id;
     private String name;
     private String nickName;
-    private String avatar;
+    private Uri avatar;
     private String email;
     private String status;
     private boolean isSleeping;
@@ -16,7 +18,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String nickName, String avatar, String email) {
+    public User(String id, String name, String nickName, Uri avatar, String email) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
@@ -57,11 +59,11 @@ public class User {
         this.nickName = nickName;
     }
 
-    public String getAvatar() {
+    public Uri getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Uri avatar) {
         this.avatar = avatar;
     }
 
