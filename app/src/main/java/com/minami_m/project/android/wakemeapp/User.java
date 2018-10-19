@@ -1,8 +1,5 @@
 package com.minami_m.project.android.wakemeapp;
 
-import java.util.Date;
-import java.util.List;
-
 public class User {
     private String id;
     private String name;
@@ -11,11 +8,15 @@ public class User {
     private String email;
     private String status;
     private boolean isSleeping;
-    private Date lastLogin;
-    private Date alarmTime;
+    private long lastLogin;
+    private long alarmTime;
 
     public User() {
     }
+
+
+
+
 
     public String getId() {
         return id;
@@ -65,19 +66,19 @@ public class User {
         isSleeping = sleeping;
     }
 
-    public Date getLastLogin() {
+    public long getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(long lastLogin) {
         this.lastLogin = lastLogin;
     }
 
-    public Date getAlarmTime() {
+    public long getAlarmTime() {
         return alarmTime;
     }
 
-    public void setAlarmTime(Date alarmTime) {
+    public void setAlarmTime(long alarmTime) {
         this.alarmTime = alarmTime;
     }
 
