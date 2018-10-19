@@ -32,7 +32,8 @@ import java.util.Arrays;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
-public class SignInActivity extends AppCompatActivity implements FragmentChangeListener, ActivityChangeListener, FacebookLogin_Listener {
+public class SignInActivity extends AppCompatActivity implements FragmentChangeListener,
+        ActivityChangeListener, FacebookLogin_Listener {
 
     CallbackManager callbackManager;
     private static final String EMAIL = "email";
@@ -103,7 +104,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

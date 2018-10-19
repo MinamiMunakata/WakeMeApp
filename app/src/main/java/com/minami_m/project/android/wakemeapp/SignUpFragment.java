@@ -1,7 +1,12 @@
 package com.minami_m.project.android.wakemeapp;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
@@ -36,6 +43,8 @@ public class SignUpFragment extends Fragment implements inputValidationHandler, 
     Button signUpButton;
     ImageView icon;
     TextView errorMsg;
+    private static int PICK_IMAGE_REQUEST = 12345;
+    private Uri filePath;
 
 
 
@@ -58,12 +67,45 @@ public class SignUpFragment extends Fragment implements inputValidationHandler, 
             @Override
             public void onClick(View view) {
                 // TODO: Upload image
+                uploadImg();
             }
         });
         pwField = view.findViewById(R.id.edit_pw);
         signUpButton = view.findViewById(R.id.signup_btn);
         signUpButton.setOnClickListener(this);
         return view;
+    }
+
+    public void uploadImg() {
+        // choose an image
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST &&
+                resultCode == Activity.RESULT_OK &&
+                data != null &&
+                data.getData() != null) {
+            Log.i(TAG, "onActivityResult: 12345 ---> Success!");
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                icon.setImageBitmap(bitmap);
+                Log.i(TAG, "onActivityResult: 12345 ---> Success to try!");
+            } catch (FileNotFoundException e) {
+                Log.i(TAG, "onActivityResult: 12345 -> error");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.i(TAG, "onActivityResult: 12345 -> error");
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override
@@ -87,6 +129,7 @@ public class SignUpFragment extends Fragment implements inputValidationHandler, 
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 // TODO: Register to real time database with name
+
                                 ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
 
                             } else {
