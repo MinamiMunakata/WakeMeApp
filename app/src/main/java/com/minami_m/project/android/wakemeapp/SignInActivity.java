@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,13 +20,19 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
@@ -38,6 +45,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     AccessTokenTracker mAccessTokenTracker;
     ProfileTracker profileTracker;
     FirebaseAuth mAuth;
+    Profile facebookProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,31 +67,14 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             }
         };
 
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if (isLoggedIn) Log.i(TAG, "onCreate: 123456");
-
-
-
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                if (currentProfile == null) {
-                    // logout
-                    Log.i(TAG, "onCurrentProfileChanged: 123456 logout");
-                } else {
-                    Log.i(TAG, "onCurrentProfileChanged: 123456 " + currentProfile.getName());
-                }
-            }
-        };
         callbackManager = CallbackManager.Factory.create();
+        // TODO: DELETE THE LINE BELOW LATER
+        LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.i(TAG, "onSuccess: 123456");
-
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                launchActivity(MainActivity.class);
             }
 
             @Override
@@ -135,33 +126,34 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         mAuth = firebaseAuth;
         if (AccessToken.getCurrentAccessToken() != null){
             LoginManager.getInstance().logOut();
+
         } else {
-//                    mAccessTokenTracker.startTracking();
+            LoginManager.getInstance().logOut();
             LoginManager.getInstance().logInWithReadPermissions(this,Arrays.asList(EMAIL));
         }
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             // Check if the usr sign in for the first time.
                             boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
                             if (isNewUser) {
-                                // TODO: get avatar from facebook
-                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail());
-                                FirebaseRealtimeDatabase.writeNewUser(newUser);
+                                facebookProfile = Profile.getCurrentProfile();
+                                String avatar = facebookProfile.getProfilePictureUri(300, 300).toString();
+                                User newUser = new User(user.getUid(),
+                                        facebookProfile.getName(),
+                                        user.getEmail(),
+                                        avatar);
+                                FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
+                            launchActivity(MainActivity.class);
 
-//                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -169,8 +161,8 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
                     }
                 });
     }
+
 }

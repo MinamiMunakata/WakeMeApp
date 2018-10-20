@@ -53,8 +53,6 @@ public class SignUpFragment extends Fragment
     private TextView errorMsg;
     private static int PICK_IMAGE_REQUEST = 12345;
     private Uri filePath;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
     private Uri downloadedIconUri;
 
 
@@ -70,8 +68,6 @@ public class SignUpFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         mAuth = FirebaseAuth.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
         errorMsg = view.findViewById(R.id.sign_up_error);
@@ -100,13 +96,8 @@ public class SignUpFragment extends Fragment
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
-        StorageReference ref = storageReference;
-        final StorageReference icon = ref
-                .child("users")
-                .child(currentUser.getUid())
-                .child("icon/" + currentUser.getUid());
         // upload image to Firebase Storage
-        icon.putFile(filePath)
+        FirebaseStorageHelper.ICON_REF(currentUser).putFile(filePath)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -133,7 +124,7 @@ public class SignUpFragment extends Fragment
                                             currentUser.getDisplayName(),
                                             currentUser.getEmail(),
                                             downloadedIconUri.toString());
-                                    FirebaseRealtimeDatabase.writeNewUser(newUser);
+                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                                 } else {
                                     Log.w(TAG, "onComplete: ", task.getException());
                                     toast("Failed to update the user profile.");
@@ -198,7 +189,7 @@ public class SignUpFragment extends Fragment
                                     User newUser = new User(currentUser.getUid(),
                                             currentUser.getDisplayName(),
                                             currentUser.getEmail());
-                                    FirebaseRealtimeDatabase.writeNewUser(newUser);
+                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                                 }
                                 ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                             } else {
