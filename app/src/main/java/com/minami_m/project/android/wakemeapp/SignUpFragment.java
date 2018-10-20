@@ -75,6 +75,9 @@ public class SignUpFragment extends Fragment
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
         errorMsg = view.findViewById(R.id.sign_up_error);
+        pwField = view.findViewById(R.id.edit_pw);
+        signUpButton = view.findViewById(R.id.signup_btn);
+        signUpButton.setOnClickListener(this);
         icon = view.findViewById(R.id.user_icon);
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +85,6 @@ public class SignUpFragment extends Fragment
                 chooseImg();
             }
         });
-        pwField = view.findViewById(R.id.edit_pw);
-        signUpButton = view.findViewById(R.id.signup_btn);
-        signUpButton.setOnClickListener(this);
         return view;
     }
 
@@ -96,7 +96,7 @@ public class SignUpFragment extends Fragment
                 PICK_IMAGE_REQUEST);
     }
 
-    public void uploadImg(final FirebaseUser currentUser) {
+    public void writeNewUSerWithImg(final FirebaseUser currentUser) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
@@ -105,35 +105,41 @@ public class SignUpFragment extends Fragment
                 .child("users")
                 .child(currentUser.getUid())
                 .child("icon/" + currentUser.getUid());
+        // upload image to Firebase Storage
         icon.putFile(filePath)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getContext(),
-                                "Failed... " + e.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "onFailure: 12345 ----> " + e.getMessage());
+                        toast("Failed... " + e.getMessage());
                     }
                 })
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressDialog.dismiss();
+                        toast("Successfully Uploaded");
                         downloadedIconUri = taskSnapshot.getUploadSessionUri();
-                        Log.i(TAG, "onSuccess: 12345 "+ downloadedIconUri);
-                        Log.i(TAG, "onSuccess: 123456 " + icon.getDownloadUrl());
-                        FirebaseAuthentication.updateProfile(currentUser, downloadedIconUri);
-                        User newUser = new User(currentUser.getUid(),
-                                currentUser.getDisplayName(),
-                                currentUser.getEmail(),
-                                downloadedIconUri.toString());
-                        FirebaseRealtimeDatabase.writeNewUser(newUser);
-
-                        Toast.makeText(getContext(),
-                                "Successfully Uploaded",
-                                Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "onSuccess: 12345 FB storage success");
+                        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(currentUser.getDisplayName())
+                                .setPhotoUri(downloadedIconUri)
+                                .build();
+                        currentUser.updateProfile(request)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    User newUser = new User(currentUser.getUid(),
+                                            currentUser.getDisplayName(),
+                                            currentUser.getEmail(),
+                                            downloadedIconUri.toString());
+                                    FirebaseRealtimeDatabase.writeNewUser(newUser);
+                                } else {
+                                    Log.w(TAG, "onComplete: ", task.getException());
+                                    toast("Failed to update the user profile.");
+                                }
+                            }
+                        });
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -153,21 +159,15 @@ public class SignUpFragment extends Fragment
                 resultCode == Activity.RESULT_OK &&
                 data != null &&
                 data.getData() != null) {
-            Log.i(TAG, "onActivityResult: 12345 ---> Success!");
             filePath = data.getData();
-            Log.i(TAG, "onActivityResult: 12345 ----> " + filePath);
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 icon.setImageBitmap(bitmap);
-                Log.i(TAG, "onActivityResult: 12345 ---> Success to try!");
             } catch (FileNotFoundException e) {
-                Log.i(TAG, "onActivityResult: 12345 -> error");
                 e.printStackTrace();
             } catch (IOException e) {
-                Log.i(TAG, "onActivityResult: 12345 -> error");
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -190,36 +190,33 @@ public class SignUpFragment extends Fragment
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
-                                FirebaseAuthentication.updateProfile(currentUser, name);
-                                // TODO: Register to real time database with name
+                                // Update user info.
                                 if (filePath != null) {
-                                    uploadImg(currentUser);
+                                    writeNewUSerWithImg(currentUser);
                                 } else {
                                     User newUser = new User(currentUser.getUid(),
                                             currentUser.getDisplayName(),
                                             currentUser.getEmail());
                                     FirebaseRealtimeDatabase.writeNewUser(newUser);
                                 }
-                                Log.i(TAG, "onComplete: 12345 name: " + currentUser.getDisplayName() + " uri: " + downloadedIconUri);
-
-
-                                //((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
-
+                                ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(getContext(), "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                toast("Authentication failed.");
                                 errorMsg.setText(task.getException().getMessage());
                             }
                         }
                     });
 
         } else {
-            Toast.makeText(getContext(), "Invalid Input", Toast.LENGTH_SHORT).show();
+            toast("Invalid Input");
         }
     }
+
+    private void toast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 }
+

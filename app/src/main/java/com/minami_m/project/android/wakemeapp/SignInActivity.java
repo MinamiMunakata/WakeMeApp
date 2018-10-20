@@ -139,7 +139,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 //                    mAccessTokenTracker.startTracking();
             LoginManager.getInstance().logInWithReadPermissions(this,Arrays.asList(EMAIL));
         }
-        Log.i(TAG, "loginWithFacebook: 123456");
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -158,7 +157,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                             boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
                             if (isNewUser) {
                                 // TODO: get avatar from facebook
-                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail(), null);
+                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail());
                                 FirebaseRealtimeDatabase.writeNewUser(newUser);
                             }
 

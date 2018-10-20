@@ -65,12 +65,10 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
-                    Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "onAuthStateChanged: " + user.getUid() + " : " + user.getDisplayName() + " : " + user.getEmail());
+                    toast("Welcome " + user.getDisplayName());
                     return;
                 } else {
                     // TODO: sign out
-                    Log.i(TAG, "onAuthStateChanged: ---------------> minamiminami");
                 }
             }
         });
@@ -113,15 +111,14 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(getContext(), "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
+                        toast("Authentication failed.");
                         errorMsg.setText(task.getException().getMessage());
                         return;
                     }
                 }
             });
         } else {
-            Toast.makeText(getContext(), "Invalid Input", Toast.LENGTH_SHORT).show();
+            toast("Invalid Input");
         }
 
     }
@@ -145,5 +142,9 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         if (!InputHandler.isValidFormEmail(editTextEmail)) return false;
         if (!InputHandler.isValidFormPW(editTextPw)) return false;
         return true;
+    }
+
+    private void toast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
