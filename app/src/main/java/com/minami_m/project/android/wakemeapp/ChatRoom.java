@@ -1,5 +1,7 @@
 package com.minami_m.project.android.wakemeapp;
 
+import android.net.Uri;
+
 public class ChatRoom {
     private String id;
     private User sender;
@@ -8,11 +10,11 @@ public class ChatRoom {
 
     private class Dialog {
         private String receiverName;
-        private String recieverIcon;
+        private Uri recieverIcon;
         private String receiverStatus;
         private boolean isReceiverSleeping;
 
-        public Dialog(String receiverName, String recieverIcon, String receiverStatus,
+        public Dialog(String receiverName, Uri recieverIcon, String receiverStatus,
                       boolean isReceiverSleeping) {
             this.receiverName = receiverName;
             this.recieverIcon = recieverIcon;
