@@ -10,11 +10,11 @@ public class ChatRoom {
 
     private class Dialog {
         private String receiverName;
-        private Uri recieverIcon;
+        private String recieverIcon;
         private String receiverStatus;
         private boolean isReceiverSleeping;
 
-        public Dialog(String receiverName, Uri recieverIcon, String receiverStatus,
+        public Dialog(String receiverName, String recieverIcon, String receiverStatus,
                       boolean isReceiverSleeping) {
             this.receiverName = receiverName;
             this.recieverIcon = recieverIcon;

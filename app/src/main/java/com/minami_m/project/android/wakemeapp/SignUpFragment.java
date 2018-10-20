@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -33,7 +35,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.UUID;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -78,7 +79,6 @@ public class SignUpFragment extends Fragment
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Upload image
                 chooseImg();
             }
         });
@@ -96,50 +96,54 @@ public class SignUpFragment extends Fragment
                 PICK_IMAGE_REQUEST);
     }
 
-    public void uploadImg(String userId) {
-        if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-            StorageReference ref = storageReference;
-            final StorageReference icon = ref
-                    .child("users")
-                    .child(userId)
-                    .child("icon/" + userId);
-            icon.putFile(filePath)
-                    .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(),
-                            "Failed... " + e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "onFailure: 12345 ----> " + e.getMessage());
-                }
-            })
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            downloadedIconUri = taskSnapshot.getUploadSessionUri();
-                            Log.i(TAG, "onSuccess: 12345 "+ downloadedIconUri);
-                            Log.i(TAG, "onSuccess: 123456 " + icon.getDownloadUrl());
+    public void uploadImg(final FirebaseUser currentUser) {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Uploading...");
+        progressDialog.show();
+        StorageReference ref = storageReference;
+        final StorageReference icon = ref
+                .child("users")
+                .child(currentUser.getUid())
+                .child("icon/" + currentUser.getUid());
+        icon.putFile(filePath)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(),
+                                "Failed... " + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "onFailure: 12345 ----> " + e.getMessage());
+                    }
+                })
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressDialog.dismiss();
+                        downloadedIconUri = taskSnapshot.getUploadSessionUri();
+                        Log.i(TAG, "onSuccess: 12345 "+ downloadedIconUri);
+                        Log.i(TAG, "onSuccess: 123456 " + icon.getDownloadUrl());
+                        FirebaseAuthentication.updateProfile(currentUser, downloadedIconUri);
+                        User newUser = new User(currentUser.getUid(),
+                                currentUser.getDisplayName(),
+                                currentUser.getEmail(),
+                                downloadedIconUri.toString());
+                        FirebaseRealtimeDatabase.writeNewUser(newUser);
 
-                            Toast.makeText(getContext(),
-                                    "Successfully Uploaded",
-                                    Toast.LENGTH_SHORT).show();
-                            Log.i(TAG, "onSuccess: 12345 FB storage success");
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot
-                            .getBytesTransferred()/taskSnapshot
-                            .getTotalByteCount());
-                    progressDialog.setMessage("Uploaded " + (int)progress + "%");
-                }
-            });
-        }
+                        Toast.makeText(getContext(),
+                                "Successfully Uploaded",
+                                Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "onSuccess: 12345 FB storage success");
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot
+                        .getBytesTransferred()/taskSnapshot
+                        .getTotalByteCount());
+                progressDialog.setMessage("Uploaded " + (int)progress + "%");
+            }
+        });
     }
 
     @Override
@@ -178,7 +182,8 @@ public class SignUpFragment extends Fragment
     @Override
     public void onClick(View view) {
         if (isValidInput()) {
-            String email = emailField.getText().toString(),
+            final String name = nameField.getText().toString(),
+                    email = emailField.getText().toString(),
                     password = pwField.getText().toString();
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -187,10 +192,21 @@ public class SignUpFragment extends Fragment
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                FirebaseAuthentication.updateProfile(currentUser, name);
                                 // TODO: Register to real time database with name
-                                uploadImg(mAuth.getCurrentUser().getUid());
+                                if (filePath != null) {
+                                    uploadImg(currentUser);
+                                } else {
+                                    User newUser = new User(currentUser.getUid(),
+                                            currentUser.getDisplayName(),
+                                            currentUser.getEmail());
+                                    FirebaseRealtimeDatabase.writeNewUser(newUser);
+                                }
+                                Log.i(TAG, "onComplete: 12345 name: " + currentUser.getDisplayName() + " uri: " + downloadedIconUri);
 
-                                ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+
+                                //((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
 
                             } else {
                                 // If sign in fails, display a message to the user.

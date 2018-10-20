@@ -1,6 +1,5 @@
 package com.minami_m.project.android.wakemeapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,7 +14,6 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
@@ -33,7 +31,7 @@ import java.util.Arrays;
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
 public class SignInActivity extends AppCompatActivity implements FragmentChangeListener,
-        ActivityChangeListener, FacebookLogin_Listener {
+        ActivityChangeListener, FacebookLoginListener {
 
     CallbackManager callbackManager;
     private static final String EMAIL = "email";
@@ -160,8 +158,8 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                             boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
                             if (isNewUser) {
                                 // TODO: get avatar from facebook
-                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail());
-                                RealtimeDatabase.writeNewUser(newUser);
+                                User newUser = new User(user.getUid(), user.getDisplayName(), user.getEmail(), null);
+                                FirebaseRealtimeDatabase.writeNewUser(newUser);
                             }
 
 //                            updateUI(user);
