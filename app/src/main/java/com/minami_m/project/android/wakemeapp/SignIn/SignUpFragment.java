@@ -2,7 +2,6 @@ package com.minami_m.project.android.wakemeapp.SignIn;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -56,12 +58,12 @@ public class SignUpFragment extends Fragment
     private EditText nameField;
     private EditText emailField;
     private EditText pwField;
-    private Button signUpButton;
     private ImageView icon;
     private TextView errorMsg;
     private static int PICK_IMAGE_REQUEST = 12345;
     private Uri filePath;
     private Uri downloadedIconUri;
+    private ProgressBar progressBar;
 
 
 
@@ -80,7 +82,7 @@ public class SignUpFragment extends Fragment
         emailField = view.findViewById(R.id.edit_email);
         errorMsg = view.findViewById(R.id.sign_up_error);
         pwField = view.findViewById(R.id.edit_pw);
-        signUpButton = view.findViewById(R.id.signup_btn);
+        Button signUpButton = view.findViewById(R.id.signup_btn);
         signUpButton.setOnClickListener(this);
         icon = view.findViewById(R.id.user_icon);
         icon.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +91,8 @@ public class SignUpFragment extends Fragment
                 chooseImg();
             }
         });
+        progressBar = view.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -101,44 +105,26 @@ public class SignUpFragment extends Fragment
     }
 
     public void writeNewUSerWithImg(final FirebaseUser currentUser) {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Uploading...");
-        progressDialog.show();
         // upload image to Firebase Storage
         FirebaseStorageHelper.ICON_REF(currentUser).putFile(filePath)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.INVISIBLE);
                         toast("Failed... " + e.getMessage());
                     }
                 })
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.INVISIBLE);
                         toast("Successfully Uploaded");
                         downloadedIconUri = taskSnapshot.getUploadSessionUri();
-                        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(currentUser.getDisplayName())
-                                .setPhotoUri(downloadedIconUri)
-                                .build();
-                        currentUser.updateProfile(request)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    User newUser = new User(currentUser.getUid(),
-                                            currentUser.getDisplayName(),
-                                            currentUser.getEmail(),
-                                            downloadedIconUri.toString());
-                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                                } else {
-                                    Log.w(TAG, "onComplete: ", task.getException());
-                                    toast("Failed to update the user profile.");
-                                }
-                            }
-                        });
+                        User newUser = new User(currentUser.getUid(),
+                                currentUser.getDisplayName(),
+                                currentUser.getEmail(),
+                                downloadedIconUri.toString());
+                        FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -146,7 +132,7 @@ public class SignUpFragment extends Fragment
                 double progress = (100.0 * taskSnapshot
                         .getBytesTransferred()/taskSnapshot
                         .getTotalByteCount());
-                progressDialog.setMessage("Uploaded " + (int)progress + "%");
+                progressBar.setProgress((int)progress);
             }
         });
     }
@@ -162,8 +148,6 @@ public class SignUpFragment extends Fragment
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 icon.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -181,6 +165,7 @@ public class SignUpFragment extends Fragment
     @Override
     public void onClick(View view) {
         if (isValidInput()) {
+            progressBar.setVisibility(View.VISIBLE);
             final String name = nameField.getText().toString(),
                     email = emailField.getText().toString(),
                     password = pwField.getText().toString();
@@ -189,20 +174,37 @@ public class SignUpFragment extends Fragment
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                FirebaseUser currentUser = mAuth.getCurrentUser();
-                                // Update user info.
-                                if (filePath != null) {
-                                    writeNewUSerWithImg(currentUser);
-                                } else {
-                                    User newUser = new User(currentUser.getUid(),
-                                            currentUser.getDisplayName(),
-                                            currentUser.getEmail());
-                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                                }
-                                ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                                final FirebaseUser currentUser = mAuth.getCurrentUser();
+                                UserProfileChangeRequest request =
+                                        new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name)
+                                        .build();
+                                currentUser.updateProfile(request)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (filePath != null) {
+                                            writeNewUSerWithImg(currentUser);
+                                        } else {
+                                            User newUser = new User(currentUser.getUid(),
+                                                    currentUser.getDisplayName(),
+                                                    currentUser.getEmail());
+                                            FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                        }
+//                                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                                    }
+                                })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.i(TAG, "onFailure: 12345 " + e.getMessage());
+                                                toast("Failed to update the user profile.");
+                                            }
+                                        });
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Log.w(TAG, "createUserWithEmail:failure 12345", task.getException());
                                 toast("Authentication failed.");
                                 errorMsg.setText(task.getException().getMessage());
                             }

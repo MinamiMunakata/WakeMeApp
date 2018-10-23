@@ -71,8 +71,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
-                    toast("Welcome " + user.getDisplayName());
+                    if (user.getDisplayName() != null) toast("Welcome " + user.getDisplayName());
+//                    ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
                     return;
                 } else {
                     // TODO: sign out

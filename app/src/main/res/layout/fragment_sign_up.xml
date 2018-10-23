@@ -7,14 +7,23 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     android:gravity="center">
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:max="100"
+        android:backgroundTint="@color/white"
+        android:indeterminateTint="#1a09d6"/>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/space_both_edges"
         android:layout_marginRight="@dimen/space_both_edges"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,54 +38,54 @@
             android:id="@+id/user_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/img_picture"
-            android:layout_marginTop="@dimen/small_vertical_space_bw_item"/>
+            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
+            android:src="@drawable/img_picture" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
             android:layout_marginTop="@dimen/input_header"
-            android:textColor="@color/colorMyAccent"/>
+            android:text="Name"
+            android:textColor="@color/colorMyAccent" />
 
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorMyAccent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:backgroundTint="@color/colorMyAccent"/>
+            android:inputType="textPersonName" />
 
         <TextView
-            android:layout_marginTop="@dimen/input_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_header"
             android:text="Email"
-            android:textColor="@color/colorMyAccent"/>
+            android:textColor="@color/colorMyAccent" />
 
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorMyAccent"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            android:backgroundTint="@color/colorMyAccent"/>
+            android:inputType="textEmailAddress" />
 
         <TextView
-            android:layout_marginTop="@dimen/input_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_header"
             android:text="Password"
-            android:textColor="@color/colorMyAccent"/>
+            android:textColor="@color/colorMyAccent" />
 
         <EditText
             android:id="@+id/edit_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorMyAccent"
             android:ems="10"
-            android:inputType="textPassword"
-            android:backgroundTint="@color/colorMyAccent"/>
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/signup_btn"
@@ -86,12 +95,13 @@
             android:layout_marginTop="@dimen/vertical_space_bw_items"
             android:background="@drawable/rounded_button"
             android:text="@string/sign_up"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/sign_up_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"/>
+            android:textColor="@color/red" />
 
     </LinearLayout>
 
