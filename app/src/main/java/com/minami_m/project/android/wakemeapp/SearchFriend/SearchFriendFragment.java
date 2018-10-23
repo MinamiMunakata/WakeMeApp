@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.minami_m.project.android.wakemeapp.FragmentCallback;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
@@ -20,7 +19,6 @@ import com.minami_m.project.android.wakemeapp.inputValidationHandler;
  */
 public class SearchFriendFragment extends Fragment implements inputValidationHandler {
     EditText editText;
-    FragmentCallback fragmentCallback;
     private static final String TAG = "SearchFriendFragment";
 
 
@@ -45,13 +43,6 @@ public class SearchFriendFragment extends Fragment implements inputValidationHan
         return InputHandler.isValidFormEmail(editText);
     }
 
-//    public void getEditEmail() {
-//        if (fragmentCallback != null) {
-//            if (isValidInput()) {
-//                fragmentCallback.getEditEmail(editText.getText().toString());
-//            }
-//        }
-//    }
 
     public static SearchFriendFragment newInstance() {
         return new SearchFriendFragment();
