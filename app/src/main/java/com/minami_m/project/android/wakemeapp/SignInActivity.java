@@ -41,7 +41,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         ActivityChangeListener, FacebookLoginListener {
 
     CallbackManager callbackManager;
-    private static final String EMAIL = "email";
+    private static final String EMAIL = "editEmail";
     AccessTokenTracker mAccessTokenTracker;
     ProfileTracker profileTracker;
     FirebaseAuth mAuth;
