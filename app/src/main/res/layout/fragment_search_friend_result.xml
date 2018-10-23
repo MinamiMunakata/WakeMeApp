@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFriendResultFragment"
+    tools:context=".SearchFriend.SearchFriendResultFragment"
     android:background="@color/colorBackground"
     android:gravity="center_horizontal">
     <ImageView
