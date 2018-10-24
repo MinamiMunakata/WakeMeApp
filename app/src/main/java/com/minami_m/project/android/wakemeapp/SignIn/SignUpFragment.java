@@ -125,6 +125,7 @@ public class SignUpFragment extends Fragment
                                 currentUser.getEmail(),
                                 downloadedIconUri.toString());
                         FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -193,8 +194,8 @@ public class SignUpFragment extends Fragment
                                                     currentUser.getEmail());
                                             FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                                             progressBar.setVisibility(View.INVISIBLE);
+                                            ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                                         }
-//                                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                                     }
                                 })
                                         .addOnFailureListener(new OnFailureListener() {

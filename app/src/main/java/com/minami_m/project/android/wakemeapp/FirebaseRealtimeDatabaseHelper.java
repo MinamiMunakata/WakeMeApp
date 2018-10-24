@@ -32,6 +32,7 @@ public class FirebaseRealtimeDatabaseHelper {
     public static void followFriend(final String currentUserId, final String friendId) {
         FRIEND_ID_LIST_REF.child(currentUserId).child(friendId).setValue(true);
         FRIEND_ID_LIST_REF.child(friendId).child(currentUserId).setValue(true);
+        Log.i(TAG, "followFriend: 12345 ADD!");
     }
 }
 

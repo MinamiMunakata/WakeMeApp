@@ -13,6 +13,9 @@ public class User {
     private long lastLogin;
     private long alarmTime;
 
+    public User() {
+    }
+
     public User(String id, String name, String email, String avatar) {
         this.id = id;
         this.name = name;
