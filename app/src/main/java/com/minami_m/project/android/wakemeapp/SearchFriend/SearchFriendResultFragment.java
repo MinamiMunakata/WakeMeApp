@@ -28,4 +28,8 @@ public class SearchFriendResultFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_search_friend_result, container, false);
     }
 
+    public static SearchFriendResultFragment newInstance() {
+        return new SearchFriendResultFragment();
+    }
+
 }
