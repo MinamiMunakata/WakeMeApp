@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.SearchFriend;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -21,8 +25,8 @@ import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 public class SearchFriendActivity extends AppCompatActivity implements FragmentChangeListener, inputValidationHandler {
     private Button search_btn;
     private EditText editEmail;
-    private ValueEventListener searchListner;
     private static final String TAG = "SearchFriendActivity";
+    private FirebaseUser user;
 
     public void setEditEmail(EditText editEmail) {
         this.editEmail = editEmail;
@@ -33,6 +37,7 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
         search_btn = findViewById(R.id.search_button);
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -48,20 +53,24 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
                         Log.i(TAG, "onClick: " + editEmail.getText().toString());
                         searchFriendByEmail(editEmail.getText().toString());
                     }
-
                 }
             }
         });
     }
 
-    public void searchFriendByEmail(String email) {
-        FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListner);
-
-        searchListner = new ValueEventListener() {
+    public void searchFriendByEmail(final String email) {
+        if (email.equals(user.getEmail())) {
+            Toast.makeText(this, "Search friend's ID", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ValueEventListener searchListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot user: dataSnapshot.getChildren()) {
-                    Log.i(TAG, "onDataChange: " + user.getValue().toString());
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    if (userSnapshot.child("email").getValue().equals(email)) {
+                        Log.i(TAG, "onDataChange: " + userSnapshot.getKey());
+                        followNewFriend(user.getUid(), userSnapshot.getKey());
+                    }
                 }
             }
 
@@ -70,7 +79,28 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
 
             }
         };
+        FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
+    }
 
+    public void followNewFriend(final String currentUserId, final String friendId) {
+        FirebaseRealtimeDatabaseHelper.FRIEND_ID_LIST_REF
+                .child(currentUserId)
+                .child(friendId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), "Already following the user", Toast.LENGTH_SHORT).show();
+                        } else {
+                            FirebaseRealtimeDatabaseHelper.followFriend(currentUserId, friendId);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     @Override
@@ -83,4 +113,5 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
     public boolean isValidInput() {
         return InputHandler.isValidFormEmail(editEmail);
     }
+
 }

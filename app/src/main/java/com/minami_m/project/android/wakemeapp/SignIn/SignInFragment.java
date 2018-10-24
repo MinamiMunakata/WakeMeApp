@@ -66,6 +66,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         errorMsg = view.findViewById(R.id.sign_in_error);
 
         mAuth = FirebaseAuth.getInstance();
+
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -95,6 +96,9 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
     @Override
     public void onStart() {
         super.onStart();
+        if (mAuth.getCurrentUser() != null) {
+            ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
+        }
         signInBtn.setOnClickListener(this);
         signUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
