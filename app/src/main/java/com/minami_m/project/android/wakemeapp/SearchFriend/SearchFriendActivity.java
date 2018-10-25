@@ -43,6 +43,7 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
     private FirebaseUser user;
     private String friendId;
     private User friend;
+    private static final String DIALOG_TAG = "dialog";
 
     public void setEditEmail(EditText editEmail) {
         this.editEmail = editEmail;
@@ -62,7 +63,6 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
     @Override
     protected void onStart() {
         super.onStart();
-        search_btn.setText(R.string.search_email);
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +75,10 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
                             searchFriendByEmail(editEmail.getText().toString());
                         }
                     }
-                } else if (search_btn.getText().equals(getResources().getString(R.string.add_as_friend))) {
+                } else if (search_btn.getText()
+                        .equals(getResources().getString(R.string.add_as_friend))) {
+                    SuccessfullyAddedDialog.newInstance()
+                            .show(getSupportFragmentManager(), DIALOG_TAG);
                     followNewFriend(user.getUid(), friendId);
                 } else {
                     // TODO: fix
@@ -169,5 +172,14 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
         nameHolder.setText(friend.getName());
     }
 
+//    @Override
+//    public void resetSearchButton() {
+//        search_btn.setText(R.string.search_email);
+//    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        search_btn.setText(R.string.search_email);
+    }
 }

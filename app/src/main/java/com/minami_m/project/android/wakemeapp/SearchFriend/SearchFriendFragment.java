@@ -38,6 +38,16 @@ public class SearchFriendFragment extends Fragment implements inputValidationHan
         return view;
     }
 
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        SearchFriendFragmentListener listener = (SearchFriendFragmentListener)getActivity();
+//        listener.resetSearchButton();
+//        editText.setText("");
+//    }
+
+
+
     @Override
     public boolean isValidInput() {
         return InputHandler.isValidFormEmail(editText);

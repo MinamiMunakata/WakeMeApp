@@ -5,4 +5,5 @@ import android.widget.TextView;
 
 public interface SearchFriendFragmentListener {
     void showFriend(ImageView iconHolder, TextView nameHolder);
+//    void resetSearchButton();
 }
