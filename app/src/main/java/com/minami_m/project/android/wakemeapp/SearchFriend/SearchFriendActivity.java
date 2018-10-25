@@ -62,6 +62,7 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
     @Override
     protected void onStart() {
         super.onStart();
+        search_btn.setText(R.string.search_email);
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

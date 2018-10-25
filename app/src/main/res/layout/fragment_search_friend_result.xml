@@ -9,7 +9,7 @@
     tools:context=".SearchFriend.SearchFriendResultFragment"
     android:background="@color/colorBackground"
     android:gravity="center_horizontal">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_holder"
         android:background="@drawable/circle"
         android:layout_width="150dp"

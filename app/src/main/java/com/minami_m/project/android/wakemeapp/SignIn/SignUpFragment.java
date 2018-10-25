@@ -17,10 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +29,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,9 +41,7 @@ import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.User;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -62,7 +59,7 @@ public class SignUpFragment extends Fragment
     private TextView errorMsg;
     private static int PICK_IMAGE_REQUEST = 12345;
     private Uri filePath;
-    private Uri downloadedIconUri;
+    private String downloadedIconUrl;
     private ProgressBar progressBar;
 
 
@@ -119,13 +116,19 @@ public class SignUpFragment extends Fragment
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressBar.setVisibility(View.INVISIBLE);
                         toast("Successfully Uploaded");
-                        downloadedIconUri = taskSnapshot.getUploadSessionUri();
-                        User newUser = new User(currentUser.getUid(),
-                                currentUser.getDisplayName(),
-                                currentUser.getEmail(),
-                                downloadedIconUri.toString());
-                        FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                        FirebaseStorageHelper.ICON_REF(currentUser).getDownloadUrl()
+                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                downloadedIconUrl = task.getResult().toString();
+                                User newUser = new User(currentUser.getUid(),
+                                        currentUser.getDisplayName(),
+                                        currentUser.getEmail(),
+                                        downloadedIconUrl);
+                                FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                            }
+                        });
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -138,6 +141,7 @@ public class SignUpFragment extends Fragment
                 progressBar.setProgress((int)progress);
             }
         });
+
     }
 
     @Override
@@ -201,12 +205,14 @@ public class SignUpFragment extends Fragment
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                progressBar.setVisibility(View.INVISIBLE);
                                                 Log.i(TAG, "onFailure: 12345 " + e.getMessage());
                                                 toast("Failed to update the user profile.");
                                             }
                                         });
                             } else {
                                 // If sign in fails, display a message to the user.
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Log.w(TAG, "createUserWithEmail:failure 12345", task.getException());
                                 toast("Authentication failed.");
                                 errorMsg.setText(task.getException().getMessage());
