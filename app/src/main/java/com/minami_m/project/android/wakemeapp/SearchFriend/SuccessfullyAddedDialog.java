@@ -3,16 +3,20 @@ package com.minami_m.project.android.wakemeapp.SearchFriend;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.minami_m.project.android.wakemeapp.R;
 
@@ -45,8 +49,19 @@ public class SuccessfullyAddedDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((AlertDialog)getDialog()).getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(getResources().getColor(R.color.colorMyAccent));
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = (int) (size.x * 0.8);
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        getDialog().getWindow().setBackgroundDrawableResource(R.drawable.rounded_dialog);
+        getDialog().getWindow().setLayout(width, height);
+        Button okButton = ((AlertDialog)getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
+        okButton.setTextColor(getResources().getColor(R.color.colorMyAccent));
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) okButton.getLayoutParams();
+        layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        okButton.setLayoutParams(layoutParams);
+
     }
 
     public static SuccessfullyAddedDialog newInstance() {

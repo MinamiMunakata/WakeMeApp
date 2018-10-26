@@ -77,8 +77,6 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
                     }
                 } else if (search_btn.getText()
                         .equals(getResources().getString(R.string.add_as_friend))) {
-                    SuccessfullyAddedDialog.newInstance()
-                            .show(getSupportFragmentManager(), DIALOG_TAG);
                     followNewFriend(user.getUid(), friendId);
                 } else {
                     // TODO: fix
@@ -132,6 +130,8 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
 
                         } else {
                             FirebaseRealtimeDatabaseHelper.followFriend(currentUserId, friendId);
+                            SuccessfullyAddedDialog.newInstance()
+                                    .show(getSupportFragmentManager(), DIALOG_TAG);
                             // TODO: launch MainActivity
                         }
                     }
