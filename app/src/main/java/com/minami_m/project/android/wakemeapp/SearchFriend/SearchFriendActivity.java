@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.SearchFriend;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.transition.Fade;
 import android.support.transition.Slide;
@@ -28,15 +29,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
+import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.User;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 import com.squareup.picasso.Picasso;
 
-public class SearchFriendActivity extends AppCompatActivity implements FragmentChangeListener, inputValidationHandler, SearchFriendFragmentListener {
+public class SearchFriendActivity extends AppCompatActivity
+        implements FragmentChangeListener, inputValidationHandler,
+        SearchFriendFragmentListener, ActivityChangeListener {
     private Button search_btn;
     private EditText editEmail;
     private static final String TAG = "SearchFriendActivity";
@@ -130,9 +135,10 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
 
                         } else {
                             FirebaseRealtimeDatabaseHelper.followFriend(currentUserId, friendId);
+                            FirebaseRealtimeDatabaseHelper.createChatRoom(currentUserId, friendId);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
-                            // TODO: launch MainActivity
+                            launchActivity(MainActivity.class);
                         }
                     }
 
@@ -176,5 +182,12 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
     public void onBackPressed() {
         super.onBackPressed();
         search_btn.setText(R.string.search_email);
+    }
+
+
+    @Override
+    public void launchActivity(Class nextActivity) {
+        Intent intent = new Intent(this, nextActivity);
+        startActivity(intent);
     }
 }
