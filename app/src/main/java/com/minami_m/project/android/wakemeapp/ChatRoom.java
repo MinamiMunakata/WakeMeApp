@@ -1,11 +1,14 @@
 package com.minami_m.project.android.wakemeapp;
 
-import android.net.Uri;
+import android.util.Log;
 
-public class ChatRoom {
+import java.util.List;
+
+public class ChatRoom{
+
+    public static final String TAG = "ChatRoom";
     private String id;
-    private User sender;
-    private User receiver;
+    private List<String> memberIDs;
     private Dialog dialog;
 
     private class Dialog {
@@ -14,10 +17,10 @@ public class ChatRoom {
         private String receiverStatus;
         private boolean isReceiverSleeping;
 
-        public Dialog(String receiverName, String recieverIcon, String receiverStatus,
+        public Dialog(String receiverName, String receiverIcon, String receiverStatus,
                       boolean isReceiverSleeping) {
             this.receiverName = receiverName;
-            this.recieverIcon = recieverIcon;
+            this.recieverIcon = receiverIcon;
             this.receiverStatus = receiverStatus;
             this.isReceiverSleeping = isReceiverSleeping;
         }
@@ -26,12 +29,9 @@ public class ChatRoom {
     public ChatRoom() {
     }
 
-    public ChatRoom(String id, User sender, User receiver) {
+    public ChatRoom(String id, List<String> memberIDs) {
         this.id = id;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.dialog = new Dialog(receiver.getName(), receiver.getAvatar(),
-                receiver.getStatus(), receiver.isSleeping());
+        this.memberIDs = memberIDs;
     }
 
     public String getId() {
@@ -42,28 +42,48 @@ public class ChatRoom {
         this.id = id;
     }
 
-    public User getSender() {
-        return sender;
+    public User getSender(String currentUserId) {
+        for (String id: this.memberIDs) {
+            if (id.equals(currentUserId)) {
+                FirebaseRealtimeDatabaseHelper.readUserData(id, new RealtimeDatabaseCallback() {
+                    @Override
+                    public User getUser(User sender) {
+                        return sender;
+                    }
+                });
+            }
+        }
+        Log.i(TAG, "getSender: The current user doesn't belong to this chat room.");
+        return new User();
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    public User getReceiver(String currentUserId) {
+        for (String id: this.memberIDs) {
+            if (!id.equals(currentUserId)) {
+                FirebaseRealtimeDatabaseHelper.readUserData(id, new RealtimeDatabaseCallback() {
+                    @Override
+                    public User getUser(User receiver) {
+                        return receiver;
+                    }
+                });
+            }
+        }
+        Log.i(TAG, "getReceiver: The user doesn't belong to this chat room.");
+        return new User();
     }
 
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
-
-    public Dialog getDialog() {
-        return dialog;
-    }
-
-    public void setDialog(ChatRoom chatRoom) {
-        this.dialog = new Dialog(chatRoom.receiver.getName(), chatRoom.receiver.getAvatar(),
-                chatRoom.receiver.getStatus(), chatRoom.receiver.isSleeping());
+    public Dialog getDialog(String currentUserId) {
+        if (this.dialog != null) {
+            return this.dialog;
+        } else {
+            User receiver = getReceiver(currentUserId);
+            Dialog newDialog = new Dialog(
+                    receiver.getName(),
+                    receiver.getAvatar(),
+                    receiver.getStatus(),
+                    receiver.isSleeping());
+            this.dialog = newDialog;
+            return this.dialog;
+        }
     }
 }
