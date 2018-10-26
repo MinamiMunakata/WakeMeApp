@@ -172,11 +172,6 @@ public class SearchFriendActivity extends AppCompatActivity implements FragmentC
         nameHolder.setText(friend.getName());
     }
 
-//    @Override
-//    public void resetSearchButton() {
-//        search_btn.setText(R.string.search_email);
-//    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
