@@ -6,7 +6,7 @@ public class User {
     private String id;
     private String name;
     private String nickName;
-    private String avatar;
+    private String icon;
     private String email;
     private String status;
     private boolean isSleeping;
@@ -16,11 +16,11 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String email, String avatar) {
+    public User(String id, String name, String email, String icon) {
         this.id = id;
         this.name = name;
         this.nickName = name;
-        this.avatar = avatar;
+        this.icon = icon;
         this.email = email;
         this.lastLogin = new Date().getTime();
     }
@@ -57,12 +57,12 @@ public class User {
         this.nickName = nickName;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getEmail() {
