@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
@@ -13,6 +14,7 @@ public class ChatRoom{
     private String id;
     private List<String> memberIDs;
     private Dialog dialog;
+    private User receiver;
 
     private class Dialog {
         private String receiverName;
@@ -20,12 +22,11 @@ public class ChatRoom{
         private String receiverStatus;
         private boolean isReceiverSleeping;
 
-        public Dialog(String receiverName, String receiverIcon, String receiverStatus,
-                      boolean isReceiverSleeping) {
-            this.receiverName = receiverName;
-            this.recieverIcon = receiverIcon;
-            this.receiverStatus = receiverStatus;
-            this.isReceiverSleeping = isReceiverSleeping;
+        public Dialog(User receiver) {
+            this.receiverName = receiver.getName();
+            this.recieverIcon = receiver.getAvatar();
+            this.receiverStatus = receiver.getStatus();
+            this.isReceiverSleeping = receiver.isSleeping();
         }
     }
 
@@ -75,18 +76,35 @@ public class ChatRoom{
         return new User();
     }
 
-    public Dialog getDialog(String currentUserId) {
-        if (this.dialog != null) {
-            return this.dialog;
-        } else {
-            User receiver = getReceiver(currentUserId);
-            Dialog newDialog = new Dialog(
-                    receiver.getName(),
-                    receiver.getAvatar(),
-                    receiver.getStatus(),
-                    receiver.isSleeping());
-            this.dialog = newDialog;
-            return this.dialog;
-        }
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+        this.dialog = new Dialog(receiver);
     }
+
+//    public void setDialog(String currentUser) {
+//        this.dialog = dialog;
+//    }
+
+//    public Dialog getDialog(String currentUserId) {
+//        if (this.dialog != null) {
+//            return this.dialog;
+//        } else {
+//            init(currentUserId);
+//            return this.dialog;
+//        }
+//    }
+//
+//    public void init(String currentUserId) {
+//        this.receiver = getReceiver(currentUserId);
+//        this.dialog = new Dialog(this.receiver);
+//    }
+//
+//    public void updateDialog(User receiver) {
+//        dialog.receiverName = receiver.getName();
+//        dialog.recieverIcon = receiver.getAvatar();
+//        dialog.receiverStatus = receiver.getStatus();
+//        dialog.isReceiverSleeping = receiver.isSleeping();
+//    }
+
+
 }
