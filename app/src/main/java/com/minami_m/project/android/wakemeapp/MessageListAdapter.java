@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.minami_m.project.android.wakemeapp.Model.Message;
+
 import java.util.List;
 
 public class MessageListAdapter extends RecyclerView.Adapter {

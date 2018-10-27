@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
+import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
 import java.util.List;

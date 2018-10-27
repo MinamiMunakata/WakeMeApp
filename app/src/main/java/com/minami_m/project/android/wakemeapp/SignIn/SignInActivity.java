@@ -31,7 +31,7 @@ import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.User;
+import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
 
