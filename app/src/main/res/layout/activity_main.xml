@@ -8,17 +8,6 @@
     tools:context=".MainActivity"
     android:background="@color/colorBackground">
 
-    <ImageButton
-        android:id="@+id/semicircle_btn"
-        android:translationY="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/semicircle_button"
-        android:src="@drawable/ic_add_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -26,6 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/space_both_edges"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -41,5 +32,15 @@
 
 
     </LinearLayout>
+    <ImageButton
+        android:id="@+id/semicircle_btn"
+        android:translationY="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/semicircle_button"
+        android:src="@drawable/ic_add_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
