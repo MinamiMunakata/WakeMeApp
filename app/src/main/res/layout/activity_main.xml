@@ -16,12 +16,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/space_both_edges"
-        android:layout_marginBottom="30dp"
         android:orientation="vertical">
         <TextView
+            android:textColor="@color/colorMyAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Good Morning!"/>
+            android:text="@string/good_morning"
+            android:textSize="@dimen/text_h2"/>
+        <TextView
+            android:textColor="@color/colorMyAccent"
+            android:id="@+id/current_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_h2"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:textColor="@color/colorMyAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/who_is_still_sleeping"
+            android:textSize="@dimen/text_h3"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"

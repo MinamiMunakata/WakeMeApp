@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,13 +26,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener{
     public static final String TAG = "---- MainActivity ----";
-    ImageButton button;
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
-    List<String> chatRoomIDs;
-    List<ChatRoomCard> chatRoomCards;
-    RecyclerView recyclerView;
-    CardRecyclerAdapter adapter;
+    private ImageButton button;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private List<String> chatRoomIDs;
+    private List<ChatRoomCard> chatRoomCards;
+    private RecyclerView recyclerView;
+    private CardRecyclerAdapter adapter;
+    private TextView currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        currentUserName = findViewById(R.id.current_user_name);
+        currentUserName.setText(currentUser.getDisplayName() + "!");
         chatRoomIDs = new ArrayList<>();
         chatRoomCards = new ArrayList<>();
         button = findViewById(R.id.semicircle_btn);
