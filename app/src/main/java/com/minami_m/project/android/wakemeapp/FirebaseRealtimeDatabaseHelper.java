@@ -52,6 +52,8 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
+    // TODO: fix data structure
+
     public static void createChatRoom(final String currentUserId, final String friendId) {
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
         String[] memberIds = {currentUserId, friendId};

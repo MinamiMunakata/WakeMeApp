@@ -167,7 +167,7 @@ public class SearchFriendActivity extends AppCompatActivity
     public void showFriend(ImageView iconHolder, TextView nameHolder) {
         if (friend == null) return;
         // TODO: storage url doesn't show the image
-        if (friend.getAvatar() != null) Picasso.get().load(friend.getAvatar()).into(iconHolder);
+        if (friend.getIcon() != null) Picasso.get().load(friend.getIcon()).into(iconHolder);
         nameHolder.setText(friend.getName());
     }
 
