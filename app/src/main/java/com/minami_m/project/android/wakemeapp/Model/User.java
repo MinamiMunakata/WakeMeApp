@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp;
+package com.minami_m.project.android.wakemeapp.Model;
 
 import java.util.Date;
 
