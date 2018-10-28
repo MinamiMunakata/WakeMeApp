@@ -9,6 +9,15 @@
     tools:context=".SignIn.SignInFragment"
     android:gravity="center"
     android:background="@color/colorBackground">
+    <ProgressBar
+        android:id="@+id/sign_in_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="#1a09d6"
+        android:max="100"
+        android:backgroundTint="@color/white"/>
 
     <LinearLayout
         android:orientation="vertical"

@@ -137,6 +137,7 @@ public class SignUpFragment extends Fragment
                         .getBytesTransferred()/taskSnapshot
                         .getTotalByteCount());
                 progressBar.setProgress((int)progress);
+                Log.i(TAG, "onProgress: " + progress);
             }
         });
 

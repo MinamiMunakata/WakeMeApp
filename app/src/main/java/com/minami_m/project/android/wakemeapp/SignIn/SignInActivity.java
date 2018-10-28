@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -46,10 +48,14 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     ProfileTracker profileTracker;
     FirebaseAuth mAuth;
     Profile facebookProfile;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_sign_in);
+        progressBar = findViewById(R.id.sign_in_activity_progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         // --- create a new fragment to be placed in the activity layout ---
         if (findViewById(R.id.signin_container) != null) {
             if (savedInstanceState != null) {
@@ -79,11 +85,13 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
             @Override
             public void onCancel() {
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onCancel: 123456");
             }
 
             @Override
             public void onError(FacebookException error) {
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onError: 123456");
                 Log.i(TAG, "onError: " + error.getMessage());
             }
@@ -130,6 +138,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         } else {
             LoginManager.getInstance().logOut();
             LoginManager.getInstance().logInWithReadPermissions(this,Arrays.asList(EMAIL));
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 
@@ -152,9 +161,11 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                         avatar);
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
+                            progressBar.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);
 
                         } else {
+                            progressBar.setVisibility(View.INVISIBLE);
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
     private TextView signUpLink;
     private TextView errorMsg;
     private ProfileTracker profileTracker;
+    private ProgressBar progressBar;
 
     private  CallbackManager mCallbackManager;
     private AccessTokenTracker mAccessTokenTracker;
@@ -64,6 +66,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         editTextPw = view.findViewById(R.id.edit_text_password_for_sign_in);
         signUpLink = view.findViewById(R.id.sign_up_link);
         errorMsg = view.findViewById(R.id.sign_in_error);
+        progressBar = view.findViewById(R.id.sign_in_progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -113,9 +117,12 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         if (isValidInput()) {
             String email = editTextEmail.getText().toString(),
                     password = editTextPw.getText().toString();
+            // TODO: show a progress bar
+            progressBar.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         updateUI(true);
