@@ -9,15 +9,16 @@
     tools:context=".SignIn.SignInFragment"
     android:gravity="center"
     android:background="@color/colorBackground">
+
     <ProgressBar
         android:id="@+id/sign_in_progressbar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        android:backgroundTint="@color/white"
         android:indeterminate="true"
         android:indeterminateTint="#1a09d6"
-        android:max="100"
-        android:backgroundTint="@color/white"/>
+        android:max="100" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -100,7 +101,6 @@
             android:textColor="@color/white"
             android:text="Facebook Login"
             android:background="@drawable/facebook_login_btn"/>
-
         <TextView
             android:paddingTop="2dp"
             android:id="@+id/sign_in_error"

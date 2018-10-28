@@ -11,7 +11,7 @@
         android:id="@+id/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:indeterminate="true"
         android:max="100"
         android:backgroundTint="@color/white"

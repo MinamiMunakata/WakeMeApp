@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.SignIn;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.MainActivity;
+import com.minami_m.project.android.wakemeapp.ProgressbarListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 
@@ -36,7 +38,9 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignInFragment extends Fragment implements View.OnClickListener, inputValidationHandler {
+public class SignInFragment extends Fragment implements
+        View.OnClickListener,
+        inputValidationHandler {
 
     private FirebaseAuth mAuth;
     private Button signInBtn;
@@ -89,6 +93,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SignInActivity.setProgressBar(progressBar);
                 FacebookLoginListener facebookLoginListener = (FacebookLoginListener)getActivity();
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
@@ -165,4 +170,5 @@ public class SignInFragment extends Fragment implements View.OnClickListener, in
     private void toast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
 }
