@@ -63,13 +63,15 @@ public class FirebaseRealtimeDatabaseHelper {
         CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
         //TODO
 
-        CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId).setValue(new ChatRoomCard(chatRoomId, friend), new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId)
+                .setValue(new ChatRoomCard(chatRoomId, friend), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });
-        CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId).setValue(new ChatRoomCard(chatRoomId, mUser), new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId)
+                .setValue(new ChatRoomCard(chatRoomId, mUser), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);

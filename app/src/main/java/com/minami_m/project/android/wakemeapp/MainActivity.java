@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         currentUserName = findViewById(R.id.current_user_name);
-        currentUserName.setText(currentUser.getDisplayName() + "!");
+        currentUserName.setText(String.format("%s!",currentUser.getDisplayName()));
         chatRoomIDs = new ArrayList<>();
         chatRoomCards = new ArrayList<>();
         button = findViewById(R.id.semicircle_btn);
@@ -52,21 +52,38 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 launchActivity(SearchFriendActivity.class);
             }
         });
-        User yukako = new User("123456", "Yukako", "yukako.@gmail.com");
-        User nagisa = new User("789012", "Nagisa", "nagisa.@gmail.com");
-        User natsumi = new User("345678", "Natsumi", "natsumi.@gmail.com");
-        ChatRoomCard yukakoCard = new ChatRoomCard(yukako);
-        ChatRoomCard nagisaCard = new ChatRoomCard(nagisa);
-        ChatRoomCard natsumiCard = new ChatRoomCard(natsumi);
-        chatRoomCards.add(yukakoCard);
-        chatRoomCards.add(nagisaCard);
-        chatRoomCards.add(natsumiCard);
-        chatRoomCards.add(yukakoCard);
-        chatRoomCards.add(nagisaCard);
-        chatRoomCards.add(natsumiCard);
-        chatRoomCards.add(yukakoCard);
-        chatRoomCards.add(nagisaCard);
-        chatRoomCards.add(natsumiCard);
+
+        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
+                    ChatRoomCard roomCard = chatRoomIdSnapshot.getValue(ChatRoomCard.class);
+                    chatRoomCards.add(roomCard);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+//        User yukako = new User("123456", "Yukako", "yukako.@gmail.com");
+//        User nagisa = new User("789012", "Nagisa", "nagisa.@gmail.com");
+//        User natsumi = new User("345678", "Natsumi", "natsumi.@gmail.com");
+//        ChatRoomCard yukakoCard = new ChatRoomCard(yukako);
+//        ChatRoomCard nagisaCard = new ChatRoomCard(nagisa);
+//        ChatRoomCard natsumiCard = new ChatRoomCard(natsumi);
+//        chatRoomCards.add(yukakoCard);
+//        chatRoomCards.add(nagisaCard);
+//        chatRoomCards.add(natsumiCard);
+//        chatRoomCards.add(yukakoCard);
+//        chatRoomCards.add(nagisaCard);
+//        chatRoomCards.add(natsumiCard);
+//        chatRoomCards.add(yukakoCard);
+//        chatRoomCards.add(nagisaCard);
+//        chatRoomCards.add(natsumiCard);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
