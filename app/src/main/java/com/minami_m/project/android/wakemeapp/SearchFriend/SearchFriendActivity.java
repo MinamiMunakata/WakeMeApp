@@ -121,10 +121,14 @@ public class SearchFriendActivity extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };
         FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
+        if (friend == null) {
+            Log.i(TAG, "onDataChange: 123456789 no User?");
+            Toast.makeText(this, R.string.email_not_match, Toast.LENGTH_SHORT).show();
+        }
     }
 
     // TODO
@@ -147,7 +151,6 @@ public class SearchFriendActivity extends AppCompatActivity
                             FirebaseRealtimeDatabaseHelper.createChatRoom(mUser, friend);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
-                            launchActivity(MainActivity.class);
                         }
                     }
 
@@ -156,6 +159,7 @@ public class SearchFriendActivity extends AppCompatActivity
 
                     }
                 });
+
     }
 
     @Override
@@ -193,6 +197,7 @@ public class SearchFriendActivity extends AppCompatActivity
     public void onBackPressed() {
         super.onBackPressed();
         search_btn.setText(R.string.search_email);
+        friend = null;
     }
 
 

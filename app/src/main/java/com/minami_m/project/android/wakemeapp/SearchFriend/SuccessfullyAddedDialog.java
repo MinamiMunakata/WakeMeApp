@@ -3,6 +3,7 @@ package com.minami_m.project.android.wakemeapp.SearchFriend;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,12 +19,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuccessfullyAddedDialog extends DialogFragment {
+public class SuccessfullyAddedDialog extends DialogFragment implements ActivityChangeListener {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class SuccessfullyAddedDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // sign in the user ...
                         dialog.dismiss();
+                        launchActivity(MainActivity.class);
                     }
                 });
         // Create the AlertDialog object and return it
@@ -61,10 +65,22 @@ public class SuccessfullyAddedDialog extends DialogFragment {
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) okButton.getLayoutParams();
         layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
         okButton.setLayoutParams(layoutParams);
+        getDialog().setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                launchActivity(MainActivity.class);
+            }
+        });
 
     }
 
     public static SuccessfullyAddedDialog newInstance() {
         return new SuccessfullyAddedDialog();
+    }
+
+    @Override
+    public void launchActivity(Class nextActivity) {
+        Intent intent = new Intent(getContext(), nextActivity);
+        startActivity(intent);
     }
 }
