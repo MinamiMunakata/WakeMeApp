@@ -15,6 +15,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/img_picture"
+        android:backgroundTint="@color/colorBackground"
         android:layout_marginVertical="@dimen/vertical_space_bw_items"/>
     <TextView
         android:id="@+id/name_holder"

@@ -86,6 +86,8 @@ public class SearchFriendActivity extends AppCompatActivity
                         if (isValidInput()) {
                             Log.i(TAG, "onClick: " + editEmail.getText().toString());
                             searchFriendByEmail(editEmail.getText().toString());
+                        } else {
+                            Log.i(TAG, "onClick: 123456789 " + editEmail.getText().toString());
                         }
                     }
                 } else if (search_btn.getText()
@@ -108,14 +110,20 @@ public class SearchFriendActivity extends AppCompatActivity
         ValueEventListener searchListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean dataExist = false;
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     if (userSnapshot.child("email").getValue().equals(email)) {
                         Log.i(TAG, "onDataChange: " + userSnapshot.getKey());
                         friendId = userSnapshot.getKey();
                         friend = userSnapshot.getValue(User.class);
                         search_btn.setText(R.string.add_as_friend);
+                        dataExist = true;
                         replaceFragment(SearchFriendResultFragment.newInstance());
                     }
+                }
+                if (!dataExist) {
+                    Log.i(TAG, "onDataChange: 123456789 no User?");
+                    Toast.makeText(getApplicationContext(), R.string.email_not_match, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -125,10 +133,6 @@ public class SearchFriendActivity extends AppCompatActivity
             }
         };
         FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
-        if (friend == null) {
-            Log.i(TAG, "onDataChange: 123456789 no User?");
-            Toast.makeText(this, R.string.email_not_match, Toast.LENGTH_SHORT).show();
-        }
     }
 
     // TODO
@@ -196,8 +200,13 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        search_btn.setText(R.string.search_email);
-        friend = null;
+        if (!search_btn.getText().equals(getResources().getString(R.string.search_email))) {
+            search_btn.setText(R.string.search_email);
+            friend = null;
+        } else {
+            search_btn.setText(R.string.add_as_friend);
+        }
+
     }
 
 

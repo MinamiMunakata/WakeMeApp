@@ -35,8 +35,10 @@ import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.ProgressbarListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.StatusGenerator;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -166,6 +168,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                         facebookProfile.getName(),
                                         user.getEmail(),
                                         avatar);
+                                newUser.setStatus(StatusGenerator.formattedStatus(newUser.getLastLogin()));
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
                             progressBar.setVisibility(View.INVISIBLE);

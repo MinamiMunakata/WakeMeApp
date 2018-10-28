@@ -53,22 +53,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             }
         });
 
-        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
-                    ChatRoomCard roomCard = chatRoomIdSnapshot.getValue(ChatRoomCard.class);
-                    chatRoomCards.add(roomCard);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
 //        User yukako = new User("123456", "Yukako", "yukako.@gmail.com");
 //        User nagisa = new User("789012", "Nagisa", "nagisa.@gmail.com");
 //        User natsumi = new User("345678", "Natsumi", "natsumi.@gmail.com");
@@ -95,6 +79,25 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         adapter = new CardRecyclerAdapter(chatRoomCards);
         recyclerView.setAdapter(adapter);
+
+        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        chatRoomCards.clear();;
+                        for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
+                            ChatRoomCard roomCard = chatRoomIdSnapshot.getValue(ChatRoomCard.class);
+                            chatRoomCards.add(roomCard);
+                            adapter.notifyDataSetChanged();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
     }
