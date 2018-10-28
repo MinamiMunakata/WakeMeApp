@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
 public class ChatRoomCard {
+    private String chatRoomId;
     private String receiverId;
     private String receiverName;
     private String receiverIcon;
@@ -10,16 +11,27 @@ public class ChatRoomCard {
     public ChatRoomCard() {
     }
 
-    public ChatRoomCard(String receiverId,
+    public ChatRoomCard(String chatRoomId,
+                        String receiverId,
                         String receiverName,
                         String receiverIcon,
                         String receiverStatus,
                         boolean isReceiverSleeping) {
+        this.chatRoomId = chatRoomId;
         this.receiverId = receiverId;
         this.receiverName = receiverName;
         this.receiverIcon = receiverIcon;
         this.receiverStatus = receiverStatus;
         this.isReceiverSleeping = isReceiverSleeping;
+    }
+
+    public ChatRoomCard(String chatRoomId, User receiver) {
+        this.chatRoomId = chatRoomId;
+        this.receiverId = receiver.getId();
+        this.receiverName = receiver.getName();
+        this.receiverIcon = receiver.getIcon();
+        this.receiverStatus = receiver.getStatus();
+        this.isReceiverSleeping = receiver.isSleeping();
     }
 
     public ChatRoomCard(User receiver) {
@@ -28,6 +40,14 @@ public class ChatRoomCard {
         this.receiverIcon = receiver.getIcon();
         this.receiverStatus = receiver.getStatus();
         this.isReceiverSleeping = receiver.isSleeping();
+    }
+
+    public String getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(String chatRoomId) {
+        this.chatRoomId = chatRoomId;
     }
 
     public String getReceiverId() {

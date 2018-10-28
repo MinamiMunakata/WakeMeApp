@@ -29,6 +29,7 @@ import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 import com.squareup.picasso.Picasso;
 
@@ -38,9 +39,10 @@ public class SearchFriendActivity extends AppCompatActivity
     private Button search_btn;
     private EditText editEmail;
     private static final String TAG = "SearchFriendActivity";
-    private FirebaseUser user;
+    private FirebaseUser currentUser;
     private String friendId;
     private User friend;
+    private User mUser;
     private static final String DIALOG_TAG = "dialog";
 
     public void setEditEmail(EditText editEmail) {
@@ -55,7 +57,14 @@ public class SearchFriendActivity extends AppCompatActivity
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_search_friend);
         search_btn = findViewById(R.id.search_button);
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseRealtimeDatabaseHelper.readUserData(currentUser.getUid(), new RealtimeDatabaseCallback() {
+            @Override
+            public User getUser(User user) {
+                mUser = user;
+                return user;
+            }
+        });
     }
 
     @Override
@@ -75,7 +84,7 @@ public class SearchFriendActivity extends AppCompatActivity
                     }
                 } else if (search_btn.getText()
                         .equals(getResources().getString(R.string.add_as_friend))) {
-                    followNewFriend(user.getUid(), friendId);
+                    followNewFriend(mUser, friend);
                 } else {
                     // TODO: fix
                     Log.i(TAG, "onClick: 123456 Something wrong...");
@@ -86,7 +95,7 @@ public class SearchFriendActivity extends AppCompatActivity
     }
 
     public void searchFriendByEmail(final String email) {
-        if (email.equals(user.getEmail())) {
+        if (email.equals(currentUser.getEmail())) {
             Toast.makeText(this, "Search friend's ID", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -112,23 +121,24 @@ public class SearchFriendActivity extends AppCompatActivity
         FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 
-    public void followNewFriend(final String currentUserId, final String friendId) {
+    // TODO
+    public void followNewFriend(final User mUser, User friend) {
         FirebaseRealtimeDatabaseHelper.FRIEND_ID_LIST_REF
-                .child(currentUserId)
-                .child(friendId)
+                .child(mUser.getId())
+                .child(friend.getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             Toast.makeText(getApplicationContext(),
-                                    "Already following the user",
+                                    "Already following the currentUser",
                                     Toast.LENGTH_SHORT).show();
                             replaceFragment(SearchFriendFragment.newInstance());
                             search_btn.setText(R.string.search_email);
 
                         } else {
-                            FirebaseRealtimeDatabaseHelper.followFriend(currentUserId, friendId);
-                            FirebaseRealtimeDatabaseHelper.createChatRoom(currentUserId, friendId);
+                            FirebaseRealtimeDatabaseHelper.followFriend(mUser.getId(), friendId);
+                            FirebaseRealtimeDatabaseHelper.createChatRoom(mUser.getId(), friendId);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
                             launchActivity(MainActivity.class);
@@ -166,7 +176,6 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public void showFriend(ImageView iconHolder, TextView nameHolder) {
         if (friend == null) return;
-        // TODO: storage url doesn't show the image
         if (friend.getIcon() != null) Picasso.get().load(friend.getIcon()).into(iconHolder);
         nameHolder.setText(friend.getName());
     }

@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
+import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
@@ -54,18 +55,21 @@ public class FirebaseRealtimeDatabaseHelper {
 
     // TODO: fix data structure
 
-    public static void createChatRoom(final String currentUserId, final String friendId) {
+    public static void createChatRoom(User mUser, User friend) {
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
-        String[] memberIds = {currentUserId, friendId};
+        String[] memberIds = {mUser.getId(), friend.getId()};
         List<String> memberIDList = Arrays.asList(memberIds);
-        CHAT_ROOMS_REF.child(chatRoomId).setValue(new ChatRoom(chatRoomId, memberIDList));
-        CHAT_ROOM_ID_LIST_REF.child(currentUserId).child(chatRoomId).setValue(true, new DatabaseReference.CompletionListener() {
+        ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
+        CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
+        //TODO
+
+        CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId).setValue(new ChatRoomCard(chatRoomId, friend), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });
-        CHAT_ROOM_ID_LIST_REF.child(friendId).child(chatRoomId).setValue(true, new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId).setValue(new ChatRoomCard(chatRoomId, mUser), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
