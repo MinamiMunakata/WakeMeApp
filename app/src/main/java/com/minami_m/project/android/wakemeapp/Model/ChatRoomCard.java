@@ -42,6 +42,10 @@ public class ChatRoomCard {
         this.isReceiverSleeping = receiver.isSleeping();
     }
 
+    public void updateReceiver(User receiver) {
+        this.receiverStatus = receiver.getStatus();
+    }
+
     public String getChatRoomId() {
         return chatRoomId;
     }

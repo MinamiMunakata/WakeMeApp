@@ -9,11 +9,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
-import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FirebaseRealtimeDatabaseHelper {
     private static final String TAG = "RealtimeDatabaseHelper";
@@ -38,6 +39,11 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
+    public static void updateStatusWithLoginTime(String currentUserId, long loginTime) {
+        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
+        USERS_REF.child(currentUserId).child("status").setValue(StatusGenerator.formattedStatus(loginTime));
+    }
+
     public static void followFriend(final String currentUserId, final String friendId) {
         FRIEND_ID_LIST_REF.child(currentUserId).child(friendId).setValue(true, new DatabaseReference.CompletionListener() {
             @Override
@@ -55,23 +61,21 @@ public class FirebaseRealtimeDatabaseHelper {
 
     // TODO: fix data structure
 
-    public static void createChatRoom(User mUser, User friend) {
+    public static void createChatRoom(String currentUid, String friendId) {
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
-        String[] memberIds = {mUser.getId(), friend.getId()};
+        String[] memberIds = {currentUid, friendId};
         List<String> memberIDList = Arrays.asList(memberIds);
         ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
         CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
-        //TODO
-
-        CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId)
-                .setValue(new ChatRoomCard(chatRoomId, friend), new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(currentUid).child(chatRoomId)
+                .setValue(receiverMap(friendId), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });
-        CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId)
-                .setValue(new ChatRoomCard(chatRoomId, mUser), new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(friendId).child(chatRoomId)
+                .setValue(receiverMap(currentUid), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
@@ -88,11 +92,11 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void readUserData(String id, final RealtimeDatabaseCallback callback) {
-        USERS_REF.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        USERS_REF.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                callback.getUser(user);
+                callback.retrieveUserData(user);
             }
 
             @Override
@@ -100,6 +104,12 @@ public class FirebaseRealtimeDatabaseHelper {
                 showResult(databaseError);
             }
         });
+    }
+
+    public static Map<String, String> receiverMap(String receiverId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("receiver", receiverId);
+        return map;
     }
 
 

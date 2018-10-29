@@ -25,12 +25,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
+import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.MainActivity;
 import com.minami_m.project.android.wakemeapp.ProgressbarListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
+
+import java.util.Date;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -106,6 +109,9 @@ public class SignInFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
+            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
+                    mAuth.getCurrentUser().getUid(),
+                    new Date().getTime());
             ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
         }
         signInBtn.setOnClickListener(this);
