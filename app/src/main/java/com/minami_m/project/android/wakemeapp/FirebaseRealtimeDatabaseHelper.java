@@ -91,7 +91,7 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    // TODO: fix data structure ----------- !!!!!!
+    // TODO: fix data structure ----------- !!!!!! Why there is own user???
 
     public static void createChatRoom(User mUser, User friend) {
         Log.i(TAG, "createChatRoom: 123456789 -------- 1");
