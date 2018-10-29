@@ -18,10 +18,10 @@ public class StatusGenerator {
             return String.format(Locale.US,"Active %dm ago", min);
         } else if (diff < DAY) {
             int hour= (int)((now - time) / HOUR);
-            return String.format("Active %dh ago", hour);
+            return String.format(Locale.US,"Active %dh ago", hour);
 
         } else {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d at h:m a");
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d at h:m a", Locale.US);
             return String.format("Last seen %s", dateFormatter.format(new Date(time)));
         }
     }
