@@ -112,7 +112,7 @@ public class FirebaseRealtimeDatabaseHelper {
             }
         });
         CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId)
-                .setValue(friend, new DatabaseReference.CompletionListener() {
+                .setValue(mUser, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);

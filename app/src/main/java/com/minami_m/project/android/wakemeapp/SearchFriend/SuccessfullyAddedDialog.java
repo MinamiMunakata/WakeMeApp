@@ -13,14 +13,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.MainActivity;
+import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 
 /**

@@ -34,7 +34,7 @@ import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.InputHandler;
-import com.minami_m.project.android.wakemeapp.MainActivity;
+import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.StatusGenerator;

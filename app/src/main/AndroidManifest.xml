@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchFriend.SearchFriendActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ChatRoomActivity"></activity>
+        <activity android:name=".Main.MainActivity" />
+        <activity android:name=".ChatRoom.ChatRoomActivity"></activity>
     </application>
 
 </manifest>

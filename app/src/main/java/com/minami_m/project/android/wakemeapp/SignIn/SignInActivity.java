@@ -31,14 +31,12 @@ import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
-import com.minami_m.project.android.wakemeapp.MainActivity;
-import com.minami_m.project.android.wakemeapp.ProgressbarListener;
+import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.StatusGenerator;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
