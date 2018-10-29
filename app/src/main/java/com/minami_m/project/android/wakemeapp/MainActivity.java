@@ -70,18 +70,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         chatRoomCards.clear();
                         for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
-                            FirebaseRealtimeDatabaseHelper.readUserData(
-                                    (String) chatRoomIdSnapshot.child("receiver").getValue(),
-                                    new RealtimeDatabaseCallback() {
-                                @Override
-                                public void retrieveUserData(User receiver) {
-                                    receiver.setStatus(
-                                            StatusGenerator.formattedStatus(receiver.getLastLogin()));
-                                    ChatRoomCard roomCard = new ChatRoomCard(receiver);
-                                    chatRoomCards.add(roomCard);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            });
+                            User receiver = chatRoomIdSnapshot.getValue(User.class);
+                            Log.i(TAG, "onDataChange: 123456789\n" + receiver);
+                            ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
+                            chatRoomCards.add(roomCard);
+                            adapter.notifyDataSetChanged();
 
                         }
                     }
@@ -92,14 +85,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     }
                 });
 
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (receiverIdList.size() > 0) {
-        }
 
     }
 

@@ -28,6 +28,7 @@ import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 import com.minami_m.project.android.wakemeapp.inputValidationHandler;
 import com.squareup.picasso.Picasso;
@@ -57,14 +58,27 @@ public class SearchFriendActivity extends AppCompatActivity
         setContentView(R.layout.activity_search_friend);
         search_btn = findViewById(R.id.search_button);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            FirebaseRealtimeDatabaseHelper.readUserData(currentUser.getUid(), new RealtimeDatabaseCallback() {
+                @Override
+                public void retrieveUserData(User user) {
+                    mUser = user;
+                    if (mUser == null) {
+                        Log.i(TAG, "onCreate: 123456789 the user doesn't exist.");
+                        launchActivity(SignInActivity.class);
+                    }
+                }
+            });
+
+        } else {
+            launchActivity(SignInActivity.class);
+        }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (currentUser == null) {
-            launchActivity(SignInActivity.class);
-        }
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +95,7 @@ public class SearchFriendActivity extends AppCompatActivity
                     }
                 } else if (search_btn.getText()
                         .equals(getResources().getString(R.string.add_as_friend))) {
-                    followNewFriend(currentUser.getUid(), friendId);
+                    followNewFriend(mUser, friend);
                 } else {
                     // TODO: fix
                     Log.i(TAG, "onClick: 123456 Something wrong...");
@@ -101,8 +115,8 @@ public class SearchFriendActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean dataExist = false;
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    Log.i(TAG, "onDataChange: 123456789 " + userSnapshot.getKey());
                     if (userSnapshot.child("email").getValue().equals(email)) {
+                        Log.i(TAG, "onDataChange: " + userSnapshot.getKey());
                         friendId = userSnapshot.getKey();
                         friend = userSnapshot.getValue(User.class);
                         search_btn.setText(R.string.add_as_friend);
@@ -125,10 +139,10 @@ public class SearchFriendActivity extends AppCompatActivity
     }
 
     // TODO
-    public void followNewFriend(final String currentUserId, final String friendId) {
+    public void followNewFriend(final User mUser, final User friend) {
         FirebaseRealtimeDatabaseHelper.FRIEND_ID_LIST_REF
-                .child(currentUserId)
-                .child(friendId)
+                .child(mUser.getId())
+                .child(friend.getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,8 +154,8 @@ public class SearchFriendActivity extends AppCompatActivity
                             search_btn.setText(R.string.search_email);
 
                         } else {
-                            FirebaseRealtimeDatabaseHelper.followFriend(currentUserId, SearchFriendActivity.this.friendId);
-                            FirebaseRealtimeDatabaseHelper.createChatRoom(currentUserId, friendId);
+                            FirebaseRealtimeDatabaseHelper.followFriend(mUser.getId(), friendId);
+                            FirebaseRealtimeDatabaseHelper.createChatRoom(mUser, friend);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
                         }

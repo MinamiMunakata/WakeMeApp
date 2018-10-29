@@ -2,6 +2,7 @@ package com.minami_m.project.android.wakemeapp;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
+import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
@@ -24,6 +26,7 @@ public class FirebaseRealtimeDatabaseHelper {
     public static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
     public static final DatabaseReference FRIEND_ID_LIST_REF = FIREBASE_DATABASE.getReference("FriendIDList");
     public static final DatabaseReference CHAT_ROOM_ID_LIST_REF = FIREBASE_DATABASE.getReference("ChatRoomIDList");
+    public static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
 
     public static FirebaseRealtimeDatabaseHelper newInstance() {
         return new FirebaseRealtimeDatabaseHelper();
@@ -39,9 +42,38 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    public static void updateStatusWithLoginTime(String currentUserId, long loginTime) {
-        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
-        USERS_REF.child(currentUserId).child("status").setValue(StatusGenerator.formattedStatus(loginTime));
+    public static void updateStatusWithLoginTime(String currentUserId, final long loginTime) {
+        final String status = StatusGenerator.formattedStatus(loginTime);
+        final Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/" + currentUserId + "/lastLogin", loginTime);
+        childUpdates.put("/Users/" + currentUserId + "/status", status);
+        RECEIVER_PATH_REF.child(currentUserId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot path: dataSnapshot.getChildren()) {
+                    childUpdates.put(path.getValue() + "/lastLogin", loginTime);
+                    childUpdates.put(path.getValue() + "/status", status);
+                }
+                FIREBASE_DATABASE.getReference().updateChildren(
+                        childUpdates,
+                        new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError,
+                                           @NonNull DatabaseReference databaseReference) {
+                        showResult(databaseError);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
+            }
+        });
+//        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
+//        USERS_REF.child(currentUserId).child("status").setValue(StatusGenerator.formattedStatus(loginTime));
     }
 
     public static void followFriend(final String currentUserId, final String friendId) {
@@ -59,28 +91,38 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    // TODO: fix data structure
+    // TODO: fix data structure ----------- !!!!!!
 
-    public static void createChatRoom(String currentUid, String friendId) {
+    public static void createChatRoom(User mUser, User friend) {
+        Log.i(TAG, "createChatRoom: 123456789 -------- 1");
+        // (1) create a ChatRoom Obj and save it.
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
-        String[] memberIds = {currentUid, friendId};
+        String[] memberIds = {mUser.getId(), friend.getId()};
         List<String> memberIDList = Arrays.asList(memberIds);
         ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
+        Log.i(TAG, "createChatRoom: 123456789 " + chatRoom);
         CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
-        CHAT_ROOM_ID_LIST_REF.child(currentUid).child(chatRoomId)
-                .setValue(receiverMap(friendId), new DatabaseReference.CompletionListener() {
+
+        // (2) Save ChatRoom ID.
+        CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId)
+                .setValue(friend, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });
-        CHAT_ROOM_ID_LIST_REF.child(friendId).child(chatRoomId)
-                .setValue(receiverMap(currentUid), new DatabaseReference.CompletionListener() {
+        CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId)
+                .setValue(friend, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });
+
+        // (3) Save Receiver Path.
+        RECEIVER_PATH_REF.child(mUser.getId()).push().setValue("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
+        RECEIVER_PATH_REF.child(friend.getId()).push().setValue("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
+
     }
 
     public static void showResult(DatabaseError databaseError) {
@@ -104,12 +146,6 @@ public class FirebaseRealtimeDatabaseHelper {
                 showResult(databaseError);
             }
         });
-    }
-
-    public static Map<String, String> receiverMap(String receiverId) {
-        Map<String, String> map = new HashMap<>();
-        map.put("receiver", receiverId);
-        return map;
     }
 
 
