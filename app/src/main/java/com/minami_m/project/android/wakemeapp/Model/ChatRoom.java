@@ -12,7 +12,6 @@ public class ChatRoom{
     public static final String TAG = "ChatRoom";
     private String id;
     private List<String> memberList;
-    private ChatRoomCard chatRoomCard;
 
     public ChatRoom() {
     }
@@ -23,10 +22,6 @@ public class ChatRoom{
 
     }
 
-    public void setChatRoomCard(User reciever) {
-        this.chatRoomCard = new ChatRoomCard(reciever);
-    }
-
     public String getId() {
         return id;
     }
@@ -35,8 +30,15 @@ public class ChatRoom{
         this.id = id;
     }
 
+    public List<String> getMemberList() {
+        return memberList;
+    }
 
-//    public User getReceiver(String currentUserId) {
+    public void setMemberList(List<String> memberList) {
+        this.memberList = memberList;
+    }
+
+    //    public User getReceiver(String currentUserId) {
 //        for (String id: this.memberIDs) {
 //            if (!id.equals(currentUserId)) {
 //                FirebaseRealtimeDatabaseHelper.readUserData(id, new RealtimeDatabaseCallback() {
@@ -66,4 +68,9 @@ public class ChatRoom{
 //    }
 
 
+    @Override
+    public String toString() {
+        String description = String.format("ID: %s, member: %s", id, memberList.toString());
+        return description;
+    }
 }
