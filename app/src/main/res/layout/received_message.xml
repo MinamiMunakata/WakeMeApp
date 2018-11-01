@@ -10,18 +10,18 @@
     android:clipToPadding="false">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/message_icon"
+        android:id="@+id/receiver_bubble_icon"
         android:layout_width="@dimen/message_avatar"
         android:layout_height="@dimen/message_avatar"
         android:src="@drawable/com_facebook_profile_picture_blank_portrait"
-        android:layout_alignBottom="@+id/others_bubble"/>
+        android:layout_alignBottom="@+id/received_bubble"/>
     <TextView
-        android:id="@+id/others_bubble"
+        android:id="@+id/received_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/received_message"
         android:text="test test test test test test test test test test test test as"
-        android:layout_toRightOf="@+id/message_icon"
+        android:layout_toRightOf="@+id/receiver_bubble_icon"
         android:textSize="@dimen/message_text_size"
         android:padding="@dimen/padding_inside_bubble"
         android:layout_marginLeft="@dimen/margin_bw_items"
