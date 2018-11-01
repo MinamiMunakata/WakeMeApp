@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
+import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -16,9 +17,11 @@ import java.util.List;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder> {
     private List<ChatRoomCard> chatRoomCards;
+    private static ChatRoomCardClickListener listener;
 
-    public CardRecyclerAdapter(List<ChatRoomCard> chatRoomCards) {
+    public CardRecyclerAdapter(List<ChatRoomCard> chatRoomCards, ChatRoomCardClickListener listener) {
         this.chatRoomCards = chatRoomCards;
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,7 +51,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         return chatRoomCards.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView iconView, alertView;
         public TextView nameView, statusView;
 
@@ -58,6 +61,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
             alertView = itemView.findViewById(R.id.card_alart);
             nameView = itemView.findViewById(R.id.card_name);
             statusView = itemView.findViewById(R.id.card_status);
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            listener.onChatRoomCardClicked(v, this.getLayoutPosition());
         }
     }
 }

@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -27,7 +28,7 @@ import com.minami_m.project.android.wakemeapp.SearchFriend.SearchFriendActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ActivityChangeListener {
+public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
     private ImageButton button;
     private FirebaseAuth mAuth;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         recyclerView.setLayoutManager(layoutManager);
 
 
-        adapter = new CardRecyclerAdapter(chatRoomCards);
+        adapter = new CardRecyclerAdapter(chatRoomCards, this);
         recyclerView.setAdapter(adapter);
 
         FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
@@ -74,11 +75,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                         chatRoomCards.clear();
                         for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
                             User receiver = chatRoomIdSnapshot.getValue(User.class);
+                            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
                             Log.i(TAG, "onDataChange: 123456789\n" + receiver);
                             ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                             chatRoomCards.add(roomCard);
                             adapter.notifyDataSetChanged();
-
                         }
                     }
 
@@ -95,5 +96,12 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public void launchActivity(Class nextActivity) {
         Intent intent = new Intent(this, nextActivity);
         startActivity(intent);
+    }
+
+    @Override
+    public void onChatRoomCardClicked(View v, int position) {
+        Log.i(TAG, "onChatRoomCardClicked: CLICKED!\n" +
+                "Position: " + position + "\n" +
+                chatRoomCards.get(position).getReceiver().getName());
     }
 }
