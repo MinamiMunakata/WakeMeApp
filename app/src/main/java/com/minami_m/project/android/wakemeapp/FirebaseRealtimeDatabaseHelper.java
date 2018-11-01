@@ -42,12 +42,12 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    public static void updateStatusWithLoginTime(String currentUserId, final long loginTime) {
+    public static void updateStatusWithLoginTime(String userId, final long loginTime) {
         final String status = StatusGenerator.formattedStatus(loginTime);
         final Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/Users/" + currentUserId + "/lastLogin", loginTime);
-        childUpdates.put("/Users/" + currentUserId + "/status", status);
-        RECEIVER_PATH_REF.child(currentUserId)
+        childUpdates.put("/Users/" + userId + "/lastLogin", loginTime);
+        childUpdates.put("/Users/" + userId + "/status", status);
+        RECEIVER_PATH_REF.child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,8 +90,6 @@ public class FirebaseRealtimeDatabaseHelper {
             }
         });
     }
-
-    // TODO: fix data structure ----------- !!!!!! Why there is own user???
 
     public static void createChatRoom(User mUser, User friend) {
         Log.i(TAG, "createChatRoom: 123456789 -------- 1");
