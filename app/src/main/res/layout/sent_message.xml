@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/my_bubble"
-        android:background="@drawable/my_message"
+        android:background="@drawable/sent_message"
         android:layout_alignParentRight="true"
         android:padding="@dimen/padding_inside_bubble">
         <TextView
