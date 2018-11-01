@@ -8,28 +8,27 @@
     android:paddingLeft="@dimen/padding_bubbles_to_the_other_side"
     android:clipToPadding="false">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/my_bubble"
         android:background="@drawable/sent_message"
         android:layout_alignParentRight="true"
         android:padding="@dimen/padding_inside_bubble">
         <TextView
-            android:id="sent_message_text"
-            android:layout_width="0dp"
+            android:id="@+id/sent_message_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:text="test test test test test test test test test"
             android:elevation="@dimen/elevation"
             android:textSize="@dimen/message_text_size"/>
         <TextView
-            android:id="sent_message_seen"
+            android:id="@+id/sent_message_seen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="seen"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="end"
             android:textColor="@color/colorMyAccent"/>
     </LinearLayout>
 

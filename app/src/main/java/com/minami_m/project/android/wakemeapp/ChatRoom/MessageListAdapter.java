@@ -43,10 +43,12 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         return mMessageList.size();
     }
 
-    private class SentMessage extends RecyclerView.ViewHolder {
+    private class SentMessageViewHolder extends RecyclerView.ViewHolder {
 
-        public SentMessage(@NonNull View itemView) {
+
+        public SentMessageViewHolder(@NonNull View itemView) {
             super(itemView);
+
 
         }
     }

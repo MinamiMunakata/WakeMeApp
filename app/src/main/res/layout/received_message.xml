@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/received_message"
-        android:text="test test test test test test test test test test test test as"
+        android:text="test test test test test test test test test test test test test"
         android:layout_toRightOf="@+id/receiver_bubble_icon"
         android:textSize="@dimen/message_text_size"
         android:padding="@dimen/padding_inside_bubble"
