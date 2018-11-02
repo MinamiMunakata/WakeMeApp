@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
+import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
@@ -140,6 +141,30 @@ public class FirebaseRealtimeDatabaseHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                showResult(databaseError);
+            }
+        });
+    }
+
+    public static void sendNewMessage(String chatRoomId, Message message) {
+        String key = MESSAGES_REF.child(chatRoomId).push().getKey();
+        message.setId(key);
+        MESSAGES_REF.child(chatRoomId).child(key)
+                .setValue(message, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError,
+                                   @NonNull DatabaseReference databaseReference) {
+                showResult(databaseError);
+            }
+        });
+    }
+
+    public static void updateIfMessageHasSeen(String chatRoomId, Message message) {
+        MESSAGES_REF.child(chatRoomId).child(message.getId()).child("isSeen")
+                .setValue(message.isSeen(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError,
+                                   @NonNull DatabaseReference databaseReference) {
                 showResult(databaseError);
             }
         });

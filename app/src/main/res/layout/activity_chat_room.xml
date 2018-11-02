@@ -28,7 +28,7 @@
         android:background="@drawable/rounded_field">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/message_text_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

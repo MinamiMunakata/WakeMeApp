@@ -11,13 +11,13 @@ import android.widget.EditText;
 
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.inputValidationHandler;
+import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFriendFragment extends Fragment implements inputValidationHandler {
+public class SearchFriendFragment extends Fragment implements InputValidationHandler {
     EditText editText;
     private static final String TAG = "SearchFriendFragment";
 

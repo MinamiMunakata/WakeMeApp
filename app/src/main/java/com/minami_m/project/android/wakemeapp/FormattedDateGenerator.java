@@ -21,13 +21,13 @@ public class FormattedDateGenerator {
             return String.format(Locale.US,"Active %dh ago", hour);
 
         } else {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' h:m a", Locale.US);
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' h:mm a", Locale.US);
             return String.format("Last seen %s", dateFormatter.format(new Date(time)));
         }
     }
 
     public static String generateTimestamp(long createdAt) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("h:m", Locale.US);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("h:mm", Locale.US);
         return String.valueOf(dateFormatter.format(createdAt));
     }
 }

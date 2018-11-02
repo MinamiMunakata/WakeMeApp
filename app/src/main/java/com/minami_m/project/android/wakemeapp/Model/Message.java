@@ -5,20 +5,27 @@ import java.util.Date;
 public class Message {
     private String id;
     private String text;
-    private String author;
+    private String senderId;
     private long createdAt;
     private boolean isSeen;
 
     public Message() {
     }
 
-    public Message(String id, String text, String author) {
+    public Message(String id, String text, String senderId) {
         this.id = id;
         this.text = text;
-        this.author = author;
+        this.senderId = senderId;
         this.createdAt = new Date().getTime();
         this.isSeen = false;
     }
+
+    public Message(String text, String senderId, long createdAt) {
+        this.text = text;
+        this.senderId = senderId;
+        this.createdAt = createdAt;
+    }
+
 
     public String getId() {
         return id;
@@ -36,12 +43,12 @@ public class Message {
         this.text = text;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
     public long getCreatedAt() {

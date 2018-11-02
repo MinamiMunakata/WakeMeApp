@@ -38,7 +38,7 @@ import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.inputValidationHandler;
+import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 
 import java.io.IOException;
 
@@ -49,7 +49,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class SignUpFragment extends Fragment
-        implements inputValidationHandler, View.OnClickListener {
+        implements InputValidationHandler, View.OnClickListener {
     private FirebaseAuth mAuth;
     private EditText nameField;
     private EditText emailField;

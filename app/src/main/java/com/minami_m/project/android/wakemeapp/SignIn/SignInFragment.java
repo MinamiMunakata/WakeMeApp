@@ -29,7 +29,7 @@ import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.inputValidationHandler;
+import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 
 import java.util.Date;
 
@@ -41,7 +41,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  */
 public class SignInFragment extends Fragment implements
         View.OnClickListener,
-        inputValidationHandler {
+        InputValidationHandler {
 
     private FirebaseAuth mAuth;
     private Button signInBtn;

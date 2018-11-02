@@ -30,11 +30,11 @@ import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
-import com.minami_m.project.android.wakemeapp.inputValidationHandler;
+import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 import com.squareup.picasso.Picasso;
 
 public class SearchFriendActivity extends AppCompatActivity
-        implements FragmentChangeListener, inputValidationHandler,
+        implements FragmentChangeListener, InputValidationHandler,
         SearchFriendFragmentListener, ActivityChangeListener {
     private Button search_btn;
     private EditText editEmail;
@@ -90,7 +90,7 @@ public class SearchFriendActivity extends AppCompatActivity
                             Log.i(TAG, "onClick: " + editEmail.getText().toString());
                             searchFriendByEmail(editEmail.getText().toString());
                         } else {
-                            Log.i(TAG, "onClick: 123456789 " + editEmail.getText().toString());
+                            Log.i(TAG, "onClick: 123456789 Invalid input...");
                         }
                     }
                 } else if (search_btn.getText()
@@ -135,6 +135,8 @@ public class SearchFriendActivity extends AppCompatActivity
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };
+        Log.i(TAG, "searchFriendByEmail: 12345" + FirebaseRealtimeDatabaseHelper.FIREBASE_DATABASE);
+        Log.i(TAG, "searchFriendByEmail: 12345" + FirebaseRealtimeDatabaseHelper.USERS_REF);
         FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 

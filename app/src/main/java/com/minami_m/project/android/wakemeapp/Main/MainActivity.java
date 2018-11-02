@@ -18,22 +18,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.ChatRoom.ChatRoomActivity;
 import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.SearchFriend.SearchFriendActivity;
+import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
+    public static final String CHAT_ROOM_ID = "ChatRoomID";
+    public static final String RECEIVER_ICON = "ReceiverIcon";
     private ImageButton button;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private List<String> receiverIdList;
     private List<ChatRoomCard> chatRoomCards;
     private RecyclerView recyclerView;
     private CardRecyclerAdapter adapter;
@@ -43,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "onCreate: 123456789 ------- HEY! -------");
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         currentUserName = findViewById(R.id.current_user_name);
         currentUserName.setText(String.format("%s!",currentUser.getDisplayName()));
-        receiverIdList = new ArrayList<>();
         chatRoomCards = new ArrayList<>();
         button = findViewById(R.id.semicircle_btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        Log.i(TAG, "onCreate: 123456789 ID: " + currentUser.getUid());
 
         adapter = new CardRecyclerAdapter(chatRoomCards, this);
         recyclerView.setAdapter(adapter);
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         chatRoomCards.clear();
+                        Log.i(TAG, "onDataChange: reading? 123456");
                         for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
                             User receiver = chatRoomIdSnapshot.getValue(User.class);
                             FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
@@ -93,6 +97,14 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (currentUser == null) {
+            launchActivity(SignInActivity.class);
+        }
+    }
+
+    @Override
     public void launchActivity(Class nextActivity) {
         Intent intent = new Intent(this, nextActivity);
         startActivity(intent);
@@ -100,8 +112,16 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
     @Override
     public void onChatRoomCardClicked(View v, int position) {
+        ChatRoomCard roomCard = chatRoomCards.get(position);
         Log.i(TAG, "onChatRoomCardClicked: CLICKED!\n" +
                 "Position: " + position + "\n" +
-                chatRoomCards.get(position).getReceiver().getName());
+                roomCard.getReceiver().getName());
+        Intent intent = new Intent(this, ChatRoomActivity.class);
+        Bundle data = new Bundle();
+        data.putString(CHAT_ROOM_ID, roomCard.getChatRoomId());
+        data.putString(RECEIVER_ICON, roomCard.getReceiver().getIcon());
+        intent.putExtras(data);
+        startActivity(intent);
+//        finish();
     }
 }
