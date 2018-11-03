@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.minami_m.project.android.wakemeapp.FormattedDateGenerator;
+import com.minami_m.project.android.wakemeapp.TimeHandler;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
@@ -64,16 +64,25 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message message = mMessageList.get(position);
+        boolean isFirstChat = false;
+        if (position == 0) {
+            isFirstChat = true;
+        } else {
+            Message previousMessage = mMessageList.get(position - 1);
+            if (!TimeHandler.isSameDay(previousMessage.getCreatedAt(), message.getCreatedAt())) {
+                isFirstChat = true;
+            }
+        }
+
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
                 ((SentMessageViewHolder)holder)
-                        .bind(message, mMessageList.size() == position + 1);
-                Log.i(TAG, "onBindViewHolder: position " + position);
-                Log.i(TAG, "onBindViewHolder: is Last? " + (mMessageList.size() == position + 1));
+                        .bind(message, mMessageList.size() == position + 1, isFirstChat);
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((ReceivedMessageViewHolder)holder).bind(message, receiverIcon);
+                ((ReceivedMessageViewHolder)holder).bind(message, receiverIcon, isFirstChat);
+                break;
         }
 
     }
@@ -84,44 +93,56 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     private class SentMessageViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView, seenHolder;
+        private TextView textView, dateView, seenHolder;
 
         public SentMessageViewHolder(@NonNull View itemView) {
             super(itemView);
+            dateView = itemView.findViewById(R.id.sender_date);
             textView = itemView.findViewById(R.id.sent_message_text);
             seenHolder = itemView.findViewById(R.id.sent_message_seen);
 
         }
 
-        public void bind(Message message, boolean isLast) {
+        public void bind(Message message, boolean isLast, boolean isFirstChat) {
             textView.setText(message.getText());
-            Log.i(TAG, "bind: " + message.getText());
-            Log.i(TAG, "bind: " + isLast);
-            Log.i(TAG, "bind: is Seen " + message.getIsSeen());
+            setDate(dateView, message, isFirstChat);
             if (isLast && message.getIsSeen()) {
-                // TODO: fix
-                seenHolder.setText("Seen");
+                seenHolder.setText(R.string.seen);
             } else {
-                seenHolder.setText(FormattedDateGenerator.generateTimestamp(message.getCreatedAt()));
+                seenHolder.setText(TimeHandler.generateTimestamp(message.getCreatedAt()));
+            }
+        }
+
+    }
+
+    private void setDate(TextView dateView, Message message, boolean isFirstChat) {
+        if (isFirstChat) {
+            dateView.setVisibility(View.VISIBLE);
+            if (TimeHandler.isToday(message.getCreatedAt())) {
+                dateView.setText(R.string.today);
+            } else if (TimeHandler.isYesterday(message.getCreatedAt())) {
+                dateView.setText(R.string.yesterday);
+            } else {
+                dateView.setText(TimeHandler.generateDateOfChat(message.getCreatedAt()));
             }
         }
     }
 
     private class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
+        private TextView textView, dateView;
         private CircleImageView imageView;
 
         public ReceivedMessageViewHolder(@NonNull View itemView) {
             super(itemView);
+            dateView = itemView.findViewById(R.id.receiver_date);
             textView = itemView.findViewById(R.id.received_bubble);
             imageView = itemView.findViewById(R.id.receiver_bubble_icon);
         }
 
-        public void bind(Message message, String receiverIcon) {
+        public void bind(Message message, String receiverIcon, boolean isFirstChat) {
+            setDate(dateView, message, isFirstChat);
             textView.setText(message.getText());
             Picasso.get().load(receiverIcon).into(imageView);
-            Log.i(TAG, "bind: " + message.getText());
-            Log.i(TAG, "bind: is Seen " + message.getIsSeen());
         }
     }
 }

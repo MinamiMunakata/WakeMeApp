@@ -33,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
-import com.minami_m.project.android.wakemeapp.FormattedDateGenerator;
+import com.minami_m.project.android.wakemeapp.TimeHandler;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
@@ -124,7 +124,7 @@ public class SignUpFragment extends Fragment
                                         currentUser.getDisplayName(),
                                         currentUser.getEmail(),
                                         downloadedIconUrl);
-                                newUser.setStatus(FormattedDateGenerator.generateStatus(newUser.getLastLogin()));
+                                newUser.setStatus(TimeHandler.generateStatus(newUser.getLastLogin()));
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                                 ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                             }

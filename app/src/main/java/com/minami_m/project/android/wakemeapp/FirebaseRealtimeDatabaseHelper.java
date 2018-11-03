@@ -43,7 +43,7 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void updateStatusWithLoginTime(String userId, final long loginTime) {
-        final String status = FormattedDateGenerator.generateStatus(loginTime);
+        final String status = TimeHandler.generateStatus(loginTime);
         final Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + userId + "/lastLogin", loginTime);
         childUpdates.put("/Users/" + userId + "/status", status);
@@ -73,7 +73,7 @@ public class FirebaseRealtimeDatabaseHelper {
             }
         });
 //        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
-//        USERS_REF.child(currentUserId).child("status").setValue(FormattedDateGenerator.generateStatus(loginTime));
+//        USERS_REF.child(currentUserId).child("status").setValue(TimeHandler.generateStatus(loginTime));
     }
 
     public static void followFriend(final String currentUserId, final String friendId) {
