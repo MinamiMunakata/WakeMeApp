@@ -1,6 +1,5 @@
 package com.minami_m.project.android.wakemeapp.ChatRoom;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.FormattedDateGenerator;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.R;
@@ -20,7 +18,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
-    private static final String TAG = "--MessageListAdapter--";
+    private static final String TAG = "--Adapter--123456";
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
@@ -71,6 +69,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             case VIEW_TYPE_MESSAGE_SENT:
                 ((SentMessageViewHolder)holder)
                         .bind(message, mMessageList.size() == position + 1);
+                Log.i(TAG, "onBindViewHolder: position " + position);
+                Log.i(TAG, "onBindViewHolder: is Last? " + (mMessageList.size() == position + 1));
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
                 ((ReceivedMessageViewHolder)holder).bind(message, receiverIcon);
@@ -95,7 +95,10 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         public void bind(Message message, boolean isLast) {
             textView.setText(message.getText());
-            if (isLast && message.isSeen()) {
+            Log.i(TAG, "bind: " + message.getText());
+            Log.i(TAG, "bind: " + isLast);
+            Log.i(TAG, "bind: is Seen " + message.getIsSeen());
+            if (isLast && message.getIsSeen()) {
                 // TODO: fix
                 seenHolder.setText("Seen");
             } else {
@@ -117,6 +120,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         public void bind(Message message, String receiverIcon) {
             textView.setText(message.getText());
             Picasso.get().load(receiverIcon).into(imageView);
+            Log.i(TAG, "bind: " + message.getText());
+            Log.i(TAG, "bind: is Seen " + message.getIsSeen());
         }
     }
 }

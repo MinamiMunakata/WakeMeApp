@@ -26,7 +26,6 @@ import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 
-import java.io.ObjectInputValidation;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -86,10 +85,10 @@ public class ChatRoomActivity
                 for (DataSnapshot messageSnapShot: dataSnapshot.getChildren()) {
                     Message message = messageSnapShot.getValue(Message.class);
                     if (!message.getSenderId().equals(currentUser.getUid())) {
-                        message.setSeen(true);
+                        message.setIsSeen(true);
                         FirebaseRealtimeDatabaseHelper.updateIfMessageHasSeen(chatRoomId, message);
                     }
-                    Log.i(TAG, "onDataChange: 1234567 " + message.getText());
+                    Log.i(TAG, "onDataChange: " + message.toString());
                     mMessageList.add(message);
                     adapter.notifyDataSetChanged();
                 }

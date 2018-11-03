@@ -59,13 +59,17 @@ public class Message {
         this.createdAt = createdAt;
     }
 
-    public boolean isSeen() {
+    public boolean getIsSeen() {
         return isSeen;
     }
 
-    public void setSeen(boolean seen) {
-        isSeen = seen;
+    public void setIsSeen(boolean seen) {
+        this.isSeen = seen;
     }
 
-
+    @Override
+    public String toString() {
+        String description = String.format("\nText: %s\nisSeen: %s\n", this.text, this.isSeen);
+        return description;
+    }
 }

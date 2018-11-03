@@ -160,8 +160,10 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void updateIfMessageHasSeen(String chatRoomId, Message message) {
+        Log.i(TAG, "updateIfMessageHasSeen: " + message.getText());
+        Log.i(TAG, "updateIfMessageHasSeen: is Seen ? " + message.getIsSeen());
         MESSAGES_REF.child(chatRoomId).child(message.getId()).child("isSeen")
-                .setValue(message.isSeen(), new DatabaseReference.CompletionListener() {
+                .setValue(message.getIsSeen(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError,
                                    @NonNull DatabaseReference databaseReference) {
