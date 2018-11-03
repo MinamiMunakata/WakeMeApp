@@ -27,7 +27,7 @@ public class FormattedDateGenerator {
     }
 
     public static String generateTimestamp(long createdAt) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("h:mm", Locale.US);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm", Locale.US);
         return String.valueOf(dateFormatter.format(createdAt));
     }
 }
