@@ -13,7 +13,8 @@
         app:layout_constraintBottom_toTopOf="@+id/input_message_box"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="@dimen/space_both_edges">
 
     </android.support.v7.widget.RecyclerView>
     <LinearLayout

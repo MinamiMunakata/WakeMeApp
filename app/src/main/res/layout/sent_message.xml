@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="@dimen/padding_bubbles"
-    android:paddingRight="@dimen/pudding_bubbles_to_wall"
-    android:paddingLeft="@dimen/padding_bubbles_to_the_other_side"
+    android:background="@color/colorBackground"
     android:clipToPadding="false">
+    <TextView
+        android:id="@+id/sender_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nov 2, 2018"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:layout_marginBottom="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/my_bubble"
         android:background="@drawable/sent_message"
-        android:layout_alignParentRight="true"
         android:padding="@dimen/padding_inside_bubble">
         <TextView
             android:id="@+id/sent_message_text"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="test test test test test test test test test"
             android:elevation="@dimen/elevation"
             android:textSize="@dimen/message_text_size"/>
-        <TextView
-            android:id="@+id/sent_message_seen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hasSeen"
-            android:layout_gravity="end"
-            android:textColor="@color/colorMyAccent"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/sent_message_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seen"
+        android:layout_gravity="end"
+        android:paddingTop="8dp"
+        android:textColor="@color/colorMyAccent" />
 
 
-</RelativeLayout>
+</LinearLayout>
