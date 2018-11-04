@@ -125,6 +125,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             } else {
                 dateView.setText(TimeHandler.generateDateOfChat(message.getCreatedAt()));
             }
+        } else {
+            dateView.setVisibility(View.GONE);
         }
     }
 

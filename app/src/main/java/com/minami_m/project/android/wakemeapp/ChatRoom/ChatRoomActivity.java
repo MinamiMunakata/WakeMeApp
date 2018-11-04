@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -127,10 +128,9 @@ public class ChatRoomActivity
 
     @Override
     public void onClick(View v) {
-        Log.i(TAG, "onClick: 123456789 Clicked!");
         if (isValidInput()) {
             Message message = new Message(
-                    editText.getText().toString(), currentUser.getUid(), new Date().getTime());
+                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
             FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomId, message);
             editText.setText("");
         } else {

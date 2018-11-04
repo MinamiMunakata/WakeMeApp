@@ -15,29 +15,30 @@
         android:visibility="gone"
         android:textAlignment="center"
         android:layout_marginBottom="10dp"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:id="@+id/my_bubble"
         android:background="@drawable/sent_message"
-        android:padding="@dimen/padding_inside_bubble">
+        android:padding="5dp">
         <TextView
             android:id="@+id/sent_message_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="test test test test test test test test test"
+            android:text="test test test test test test test test test test"
             android:elevation="@dimen/elevation"
+            android:padding="@dimen/sender_bubble_text_padding"
             android:textSize="@dimen/message_text_size"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/sent_message_seen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seen"
-        android:layout_gravity="end"
-        android:paddingTop="8dp"
-        android:textColor="@color/colorMyAccent" />
-
-
+        <TextView
+            android:id="@+id/sent_message_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seen"
+            android:layout_alignEnd="@+id/sent_message_text"
+            android:layout_alignBottom="@+id/sent_message_text"
+            android:textSize="12sp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/colorMyAccent" />
+    </RelativeLayout>
 </LinearLayout>

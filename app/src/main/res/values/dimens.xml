@@ -31,4 +31,5 @@
     <dimen name="text_size_sign_in_input">15sp</dimen>
     <dimen name="small_padding_text">3dp</dimen>
     <dimen name="dialog_radius">18dp</dimen>
+    <dimen name="sender_bubble_text_padding">8dp</dimen>
 </resources>

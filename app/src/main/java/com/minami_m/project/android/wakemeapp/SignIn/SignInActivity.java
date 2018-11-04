@@ -16,8 +16,10 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +61,10 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // facebook
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        AppEventsLogger.activateApp(this);
+        // ========
         setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_sign_in);
         // --- create a new fragment to be placed in the activity layout ---
         if (findViewById(R.id.signin_container) != null) {
