@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <declare-styleable name="ImFlexboxLayout">
-        <attr name="viewPartMain" format="reference"></attr>
-        <attr name="viewPartSlave" format="reference"></attr>
-    </declare-styleable>
-</resources>
