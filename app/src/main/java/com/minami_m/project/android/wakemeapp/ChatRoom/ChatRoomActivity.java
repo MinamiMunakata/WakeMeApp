@@ -130,7 +130,7 @@ public class ChatRoomActivity
     public void onClick(View v) {
         if (isValidInput()) {
             Message message = new Message(
-                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
+                    (editText.getText().toString()), currentUser.getUid(), new Date().getTime());
             FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomId, message);
             editText.setText("");
         } else {
