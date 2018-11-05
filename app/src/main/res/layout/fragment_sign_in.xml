@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/sign_in_fragment"
+<LinearLayout android:id="@+id/sign_in_fragment"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".SignIn.SignInFragment"
     android:gravity="center"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ProgressBar
         android:id="@+id/sign_in_progressbar"
@@ -19,18 +19,46 @@
         android:indeterminate="true"
         android:indeterminateTint="#1a09d6"
         android:max="100" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical">
-        <ImageView
-            android:layout_marginBottom="@dimen/vertical_space_bw_items"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_logo"
-            android:background="@drawable/logo_bubble" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_bubble"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <FrameLayout
+                android:id="@+id/center"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:src="@drawable/img_logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/center"/>
+        </android.support.constraint.ConstraintLayout>
         <LinearLayout
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
             android:gravity="center_vertical"
@@ -104,6 +132,7 @@
         <TextView
             android:paddingTop="2dp"
             android:id="@+id/sign_in_error"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/red"/>

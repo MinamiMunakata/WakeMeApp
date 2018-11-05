@@ -172,6 +172,7 @@ public class SignUpFragment extends Fragment
 
     @Override
     public void onClick(View view) {
+        InputHandler.hideSoftKeyBoard(getActivity());
         if (isValidInput()) {
             progressBar.setVisibility(View.VISIBLE);
             final String name = nameField.getText().toString(),

@@ -70,9 +70,10 @@ public class SignInFragment extends Fragment implements
         editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);
         editTextPw = view.findViewById(R.id.edit_text_password_for_sign_in);
         signUpLink = view.findViewById(R.id.sign_up_link);
-        errorMsg = view.findViewById(R.id.sign_in_error);
         progressBar = view.findViewById(R.id.sign_in_progressbar);
         progressBar.setVisibility(View.INVISIBLE);
+        errorMsg = view.findViewById(R.id.sign_in_error);
+        errorMsg.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -123,6 +124,7 @@ public class SignInFragment extends Fragment implements
 
     @Override
     public void onClick(View view) {
+        InputHandler.hideSoftKeyBoard(getActivity());
         if (isValidInput()) {
             String email = editTextEmail.getText().toString(),
                     password = editTextPw.getText().toString();
@@ -146,6 +148,7 @@ public class SignInFragment extends Fragment implements
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         toast("Authentication failed.");
+                        errorMsg.setVisibility(View.VISIBLE);
                         errorMsg.setText(task.getException().getMessage());
                         return;
                     }

@@ -67,7 +67,6 @@ public class ChatRoomActivity
         layoutManager.setStackFromEnd(true);
 
         adapter = new MessageListAdapter(mMessageList, currentUser.getUid(), receiverIcon);
-
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -83,6 +82,7 @@ public class ChatRoomActivity
 
             }
         });
+        Log.i(TAG, "onCreate: 12345 no");
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -107,7 +107,6 @@ public class ChatRoomActivity
                         message.setIsSeen(true);
                         FirebaseRealtimeDatabaseHelper.updateIfMessageHasSeen(chatRoomId, message);
                     }
-                    Log.i(TAG, "onDataChange: " + message.toString());
                     mMessageList.add(message);
                     adapter.notifyDataSetChanged();
                 }
@@ -128,10 +127,14 @@ public class ChatRoomActivity
 
     @Override
     public void onClick(View v) {
+//        InputHandler.hideSoftKeyBoard(this);
         if (isValidInput()) {
             Message message = new Message(
-                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
+                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
+            mMessageList.add(message);
+            adapter.notifyItemInserted(mMessageList.size() - 1);
             FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomId, message);
+            adapter.notifyDataSetChanged();
             editText.setText("");
         } else {
             Log.i(TAG, "onClick: 123456789 Invalid input");
