@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".SearchFriend.SearchFriendActivity" />
         <activity android:name=".Main.MainActivity" />
-        <activity android:name=".ChatRoom.ChatRoomActivity"></activity>
+        <activity android:name=".ChatRoom.ChatRoomActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>

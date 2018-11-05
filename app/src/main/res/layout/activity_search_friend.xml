@@ -19,6 +19,7 @@
             tools:layout="@layout/fragment_search_friend"/>
     </FrameLayout>
     <Button
+        android:textAllCaps="false"
         android:id="@+id/search_button"
         android:layout_marginLeft="@dimen/space_both_edges"
         android:layout_marginRight="@dimen/space_both_edges"

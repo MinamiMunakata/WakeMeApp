@@ -112,6 +112,7 @@
                 android:hint="Password"/>
         </LinearLayout>
         <Button
+            android:textAllCaps="false"
             android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,6 +123,7 @@
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item"/>
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/fb_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

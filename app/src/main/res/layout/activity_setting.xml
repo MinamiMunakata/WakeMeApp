@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    android:background="@color/colorBackground">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/space_both_edges"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_h3"
+            android:textColor="@color/colorMyAccent"
+            android:textAlignment="center"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/setting_profile_icon"
+                android:src="@drawable/user_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_camera"
+                android:layout_alignEnd="@+id/setting_profile_icon"
+                android:layout_alignBottom="@+id/setting_profile_icon"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:text="Time"
+                    android:textSize="@dimen/text_h4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7:30"
+                    android:textSize="@dimen/text_h2"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nickname"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_h4"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_profile_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/grey" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_edit"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/edit_profile_nickname"
+                android:paddingEnd="5dp"/>
+        </RelativeLayout>
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="@dimen/text_h4"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/grey" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_edit"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/edit_profile_email"
+                android:paddingEnd="5dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="@dimen/text_h4"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_profile_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/grey" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_edit"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/edit_profile_pw"
+                android:paddingEnd="5dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
