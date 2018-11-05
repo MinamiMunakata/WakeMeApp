@@ -110,6 +110,7 @@ public class SearchFriendActivity extends AppCompatActivity
             Toast.makeText(this, "Search friend's ID", Toast.LENGTH_SHORT).show();
             return;
         }
+        // TODO: progressbar
         ValueEventListener searchListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

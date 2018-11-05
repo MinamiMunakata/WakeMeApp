@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ChatRoom.ChatRoomActivity"
     android:background="@color/colorBackground">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_message_list_view"
         android:layout_width="0dp"

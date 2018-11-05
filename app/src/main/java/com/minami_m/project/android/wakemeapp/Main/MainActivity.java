@@ -2,12 +2,16 @@ package com.minami_m.project.android.wakemeapp.Main;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -46,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.my_toolbar_main);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
+
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         currentUserName = findViewById(R.id.current_user_name);
@@ -81,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                             chatRoomCards.add(roomCard);
                             adapter.notifyDataSetChanged();
                         }
+                        Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
                     }
 
                     @Override
@@ -98,6 +108,25 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting_menu:
+                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
+                return true;
+            case R.id.logout_menu:
+                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
