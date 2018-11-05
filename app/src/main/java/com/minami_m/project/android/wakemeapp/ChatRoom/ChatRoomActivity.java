@@ -40,6 +40,7 @@ public class ChatRoomActivity
     private MessageListAdapter adapter;
     private String chatRoomId;
     private String receiverIcon;
+    private String receiverName;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private RecyclerView recyclerView;
@@ -50,13 +51,15 @@ public class ChatRoomActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-//        Toolbar toolbar = findViewById(R.id.toolbar_chatroom);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
         chatRoomId = data.getString(MainActivity.CHAT_ROOM_ID);
         receiverIcon = data.getString(MainActivity.RECEIVER_ICON);
+        receiverName = data.getString(MainActivity.RECEIVER_NAME);
         sendButton = findViewById(R.id.send_button);
         sendButton.setOnClickListener(this);
         editText = findViewById(R.id.message_text_field);
@@ -100,6 +103,8 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
+        getSupportActionBar().setTitle(receiverName);
+        // TODO: get status
         FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomId)
                 .addValueEventListener(new ValueEventListener() {
             @Override
