@@ -197,7 +197,10 @@ public class SearchFriendActivity extends AppCompatActivity
         if (friend == null) return;
         if (friend.getIcon() != null) {
             Log.i(TAG, "showFriend: 123456" + friend.getIcon());
-            Picasso.get().load(friend.getIcon()).into(iconHolder);
+            Picasso.get()
+                    .load(friend.getIcon()) // TODO: set default image
+                    .error(R.drawable.ico_awake)
+                    .into(iconHolder);
             nameHolder.setText(friend.getName());
         }
     }

@@ -144,7 +144,10 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         public void bind(Message message, String receiverIcon, boolean isFirstChat) {
             setDate(dateView, message, isFirstChat);
             textView.setText(message.getText());
-            Picasso.get().load(receiverIcon).into(imageView);
+            Picasso.get()
+                    .load(receiverIcon)
+                    .error(R.drawable.ico_awake) // TODO: set default image
+                    .into(imageView);
         }
     }
 }
