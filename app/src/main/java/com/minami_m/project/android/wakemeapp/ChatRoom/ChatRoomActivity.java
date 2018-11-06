@@ -10,9 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,16 +51,33 @@ public class ChatRoomActivity
     private RecyclerView recyclerView;
     private ImageButton sendButton;
     private EditText editText;
+    private TextView title;
+    private TextView subtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
         getDataFromMainActivity();
+        title = findViewById(R.id.toolbar_title_chat_room);
+        subtitle = findViewById(R.id.toolbar_subtitle_chat_room);
+        sendButton = findViewById(R.id.send_button);
+        editText = findViewById(R.id.message_text_field);
+        mMessageList = new ArrayList<>();
+        sendButton.setOnClickListener(this);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        setupToolbar();
+        setupRecyclerViewWithAdapter();
+
+    }
+
+    private void setupToolbar() {
         final Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(receiverName);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        title.setText(receiverName);
         FirebaseRealtimeDatabaseHelper.USERS_REF.child(receiverId)
                 .addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,7 +87,7 @@ public class ChatRoomActivity
                 String status = dataSnapshot.child("status").getValue(String.class);
                 Log.i(TAG, "onDataChange: 1234567 name: " + dataSnapshot.getValue(User.class));
                 Log.i(TAG, "onDataChange: 1234567 status: " + status);
-                toolbar.setSubtitle(status);
+                subtitle.setText(status);
             }
 
             @Override
@@ -75,15 +95,6 @@ public class ChatRoomActivity
 
             }
         });
-
-        sendButton = findViewById(R.id.send_button);
-        editText = findViewById(R.id.message_text_field);
-        mMessageList = new ArrayList<>();
-        sendButton.setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        setupRecyclerViewWithAdapter();
-
     }
 
     private void setupRecyclerViewWithAdapter() {
@@ -150,6 +161,31 @@ public class ChatRoomActivity
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting_menu:
+                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
+                return true;
+            case R.id.logout_menu:
+                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

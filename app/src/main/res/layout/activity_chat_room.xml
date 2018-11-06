@@ -13,6 +13,27 @@
         android:theme="@style/AppTheme"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/white">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/toolbar_title_chat_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/colorMyAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_h3"/>
+            <TextView
+                android:id="@+id/toolbar_subtitle_chat_room"
+                android:textColor="@color/colorMyAccent"
+                android:text="status"
+                android:textSize="@dimen/text_small_default_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_message_list_view"
