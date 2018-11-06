@@ -92,13 +92,11 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void createChatRoom(User mUser, User friend) {
-        Log.i(TAG, "createChatRoom: 123456789 -------- 1");
         // (1) create a ChatRoom Obj and save it.
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
         String[] memberIds = {mUser.getId(), friend.getId()};
         List<String> memberIDList = Arrays.asList(memberIds);
         ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
-        Log.i(TAG, "createChatRoom: 123456789 " + chatRoom);
         CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
 
         // (2) Save ChatRoom ID.

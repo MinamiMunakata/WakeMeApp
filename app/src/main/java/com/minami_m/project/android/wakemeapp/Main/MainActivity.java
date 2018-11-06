@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public static final String CHAT_ROOM_ID = "ChatRoomID";
     public static final String RECEIVER_ICON = "ReceiverIcon";
     public static final String RECEIVER_NAME = "ReceiverName";
+    public static final String RECEIVER_ID = "ReceiverId";
     private ImageButton button;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         data.putString(CHAT_ROOM_ID, roomCard.getChatRoomId());
         data.putString(RECEIVER_ICON, roomCard.getReceiver().getIcon());
         data.putString(RECEIVER_NAME, roomCard.getReceiver().getName());
+        data.putString(RECEIVER_ID, roomCard.getChatRoomId());
         intent.putExtras(data);
         startActivity(intent);
 //        finish();

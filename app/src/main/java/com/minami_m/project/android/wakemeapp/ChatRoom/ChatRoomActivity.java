@@ -41,6 +41,7 @@ public class ChatRoomActivity
     private String chatRoomId;
     private String receiverIcon;
     private String receiverName;
+    private String receiverId;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private RecyclerView recyclerView;
@@ -51,21 +52,37 @@ public class ChatRoomActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-        Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
+        getDataFromMainActivity();
+        final Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(receiverName);
+        FirebaseRealtimeDatabaseHelper.USERS_REF.child(receiverId)
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.child("status").getValue(String.class);
+                Log.i(TAG, "onDataChange: 123456 status: " + status);
+                toolbar.setSubtitle(status);
+            }
 
-        Intent intent = getIntent();
-        Bundle data = intent.getExtras();
-        chatRoomId = data.getString(MainActivity.CHAT_ROOM_ID);
-        receiverIcon = data.getString(MainActivity.RECEIVER_ICON);
-        receiverName = data.getString(MainActivity.RECEIVER_NAME);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         sendButton = findViewById(R.id.send_button);
-        sendButton.setOnClickListener(this);
         editText = findViewById(R.id.message_text_field);
         mMessageList = new ArrayList<>();
+        sendButton.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        setupRecyclerViewWithAdapter();
+
+    }
+
+    private void setupRecyclerViewWithAdapter() {
         recyclerView = findViewById(R.id.recycler_message_list_view);
 //        recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -89,12 +106,17 @@ public class ChatRoomActivity
 
             }
         });
-        Log.i(TAG, "onCreate: 12345 no");
-
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
 
-
+    private void getDataFromMainActivity() {
+        Intent intent = getIntent();
+        Bundle data = intent.getExtras();
+        chatRoomId = data.getString(MainActivity.CHAT_ROOM_ID);
+        receiverIcon = data.getString(MainActivity.RECEIVER_ICON);
+        receiverName = data.getString(MainActivity.RECEIVER_NAME);
+        receiverId = data.getString(MainActivity.RECEIVER_ID);
     }
 
     @Override
@@ -103,8 +125,6 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
-        getSupportActionBar().setTitle(receiverName);
-        // TODO: get status
         FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomId)
                 .addValueEventListener(new ValueEventListener() {
             @Override

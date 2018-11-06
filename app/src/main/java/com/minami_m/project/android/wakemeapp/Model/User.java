@@ -1,5 +1,8 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 public class User {
@@ -112,6 +115,5 @@ public class User {
                 this.name, this.email, this.icon, this.status);
         return info;
     }
-
 
 }
