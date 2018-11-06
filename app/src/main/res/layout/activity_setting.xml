@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".SettingActivity"
     android:background="@color/colorBackground">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/space_both_edges"
@@ -14,18 +20,21 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal">
         <TextView
+            android:id="@+id/setting_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/app_name"
             android:textSize="@dimen/text_h3"
             android:textColor="@color/colorMyAccent"
             android:textAlignment="center"/>
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/setting_profile_icon"
-                android:src="@drawable/user_icon"
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
                 android:layout_width="150dp"
                 android:layout_height="150dp" />
             <ImageView
@@ -34,8 +43,6 @@
                 android:src="@drawable/ico_camera"
                 android:layout_alignEnd="@+id/setting_profile_icon"
                 android:layout_alignBottom="@+id/setting_profile_icon"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
                 />
         </RelativeLayout>
 

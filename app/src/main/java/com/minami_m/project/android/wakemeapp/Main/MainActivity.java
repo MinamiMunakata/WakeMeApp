@@ -29,6 +29,7 @@ import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.SearchFriend.SearchFriendActivity;
+import com.minami_m.project.android.wakemeapp.SettingActivity;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 
 import java.util.ArrayList;
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.setting_menu:
+                launchActivity(SettingActivity.class);
                 Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
                 return true;
             case R.id.logout_menu:
