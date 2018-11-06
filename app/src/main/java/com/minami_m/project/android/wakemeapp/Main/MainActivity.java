@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         data.putString(CHAT_ROOM_ID, roomCard.getChatRoomId());
         data.putString(RECEIVER_ICON, roomCard.getReceiver().getIcon());
         data.putString(RECEIVER_NAME, roomCard.getReceiver().getName());
-        data.putString(RECEIVER_ID, roomCard.getChatRoomId());
+        data.putString(RECEIVER_ID, roomCard.getReceiver().getId());
         intent.putExtras(data);
         startActivity(intent);
 //        finish();

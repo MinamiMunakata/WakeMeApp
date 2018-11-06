@@ -25,6 +25,7 @@ import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Model.Message;
+import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 
@@ -61,8 +62,11 @@ public class ChatRoomActivity
                 .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i(TAG, "onDataChange: 1234567 id = " + receiverId);
+                Log.i(TAG, "onDataChange: 1234567" + dataSnapshot.getKey());
                 String status = dataSnapshot.child("status").getValue(String.class);
-                Log.i(TAG, "onDataChange: 123456 status: " + status);
+                Log.i(TAG, "onDataChange: 1234567 name: " + dataSnapshot.getValue(User.class));
+                Log.i(TAG, "onDataChange: 1234567 status: " + status);
                 toolbar.setSubtitle(status);
             }
 
@@ -132,9 +136,9 @@ public class ChatRoomActivity
                 mMessageList.clear();
                 for (DataSnapshot messageSnapShot: dataSnapshot.getChildren()) {
                     Message message = messageSnapShot.getValue(Message.class);
-                    if (!message.getSenderId().equals(currentUser.getUid())) {
+                    if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
                         message.setIsSeen(true);
-                        FirebaseRealtimeDatabaseHelper.updateIfMessageHasSeen(chatRoomId, message);
+                        FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomId, message);
                     }
                     mMessageList.add(message);
                     adapter.notifyDataSetChanged();

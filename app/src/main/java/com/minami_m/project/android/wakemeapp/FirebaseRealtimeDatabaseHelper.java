@@ -157,9 +157,9 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    public static void updateIfMessageHasSeen(String chatRoomId, Message message) {
-        Log.i(TAG, "updateIfMessageHasSeen: " + message.getText());
-        Log.i(TAG, "updateIfMessageHasSeen: is Seen ? " + message.getIsSeen());
+    public static void updateStatusThatMessageHasSeen(String chatRoomId, Message message) {
+        Log.i(TAG, "updateStatusThatMessageHasSeen: 123456 " + message);
+        Log.i(TAG, "updateStatusThatMessageHasSeen: 123456 is updated!");
         MESSAGES_REF.child(chatRoomId).child(message.getId()).child("isSeen")
                 .setValue(message.getIsSeen(), new DatabaseReference.CompletionListener() {
             @Override
