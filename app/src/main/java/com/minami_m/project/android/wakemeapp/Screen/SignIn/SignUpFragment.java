@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.SignIn;
+package com.minami_m.project.android.wakemeapp.Screen.SignIn;
 
 
 import android.app.Activity;
@@ -35,7 +35,7 @@ import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.TimeHandler;
 import com.minami_m.project.android.wakemeapp.InputHandler;
-import com.minami_m.project.android.wakemeapp.Main.MainActivity;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;

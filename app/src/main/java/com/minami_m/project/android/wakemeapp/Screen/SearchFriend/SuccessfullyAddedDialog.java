@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.SearchFriend;
+package com.minami_m.project.android.wakemeapp.Screen.SearchFriend;
 
 
 import android.app.Dialog;
@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.Main.MainActivity;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 
 /**

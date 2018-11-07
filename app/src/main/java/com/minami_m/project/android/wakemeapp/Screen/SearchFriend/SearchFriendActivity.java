@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.SearchFriend;
+package com.minami_m.project.android.wakemeapp.Screen.SearchFriend;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -29,12 +29,12 @@ import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
-import com.minami_m.project.android.wakemeapp.Main.MainActivity;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
-import com.minami_m.project.android.wakemeapp.SettingActivity;
-import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
+import com.minami_m.project.android.wakemeapp.Screen.SettingActivity;
+import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 import com.squareup.picasso.Picasso;
 

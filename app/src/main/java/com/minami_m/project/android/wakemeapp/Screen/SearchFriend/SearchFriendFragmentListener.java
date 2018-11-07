@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.SearchFriend;
+package com.minami_m.project.android.wakemeapp.Screen.SearchFriend;
 
 import android.widget.ImageView;
 import android.widget.TextView;

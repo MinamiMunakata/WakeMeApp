@@ -24,7 +24,7 @@ public class TimeHandler {
             return String.format(Locale.US,"Active %dh ago", hour);
 
         } else {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' h:mm a", Locale.US);
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' HH:mm", Locale.US);
             return String.format("Last seen %s", dateFormatter.format(new Date(time)));
         }
     }

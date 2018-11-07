@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFriend.SearchFriendActivity"
+    tools:context=".Screen.SearchFriend.SearchFriendActivity"
     android:background="@color/colorBackground">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_search_friend"
@@ -28,7 +28,7 @@
             android:id="@+id/search_friend_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.minami_m.project.android.wakemeapp.SearchFriend.SearchFriendFragment"
+            android:name="com.minami_m.project.android.wakemeapp.Screen.SearchFriend.SearchFriendFragment"
             tools:layout="@layout/fragment_search_friend"/>
     </FrameLayout>
     <Button

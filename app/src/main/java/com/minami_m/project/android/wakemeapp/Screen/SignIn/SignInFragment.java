@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.SignIn;
+package com.minami_m.project.android.wakemeapp.Screen.SignIn;
 
 
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
-import com.minami_m.project.android.wakemeapp.Main.MainActivity;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 

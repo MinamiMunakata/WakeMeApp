@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".SignIn.SignInActivity"
+        <activity android:name=".Screen.SignIn.SignInActivity"
             android:theme="@style/MyAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchFriend.SearchFriendActivity" />
-        <activity android:name=".Main.MainActivity" />
-        <activity android:name=".ChatRoom.ChatRoomActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".Screen.SearchFriend.SearchFriendActivity" />
+        <activity android:name=".Screen.Main.MainActivity" />
+        <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
+        <activity android:name=".Screen.SettingActivity"></activity>
     </application>
 
 </manifest>
