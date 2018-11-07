@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:theme="@style/MyAppTheme"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/white">
+        android:background="@color/white"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -20,19 +23,21 @@
             android:gravity="center">
             <TextView
                 android:id="@+id/toolbar_title_chat_room"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textColor="@color/colorMyAccent"
                 android:textStyle="bold"
-                android:textSize="@dimen/text_h3"/>
+                android:textSize="@dimen/text_h3" />
             <TextView
                 android:id="@+id/toolbar_subtitle_chat_room"
                 android:textColor="@color/colorMyAccent"
                 android:text="status"
                 android:textSize="@dimen/text_small_default_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"/>
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView

@@ -64,6 +64,7 @@ public class SearchFriendActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         search_btn = findViewById(R.id.search_button);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {

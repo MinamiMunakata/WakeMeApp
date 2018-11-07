@@ -77,6 +77,7 @@ public class ChatRoomActivity
         final Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
         title.setText(receiverName);
         FirebaseRealtimeDatabaseHelper.USERS_REF.child(receiverId)
