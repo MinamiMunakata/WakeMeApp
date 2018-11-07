@@ -77,20 +77,6 @@ public class SignInFragment extends Fragment implements
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    if (user.getDisplayName() != null) toast("Welcome " + user.getDisplayName());
-//                    ((ActivityChangeListener)getActivity()).launchActivity(MainActivity.class);
-                    return;
-                } else {
-                    // TODO: sign out
-                }
-            }
-        });
-
         Button loginButton = view.findViewById(R.id.fb_login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

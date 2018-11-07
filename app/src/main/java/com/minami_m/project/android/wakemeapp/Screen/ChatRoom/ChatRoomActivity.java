@@ -105,8 +105,19 @@ public class ChatRoomActivity
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
+        if (currentUser == null) {
+            launchActivity(SignInActivity.class);
+            finish();
+        }
 
-        adapter = new MessageListAdapter(mMessageList, currentUser.getUid(), receiverIcon);
+        String currentUserId = null;
+        try {
+            currentUserId = currentUser.getUid();
+        } catch (Exception e) {
+            Log.i(TAG, "setupRecyclerViewWithAdapter: " + e.getMessage());
+            launchActivity(SignInActivity.class);
+        }
+        adapter = new MessageListAdapter(mMessageList, currentUserId, receiverIcon);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -173,12 +184,15 @@ public class ChatRoomActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.setting_menu:
+            case R.id.home_menu:
+                launchActivity(MainActivity.class);
+                return true;
+            case R.id.my_page_menu:
                 launchActivity(SettingActivity.class);
-                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
                 return true;
             case R.id.logout_menu:
-                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                FirebaseAuth.getInstance().signOut();
+                launchActivity(SignInActivity.class);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -207,7 +221,7 @@ public class ChatRoomActivity
 //        InputHandler.hideSoftKeyBoard(this);
         if (isValidInput()) {
             Message message = new Message(
-                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
+                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
             FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomId, message);

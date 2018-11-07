@@ -18,7 +18,7 @@
     <dimen name="semicircle_radius">200dp</dimen>
     <dimen name="padding_rounded_field">10dp</dimen>
     <dimen name="padding_dialog_text">10dp</dimen>
-    <dimen name="padding_dialog">15dp</dimen>
+    <dimen name="padding_dialog">13dp</dimen>
     <dimen name="card_view_height">120dp</dimen>
     <dimen name="padding_send_icon">10dp</dimen>
     <dimen name="input_message_box_margin">8dp</dimen>

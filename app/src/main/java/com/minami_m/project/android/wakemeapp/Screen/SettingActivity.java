@@ -32,6 +32,7 @@ import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import com.squareup.picasso.Picasso;
 
@@ -133,8 +134,7 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
-        profileName.setText(currentUser.getDisplayName());
-        FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String path = dataSnapshot.child("icon").getValue(String.class);
@@ -147,7 +147,14 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
                 Log.w(TAG, "onCancelled: ", databaseError.toException());
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
-        });
+        };
+        try {
+            profileName.setText(currentUser.getDisplayName());
+            FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
+        } catch (Exception e) {
+            launchActivity(SignInActivity.class);
+            finish();
+        }
 
     }
 
@@ -160,12 +167,16 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // TODO: on setting page...? just logout?
-            case R.id.setting_menu:
-                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
+            case R.id.home_menu:
+                launchActivity(MainActivity.class);
+                return true;
+            case R.id.my_page_menu:
+                launchActivity(SettingActivity.class);
                 return true;
             case R.id.logout_menu:
-                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                FirebaseAuth.getInstance().signOut();
+                launchActivity(SignInActivity.class);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

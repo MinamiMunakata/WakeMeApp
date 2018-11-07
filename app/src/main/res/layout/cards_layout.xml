@@ -21,20 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/padding_dialog"
-            android:weightSum="9"
+            android:weightSum="12"
             android:gravity="center_vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/card_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="6"
+                android:layout_weight="8"
                 android:gravity="center_vertical"
                 android:padding="@dimen/padding_dialog_text">
                 <TextView
@@ -43,12 +43,18 @@
                     android:layout_height="wrap_content"
                     android:text="name"
                     android:textSize="@dimen/text_h3"
-                    android:gravity="center_vertical"/>
+                    android:textColor="@color/colorMyAccent"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="2dp"/>
                 <TextView
                     android:id="@+id/card_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="status"
+                    android:layout_marginVertical="2dp"
+                    android:textSize="@dimen/text_small_default_12"
+                    android:textColor="@color/colorMyAccent"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 

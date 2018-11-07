@@ -122,12 +122,15 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.setting_menu:
+            case R.id.home_menu:
+                launchActivity(MainActivity.class);
+                return true;
+            case R.id.my_page_menu:
                 launchActivity(SettingActivity.class);
-                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
                 return true;
             case R.id.logout_menu:
-                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                FirebaseAuth.getInstance().signOut();
+                launchActivity(SignInActivity.class);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -142,7 +145,14 @@ public class SearchFriendActivity extends AppCompatActivity
     }
 
     public void searchFriendByEmail(final String email) {
-        if (email.equals(currentUser.getEmail())) {
+        String userEmail = null;
+        try {
+            userEmail = currentUser.getEmail();
+        } catch (Exception e) {
+            Log.i(TAG, "searchFriendByEmail: " + e.getMessage());
+            launchActivity(SignInActivity.class);
+        }
+        if (email.equals(userEmail)) {
             Toast.makeText(this, "Search friend's ID", Toast.LENGTH_SHORT).show();
             return;
         }

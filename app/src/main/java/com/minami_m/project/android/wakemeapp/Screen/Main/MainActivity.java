@@ -32,6 +32,7 @@ import com.minami_m.project.android.wakemeapp.Screen.SettingActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
@@ -60,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         currentUserName = findViewById(R.id.current_user_name);
-        currentUserName.setText(String.format("%s!",currentUser.getDisplayName()));
+        try {
+            currentUserName.setText(String.format("%s!",currentUser.getDisplayName()));
+        } catch (Exception e) {
+            launchActivity(SignInActivity.class);
+        }
         chatRoomCards = new ArrayList<>();
         button = findViewById(R.id.semicircle_btn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -79,28 +84,32 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         adapter = new CardRecyclerAdapter(chatRoomCards, this);
         recyclerView.setAdapter(adapter);
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                chatRoomCards.clear();
+                for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
+                    User receiver = chatRoomIdSnapshot.getValue(User.class);
+                    FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
+                    ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
+                    chatRoomCards.add(roomCard);
+                    adapter.notifyDataSetChanged();
+                }
+                Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
+            }
 
-        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        chatRoomCards.clear();
-                        for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
-                            User receiver = chatRoomIdSnapshot.getValue(User.class);
-                            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
-                            ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
-                            chatRoomCards.add(roomCard);
-                            adapter.notifyDataSetChanged();
-                        }
-                        Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+            }
+        };
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.i(TAG, "onCancelled: " + databaseError.getMessage());
-                    }
-                });
-
+        try {
+            FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                    .addValueEventListener(listener);
+        } catch (Exception e) {
+            launchActivity(SignInActivity.class);
+        }
 
     }
 
@@ -121,12 +130,15 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.setting_menu:
+            case R.id.home_menu:
+                launchActivity(MainActivity.class);
+                return true;
+            case R.id.my_page_menu:
                 launchActivity(SettingActivity.class);
-                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
                 return true;
             case R.id.logout_menu:
-                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                FirebaseAuth.getInstance().signOut();
+                launchActivity(SignInActivity.class);
                 return true;
         }
         return super.onOptionsItemSelected(item);
