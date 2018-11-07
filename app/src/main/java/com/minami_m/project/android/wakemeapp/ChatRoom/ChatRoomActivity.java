@@ -191,6 +191,12 @@ public class ChatRoomActivity
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }
+
+    @Override
     public void launchActivity(Class nextActivity) {
         Intent intent = new Intent(getApplicationContext(), nextActivity);
         startActivity(intent);

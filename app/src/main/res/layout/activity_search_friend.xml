@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".SearchFriend.SearchFriendActivity"
     android:background="@color/colorBackground">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_search_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/MyAppTheme"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Add Friend"
+            android:textStyle="bold"/>
+    </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:id="@+id/search_friend_container"
         android:layout_width="match_parent"

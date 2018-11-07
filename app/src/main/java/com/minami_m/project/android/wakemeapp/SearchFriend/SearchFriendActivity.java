@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -26,9 +29,11 @@ import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
+import com.minami_m.project.android.wakemeapp.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
+import com.minami_m.project.android.wakemeapp.SettingActivity;
 import com.minami_m.project.android.wakemeapp.SignIn.SignInActivity;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;
 import com.squareup.picasso.Picasso;
@@ -53,9 +58,12 @@ public class SearchFriendActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
+        Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         search_btn = findViewById(R.id.search_button);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -103,6 +111,34 @@ public class SearchFriendActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting_menu:
+                launchActivity(SettingActivity.class);
+                Log.i(TAG, "onOptionsItemSelected: 1234567 setting!");
+                return true;
+            case R.id.logout_menu:
+                Log.i(TAG, "onOptionsItemSelected: 1234567 logout!");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        return true;
     }
 
     public void searchFriendByEmail(final String email) {
