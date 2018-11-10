@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private RecyclerView recyclerView;
     private CardRecyclerAdapter adapter;
     private TextView currentUserName;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 launchActivity(SearchFriendActivity.class);
             }
         });
+        progressBar = findViewById(R.id.progressbar_main);
+//        progressBar.setVisibility(View.GONE);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
                 chatRoomCards.clear();
                 for (DataSnapshot chatRoomIdSnapshot: dataSnapshot.getChildren()) {
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
@@ -96,10 +101,12 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     adapter.notifyDataSetChanged();
                 }
                 Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };

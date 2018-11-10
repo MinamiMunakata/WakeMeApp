@@ -1,111 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Screen.SignIn.SignUpFragment"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
     android:gravity="center">
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:indeterminate="true"
-        android:max="100"
-        android:backgroundTint="@color/white"
-        android:indeterminateTint="#1a09d6"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/space_both_edges"
-        android:layout_marginRight="@dimen/space_both_edges"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/sign_up"
-            android:textColor="@color/colorMyAccent"
-            android:textSize="@dimen/text_h2"
-            android:textStyle="bold" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
-            android:src="@drawable/img_picture" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/input_header"
-            android:text="Name"
-            android:textColor="@color/colorMyAccent" />
-
-        <EditText
-            android:id="@+id/edit_name"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorMyAccent"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/space_both_edges"
+            android:layout_marginRight="@dimen/space_both_edges"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/input_header"
-            android:text="Email"
-            android:textColor="@color/colorMyAccent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sign_up"
+                android:textColor="@color/colorMyAccent"
+                android:textSize="@dimen/text_h2"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorMyAccent"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/small_vertical_space_bw_item"
+                android:src="@drawable/img_picture" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/input_header"
-            android:text="Password"
-            android:textColor="@color/colorMyAccent" />
 
-        <EditText
-            android:id="@+id/edit_pw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorMyAccent"
-            android:ems="10"
-            android:inputType="textPassword" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_header"
+                android:text="Name"
+                android:textColor="@color/colorMyAccent" />
 
-        <Button
-            android:textAllCaps="false"
-            android:id="@+id/signup_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/vertical_space_bw_items"
-            android:background="@drawable/rounded_button"
-            android:text="@string/sign_up"
-            android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorMyAccent"
+                android:ems="10"
+                android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/sign_up_error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_header"
+                android:text="Email"
+                android:textColor="@color/colorMyAccent" />
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorMyAccent"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_header"
+                android:text="Password"
+                android:textColor="@color/colorMyAccent" />
+
+            <EditText
+                android:id="@+id/edit_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorMyAccent"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <Button
+                android:textAllCaps="false"
+                android:id="@+id/signup_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/vertical_space_bw_items"
+                android:background="@drawable/rounded_button"
+                android:text="@string/sign_up"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/sign_up_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:indeterminateDrawable="@drawable/custom_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:max="100"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
