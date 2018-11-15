@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".Screen.SignIn.SignInActivity"
+        <activity
+            android:name=".Screen.SignIn.SignInActivity"
             android:theme="@style/MyAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,8 @@
         <activity android:name=".Screen.SearchFriend.SearchFriendActivity" />
         <activity android:name=".Screen.Main.MainActivity" />
         <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
-        <activity android:name=".Screen.SettingActivity"></activity>
+        <activity android:name=".Screen.SettingActivity" />
+        <activity android:name=".Screen.AlarmScheduleActivity"></activity>
     </application>
 
 </manifest>
