@@ -12,13 +12,13 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="50dp">
         <LinearLayout
             android:layout_marginTop="70dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="50dp"
             android:weightSum="7">
             <LinearLayout
                 android:orientation="vertical"
@@ -27,11 +27,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/sun_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/sun"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="S"
@@ -45,15 +47,16 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/mon_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/mon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="M"
-                    android:background="@drawable/white_circle"
                     android:gravity="center"
                     android:textSize="@dimen/text_h3"/>
             </LinearLayout>
@@ -64,11 +67,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tue_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/tue"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="T"
@@ -82,11 +87,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/wed_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/wed"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="W"
@@ -100,11 +107,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/thu_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/thu"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="T"
@@ -118,11 +127,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/fri_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/fri"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="F"
@@ -136,11 +147,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/sat_alarm_sign"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="8sp"
-                    android:layout_height="8sp"
+                    android:layout_width="6sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/circle"/>
                 <TextView
+                    android:id="@+id/sat"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="S"
@@ -150,6 +163,7 @@
 
         </LinearLayout>
         <TextView
+            android:id="@+id/alarm_date"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,23 +174,28 @@
             android:layout_marginVertical="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/time_to_wake_up"
+                android:id="@+id/alarm_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8:00"
-                android:textSize="@dimen/text_h1"
                 android:layout_centerInParent="true"
-                android:paddingHorizontal="10dp"/>
+                android:paddingHorizontal="10dp"
+                android:text="8:00"
+                android:alpha="0.3"
+                android:textSize="@dimen/text_h1" />
             <TextView
+                android:id="@+id/am_pm_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AM"
+                android:alpha="0.3"
                 android:textSize="@dimen/text_h3"
-                android:layout_toEndOf="@+id/time_to_wake_up"
-                android:layout_alignBaseline="@+id/time_to_wake_up"/>
+                android:layout_toEndOf="@+id/alarm_time"
+                android:layout_alignBaseline="@+id/alarm_time"/>
         </RelativeLayout>
         <Button
+            android:id="@+id/set_time_button"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Set Time"

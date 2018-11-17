@@ -15,17 +15,19 @@
         <activity
             android:name=".Screen.SignIn.SignInActivity"
             android:theme="@style/MyAppTheme">
+
+        </activity>
+        <activity android:name=".Screen.SearchFriend.SearchFriendActivity" />
+        <activity android:name=".Screen.Main.MainActivity" />
+        <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
+        <activity android:name=".Screen.SettingActivity" />
+        <activity android:name=".Screen.AlarmScheduleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Screen.SearchFriend.SearchFriendActivity" />
-        <activity android:name=".Screen.Main.MainActivity" />
-        <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
-        <activity android:name=".Screen.SettingActivity" />
-        <activity android:name=".Screen.AlarmScheduleActivity"></activity>
     </application>
 
 </manifest>
