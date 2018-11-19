@@ -9,9 +9,12 @@ import android.widget.TextView;
 import com.minami_m.project.android.wakemeapp.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AlarmScheduleActivity extends AppCompatActivity {
     TextView sun;
@@ -32,6 +35,9 @@ public class AlarmScheduleActivity extends AppCompatActivity {
     TextView[] weekdays;
     TextView[] alarmSigns;
     TextView date;
+    Map<Integer, Long> weeklyMap;
+    long today;
+    int indexOfSelectedDay;
 
     enum Weekday {
         Today,
@@ -50,6 +56,10 @@ public class AlarmScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm_schedule);
         setup();
         setupThisWeek();
+        setupWeeklyMap();
+        for (int i = 1; i < weekdays.length; i++) {
+            weekdays[i].setOnClickListener(selectTheDayOfTheWeek());
+        }
     }
 
     private void setup() {
@@ -83,14 +93,42 @@ public class AlarmScheduleActivity extends AppCompatActivity {
             if (i == 0) {
                 week[0] = 0;
                 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-                week[dayOfWeek] = cal.getTimeInMillis();
+                indexOfSelectedDay = dayOfWeek;
+                today = cal.getTimeInMillis();
+                week[dayOfWeek] = today;
                 weekdays[dayOfWeek].setBackground(getDrawable(R.drawable.white_circle));
-                SimpleDateFormat format = new SimpleDateFormat("MMM d");
-                date.setText(format.format(cal.getTime()));
+                date.setText("Today");
             } else {
                 cal.add(Calendar.DATE, 1);
                 week[cal.get(Calendar.DAY_OF_WEEK)] = cal.getTimeInMillis();
             }
         }
+    }
+
+    private void setupWeeklyMap() {
+        weeklyMap = new HashMap<>();
+        for (int i = 1; i < weekdays.length; i++) {
+            weeklyMap.put(weekdays[i].getId(), week[i]);
+        }
+    }
+
+    private View.OnClickListener selectTheDayOfTheWeek() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long day = weeklyMap.get(v.getId());
+                indexOfSelectedDay = Arrays.asList(weekdays).indexOf(v);
+                SimpleDateFormat format = new SimpleDateFormat("MMM d");
+                if (day == today) {
+                    date.setText("Today");
+                } else {
+                    date.setText(format.format(day));
+                }
+                for (int i = 1; i < weekdays.length; i++) {
+                    weekdays[i].setBackground(null);
+                }
+                v.setBackground(getDrawable(R.drawable.white_circle));
+            }
+        };
     }
 }
