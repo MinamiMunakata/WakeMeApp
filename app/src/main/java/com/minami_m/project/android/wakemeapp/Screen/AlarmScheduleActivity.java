@@ -1,10 +1,14 @@
 package com.minami_m.project.android.wakemeapp.Screen;
 
+import android.app.TimePickerDialog;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.minami_m.project.android.wakemeapp.R;
 
@@ -38,6 +42,8 @@ public class AlarmScheduleActivity extends AppCompatActivity {
     Map<Integer, Long> weeklyMap;
     long today;
     int indexOfSelectedDay;
+    TextView time;
+    TextView textViewAMOrPM;
 
     enum Weekday {
         Today,
@@ -84,6 +90,9 @@ public class AlarmScheduleActivity extends AppCompatActivity {
             alarmSigns[i].setVisibility(View.INVISIBLE);
         }
         date = findViewById(R.id.alarm_date);
+        textViewAMOrPM = findViewById(R.id.am_pm);
+        time = findViewById(R.id.alarm_time);
+        time.setOnClickListener(showTimePicker());
     }
 
     private void setupThisWeek() {
@@ -128,6 +137,46 @@ public class AlarmScheduleActivity extends AppCompatActivity {
                     weekdays[i].setBackground(null);
                 }
                 v.setBackground(getDrawable(R.drawable.white_circle));
+            }
+        };
+    }
+
+    private View.OnClickListener showTimePicker() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                final int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                TimePickerDialog dialog = new TimePickerDialog(
+                        AlarmScheduleActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String AM_PM = "AM";
+                        String zeroMin = "";
+                        if (hourOfDay >= 12) {
+                            AM_PM = "PM";
+                            if (hourOfDay >= 13) {
+                                hourOfDay -= 12;
+                            }
+                        } else if (hourOfDay == 0) {
+                            hourOfDay = 12;
+                        }
+                        if (minute < 10) {
+                            zeroMin = "0";
+                        }
+                        time.setText(hourOfDay + ":" + zeroMin + minute);
+                        time.setAlpha(1);
+                        textViewAMOrPM.setText(AM_PM);
+                        textViewAMOrPM.setAlpha(1);
+
+                    }
+                },
+                        hour,
+                        minute,
+                        false);
+                dialog.show();
             }
         };
     }

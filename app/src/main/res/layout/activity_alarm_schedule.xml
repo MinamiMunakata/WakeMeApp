@@ -185,7 +185,7 @@
                 android:alpha="0.3"
                 android:textSize="@dimen/text_h1" />
             <TextView
-                android:id="@+id/am_pm_indicator"
+                android:id="@+id/am_pm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AM"
@@ -198,7 +198,7 @@
             android:id="@+id/set_time_button"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Set Time"
+            android:text="Set Alarm"
             android:textAllCaps="false"
             android:background="@drawable/rounded_button"
             android:textColor="@color/white"
