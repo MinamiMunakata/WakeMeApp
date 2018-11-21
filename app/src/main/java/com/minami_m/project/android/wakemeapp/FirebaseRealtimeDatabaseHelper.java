@@ -117,7 +117,7 @@ public class FirebaseRealtimeDatabaseHelper {
 
         // (3) Save Receiver Path.
         RECEIVER_PATH_REF.child(mUser.getId()).child(chatRoomId).setValue("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
-        RECEIVER_PATH_REF.child(friend.getId()).push().setValue("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
+        RECEIVER_PATH_REF.child(friend.getId()).child(chatRoomId).setValue("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
 
     }
 

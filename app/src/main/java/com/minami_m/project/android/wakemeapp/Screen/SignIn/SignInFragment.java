@@ -22,11 +22,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
+import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.InputValidationHandler;
@@ -51,6 +56,8 @@ public class SignInFragment extends Fragment implements
     private TextView errorMsg;
     private ProfileTracker profileTracker;
     private ProgressBar progressBar;
+    private String emailForSignUp = null;
+    private String passwordForSignUp = null;
 
     private  CallbackManager mCallbackManager;
     private AccessTokenTracker mAccessTokenTracker;
@@ -112,7 +119,7 @@ public class SignInFragment extends Fragment implements
     public void onClick(View view) {
         InputHandler.hideSoftKeyBoard(getActivity());
         if (isValidInput()) {
-            String email = editTextEmail.getText().toString(),
+            final String email = editTextEmail.getText().toString(),
                     password = editTextPw.getText().toString();
             // TODO: show a progress bar
             progressBar.setVisibility(View.VISIBLE);
@@ -122,8 +129,14 @@ public class SignInFragment extends Fragment implements
                     progressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        final FirebaseUser currentUser = mAuth.getCurrentUser();
                         if (currentUser != null) {
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+                                toast("Welcome! Please create an account here.");
+                                emailForSignUp = email;
+                                passwordForSignUp = password;
+                                updateUI(false);
+                            }
                             FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
                                             currentUser.getUid(),
                                             new Date().getTime());
@@ -155,7 +168,7 @@ public class SignInFragment extends Fragment implements
     }
 
     private void displaySignUpForm() {
-        SignUpFragment signUpFragment = new SignUpFragment();
+        SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener)getActivity();
         fragmentChangeListener.replaceFragment(signUpFragment);
     }
