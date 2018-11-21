@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.Model.Message;
-import com.minami_m.project.android.wakemeapp.Model.ReceiverPath;
 import com.minami_m.project.android.wakemeapp.Model.User;
 
 import java.util.Arrays;
@@ -117,10 +116,8 @@ public class FirebaseRealtimeDatabaseHelper {
         });
 
         // (3) Save Receiver Path.
-        ReceiverPath myPath = new ReceiverPath("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
-        RECEIVER_PATH_REF.child(mUser.getId()).child(chatRoomId).setValue(myPath);
-        ReceiverPath friendPath = new ReceiverPath("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
-        RECEIVER_PATH_REF.child(friend.getId()).push().setValue(friendPath);
+        RECEIVER_PATH_REF.child(mUser.getId()).child(chatRoomId).setValue("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
+        RECEIVER_PATH_REF.child(friend.getId()).push().setValue("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
 
     }
 
