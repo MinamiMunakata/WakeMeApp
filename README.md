@@ -23,11 +23,12 @@ This app let you wake up on time and be able to check if your friends get up or 
 - Search friend-users by Email.
 
 ## Specification
-Language: Java
-Tool: Android Studio
-Database: Firebase
+Language: Java  
+Tool: Android Studio  
+Database: Firebase  
 Library:
-- [Picasso](https://github.com/square/picasso)
+- [Picasso](https://github.com/square/picasso)  
+- 
 
 ## Contributor
 Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
