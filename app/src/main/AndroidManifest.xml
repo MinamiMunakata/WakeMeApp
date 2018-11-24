@@ -25,8 +25,8 @@
         <activity android:name=".Screen.Main.MainActivity" />
         <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
         <activity android:name=".Screen.SettingActivity" />
-        <activity android:name=".Screen.AlarmScheduleActivity">
-        </activity>
+        <activity android:name=".Screen.AlarmScheduleActivity"></activity>
+        <activity android:name=".Screen.AlarmActivity"></activity>
     </application>
 
 </manifest>
