@@ -45,9 +45,13 @@ Libraries:
 ## Contributor
 Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
+> ### UI Design
+>
+> <img src="../media/friend_list.png?raw=true" width="200px" alt="toybox top image"><img src="../media/chat.png?raw=true" width="200px" alt="toybox history page image" hspace="50"><img src="../media/mypage.png?raw=true" width="200px" alt="toybox history page image">
+
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
 When I first told you the idea, you immidiately understood the consepts and gave me a lot of advice as a designer. Whenever I asked you an additional design, you were always flexible and dealed with my requests.  
 Thank you so much for your help, and please let me know if I can return the favor!
 
 ## Note
-The `google-services.json` from Firebase which is nessesary to run this app is not included in this repository for security reasons.
+⚠️The `google-services.json` from Firebase which is nessesary to run this app is not included in this repository for security reasons.
