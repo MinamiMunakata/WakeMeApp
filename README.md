@@ -1,8 +1,11 @@
 # WakeMeApp
+
+🚧 This app is still a WIP 🚧
+
 ## Overview
 WakeMeApp is the app for those who are often be late for school, work, and anything you should be there before or on time.  
 This app let you wake up on time and be able to check if your friends get up or sleep over.  
-**NEVER let anyone call you a _SLEEPY HEAD!_**
+**NEVER let anyone call you a _SLEEPY HEAD!_**  
 
 ## Target
 - People who often sleep over
@@ -24,11 +27,20 @@ This app let you wake up on time and be able to check if your friends get up or 
 
 ## Specification
 Language: Java  
-Tool: Android Studio  
-Database: Firebase  
-Library:
+Libraries:
+- Android Support Library  
 - [Picasso](https://github.com/square/picasso)  
-- 
+- [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+- [Firebase](https://firebase.google.com/)
+  - Authentication
+  - Cloud Storage
+  - Realtime Database  
+
+## Architecture
+✏️ TBA
+
+## Data Architecture
+✏️ TBA
 
 ## Contributor
 Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
@@ -36,3 +48,6 @@ Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
 When I first told you the idea, you immidiately understood the consepts and gave me a lot of advice as a designer. Whenever I asked you an additional design, you were always flexible and dealed with my requests.  
 Thank you so much for your help, and please let me know if I can return the favor!
+
+## Note:
+⚠️ The `google-services.json` from Firebase which is nessesary to run this app is not included in this repository for security reasons.
