@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "614170669618",
+    "firebase_url": "https://wake-me-app-1e965.firebaseio.com",
+    "project_id": "wake-me-app-1e965",
+    "storage_bucket": "wake-me-app-1e965.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614170669618:android:d9620936066d81af",
+        "android_client_info": {
+          "package_name": "com.minami_m.project.android.wakemeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614170669618-dc7eus07uivhtk3a91614vs8if9a15l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minami_m.project.android.wakemeapp",
+            "certificate_hash": "162b5565b3e4fae5e4f2143d192e28141808e25b"
+          }
+        },
+        {
+          "client_id": "614170669618-3gkl2bqqr7nv4p1gbb4r2jks6c1k82n5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa69i0NJcl6mPvwgSBxx8hU3kJbCxRQwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614170669618-3gkl2bqqr7nv4p1gbb4r2jks6c1k82n5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

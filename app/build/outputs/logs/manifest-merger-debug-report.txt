@@ -1,0 +1,874 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/743a993e6b34bb5b5134753e4944c449/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.firebase:firebase-core:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56d5367300f2d7b7c209d7f324166b1f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:15:1-26:12
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:15:1-25:12
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:2:1-114:12
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:17:1-34:12
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:17:1-55:12
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:17:1-42:12
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:2:1-21:12
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:2:1-20:12
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:17:1-37:12
+MERGED from [com.facebook.android:facebook-android-sdk:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.35.0.aar/73f4158f09d4cef4d4bde14046f05b89/AndroidManifest.xml:21:1-31:12
+MERGED from [com.android.support:design:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8690739daf61588990204e14f330618f/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/81425ba35bc3c3cc2ed5c9ed1687e2be/AndroidManifest.xml:17:1-22:12
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:2:1-14:12
+MERGED from [me.zhanghai.android.materialprogressbar:library:1.4.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/library-1.4.2.aar/1454bdb5522a4fef8214a7c8d2f886a8/AndroidManifest.xml:6:1-16:12
+MERGED from [com.facebook.android:facebook-login:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-login-4.35.0.aar/abad27f2bc4aaf6ce6ded3a17f34921f/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-share:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-share-4.35.0.aar/042a6635fef7329fd93483cbb9b9cf9e/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:21:1-37:12
+MERGED from [com.facebook.android:facebook-places:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-places-4.35.0.aar/d214354b931596bc27e25c93023ba424/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-applinks:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.35.0.aar/6579a067be9371cc048b12c6e8fe6c68/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-messenger:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.35.0.aar/c698d7bab01e99f0d851c77d68349dbb/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:21:1-35:12
+MERGED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:21:1-53:12
+MERGED from [com.android.support:customtabs:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customtabs-28.0.0.aar/479c63dc81269188ef71ad9080956043/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-database-collection:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/61fc23799d32fbfbeff7d8eea77c62ea/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:17:1-39:12
+MERGED from [com.google.android.gms:play-services-measurement-api:16.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/124009c4b3f87ff9dc8527c60048ad3f/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:17:1-59:12
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/6493ac7dd127757376789c9085fcc560/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/51aab58b91e41cdeb9df71681edb6d5e/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/717fa1778b9b986c88d354ccf5b70779/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/4a8a8d5c6329f3e25b7778dd8ddec8b9/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-15.0.1.aar/3d9e6096cbbfbc4c2bc7e4dfe032ed93/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-15.0.1.aar/89c3a63999907f2856abb470963094c5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/d7668f8e80463d7b1ac849971f86bae6/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/d0dadf5fd9a83562f32787c6c720fc22/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:2:1-17:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/8ce7f5dbdf3c205e85f399fb8f86ee1b/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/bb6db02413be365b3c027f71fba69844/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d6d942cd0fa2a1724fa65dfdf98b84b0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4dd799283104b571f7f1576ec314b7d5/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:17:1-30:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/91970dd602fab1cdced3eb44fb19f134/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/fd7c452313da41e710a45a9cfc483cf9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3758d7fc49ce7e598b93ea4ae9d80ad5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9fd4d5669f56a7bf1a3779cf3bfe8dfc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/1d4b9e9ca6678418b1b4253d856552ac/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/06ae82a704fb863a0febcbb086e634b6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/5a2b19c7cd714f985799a131039dd831/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/6ff747354aba95350d205e0b195c0af4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/c39c1476799d26f920ec2e45f9098424/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/900f5e435d8ec57b692d33a2360c5842/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/4fd1884fe1a7b1b1fe9555bd60f79dbf/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b64fbfc6c1a017ad693b4965c7fe9739/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/01e36b52e55419861b6118c5efd48d6d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/4be06ae21d35b6fee4514d789194713c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/f0cd28bf3fcf96077a1aeec4a3b9c464/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0fd94ca3be7a79b681b30c58107dc720/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e3ac60d5b3153c1601232dc91020225f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b142306f27329d828a7bbe7290e5ff06/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/2e3911e0c5d11e98b990607f7a2184bd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/c7614a6c6626a180a2aa70dcd103a677/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/d9425c0bff0dba5f572435ef7bc0e652/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2918c1f3e7d105ecee94f7ccbf569b66/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/331c4ddfefc18de7175b51437643b268/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:exifinterface:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/exifinterface-28.0.0.aar/f297bbc99fcf27caa2c8bfed374c1b21/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4e4d36f3fbff519d01de47ce89a1671f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/3a3489d2ab084fd31b4dce08774abf29/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acb3029ca9d6e13f2e660673934a0e81/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6e20debf116c9d0faadf1fa9fd8366f3/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/a67953ca91aaba8ce50c2cc5ba74b003/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/6b1de99f9d10f9a77eacafefd97ef4b8/AndroidManifest.xml:2:1-11:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+	package
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:3:5-53
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:1-32:12
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:23:5-67
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:13:5-67
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:13:5-67
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:10:5-67
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:10:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:6:5-80
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:6:22-77
+application
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:8:5-30:19
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/743a993e6b34bb5b5134753e4944c449/AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/743a993e6b34bb5b5134753e4944c449/AndroidManifest.xml:9:5-20
+MERGED from [com.google.firebase:firebase-core:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56d5367300f2d7b7c209d7f324166b1f/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-core:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56d5367300f2d7b7c209d7f324166b1f/AndroidManifest.xml:7:5-20
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:15:5-112:19
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:15:5-112:19
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:26:5-32:19
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:26:5-32:19
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:13:5-19:19
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:13:5-19:19
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:12:5-18:19
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:12:5-18:19
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:22:5-35:19
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:22:5-35:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.35.0.aar/73f4158f09d4cef4d4bde14046f05b89/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.35.0.aar/73f4158f09d4cef4d4bde14046f05b89/AndroidManifest.xml:28:5-29:19
+MERGED from [com.android.support:design:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8690739daf61588990204e14f330618f/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8690739daf61588990204e14f330618f/AndroidManifest.xml:22:5-20
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:7:5-12:19
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:7:5-12:19
+MERGED from [com.facebook.android:facebook-login:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-login-4.35.0.aar/abad27f2bc4aaf6ce6ded3a17f34921f/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-login-4.35.0.aar/abad27f2bc4aaf6ce6ded3a17f34921f/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-share-4.35.0.aar/042a6635fef7329fd93483cbb9b9cf9e/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-share-4.35.0.aar/042a6635fef7329fd93483cbb9b9cf9e/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-places:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-places-4.35.0.aar/d214354b931596bc27e25c93023ba424/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-places:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-places-4.35.0.aar/d214354b931596bc27e25c93023ba424/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-applinks:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.35.0.aar/6579a067be9371cc048b12c6e8fe6c68/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-applinks:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.35.0.aar/6579a067be9371cc048b12c6e8fe6c68/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-messenger:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.35.0.aar/c698d7bab01e99f0d851c77d68349dbb/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-messenger:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.35.0.aar/c698d7bab01e99f0d851c77d68349dbb/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:28:5-33:19
+MERGED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:28:5-33:19
+MERGED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:28:5-51:19
+MERGED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:28:5-51:19
+MERGED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-measurement-api:16.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/124009c4b3f87ff9dc8527c60048ad3f/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-api:16.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/124009c4b3f87ff9dc8527c60048ad3f/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:28:5-57:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:28:5-57:19
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/6493ac7dd127757376789c9085fcc560/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/6493ac7dd127757376789c9085fcc560/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/51aab58b91e41cdeb9df71681edb6d5e/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/51aab58b91e41cdeb9df71681edb6d5e/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/717fa1778b9b986c88d354ccf5b70779/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/717fa1778b9b986c88d354ccf5b70779/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/4a8a8d5c6329f3e25b7778dd8ddec8b9/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/4a8a8d5c6329f3e25b7778dd8ddec8b9/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/d7668f8e80463d7b1ac849971f86bae6/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/d7668f8e80463d7b1ac849971f86bae6/AndroidManifest.xml:22:5-20
+MERGED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:9:5-15:19
+MERGED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:9:5-15:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/8ce7f5dbdf3c205e85f399fb8f86ee1b/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/8ce7f5dbdf3c205e85f399fb8f86ee1b/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:22:5-26:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:22:5-28:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:22:5-28:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/f0cd28bf3fcf96077a1aeec4a3b9c464/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/f0cd28bf3fcf96077a1aeec4a3b9c464/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6e20debf116c9d0faadf1fa9fd8366f3/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6e20debf116c9d0faadf1fa9fd8366f3/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/a67953ca91aaba8ce50c2cc5ba74b003/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/a67953ca91aaba8ce50c2cc5ba74b003/AndroidManifest.xml:7:5-20
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:13:9-35
+	android:label
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:11:9-41
+	android:roundIcon
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:12:9-54
+	android:icon
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:10:9-43
+	android:allowBackup
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:9:9-35
+	android:theme
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:14:9-42
+activity#com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:15:9-23:20
+	android:theme
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:17:13-46
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:16:13-57
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:18:13-22:29
+action#android.intent.action.MAIN
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:19:17-69
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:19:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:21:27-74
+activity#com.minami_m.project.android.wakemeapp.Screen.SearchFriend.SearchFriendActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:24:9-78
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:24:19-75
+activity#com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:25:9-62
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:25:19-59
+activity#com.minami_m.project.android.wakemeapp.Screen.ChatRoom.ChatRoomActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:26:9-70
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:26:19-67
+activity#com.minami_m.project.android.wakemeapp.Screen.SettingActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:27:9-60
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:27:19-57
+activity#com.minami_m.project.android.wakemeapp.Screen.AlarmScheduleActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:28:9-75
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:28:19-63
+activity#com.minami_m.project.android.wakemeapp.Screen.AlarmActivity
+ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:29:9-67
+	android:name
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml:29:19-55
+uses-sdk
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/743a993e6b34bb5b5134753e4944c449/AndroidManifest.xml:5:5-7:41
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/743a993e6b34bb5b5134753e4944c449/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-core:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56d5367300f2d7b7c209d7f324166b1f/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-core:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56d5367300f2d7b7c209d7f324166b1f/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:18:5-20:41
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:8:5-10:41
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:8:5-10:41
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-android-sdk:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.35.0.aar/73f4158f09d4cef4d4bde14046f05b89/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.35.0.aar/73f4158f09d4cef4d4bde14046f05b89/AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:design:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8690739daf61588990204e14f330618f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8690739daf61588990204e14f330618f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/81425ba35bc3c3cc2ed5c9ed1687e2be/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/81425ba35bc3c3cc2ed5c9ed1687e2be/AndroidManifest.xml:20:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:5:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:5:5-44
+MERGED from [me.zhanghai.android.materialprogressbar:library:1.4.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/library-1.4.2.aar/1454bdb5522a4fef8214a7c8d2f886a8/AndroidManifest.xml:12:5-14:41
+MERGED from [me.zhanghai.android.materialprogressbar:library:1.4.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/library-1.4.2.aar/1454bdb5522a4fef8214a7c8d2f886a8/AndroidManifest.xml:12:5-14:41
+MERGED from [com.facebook.android:facebook-login:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-login-4.35.0.aar/abad27f2bc4aaf6ce6ded3a17f34921f/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-login-4.35.0.aar/abad27f2bc4aaf6ce6ded3a17f34921f/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-share-4.35.0.aar/042a6635fef7329fd93483cbb9b9cf9e/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-share-4.35.0.aar/042a6635fef7329fd93483cbb9b9cf9e/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-places:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-places-4.35.0.aar/d214354b931596bc27e25c93023ba424/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-places:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-places-4.35.0.aar/d214354b931596bc27e25c93023ba424/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-applinks:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.35.0.aar/6579a067be9371cc048b12c6e8fe6c68/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-applinks:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.35.0.aar/6579a067be9371cc048b12c6e8fe6c68/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-messenger:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.35.0.aar/c698d7bab01e99f0d851c77d68349dbb/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-messenger:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.35.0.aar/c698d7bab01e99f0d851c77d68349dbb/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:customtabs:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customtabs-28.0.0.aar/479c63dc81269188ef71ad9080956043/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customtabs-28.0.0.aar/479c63dc81269188ef71ad9080956043/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-database-collection:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/61fc23799d32fbfbeff7d8eea77c62ea/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-database-collection:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/61fc23799d32fbfbeff7d8eea77c62ea/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:16.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/124009c4b3f87ff9dc8527c60048ad3f/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:16.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/124009c4b3f87ff9dc8527c60048ad3f/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/6493ac7dd127757376789c9085fcc560/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/6493ac7dd127757376789c9085fcc560/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/51aab58b91e41cdeb9df71681edb6d5e/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/51aab58b91e41cdeb9df71681edb6d5e/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/717fa1778b9b986c88d354ccf5b70779/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/717fa1778b9b986c88d354ccf5b70779/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/4a8a8d5c6329f3e25b7778dd8ddec8b9/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/4a8a8d5c6329f3e25b7778dd8ddec8b9/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-15.0.1.aar/3d9e6096cbbfbc4c2bc7e4dfe032ed93/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-15.0.1.aar/3d9e6096cbbfbc4c2bc7e4dfe032ed93/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-15.0.1.aar/89c3a63999907f2856abb470963094c5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-15.0.1.aar/89c3a63999907f2856abb470963094c5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/d7668f8e80463d7b1ac849971f86bae6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/d7668f8e80463d7b1ac849971f86bae6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/d0dadf5fd9a83562f32787c6c720fc22/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/d0dadf5fd9a83562f32787c6c720fc22/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/8ce7f5dbdf3c205e85f399fb8f86ee1b/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/8ce7f5dbdf3c205e85f399fb8f86ee1b/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/bb6db02413be365b3c027f71fba69844/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/bb6db02413be365b3c027f71fba69844/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d6d942cd0fa2a1724fa65dfdf98b84b0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/d6d942cd0fa2a1724fa65dfdf98b84b0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4dd799283104b571f7f1576ec314b7d5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4dd799283104b571f7f1576ec314b7d5/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/91970dd602fab1cdced3eb44fb19f134/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/91970dd602fab1cdced3eb44fb19f134/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/fd7c452313da41e710a45a9cfc483cf9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/fd7c452313da41e710a45a9cfc483cf9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3758d7fc49ce7e598b93ea4ae9d80ad5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/3758d7fc49ce7e598b93ea4ae9d80ad5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9fd4d5669f56a7bf1a3779cf3bfe8dfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9fd4d5669f56a7bf1a3779cf3bfe8dfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/1d4b9e9ca6678418b1b4253d856552ac/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/1d4b9e9ca6678418b1b4253d856552ac/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/06ae82a704fb863a0febcbb086e634b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/06ae82a704fb863a0febcbb086e634b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/5a2b19c7cd714f985799a131039dd831/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/5a2b19c7cd714f985799a131039dd831/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/6ff747354aba95350d205e0b195c0af4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/6ff747354aba95350d205e0b195c0af4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/c39c1476799d26f920ec2e45f9098424/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/c39c1476799d26f920ec2e45f9098424/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/900f5e435d8ec57b692d33a2360c5842/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/900f5e435d8ec57b692d33a2360c5842/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/4fd1884fe1a7b1b1fe9555bd60f79dbf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/4fd1884fe1a7b1b1fe9555bd60f79dbf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b64fbfc6c1a017ad693b4965c7fe9739/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/b64fbfc6c1a017ad693b4965c7fe9739/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/01e36b52e55419861b6118c5efd48d6d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/01e36b52e55419861b6118c5efd48d6d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/4be06ae21d35b6fee4514d789194713c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/4be06ae21d35b6fee4514d789194713c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e577a1259cd0d1529249ea69f47150b8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/f0cd28bf3fcf96077a1aeec4a3b9c464/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/f0cd28bf3fcf96077a1aeec4a3b9c464/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0fd94ca3be7a79b681b30c58107dc720/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/0fd94ca3be7a79b681b30c58107dc720/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e3ac60d5b3153c1601232dc91020225f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e3ac60d5b3153c1601232dc91020225f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b142306f27329d828a7bbe7290e5ff06/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b142306f27329d828a7bbe7290e5ff06/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/2e3911e0c5d11e98b990607f7a2184bd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/2e3911e0c5d11e98b990607f7a2184bd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/c7614a6c6626a180a2aa70dcd103a677/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/c7614a6c6626a180a2aa70dcd103a677/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/d9425c0bff0dba5f572435ef7bc0e652/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/d9425c0bff0dba5f572435ef7bc0e652/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2918c1f3e7d105ecee94f7ccbf569b66/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/2918c1f3e7d105ecee94f7ccbf569b66/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/331c4ddfefc18de7175b51437643b268/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/331c4ddfefc18de7175b51437643b268/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/exifinterface-28.0.0.aar/f297bbc99fcf27caa2c8bfed374c1b21/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/exifinterface-28.0.0.aar/f297bbc99fcf27caa2c8bfed374c1b21/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4e4d36f3fbff519d01de47ce89a1671f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4e4d36f3fbff519d01de47ce89a1671f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/3a3489d2ab084fd31b4dce08774abf29/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/3a3489d2ab084fd31b4dce08774abf29/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acb3029ca9d6e13f2e660673934a0e81/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acb3029ca9d6e13f2e660673934a0e81/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6e20debf116c9d0faadf1fa9fd8366f3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6e20debf116c9d0faadf1fa9fd8366f3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/a67953ca91aaba8ce50c2cc5ba74b003/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/a67953ca91aaba8ce50c2cc5ba74b003/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/6b1de99f9d10f9a77eacafefd97ef4b8/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/6b1de99f9d10f9a77eacafefd97ef4b8/AndroidManifest.xml:7:5-9:41
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/cc6486131362133072337aa9f02da061/AndroidManifest.xml:22:5-79
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:12:5-79
+MERGED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:12:5-79
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/8e7c92b3d9d03356d798437347b30e1f/AndroidManifest.xml:23:22-76
+meta-data#com.google.android.gms.version
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:16:9-18:69
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/b2e282308664059e6e75f1aebb962bb1/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:18:13-66
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:17:13-58
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:19:9-21:63
+	android:value
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:21:13-60
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:20:13-58
+activity#com.firebase.ui.auth.KickoffActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:23:9-27:61
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:26:13-29
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:27:13-58
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:24:13-64
+activity#com.firebase.ui.auth.ui.idp.SingleSignInActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:28:9-32:61
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:31:13-29
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:30:13-37
+	android:theme
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:32:13-58
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:29:13-76
+activity#com.firebase.ui.auth.ui.credentials.CredentialSaveActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:33:9-37:61
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:36:13-29
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:35:13-37
+	android:theme
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:37:13-58
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:34:13-86
+activity#com.firebase.ui.auth.ui.provider.GitHubLoginActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:38:9-58:20
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:41:13-29
+	android:launchMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:42:13-43
+	android:configChanges
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:40:13-96
+	android:theme
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:43:13-58
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:39:13-80
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:@string/firebase_web_host+data:path:/__/auth/handler+data:scheme:https
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:44:13-57:29
+	tools:ignore
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:46:17-47
+	android:autoVerify
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:45:17-42
+action#android.intent.action.VIEW
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:47:17-69
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:47:25-66
+category#android.intent.category.DEFAULT
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:49:17-76
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:49:27-73
+category#android.intent.category.BROWSABLE
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:50:17-78
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:50:27-75
+data
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:52:17-56:64
+	android:path
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:54:21-52
+	android:host
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:53:21-61
+	android:scheme
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:55:21-43
+	tools:ignore
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:56:21-61
+activity#com.firebase.ui.auth.ui.email.RecoverPasswordActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:59:9-63:58
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:62:13-72
+	android:windowSoftInputMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:63:13-55
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:61:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:60:13-81
+activity#com.firebase.ui.auth.ui.email.EmailActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:64:9-68:58
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:67:13-56
+	android:windowSoftInputMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:68:13-55
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:66:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:65:13-71
+activity#com.firebase.ui.auth.ui.phone.PhoneActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:69:9-73:77
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:72:13-66
+	android:windowSoftInputMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:73:13-74
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:71:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:70:13-71
+activity#com.firebase.ui.auth.ui.idp.WelcomeBackIdpPrompt
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:74:9-78:58
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:77:13-70
+	android:windowSoftInputMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:78:13-55
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:76:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:75:13-76
+activity#com.firebase.ui.auth.ui.email.WelcomeBackPasswordPrompt
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:79:9-83:58
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:82:13-75
+	android:windowSoftInputMode
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:83:13-55
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:81:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:80:13-83
+activity#com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:84:9-87:65
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:87:13-62
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:86:13-37
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:85:13-80
+activity#com.facebook.FacebookActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:88:9-92:48
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:29:9-32:66
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:29:9-32:66
+	android:label
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:91:13-45
+	tools:ignore
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:92:13-45
+	android:configChanges
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:90:13-96
+	android:theme
+		ADDED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:32:13-63
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:89:13-57
+activity#com.facebook.CustomTabActivity
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:93:9-105:20
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:34:9-67
+MERGED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:34:9-67
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:95:13-36
+	tools:ignore
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:96:13-45
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:94:13-58
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/facebook_login_protocol_scheme
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:97:13-104:29
+provider#com.firebase.ui.auth.data.client.AuthUiInitProvider
+ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:107:9-111:38
+	android:authorities
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:109:13-70
+	android:exported
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:110:13-37
+	android:initOrder
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:111:13-35
+	android:name
+		ADDED from [com.firebaseui:firebase-ui-auth:4.1.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.1.0.aar/493fe1db890514c7a6a826e1b3b04d95/AndroidManifest.xml:108:13-79
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:24:5-68
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:24:22-65
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:27:9-31:19
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:14:9-18:19
+MERGED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:14:9-18:19
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:13:9-17:19
+MERGED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:13:9-17:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:29:9-35:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:27:18-89
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/ad370bb834b858852b371db134edaadb/AndroidManifest.xml:29:17-139
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:26:5-110
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:26:5-110
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:30:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:34:9-42:20
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/477ff6a8e278cf92c7a33373c513b118/AndroidManifest.xml:29:9-37:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:36:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:38:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:35:13-100
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:39:13-41:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:40:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:44:9-47:40
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:46:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:45:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:48:9-52:72
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:50:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:51:13-37
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:52:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/d08f4f211ddbcbd232067db84f1b598f/AndroidManifest.xml:49:13-87
+activity#com.google.firebase.auth.internal.FederatedSignInActivity
+ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:24:9-31:50
+	android:excludeFromRecents
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:26:13-46
+	android:launchMode
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:28:13-44
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:27:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:29:13-102
+	android:theme
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:30:13-72
+	tools:replace
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:31:13-47
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:25:13-85
+meta-data#com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar
+ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:36:13-38:85
+	android:value
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:38:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:16.0.5] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/98096504085b2f214199670d56b53cb9/AndroidManifest.xml:37:17-109
+meta-data#com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar
+ADDED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-firestore:17.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/a2d8d9ba074a3e0d1bfea25403465647/AndroidManifest.xml:16:17-111
+meta-data#com.google.firebase.components:com.google.firebase.functions.FunctionsRegistrar
+ADDED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:14:13-16:85
+	android:value
+		ADDED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:16:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-functions:16.1.2] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-functions-16.1.2.aar/77e37bf54161d662759d81fd6e0a1a49/AndroidManifest.xml:15:17-111
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:28:9-34:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:30:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:29:13-82
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:31:13-33:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:31:28-51
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:32:17-78
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.4.aar/a2b3d91cd4189c26ef375d65d6df854e/AndroidManifest.xml:32:25-75
+provider#com.squareup.picasso.PicassoProvider
+ADDED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:8:9-11:40
+	android:authorities
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:10:13-72
+	android:exported
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [com.squareup.picasso:picasso:2.71828] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/4b0353c3d3e174a73ca80ce6c8f1aa4f/AndroidManifest.xml:9:13-64
+activity#com.facebook.CustomTabMainActivity
+ADDED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:33:9-71
+	android:name
+		ADDED from [com.facebook.android:facebook-common:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-common-4.35.0.aar/4c09d79eef12ec5553875773e3d72d86/AndroidManifest.xml:33:19-68
+provider#com.facebook.marketing.internal.MarketingInitProvider
+ADDED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:29:9-32:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:31:13-73
+	android:exported
+		ADDED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-marketing:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.35.0.aar/d9dedc837f3bbad5e03be5ae712aa736/AndroidManifest.xml:30:13-81
+provider#com.facebook.internal.FacebookInitProvider
+ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:39:9-42:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:41:13-72
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:42:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:40:13-70
+receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
+ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:44:9-50:20
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:46:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:45:13-86
+intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:47:13-49:29
+action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:48:17-95
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.35.0] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/facebook-core-4.35.0.aar/c821c73cb7fc20282b91a1224d328505/AndroidManifest.xml:48:25-92
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:33:9-36:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:35:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:15.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-auth-15.0.1.aar/0c29ff14fda0faa941104b24da1e00c4/AndroidManifest.xml:34:13-89
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:26:22-79
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:33:17-96
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:37:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:39:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:40:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:38:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:41:13-43:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:42:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:42:25-78
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:50:9-56:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:52:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:51:13-77
+intent-filter#action:name:com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:53:13-55:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:53:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:54:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.4.aar/c0d77a18045bec75cffd21c332be611e/AndroidManifest.xml:54:25-77
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:10:9-14:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:12:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:13:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:14:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:16.0.4] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.4.aar/45064671d572fa84ffd1b72150658632/AndroidManifest.xml:11:13-77
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/cd72b1e9e643ca3cd229c886fb031fc6/AndroidManifest.xml:24:13-79
+provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
+ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:23:9-27:43
+	android:authorities
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:25:13-68
+	android:multiprocess
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:27:13-40
+	android:exported
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:26:13-37
+	android:name
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/minami_munakata/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/78ba5b6a506cdd7974ffe12fed379edb/AndroidManifest.xml:24:13-83

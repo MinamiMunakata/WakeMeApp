@@ -1,0 +1,31 @@
+#Internal package file, do not edit.
+#Sun Nov 25 20:20:35 PST 2018
+2.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
+5.set=ASSET
+0.path=classes.dex
+2.baseType=DIRECTORY
+3.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/transforms/dexMerger/debug/1
+2.set=ASSET
+1.path=fonts/Gotham-Bold.ttf
+4.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
+count=7
+5.baseType=DIRECTORY
+2.path=crashlytics-build.properties
+5.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
+4.set=ASSET
+3.path=classes2.dex
+6.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/transforms/dexMerger/debug/1
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=fonts/Brandon_bld.otf
+6.set=DEX
+1.baseType=DIRECTORY
+6.baseType=DIRECTORY
+5.path=fonts/Brandon_reg.otf
+0.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/transforms/dexMerger/debug/0
+0.baseType=DIRECTORY
+3.set=DEX
+6.path=classes.dex
+1.base=/Users/minami_munakata/AndroidStudioProjects/WakeMeApp/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
+4.baseType=DIRECTORY
+0.set=DEX
