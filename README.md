@@ -3,9 +3,14 @@
 🚧 This app is still a WIP 🚧
 
 ## Overview
-WakeMeApp is the app for those who are often be late for school, work, and anything you should be there before or on time.  
+WakeMeApp is the app for those who are often late for school, work, and anything you should be there before or on time.  
 This app let you wake up on time and be able to check if your friends get up or sleep over.  
 **NEVER let anyone call you a _SLEEPY HEAD!_**  
+
+## Objective  
+- Let the user wake up on time.
+- Show the sleep-over status depends on the time to wake up the user set and update it with the last-seen time.  
+- Allow the user to send a messagesee right after checking if his/her friends sleep over.
 
 ## Target
 - People who often sleep over
