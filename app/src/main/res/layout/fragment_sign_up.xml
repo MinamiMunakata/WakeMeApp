@@ -21,6 +21,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -37,7 +38,7 @@
                 android:src="@drawable/img_picture" />
 
 
-            <TextView
+            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"
@@ -52,7 +53,7 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <TextView
+            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"
@@ -67,7 +68,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress" />
 
-            <TextView
+            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"

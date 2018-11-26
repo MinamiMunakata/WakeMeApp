@@ -67,7 +67,7 @@
                     android:textSize="@dimen/text_h2"/>
             </LinearLayout>
         </LinearLayout>
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nickname"
@@ -92,7 +92,7 @@
                 android:layout_alignEnd="@+id/edit_profile_nickname"
                 android:paddingEnd="5dp"/>
         </RelativeLayout>
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:paddingEnd="5dp"/>
         </RelativeLayout>
 
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

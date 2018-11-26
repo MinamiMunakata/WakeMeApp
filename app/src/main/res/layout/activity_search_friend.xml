@@ -17,6 +17,7 @@
         app:contentInsetStart="0dp"
         app:contentInsetEnd="0dp">
         <TextView
+            android:id="@+id/toolbar_title_add_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"

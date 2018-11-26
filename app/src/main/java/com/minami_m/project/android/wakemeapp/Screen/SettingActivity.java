@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
+import com.minami_m.project.android.wakemeapp.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
@@ -62,9 +63,11 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
             }
         });
         profileName = findViewById(R.id.setting_profile_name);
+        FontStyleHandler.setFont(this, profileName, true, true);
         Toolbar toolbar = findViewById(R.id.my_toolbar_setting);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+        // TODO: EditText - setFont
 
     }
 

@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
@@ -48,6 +49,7 @@ public class SearchFriendActivity extends AppCompatActivity
     private String friendId;
     private User friend;
     private User mUser;
+    private TextView toolbarTitle;
     private static final String DIALOG_TAG = "dialog";
 
     public void setEditEmail(EditText editEmail) {
@@ -61,11 +63,14 @@ public class SearchFriendActivity extends AppCompatActivity
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
+        toolbarTitle = findViewById(R.id.toolbar_title_add_friend);
+        FontStyleHandler.setFont(this, toolbarTitle, true, true);
         Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         search_btn = findViewById(R.id.search_button);
+        FontStyleHandler.setFont(this, search_btn, false, true);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             FirebaseRealtimeDatabaseHelper.readUserData(currentUser.getUid(), new RealtimeDatabaseCallback() {

@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Screen.ChatRoom.ChatRoomActivity;
 import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private List<ChatRoomCard> chatRoomCards;
     private RecyclerView recyclerView;
     private CardRecyclerAdapter adapter;
+    private TextView goodMorning;
     private TextView currentUserName;
     private ProgressBar progressBar;
 
@@ -63,7 +65,10 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        goodMorning = findViewById(R.id.good_morning);
+        FontStyleHandler.setFont(this, goodMorning, true, true);
         currentUserName = findViewById(R.id.current_user_name);
+        FontStyleHandler.setFont(this, currentUserName, true, true);
         try {
             currentUserName.setText(String.format("%s!",currentUser.getDisplayName()));
         } catch (Exception e) {

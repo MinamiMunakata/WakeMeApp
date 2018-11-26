@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -74,9 +75,13 @@ public class SignInFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         // Initialize Firebase Auth
         signInBtn = view.findViewById(R.id.sign_in_btn);
+        FontStyleHandler.setFont(getContext(), signInBtn, false, true);
         editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);
+        FontStyleHandler.setFont(getContext(), editTextEmail, false, false);
         editTextPw = view.findViewById(R.id.edit_text_password_for_sign_in);
+        FontStyleHandler.setFont(getContext(), editTextPw,false, false);
         signUpLink = view.findViewById(R.id.sign_up_link);
+        FontStyleHandler.setFont(getContext(), signUpLink, false, true);
         progressBar = view.findViewById(R.id.sign_in_progressbar);
         progressBar.setVisibility(View.INVISIBLE);
         errorMsg = view.findViewById(R.id.sign_in_error);
@@ -85,6 +90,7 @@ public class SignInFragment extends Fragment implements
         mAuth = FirebaseAuth.getInstance();
 
         Button loginButton = view.findViewById(R.id.fb_login_button);
+        FontStyleHandler.setFont(getContext(), loginButton, false, true);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

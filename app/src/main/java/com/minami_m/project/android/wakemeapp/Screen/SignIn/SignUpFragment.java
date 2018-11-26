@@ -36,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
+import com.minami_m.project.android.wakemeapp.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.TimeHandler;
 import com.minami_m.project.android.wakemeapp.InputHandler;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
@@ -63,6 +64,7 @@ public class SignUpFragment extends Fragment
     private Uri filePath;
     private String downloadedIconUrl;
     private ProgressBar progressBar;
+    private TextView signUp;
 
 
 
@@ -88,12 +90,16 @@ public class SignUpFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         mAuth = FirebaseAuth.getInstance();
+        signUp = view.findViewById(R.id.sign_up);
+        FontStyleHandler.setFont(getContext(), signUp, true, true);
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
         setEmailFromSignInForm();
         errorMsg = view.findViewById(R.id.sign_up_error);
         pwField = view.findViewById(R.id.edit_pw);
         Button signUpButton = view.findViewById(R.id.signup_btn);
+        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
+        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
         signUpButton.setOnClickListener(this);
         icon = view.findViewById(R.id.user_icon);
         icon.setOnClickListener(new View.OnClickListener() {
