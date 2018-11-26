@@ -9,7 +9,7 @@ This app let you wake up on time and be able to check if your friends get up or 
 
 ## Target
 - People who often sleep over
-- People who often text their friend's about attendance.
+- People who often text their friend's about the attendance.
 
 ## Features
 - Set an alarm.
