@@ -67,13 +67,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <ImageButton
+    <ImageView
         android:id="@+id/semicircle_btn"
-        android:translationY="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/semicircle_button"
-        android:src="@drawable/ic_add_24dp"
+        android:src="@drawable/img_add_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

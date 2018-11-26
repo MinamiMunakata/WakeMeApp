@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public static final String RECEIVER_ICON = "ReceiverIcon";
     public static final String RECEIVER_NAME = "ReceiverName";
     public static final String RECEIVER_ID = "ReceiverId";
-    private ImageButton button;
+    private ImageView button;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private List<ChatRoomCard> chatRoomCards;

@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/ic_send_accent_24dp"
+            android:background="@drawable/ico_send"
             android:scaleType="fitCenter"
             android:layout_marginLeft="@dimen/padding_rounded_field"/>
 

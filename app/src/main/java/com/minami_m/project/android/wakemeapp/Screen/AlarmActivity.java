@@ -3,6 +3,8 @@ package com.minami_m.project.android.wakemeapp.Screen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.minami_m.project.android.wakemeapp.R;
+
 public class AlarmActivity extends AppCompatActivity {
 
     @Override
