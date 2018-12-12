@@ -142,7 +142,13 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String path = dataSnapshot.child("icon").getValue(String.class);
                 // TODO: set default image
-                Picasso.get().load(path).error(R.drawable.user_icon).into(profileIcon);
+                Log.i(TAG, "onDataChange: " + path);
+                if (path == null) {
+                    profileIcon.setImageResource(R.drawable.test_default);
+                } else {
+                    Picasso.get().load(path).error(R.drawable.test_default).into(profileIcon);
+                }
+
             }
 
             @Override

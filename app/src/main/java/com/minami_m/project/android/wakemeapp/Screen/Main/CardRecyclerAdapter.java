@@ -37,10 +37,15 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         ChatRoomCard roomCard = chatRoomCards.get(position);
         viewHolder.nameView.setText(roomCard.getReceiverName());
         viewHolder.statusView.setText(roomCard.getReceiverStatus());
-        Picasso.get()
-                .load(roomCard.getReceiverIcon())
-                .error(R.drawable.ico_awake) // TODO: set default image
-                .into(viewHolder.iconView);
+        if (roomCard.getReceiverIcon() == null) {
+            viewHolder.iconView.setImageResource(R.drawable.test_default);
+        } else {
+            Picasso.get()
+                    .load(roomCard.getReceiverIcon())
+                    .error(R.drawable.ico_awake) // TODO: set default image
+                    .into(viewHolder.iconView);
+        }
+
         if (roomCard.isReceiverSleeping()) {
             viewHolder.alertView.setImageResource(R.drawable.ico_alart);
         } else {

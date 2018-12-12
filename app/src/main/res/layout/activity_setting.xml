@@ -34,7 +34,7 @@
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/setting_profile_icon"
-                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                android:src="@drawable/test_default"
                 android:layout_width="150dp"
                 android:layout_height="150dp" />
             <ImageView
