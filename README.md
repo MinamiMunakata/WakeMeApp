@@ -5,7 +5,6 @@
 ## Index
 
 - [Overview](#overview)
-- [UI design](#ui-design)
 - [Objective](#objective)
 - [Target](#target)
 - [Features](#features)
@@ -13,6 +12,7 @@
 - [Architecture](#architecture)
 - [Data Architecture](#data-architecture)
 - [Contributor](#contributor)
+  - [UI design](#ui-design)
 - [Note](#note)
 
 ## Overview
@@ -20,8 +20,6 @@
 WakeMeApp is the app for those who are often late for school, work, and anything you should be there before or on time.  
 This app lets you wake up on time and be able to check if your friends get up or sleep over.  
 **NEVER let anyone call you a _SLEEPY HEAD!_**
-
-## UI Design
 
 ![UI Design Image](../media/readme.png?raw=true)
 Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
