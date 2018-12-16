@@ -59,11 +59,11 @@ Libraries:
 
 ```
 root
-  ├ xxxx
+  ├ ChatRoomIDList
   |  └ xxxx
   |     └ xxxx
   |
-  ├ xxxx
+  ├ ChatRooms
   |  └ xxxx
   |     └ xxxx
   |        ├ xxxx
@@ -73,14 +73,28 @@ root
   |        ├ xxxx
   |        └ xxxx
   |
-  ├ xxxx
+  ├ FriendIDList
   |  └ xxxx
   |     └ xxxx
   |        ├ xxxx
   |        ├ xxxx
   |        └ xxxx
   |
-  └ xxxx
+  ├ Messages
+  |  └ xxxx
+  |     └ xxxx
+  |        ├ xxxx
+  |        ├ xxxx
+  |        └ xxxx
+  |
+  ├ ReceiverPaths
+  |  └ xxxx
+  |     └ xxxx
+  |        ├ xxxx
+  |        ├ xxxx
+  |        └ xxxx
+  |
+  └ Users
      └ xxxx
         └ xxxx
            ├ xxxx
