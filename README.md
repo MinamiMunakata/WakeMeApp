@@ -1,6 +1,8 @@
 # WakeMeApp
 
-🚧 This app is still a WIP 🚧
+###### 🚧 This app is still a WIP 🚧
+
+######[🀫🀫🀫🀫🀫🀫🀫🀫&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80% Completed!
 
 ## Index
 
