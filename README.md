@@ -24,13 +24,14 @@ This app lets you wake up on time and be able to check if your friends get up or
 **NEVER let anyone call you a _SLEEPY HEAD!_**
 
 ![UI Design Image](../media/readme.png?raw=true)
-Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
+Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)  
+\>\>[See Details](#contributor)
 
 ## Objective
 
-- Let the user wake up on time.
+- Let a user wake up on time.
 - Show the sleep-over status depends on the time to wake up the user set and update it with the last-seen time.
-- Allow the user to send a message right after checking if his/her friends sleep over.
+- Allow a user to send a message right after checking if his/her friends have overslept.
 
 ## Target
 
@@ -71,7 +72,7 @@ Libraries:
 
 ## Data Architecture
 
-✏️ WIP
+✏️ Editing...
 
 ##### Firebase
 
@@ -125,15 +126,18 @@ root
 
 ## Contributor
 
-Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
+#### Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
 > ### UI Design
 >
-> <img src="../media/friend_list.png?raw=true" width="200px" alt="Friend List Page Image"><img src="../media/chat.png?raw=true" width="200px" alt="Chat Page Image" hspace="50"><img src="../media/mypage.png?raw=true" width="200px" alt="Mypage Image">
+> <img src="../media/friend_list.png?raw=true" width="200px" alt="Friend List Page Image"><img src="../media/chat.png?raw=true" width="200px" alt="Chat Page Image" hspace="50"><img src="../media/mypage.png?raw=true" width="200px" alt="Mypage Image">  
+> Click on any image to see a larger picture.
 
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
 When I first told you the idea, you immidiately understood the consepts and gave me a lot of advice as a designer. Whenever I asked you for additional design work, you were always flexible and dealt with my requests.  
 Thank you so much for your help, and please let me know if I can return the favor!
+
+
 
 ## Note
 
