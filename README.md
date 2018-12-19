@@ -43,7 +43,7 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 - Set an alarm.
 - Share the time you want to wake up.
 - Send a notification after the time to check if the user get up.
-- Show the status if the user sleep over.
+- Show the status if the user has overslept.
 - Show friend list in order which the user who doesn't get up yet comes first.
 - Send and receive messages to friend-users.
 - Store all messages.
