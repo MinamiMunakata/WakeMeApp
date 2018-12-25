@@ -28,9 +28,9 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
 ## Objective
 
-- Let the user wake up on time.
-- Show the sleep-over status depends on the time to wake up the user set and update it with the last-seen time.
-- Allow the user to send a message right after checking if his/her friends sleep over.
+- Help users wake up on time.
+- Show the sleep status depending on the set wake up time, and update it with the last-seen time.
+- Allow users to send a message right after checking if his/her friends overslept.
 
 ## Target
 
