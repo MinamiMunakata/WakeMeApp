@@ -2,7 +2,7 @@
 
 ###### 🚧 This app is still a WIP 🚧
 
-###### [🀫🀫🀫🀫🀫🀫🀫🀫&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80% Completed!
+###### [■■■■■■■■□□]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80% Completed!
 
 ## Index
 
@@ -35,22 +35,22 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 ## Target
 
 - People who often sleep over
-- People who often text their friend's about the attendance.
+- People who often text their friends about their attendance.
 
 ## Features
 
 - Set an alarm.
 - Share the time you want to wake up.
-- Send a notification after the time to check if the user get up.
-- Show the status if the user sleep over.
-- Show friend list in order which the user who doesn't get up yet comes first.
-- Send and receive messages to friend-users.
+- Send a notification after the time to check if the user is awake.
+- Show the status if the user oversleeps.
+- Show friend list in order of sleep status, with oversleeping friends listed first.
+- Send and receive messages to friends.
 - Store all messages.
-- Track the last seen status.
-- Create an account with Email and Passward.
+- Track the last-seen status.
+- Create an account with Email and Password.
 - Facebook login.
 - Configure your profile. (Name/ Profile picture/ Email/ Passward)
-- Search friend-users by Email.
+- Search for friends by Email.
 
 ## Specification
 
