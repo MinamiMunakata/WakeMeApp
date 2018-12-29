@@ -24,7 +24,7 @@ This app lets you wake up on time and be able to check if your friends are awake
 **NEVER let anyone call you a _SLEEPY HEAD!_**
 
 ![UI Design Image](../media/readme.png?raw=true)
-Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
+Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)  
 👉 [Go to see details](#contributor) 👀
 
 ## Objective
