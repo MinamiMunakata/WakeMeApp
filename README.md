@@ -25,6 +25,7 @@ This app lets you wake up on time and be able to check if your friends are awake
 
 ![UI Design Image](../media/readme.png?raw=true)
 Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
+👉 [Go to see details](#contributor) 👀
 
 ## Objective
 
@@ -59,6 +60,7 @@ Libraries:
 
 - Android Support Library
 - [Picasso](https://github.com/square/picasso)
+- [Glide](https://github.com/bumptech/glide)
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 - [Firebase](https://firebase.google.com/)
   - Authentication
