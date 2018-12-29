@@ -7,6 +7,7 @@ android {
         main {
             res.srcDirs += 'src/main/res-main'
             res.srcDirs += 'src/main/res-screen'
+            res.srcDirs += 'src/main/res-screen'
             file('src/main/res-screen/')
                     .listFiles()
                     .each { res.srcDirs += it.path }

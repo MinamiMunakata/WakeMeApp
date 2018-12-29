@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Screen.SignIn;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -50,11 +53,18 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     FirebaseAuth mAuth;
     Profile facebookProfile;
     static ProgressBar progressBar;
+    static ImageView loadingImage;
 
-    public static void setProgressBar(ProgressBar bar) {
-        progressBar = bar;
-        bar.setVisibility(View.INVISIBLE);
+    public static void setLoadingImage(ImageView loadingImg, Context context) {
+        loadingImage = loadingImg;
+        loadingImg.setVisibility(View.INVISIBLE);
+        Glide.with(context).load(R.raw.loading).into(loadingImg);
     }
+//    public static void setProgressBar(ProgressBar bar) {
+//        progressBar = bar;
+//        bar.setVisibility(View.INVISIBLE);
+//        Glide.with(getApplicationContext()).load(R.raw.loading).into(loadingImage);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +104,17 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             @Override
             public void onCancel() {
                 Log.i(TAG, "onCancel: 123456");
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
+                loadingImage.setVisibility(View.INVISIBLE);
+
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.i(TAG, "onError: 123456");
                 Log.i(TAG, "onError: " + error.getMessage());
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
+                loadingImage.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -139,13 +152,16 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
     @Override
     public void loginWithFacebook(FirebaseAuth firebaseAuth) {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
+//        if (progressBar != null) {
+        if (loadingImage != null) {
+//            progressBar.setVisibility(View.VISIBLE);
+            loadingImage.setVisibility(View.VISIBLE);
         }
         mAuth = firebaseAuth;
         if (AccessToken.getCurrentAccessToken() != null){
             LoginManager.getInstance().logOut();
-            progressBar.setVisibility(View.INVISIBLE);
+//            progressBar.setVisibility(View.INVISIBLE);
+            loadingImage.setVisibility(View.INVISIBLE);
 
         } else {
             LoginManager.getInstance().logOut();
@@ -173,11 +189,13 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                 newUser.setStatus(TimeHandler.generateStatus(newUser.getLastLogin()));
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
-                            progressBar.setVisibility(View.INVISIBLE);
+//                            progressBar.setVisibility(View.INVISIBLE);
+                            loadingImage.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);
 
                         } else {
-                            progressBar.setVisibility(View.INVISIBLE);
+//                            progressBar.setVisibility(View.INVISIBLE);
+                            loadingImage.setVisibility(View.INVISIBLE);
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",

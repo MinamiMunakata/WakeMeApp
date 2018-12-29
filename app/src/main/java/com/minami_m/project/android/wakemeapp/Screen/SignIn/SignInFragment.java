@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.ProfileTracker;
@@ -54,6 +56,7 @@ public class SignInFragment extends Fragment implements
     private ProgressBar progressBar;
     private String emailForSignUp = null;
     private String passwordForSignUp = null;
+    private ImageView loadingImage;
 
     private  CallbackManager mCallbackManager;
     private AccessTokenTracker mAccessTokenTracker;
@@ -77,8 +80,11 @@ public class SignInFragment extends Fragment implements
         FontStyleHandler.setFont(getContext(), editTextPw,false, false);
         signUpLink = view.findViewById(R.id.sign_up_link);
         FontStyleHandler.setFont(getContext(), signUpLink, false, true);
-        progressBar = view.findViewById(R.id.sign_in_progressbar);
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar = view.findViewById(R.id.sign_in_progressbar);
+//        progressBar.setVisibility(View.INVISIBLE);
+        loadingImage = view.findViewById(R.id.sign_in_loading_img);
+        Glide.with(this).load(R.raw.loading).into(loadingImage);
+        loadingImage.setVisibility(View.INVISIBLE);
         errorMsg = view.findViewById(R.id.sign_in_error);
         errorMsg.setVisibility(View.GONE);
 
@@ -89,7 +95,7 @@ public class SignInFragment extends Fragment implements
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignInActivity.setProgressBar(progressBar);
+                SignInActivity.setLoadingImage(loadingImage, getContext());
                 FacebookLoginListener facebookLoginListener = (FacebookLoginListener)getActivity();
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
@@ -123,11 +129,13 @@ public class SignInFragment extends Fragment implements
             final String email = editTextEmail.getText().toString(),
                     password = editTextPw.getText().toString();
             // TODO: show a progress bar
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
+            loadingImage.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.INVISIBLE);
+//                    progressBar.setVisibility(View.INVISIBLE);
+                    loadingImage.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         final FirebaseUser currentUser = mAuth.getCurrentUser();
