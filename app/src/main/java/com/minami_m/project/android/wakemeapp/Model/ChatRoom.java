@@ -1,10 +1,5 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
-import android.util.Log;
-
-import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
-
 import java.util.List;
 
 public class ChatRoom{

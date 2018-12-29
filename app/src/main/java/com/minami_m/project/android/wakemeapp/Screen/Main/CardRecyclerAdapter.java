@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
-import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
 

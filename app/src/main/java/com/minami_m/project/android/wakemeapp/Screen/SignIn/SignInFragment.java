@@ -22,20 +22,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.FacebookLoginListener;
-import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.FragmentChangeListener;
-import com.minami_m.project.android.wakemeapp.InputHandler;
-import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.RealtimeDatabaseCallback;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Listener.FacebookLoginListener;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
 
 import java.util.Date;
 

@@ -3,6 +3,7 @@ package com.minami_m.project.android.wakemeapp;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import static android.graphics.Typeface.createFromAsset;
@@ -26,6 +27,7 @@ public class CustomBasicTextView extends android.support.v7.widget.AppCompatText
     }
 
     private void setFont() {
+        Log.i("1234567890", "setFont: " + getContext().getAssets());
         Typeface font = createFromAsset(getContext().getAssets(), BASIC);
         setTypeface(font, Typeface.NORMAL);
     }

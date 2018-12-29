@@ -3,6 +3,15 @@ import com.google.gms.googleservices.GoogleServicesPlugin
 apply plugin: 'com.android.application'
 
 android {
+    sourceSets {
+        main {
+            res.srcDirs += 'src/main/res-main'
+            res.srcDirs += 'src/main/res-screen'
+            file('src/main/res-screen/')
+                    .listFiles()
+                    .each { res.srcDirs += it.path }
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.minami_m.project.android.wakemeapp"

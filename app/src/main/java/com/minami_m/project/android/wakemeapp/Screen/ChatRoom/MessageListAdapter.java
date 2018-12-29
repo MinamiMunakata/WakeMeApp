@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.minami_m.project.android.wakemeapp.TimeHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.TimeHandler;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;

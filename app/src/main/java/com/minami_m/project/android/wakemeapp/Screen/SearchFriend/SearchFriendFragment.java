@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.minami_m.project.android.wakemeapp.InputHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
 
 
 /**

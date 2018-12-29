@@ -33,16 +33,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
-import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.FirebaseStorageHelper;
-import com.minami_m.project.android.wakemeapp.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.TimeHandler;
-import com.minami_m.project.android.wakemeapp.InputHandler;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
+import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.TimeHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
 
 import java.io.IOException;
 

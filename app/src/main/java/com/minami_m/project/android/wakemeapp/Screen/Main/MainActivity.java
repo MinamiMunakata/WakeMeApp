@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,11 +21,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Screen.ChatRoom.ChatRoomActivity;
-import com.minami_m.project.android.wakemeapp.ChatRoomCardClickListener;
-import com.minami_m.project.android.wakemeapp.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ChatRoomCardClickListener;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
@@ -36,7 +34,6 @@ import com.minami_m.project.android.wakemeapp.Screen.SettingActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
