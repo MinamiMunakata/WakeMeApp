@@ -37,8 +37,7 @@
             android:text="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_h2"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/text_h2" />
         <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
             android:textColor="@color/colorMyAccent"

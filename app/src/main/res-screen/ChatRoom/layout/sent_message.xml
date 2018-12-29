@@ -7,7 +7,7 @@
     android:paddingVertical="@dimen/padding_bubbles"
     android:background="@color/colorBackground"
     android:clipToPadding="false">
-    <TextView
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:id="@+id/sender_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:id="@+id/my_bubble"
         android:background="@drawable/sent_message"
         android:padding="5dp">
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:id="@+id/sent_message_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:elevation="@dimen/elevation"
             android:padding="@dimen/sender_bubble_text_padding"
             android:textSize="@dimen/message_text_size"/>
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:id="@+id/sent_message_seen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         goodMorning = findViewById(R.id.good_morning);
-        FontStyleHandler.setFont(this, goodMorning, true, true);
+        FontStyleHandler.setFont(this, goodMorning, false, false);
         currentUserName = findViewById(R.id.current_user_name);
         FontStyleHandler.setFont(this, currentUserName, true, true);
         try {

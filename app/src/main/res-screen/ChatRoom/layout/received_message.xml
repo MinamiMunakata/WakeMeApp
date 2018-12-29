@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingVertical="@dimen/padding_bubbles"
     android:clipToPadding="false">
-    <TextView
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:id="@+id/receiver_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:src="@drawable/com_facebook_profile_picture_blank_portrait"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"/>
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:id="@+id/received_bubble"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
