@@ -38,7 +38,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         viewHolder.nameView.setText(roomCard.getReceiverName());
         viewHolder.statusView.setText(roomCard.getReceiverStatus());
         if (roomCard.getReceiverIcon() == null) {
-            viewHolder.iconView.setImageResource(R.drawable.test_default);
+            viewHolder.iconView.setImageResource(R.drawable.ico_default_avator);
         } else {
             Picasso.get()
                     .load(roomCard.getReceiverIcon())

@@ -13,10 +13,10 @@
         android:id="@+id/icon_holder"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/img_picture"
+        android:src="@drawable/ico_default_avator"
         android:backgroundTint="@color/colorBackground"
         android:layout_marginVertical="@dimen/vertical_space_bw_items"/>
-    <TextView
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:id="@+id/name_holder"
         android:textSize="@dimen/text_h3"
         android:layout_width="wrap_content"

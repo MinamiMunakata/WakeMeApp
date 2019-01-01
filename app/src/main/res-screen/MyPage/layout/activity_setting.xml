@@ -34,7 +34,7 @@
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/setting_profile_icon"
-                android:src="@drawable/test_default"
+                android:src="@drawable/ico_default_avator"
                 android:layout_width="150dp"
                 android:layout_height="150dp" />
             <ImageView
@@ -136,12 +136,14 @@
                 android:text="@string/app_name"
                 android:textColor="@color/grey" />
             <ImageView
+                android:contentDescription="@string/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_edit"
                 android:layout_centerVertical="true"
                 android:layout_alignEnd="@+id/edit_profile_pw"
-                android:paddingEnd="5dp"/>
+                android:paddingEnd="5dp"
+                tools:ignore="RtlSymmetry" />
         </RelativeLayout>
 
     </LinearLayout>

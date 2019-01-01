@@ -144,9 +144,9 @@ public class SettingActivity extends AppCompatActivity implements ActivityChange
                 // TODO: set default image
                 Log.i(TAG, "onDataChange: " + path);
                 if (path == null) {
-                    profileIcon.setImageResource(R.drawable.test_default);
+                    profileIcon.setImageResource(R.drawable.ico_default_avator);
                 } else {
-                    Picasso.get().load(path).error(R.drawable.test_default).into(profileIcon);
+                    Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
 
             }

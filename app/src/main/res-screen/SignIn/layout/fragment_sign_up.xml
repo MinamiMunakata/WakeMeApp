@@ -35,7 +35,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/small_vertical_space_bw_item"
-                android:src="@drawable/img_picture" />
+                android:src="@drawable/img_add_picture" />
 
 
             <com.minami_m.project.android.wakemeapp.CustomBasicTextView
