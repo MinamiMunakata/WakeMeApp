@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ico_facebook"
+        android:width="@dimen/ico_size"
+        android:height="@dimen/ico_size"
+        android:gravity="right"/>
+</layer-list>

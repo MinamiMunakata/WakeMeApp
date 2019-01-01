@@ -122,8 +122,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_h3"
+                android:drawableLeft="@drawable/ico_facebook_resize"
                 android:textColor="@color/white"
-                android:text="Facebook Login"
+                android:text="Sign in with Facebook"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:paddingHorizontal="10dp"
+
                 android:background="@drawable/facebook_login_btn"/>
             <TextView
                 android:paddingTop="2dp"
