@@ -30,7 +30,7 @@ import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.SearchFriend.SearchFriendActivity;
-import com.minami_m.project.android.wakemeapp.Screen.SettingActivity;
+import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 launchActivity(MainActivity.class);
                 return true;
             case R.id.my_page_menu:
-                launchActivity(SettingActivity.class);
+                launchActivity(MypageActivity.class);
                 return true;
             case R.id.logout_menu:
                 FirebaseAuth.getInstance().signOut();

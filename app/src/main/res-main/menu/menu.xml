@@ -6,7 +6,7 @@
         android:title="Home" />
     <item
         android:id="@+id/my_page_menu"
-        android:title="Setting" />
+        android:title="My Page" />
     <item
         android:id="@+id/logout_menu"
         android:title="Logout" />
