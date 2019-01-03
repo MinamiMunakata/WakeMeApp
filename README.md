@@ -20,7 +20,7 @@
 ## Overview
 
 WakeMeApp is the app for those who are often late for school, work, and anywhere you should arrive early or on time.  
-This app lets you wake up on time and be able to check if your friends are awake or oversleeping.  
+This app helps you wake up on time and be able to check if your friends are awake or oversleeping.  
 **NEVER let anyone call you a _SLEEPY HEAD!_**
 
 ![UI Design Image](../media/readme.png?raw=true)
