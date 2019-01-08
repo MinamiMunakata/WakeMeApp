@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.Screen.Main;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableStringBuilder;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +38,8 @@ import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.graphics.Typeface.createFromAsset;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
