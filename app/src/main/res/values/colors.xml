@@ -10,5 +10,6 @@
     <color name="grey">#999</color>
     <color name="red">#FF0000</color>
     <color name="black">#333</color>
+    <color name="default_black">#000</color>
     <color name="light_gray">#AFAFAF</color>
 </resources>

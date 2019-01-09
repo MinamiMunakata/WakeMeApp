@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/sign_up"
-                android:textColor="@color/colorMyAccent"
                 android:textSize="@dimen/text_h2"
                 android:textStyle="bold" />
 
@@ -42,14 +41,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"
-                android:text="Name"
-                android:textColor="@color/colorMyAccent" />
+                android:text="Name" />
 
             <EditText
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorMyAccent"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
@@ -57,14 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"
-                android:text="Email"
-                android:textColor="@color/colorMyAccent" />
+                android:text="Email" />
 
             <EditText
                 android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorMyAccent"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
 
@@ -72,14 +67,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/input_header"
-                android:text="Password"
-                android:textColor="@color/colorMyAccent" />
+                android:text="Password" />
 
             <EditText
                 android:id="@+id/edit_pw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorMyAccent"
                 android:ems="10"
                 android:inputType="textPassword" />
 

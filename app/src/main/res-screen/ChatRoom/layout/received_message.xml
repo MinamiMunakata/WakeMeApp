@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Nov 2, 2018"
         android:visibility="gone"
+        android:textColor="@color/grey"
         android:textAlignment="center"
         android:layout_marginBottom="10dp"/>
     <LinearLayout
@@ -23,7 +24,7 @@
             android:id="@+id/receiver_bubble_icon"
             android:layout_width="@dimen/message_avatar"
             android:layout_height="@dimen/message_avatar"
-            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:src="@drawable/ico_default_avator"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"/>
         <com.minami_m.project.android.wakemeapp.CustomBasicTextView

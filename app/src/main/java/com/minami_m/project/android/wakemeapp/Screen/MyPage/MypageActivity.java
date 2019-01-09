@@ -76,7 +76,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private void setupUserInfo() {
         profileName = findViewById(R.id.setting_profile_name);
         FontStyleHandler.setFont(this, profileName, true, true);
-        nicknameTextField = findViewById(R.id.edit_profile_nickname);
+        nicknameTextField = findViewById(R.id.edit_profile_name);
         FontStyleHandler.setFont(this, nicknameTextField, false, false);
         emailTextField = findViewById(R.id.edit_profile_email);
         FontStyleHandler.setFont(this, emailTextField, false, false);
@@ -87,8 +87,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             profileName.setText(currentUser.getDisplayName());
             nicknameTextField.setText(currentUser.getDisplayName());
             emailTextField.setText(currentUser.getEmail());
-            // TODO: PW
-            pwTextField.setText("xxxxxxxx");
         }
 
     }
