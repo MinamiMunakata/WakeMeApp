@@ -216,7 +216,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 launchActivity(MainActivity.class);
                 return true;
             case R.id.my_page_menu:
-                launchActivity(MypageActivity.class);
                 return true;
             case R.id.logout_menu:
                 FirebaseAuth.getInstance().signOut();

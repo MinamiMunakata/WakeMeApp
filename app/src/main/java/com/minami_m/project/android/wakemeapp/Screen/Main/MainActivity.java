@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home_menu:
-                launchActivity(MainActivity.class);
                 return true;
             case R.id.my_page_menu:
                 launchActivity(MypageActivity.class);
