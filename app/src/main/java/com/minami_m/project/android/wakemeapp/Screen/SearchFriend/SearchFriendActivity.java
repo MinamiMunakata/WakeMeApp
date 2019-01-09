@@ -6,6 +6,7 @@ import android.support.transition.Fade;
 import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -122,6 +123,13 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        MenuCompat.setGroupDividerEnabled(menu,true);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu parentMenu) {
+        FontStyleHandler.setCustomFontOnMenuItems(parentMenu, this);
         return true;
     }
 
