@@ -154,7 +154,7 @@ public class SearchFriendActivity extends AppCompatActivity
     public boolean onSupportNavigateUp() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
         return true;
     }
 

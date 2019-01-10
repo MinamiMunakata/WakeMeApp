@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Screen.Alarm.AlarmActivity"
+    android:gravity="center_horizontal"
+    android:background="@color/colorBackground">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/MyAppTheme"
+        android:background="@color/white"
+        app:contentInsetStartWithNavigation="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp">
+        <TextView
+            android:id="@+id/toolbar_title_add_friend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Set a timer"
+            android:textStyle="bold"
+            android:textColor="@color/colorMyAccent" />
+    </android.support.v7.widget.Toolbar>
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_space_bw_items"
+        android:text="You want to wake up at..."
+        android:textSize="@dimen/text_h4"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
+        <TextView
+            android:id="@+id/wake_up_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08:00"
+            android:textColor="@color/colorMyAccent"
+            android:textSize="50sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="@dimen/small_vertical_space_bw_item"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorMyAccent"
+            android:layout_toEndOf="@+id/wake_up_time"
+            android:layout_alignBaseline="@+id/wake_up_time"
+            android:text="AM"
+            android:textSize="@dimen/text_h4"/>
+    </RelativeLayout>
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_h4"
+        android:text="Mon, Tur, Wed, Thu, Fri, Sat, Sun"/>
+    <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorMyAccent"
+        android:text="@string/_under_line"
+        android:textSize="@dimen/text_h4"
+        android:layout_marginVertical="@dimen/small_vertical_space_bw_item"/>
+
+</LinearLayout>

@@ -220,7 +220,7 @@ public class ChatRoomActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
     }
 
     @Override

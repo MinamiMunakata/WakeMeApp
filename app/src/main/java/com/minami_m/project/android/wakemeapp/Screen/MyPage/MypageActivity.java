@@ -10,12 +10,14 @@ import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeData
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import com.squareup.picasso.Picasso;
@@ -51,7 +54,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private final int PICK_IMAGE_REQUEST = 6789;
     private Uri filePath;
     private TextView nickname, email, pw;
-    private EditText nicknameTextField, emailTextField, pwTextField;
+    private EditText nicknameTextField, emailTextField, pwTextField, timer_box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,26 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         setupUserInfoCategoryName();
+        timer_box = findViewById(R.id.wake_up_time);
+        timer_box.setInputType(InputType.TYPE_NULL);
+        timer_box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
+            }
+        });
+        timer_box.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
+                }
+            }
+        });
     }
 
     private void setupUserInfo() {
