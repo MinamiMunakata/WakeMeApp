@@ -152,9 +152,7 @@ public class SearchFriendActivity extends AppCompatActivity
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+        onBackPressed();
         return true;
     }
 
@@ -273,7 +271,7 @@ public class SearchFriendActivity extends AppCompatActivity
             search_btn.setText(R.string.search_email);
             friend = null;
         } else {
-            search_btn.setText(R.string.add_as_friend);
+            overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
         }
 
     }
