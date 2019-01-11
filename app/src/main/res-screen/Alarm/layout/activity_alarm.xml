@@ -1,70 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.Alarm.AlarmActivity"
+    android:background="@color/colorBackground"
     android:gravity="center_horizontal"
-    android:background="@color/colorBackground">
+    android:orientation="vertical"
+    tools:context=".Screen.Alarm.AlarmActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/MyAppTheme"
         android:background="@color/white"
-        app:contentInsetStartWithNavigation="0dp"
+        android:theme="@style/MyAppTheme"
+        app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
-        app:contentInsetEnd="0dp">
+        app:contentInsetStartWithNavigation="0dp">
+
         <TextView
             android:id="@+id/toolbar_title_add_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:text="Set a timer"
-            android:textStyle="bold"
-            android:textColor="@color/colorMyAccent" />
+            android:textAlignment="center"
+            android:textColor="@color/colorMyAccent"
+            android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
+
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_space_bw_items"
         android:text="You want to wake up at..."
-        android:textSize="@dimen/text_h4"/>
+        android:textSize="@dimen/text_h4" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
+
         <TextView
             android:id="@+id/wake_up_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="08:00"
             android:textColor="@color/colorMyAccent"
-            android:textSize="50sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="@dimen/small_vertical_space_bw_item"/>
+            android:textSize="50sp" />
+
         <TextView
+            android:id="@+id/wake_up_time_am_pm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorMyAccent"
-            android:layout_toEndOf="@+id/wake_up_time"
             android:layout_alignBaseline="@+id/wake_up_time"
+            android:layout_marginHorizontal="@dimen/small_vertical_space_bw_item"
+            android:layout_toEndOf="@+id/wake_up_time"
             android:text="AM"
-            android:textSize="@dimen/text_h4"/>
+            android:textColor="@color/colorMyAccent"
+            android:textSize="@dimen/text_h4" />
     </RelativeLayout>
+
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_h4"
-        android:text="Mon, Tur, Wed, Thu, Fri, Sat, Sun"/>
+        android:text="Mon, Tur, Wed, Thu, Fri, Sat, Sun"
+        android:textSize="@dimen/text_h4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_vertical_space_bw_item"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
+
+            <Switch
+                android:id="@+id/switch_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alarm"
+                android:switchPadding="10dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <Switch
+                android:id="@+id/notificationCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:switchPadding="10dp"
+                android:text="Notification" />
+            <Switch
+                android:id="@+id/repeatingCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:switchPadding="10dp"
+                android:text="Repeat" />
+        </LinearLayout>
+
+
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:columnCount="7"
+            android:padding="2dp"
+            android:rowCount="1">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="5dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:fabCustomSize="32dp" />
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="M"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </FrameLayout>
+
+        </GridLayout>
+
+
+    </LinearLayout>
+
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorMyAccent"
+        android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
         android:text="@string/_under_line"
-        android:textSize="@dimen/text_h4"
-        android:layout_marginVertical="@dimen/small_vertical_space_bw_item"/>
+        android:textColor="@color/colorMyAccent"
+        android:textSize="@dimen/text_h4" />
+
 
 </LinearLayout>
