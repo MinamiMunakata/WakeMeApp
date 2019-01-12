@@ -141,6 +141,8 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 profileIcon.setImageBitmap(bitmap);
+                uploadImage();
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -169,6 +171,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                                         public void onComplete(@NonNull Task<Uri> task) {
                                             String downloadIconURL = task.getResult().toString();
                                             // TODO: update data at firebase
+                                            FirebaseRealtimeDatabaseHelper.updateIcon(currentUser, downloadIconURL);
                                         }
                                     });
 

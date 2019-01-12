@@ -1,8 +1,5 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Date;
 
 public class User {
@@ -76,11 +73,11 @@ public class User {
         this.email = email;
     }
 
-    public boolean isSleeping() {
+    public boolean getIsSleeping() {
         return isSleeping;
     }
 
-    public void setSleeping(boolean sleeping) {
+    public void setIsSleeping(boolean sleeping) {
         isSleeping = sleeping;
     }
 

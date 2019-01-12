@@ -42,11 +42,11 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         } else {
             Picasso.get()
                     .load(roomCard.getReceiverIcon())
-                    .error(R.drawable.ico_awake) // TODO: set default image
+                    .error(R.drawable.ico_default_avator)
                     .into(viewHolder.iconView);
         }
 
-        if (roomCard.isReceiverSleeping()) {
+        if (roomCard.getIsReceiverSleeping()) {
             viewHolder.alertView.setImageResource(R.drawable.ico_alart);
         } else {
             viewHolder.alertView.setImageResource(R.drawable.ico_awake);

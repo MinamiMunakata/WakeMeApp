@@ -17,7 +17,7 @@ public class ChatRoomCard {
         this.receiverName = receiver.getName();
         this.receiverIcon = receiver.getIcon();
         this.receiverStatus = receiver.getStatus();
-        this.isReceiverSleeping = receiver.isSleeping();
+        this.isReceiverSleeping = receiver.getIsSleeping();
     }
 
     public ChatRoomCard(User receiver) {
@@ -25,7 +25,7 @@ public class ChatRoomCard {
         this.receiverName = receiver.getName();
         this.receiverIcon = receiver.getIcon();
         this.receiverStatus = receiver.getStatus();
-        this.isReceiverSleeping = receiver.isSleeping();
+        this.isReceiverSleeping = receiver.getIsSleeping();
     }
 
 
@@ -61,11 +61,11 @@ public class ChatRoomCard {
         this.receiverStatus = receiverStatus;
     }
 
-    public boolean isReceiverSleeping() {
+    public boolean getIsReceiverSleeping() {
         return isReceiverSleeping;
     }
 
-    public void setReceiverSleeping(boolean receiverSleeping) {
+    public void setIsReceiverSleeping(boolean receiverSleeping) {
         isReceiverSleeping = receiverSleeping;
     }
 
