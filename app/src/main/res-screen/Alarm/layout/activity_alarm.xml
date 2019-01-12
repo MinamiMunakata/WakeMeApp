@@ -69,6 +69,8 @@
         android:textSize="@dimen/text_h4" />
 
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/config_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_vertical_space_bw_item"

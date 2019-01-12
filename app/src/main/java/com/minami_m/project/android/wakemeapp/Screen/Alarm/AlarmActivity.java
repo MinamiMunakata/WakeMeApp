@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -7,16 +8,21 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.AlarmScheduleActivity;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
+
+import java.util.Calendar;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
     private Switch alarmSwitch, notificationSwitch, repeatSwitch;
@@ -39,6 +45,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         FontStyleHandler.setFont(this, wakeUpTime, false, true);
         wakeUpTimeAmPm = findViewById(R.id.wake_up_time_am_pm);
         FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
+        wakeUpTime.setOnClickListener(showTimePicker());
     }
 
     private void setupSwitches() {
@@ -50,45 +57,48 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         FontStyleHandler.setFont(this, repeatSwitch, false, false);
     }
 
-//    private View.OnClickListener showTimePicker() {
-//        return new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Calendar calendar = Calendar.getInstance();
-//                final int hour = calendar.get(Calendar.HOUR_OF_DAY);
-//                int minute = calendar.get(Calendar.MINUTE);
-//                TimePickerDialog dialog = new TimePickerDialog(
-//                        AlarmScheduleActivity.this,
-//                        new TimePickerDialog.OnTimeSetListener() {
-//                            @Override
-//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                                String AM_PM = "AM";
-//                                String zeroMin = "";
-//                                if (hourOfDay >= 12) {
-//                                    AM_PM = "PM";
-//                                    if (hourOfDay >= 13) {
-//                                        hourOfDay -= 12;
-//                                    }
-//                                } else if (hourOfDay == 0) {
-//                                    hourOfDay = 12;
-//                                }
-//                                if (minute < 10) {
-//                                    zeroMin = "0";
-//                                }
-//                                time.setText(hourOfDay + ":" + zeroMin + minute);
-//                                time.setAlpha(1);
-//                                textViewAMOrPM.setText(AM_PM);
-//                                textViewAMOrPM.setAlpha(1);
-//
-//                            }
-//                        },
-//                        hour,
-//                        minute,
-//                        false);
-//                dialog.show();
-//            }
-//        };
-//    }
+    private View.OnClickListener showTimePicker() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                final int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                TimePickerDialog dialog = new TimePickerDialog(
+                        AlarmActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String AM_PM = "AM";
+                                String zeroMin = "";
+                                String zeroHour = "";
+                                if (hourOfDay >= 12) {
+                                    AM_PM = "PM";
+                                    if (hourOfDay >= 13) {
+                                        hourOfDay -= 12;
+                                    }
+                                } else if (hourOfDay == 0) {
+                                    hourOfDay = 12;
+                                } else if (hourOfDay < 10) {
+                                    zeroHour = "0";
+                                }
+                                if (minute < 10) {
+                                    zeroMin = "0";
+                                }
+                                wakeUpTime.setText(zeroHour + hourOfDay + ":" + zeroMin + minute);
+                                wakeUpTime.setAlpha(1);
+                                wakeUpTimeAmPm.setText(AM_PM);
+                                wakeUpTimeAmPm.setAlpha(1);
+
+                            }
+                        },
+                        hour,
+                        minute,
+                        false);
+                dialog.show();
+            }
+        };
+    }
 
 
     @Override

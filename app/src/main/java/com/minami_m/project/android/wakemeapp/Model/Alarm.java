@@ -5,6 +5,7 @@ public class Alarm {
     private boolean notificationIsOn;
     private boolean repeatIsOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
+    private int hourOfDay, minute;
 
     public Alarm() {
     }

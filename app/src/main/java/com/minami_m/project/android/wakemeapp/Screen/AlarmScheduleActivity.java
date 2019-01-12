@@ -1,11 +1,8 @@
 package com.minami_m.project.android.wakemeapp.Screen;
 
 import android.app.TimePickerDialog;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -15,9 +12,7 @@ import com.minami_m.project.android.wakemeapp.R;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AlarmScheduleActivity extends AppCompatActivity {
@@ -92,7 +87,7 @@ public class AlarmScheduleActivity extends AppCompatActivity {
         date = findViewById(R.id.alarm_date);
         textViewAMOrPM = findViewById(R.id.am_pm);
         time = findViewById(R.id.alarm_time);
-        time.setOnClickListener(showTimePicker());
+        time.setOnClickListener(showTimePickerDemo());
     }
 
     private void setupThisWeek() {
@@ -141,7 +136,7 @@ public class AlarmScheduleActivity extends AppCompatActivity {
         };
     }
 
-    private View.OnClickListener showTimePicker() {
+    private View.OnClickListener showTimePickerDemo() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
