@@ -74,6 +74,10 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         setupUserInfoCategoryName();
+        setupTimeInfo();
+    }
+
+    private void setupTimeInfo() {
         timer_box = findViewById(R.id.wake_up_time);
         timer_box.setInputType(InputType.TYPE_NULL);
         timer_box.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +98,8 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 }
             }
         });
+        FontStyleHandler.setFont(this, timer_box, false, true);
+        // TODO: get an alarm set time from Firebase.
     }
 
     private void setupUserInfo() {
@@ -196,8 +202,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String path = dataSnapshot.child("icon").getValue(String.class);
-                // TODO: set default image
-                Log.i(TAG, "onDataChange: " + path);
                 if (path == null) {
                     profileIcon.setImageResource(R.drawable.ico_default_avator);
                 } else {

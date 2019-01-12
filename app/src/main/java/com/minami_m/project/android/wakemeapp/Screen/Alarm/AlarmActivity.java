@@ -1,6 +1,5 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TimePicker;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
@@ -19,9 +18,9 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
-import java.util.Calendar;
-
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
+    private Switch alarmSwitch, notificationSwitch, repeatSwitch;
+    private TextView wakeUpTime, wakeUpTimeAmPm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,24 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setupSwitches();
+        setupWakeUpTime();
+    }
+
+    private void setupWakeUpTime() {
+        wakeUpTime = findViewById(R.id.wake_up_time);
+        FontStyleHandler.setFont(this, wakeUpTime, false, true);
+        wakeUpTimeAmPm = findViewById(R.id.wake_up_time_am_pm);
+        FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
+    }
+
+    private void setupSwitches() {
+        alarmSwitch = findViewById(R.id.switch_alarm);
+        FontStyleHandler.setFont(this, alarmSwitch, false, false);
+        notificationSwitch = findViewById(R.id.switch_notification);
+        FontStyleHandler.setFont(this, notificationSwitch, false, false);
+        repeatSwitch = findViewById(R.id.switch_repeat);
+        FontStyleHandler.setFont(this, repeatSwitch, false, false);
     }
 
 //    private View.OnClickListener showTimePicker() {
