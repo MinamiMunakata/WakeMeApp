@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.RealtimeDatabaseCallback;
-import com.minami_m.project.android.wakemeapp.Common.Handler.TimeHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -76,7 +76,7 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void updateStatusWithLoginTime(String userId, final long loginTime) {
-        final String status = TimeHandler.generateStatus(loginTime);
+        final String status = DateAndTimeFormatHandler.generateStatus(loginTime);
         final Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + userId + "/lastLogin", loginTime);
         childUpdates.put("/Users/" + userId + "/status", status);

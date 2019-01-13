@@ -61,9 +61,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="08:00 am"
+                android:text="07:30 am"
                 android:textSize="@dimen/text_h2"
-                android:textColor="@color/colorMyAccent" />
+                android:textColor="@color/black"
+                android:alpha="0.3"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,10 +31,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Model.Alarm;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
@@ -44,6 +45,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 public class MypageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
@@ -198,6 +200,17 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
+        try {
+            profileName.setText(currentUser.getDisplayName());
+            setIconAndAlarmTimeFromFB();
+        } catch (Exception e) {
+            launchActivity(SignInActivity.class);
+            finish();
+        }
+
+    }
+
+    private void setIconAndAlarmTimeFromFB() {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -206,6 +219,18 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                     profileIcon.setImageResource(R.drawable.ico_default_avator);
                 } else {
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
+                }
+                Alarm alarm = dataSnapshot.child("alarm").getValue(Alarm.class);
+                if (alarm != null) {
+                    if (alarm.getAlarmIsOn()) {
+                        timer_box.setTextColor(getResources().getColor(R.color.colorMyAccent));
+                        timer_box.setAlpha(1);
+                    }
+                    Map<String, String> formattedTime = DateAndTimeFormatHandler
+                            .generateFormattedAlarmTime(
+                                    alarm.getHourOfDay(),
+                                    alarm.getMinute());
+                    timer_box.setText(formattedTime.get("full time"));
                 }
 
             }
@@ -216,14 +241,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };
-        try {
-            profileName.setText(currentUser.getDisplayName());
-            FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
-        } catch (Exception e) {
-            launchActivity(SignInActivity.class);
-            finish();
-        }
-
+        FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
     }
 
     @Override

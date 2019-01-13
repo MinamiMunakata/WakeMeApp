@@ -10,6 +10,22 @@ public class Alarm {
     public Alarm() {
     }
 
+    public int getHourOfDay() {
+        return hourOfDay;
+    }
+
+    public void setHourOfDay(int hourOfDay) {
+        this.hourOfDay = hourOfDay;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
     public boolean getAlarmIsOn() {
         return alarmIsOn;
     }

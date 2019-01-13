@@ -37,7 +37,7 @@ import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeList
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.Common.Handler.TimeHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 
 import java.util.Arrays;
 
@@ -186,7 +186,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                         facebookProfile.getName(),
                                         user.getEmail(),
                                         avatar);
-                                newUser.setStatus(TimeHandler.generateStatus(newUser.getLastLogin()));
+                                newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
 //                            progressBar.setVisibility(View.INVISIBLE);

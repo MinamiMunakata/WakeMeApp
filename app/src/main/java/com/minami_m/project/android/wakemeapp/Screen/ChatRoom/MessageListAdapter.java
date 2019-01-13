@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.minami_m.project.android.wakemeapp.Common.Handler.TimeHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
@@ -69,7 +69,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             isFirstChat = true;
         } else {
             Message previousMessage = mMessageList.get(position - 1);
-            if (!TimeHandler.isSameDay(previousMessage.getCreatedAt(), message.getCreatedAt())) {
+            if (!DateAndTimeFormatHandler.isSameDay(previousMessage.getCreatedAt(), message.getCreatedAt())) {
                 isFirstChat = true;
             }
         }
@@ -109,7 +109,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             if (isLast && message.getIsSeen()) {
                 seenHolder.setText(R.string.seen);
             } else {
-                seenHolder.setText(TimeHandler.generateTimestamp(message.getCreatedAt()));
+                seenHolder.setText(DateAndTimeFormatHandler.generateTimestamp(message.getCreatedAt()));
             }
         }
 
@@ -118,12 +118,12 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private void setDate(TextView dateView, Message message, boolean isFirstChat) {
         if (isFirstChat) {
             dateView.setVisibility(View.VISIBLE);
-            if (TimeHandler.isToday(message.getCreatedAt())) {
+            if (DateAndTimeFormatHandler.isToday(message.getCreatedAt())) {
                 dateView.setText(R.string.today);
-            } else if (TimeHandler.isYesterday(message.getCreatedAt())) {
+            } else if (DateAndTimeFormatHandler.isYesterday(message.getCreatedAt())) {
                 dateView.setText(R.string.yesterday);
             } else {
-                dateView.setText(TimeHandler.generateDateOfChat(message.getCreatedAt()));
+                dateView.setText(DateAndTimeFormatHandler.generateDateOfChat(message.getCreatedAt()));
             }
         } else {
             dateView.setVisibility(View.GONE);

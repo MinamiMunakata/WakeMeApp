@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
-public class TimeHandler {
+public class DateAndTimeFormatHandler {
     private static final int SECOND = 1000;
     private static final int MINUTE = 60 * SECOND;
     private static final int HOUR = 60 * MINUTE;
@@ -76,5 +78,34 @@ public class TimeHandler {
     public static String generateDateOfChat(long createdAt) {
         SimpleDateFormat formatter = new SimpleDateFormat("MMM d',' yyyy", Locale.US);
         return String.valueOf(formatter.format(createdAt));
+    }
+
+    public static Map<String, String> generateFormattedAlarmTime(int hourOfDay, int minute) {
+        Map<String, String> formattedAlarmTime = new HashMap<>();
+        String AM_PM = "AM";
+        String zeroMin = "";
+        String zeroHour = "";
+        if (hourOfDay >= 12) {
+            AM_PM = "PM";
+            if (hourOfDay >= 13) {
+                hourOfDay -= 12;
+            }
+        } else if (hourOfDay == 0) {
+            hourOfDay = 12;
+        } else if (hourOfDay < 10) {
+            zeroHour = "0";
+        }
+        if (minute < 10) {
+            zeroMin = "0";
+        }
+        formattedAlarmTime.put(
+                "time",
+                String.format(Locale.US, "%s%d:%s%d", zeroHour, hourOfDay, zeroMin, minute));
+        formattedAlarmTime.put("am_pm", AM_PM);
+        formattedAlarmTime.put("full time",
+                String.format("%s %s",
+                        formattedAlarmTime.get("time"),
+                        AM_PM.toLowerCase()));
+        return formattedAlarmTime;
     }
 }

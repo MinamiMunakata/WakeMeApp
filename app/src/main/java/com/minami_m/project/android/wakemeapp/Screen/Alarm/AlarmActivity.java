@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.R;
@@ -23,6 +24,8 @@ import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
     private Switch alarmSwitch, notificationSwitch, repeatSwitch;
@@ -69,25 +72,13 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                String AM_PM = "AM";
-                                String zeroMin = "";
-                                String zeroHour = "";
-                                if (hourOfDay >= 12) {
-                                    AM_PM = "PM";
-                                    if (hourOfDay >= 13) {
-                                        hourOfDay -= 12;
-                                    }
-                                } else if (hourOfDay == 0) {
-                                    hourOfDay = 12;
-                                } else if (hourOfDay < 10) {
-                                    zeroHour = "0";
-                                }
-                                if (minute < 10) {
-                                    zeroMin = "0";
-                                }
-                                wakeUpTime.setText(zeroHour + hourOfDay + ":" + zeroMin + minute);
+                                Map<String, String> formattedTime =
+                                        DateAndTimeFormatHandler.generateFormattedAlarmTime(
+                                                hourOfDay,
+                                                minute);
+                                wakeUpTime.setText(formattedTime.get("time"));
                                 wakeUpTime.setAlpha(1);
-                                wakeUpTimeAmPm.setText(AM_PM);
+                                wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                                 wakeUpTimeAmPm.setAlpha(1);
 
                             }
