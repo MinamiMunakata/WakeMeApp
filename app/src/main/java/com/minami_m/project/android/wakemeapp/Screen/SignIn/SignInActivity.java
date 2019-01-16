@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -54,11 +55,13 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     Profile facebookProfile;
     static ProgressBar progressBar;
     static ImageView loadingImage;
+    static RelativeLayout loadingBG;
 
-    public static void setLoadingImage(ImageView loadingImg, Context context) {
+    public static void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
         loadingImage = loadingImg;
-        loadingImg.setVisibility(View.INVISIBLE);
         Glide.with(context).load(R.raw.loading).into(loadingImg);
+        loadingBG = loadingBackground;
+        loadingBG.setVisibility(View.INVISIBLE);
     }
 //    public static void setProgressBar(ProgressBar bar) {
 //        progressBar = bar;
@@ -105,7 +108,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             public void onCancel() {
                 Log.i(TAG, "onCancel: 123456");
 //                progressBar.setVisibility(View.INVISIBLE);
-                loadingImage.setVisibility(View.INVISIBLE);
+                loadingBG.setVisibility(View.INVISIBLE);
 
             }
 
@@ -114,7 +117,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                 Log.i(TAG, "onError: 123456");
                 Log.i(TAG, "onError: " + error.getMessage());
 //                progressBar.setVisibility(View.INVISIBLE);
-                loadingImage.setVisibility(View.INVISIBLE);
+                loadingBG.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -153,15 +156,15 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     @Override
     public void loginWithFacebook(FirebaseAuth firebaseAuth) {
 //        if (progressBar != null) {
-        if (loadingImage != null) {
+        if (loadingBG != null) {
 //            progressBar.setVisibility(View.VISIBLE);
-            loadingImage.setVisibility(View.VISIBLE);
+            loadingBG.setVisibility(View.VISIBLE);
         }
         mAuth = firebaseAuth;
         if (AccessToken.getCurrentAccessToken() != null){
             LoginManager.getInstance().logOut();
 //            progressBar.setVisibility(View.INVISIBLE);
-            loadingImage.setVisibility(View.INVISIBLE);
+            loadingBG.setVisibility(View.INVISIBLE);
 
         } else {
             LoginManager.getInstance().logOut();
@@ -190,12 +193,12 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
 //                            progressBar.setVisibility(View.INVISIBLE);
-                            loadingImage.setVisibility(View.INVISIBLE);
+                            loadingBG.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);
 
                         } else {
 //                            progressBar.setVisibility(View.INVISIBLE);
-                            loadingImage.setVisibility(View.INVISIBLE);
+                            loadingBG.setVisibility(View.INVISIBLE);
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",

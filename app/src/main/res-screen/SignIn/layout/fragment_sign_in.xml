@@ -164,14 +164,26 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/sign_in_loading_img"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
+    <RelativeLayout
+        android:id="@+id/loading_bg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/loading_bg"
+            android:alpha="0.6"/>
+        <ImageView
+            android:id="@+id/sign_in_loading_img"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
 
     <!--<ProgressBar-->
         <!--android:id="@+id/sign_in_progressbar"-->

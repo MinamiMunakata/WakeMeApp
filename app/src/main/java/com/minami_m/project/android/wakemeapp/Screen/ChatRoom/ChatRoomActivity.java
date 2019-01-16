@@ -28,6 +28,7 @@ import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeData
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -56,6 +57,7 @@ public class ChatRoomActivity
     private EditText editText;
     private TextView title;
     private TextView subtitle;
+    private ChatRoomCard chatRoomCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,10 +148,11 @@ public class ChatRoomActivity
     private void getDataFromMainActivity() {
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-        chatRoomId = data.getString(MainActivity.CHAT_ROOM_ID);
-        receiverIcon = data.getString(MainActivity.RECEIVER_ICON);
-        receiverName = data.getString(MainActivity.RECEIVER_NAME);
-        receiverId = data.getString(MainActivity.RECEIVER_ID);
+        chatRoomCard = data.getParcelable("ChatRoomCard");
+        chatRoomId = chatRoomCard.getChatRoomId();
+        receiverName = chatRoomCard.getReceiverName();
+        receiverIcon = chatRoomCard.getReceiverIcon();
+        receiverId = chatRoomCard.getReceiverId();
     }
 
     @Override

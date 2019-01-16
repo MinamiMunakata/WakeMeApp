@@ -53,10 +53,6 @@ import static android.graphics.Typeface.createFromAsset;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
-    public static final String CHAT_ROOM_ID = "ChatRoomID";
-    public static final String RECEIVER_ICON = "ReceiverIcon";
-    public static final String RECEIVER_NAME = "ReceiverName";
-    public static final String RECEIVER_ID = "ReceiverId";
     private ImageView button;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -193,12 +189,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     public void onChatRoomCardClicked(View v, int position) {
         ChatRoomCard roomCard = chatRoomCards.get(position);
         Intent intent = new Intent(this, ChatRoomActivity.class);
-        Bundle data = new Bundle();
-        data.putString(CHAT_ROOM_ID, roomCard.getChatRoomId());
-        data.putString(RECEIVER_ICON, roomCard.getReceiver().getIcon());
-        data.putString(RECEIVER_NAME, roomCard.getReceiver().getName());
-        data.putString(RECEIVER_ID, roomCard.getReceiver().getId());
-        intent.putExtras(data);
+        intent.putExtra("ChatRoomCard", roomCard);
         startActivity(intent);
 //        finish();
     }

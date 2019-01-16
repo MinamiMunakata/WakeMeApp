@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class SignInFragment extends Fragment implements
     private String emailForSignUp = null;
     private String passwordForSignUp = null;
     private ImageView loadingImage;
+    private RelativeLayout loadingBG;
 
     private  CallbackManager mCallbackManager;
     private AccessTokenTracker mAccessTokenTracker;
@@ -82,9 +84,10 @@ public class SignInFragment extends Fragment implements
         FontStyleHandler.setFont(getContext(), signUpLink, false, true);
 //        progressBar = view.findViewById(R.id.sign_in_progressbar);
 //        progressBar.setVisibility(View.INVISIBLE);
+        loadingBG = view.findViewById(R.id.loading_bg);
         loadingImage = view.findViewById(R.id.sign_in_loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
-        loadingImage.setVisibility(View.INVISIBLE);
+        loadingBG.setVisibility(View.INVISIBLE);
         errorMsg = view.findViewById(R.id.sign_in_error);
         errorMsg.setVisibility(View.GONE);
 
@@ -95,7 +98,7 @@ public class SignInFragment extends Fragment implements
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignInActivity.setLoadingImage(loadingImage, getContext());
+                SignInActivity.setLoadingImage(loadingBG, loadingImage, getContext());
                 FacebookLoginListener facebookLoginListener = (FacebookLoginListener)getActivity();
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
@@ -130,12 +133,12 @@ public class SignInFragment extends Fragment implements
                     password = editTextPw.getText().toString();
             // TODO: show a progress bar
 //            progressBar.setVisibility(View.VISIBLE);
-            loadingImage.setVisibility(View.VISIBLE);
+            loadingBG.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 //                    progressBar.setVisibility(View.INVISIBLE);
-                    loadingImage.setVisibility(View.INVISIBLE);
+                    loadingBG.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         final FirebaseUser currentUser = mAuth.getCurrentUser();

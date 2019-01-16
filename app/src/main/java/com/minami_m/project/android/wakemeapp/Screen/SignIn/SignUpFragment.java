@@ -17,10 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -63,7 +64,9 @@ public class SignUpFragment extends Fragment
     private static int PICK_IMAGE_REQUEST = 12345;
     private Uri filePath;
     private String downloadedIconUrl;
-    private ProgressBar progressBar;
+    //    private ProgressBar progressBar;
+    private ImageView loadingImage;
+    private RelativeLayout loadingBG;
     private TextView signUp;
 
 
@@ -108,8 +111,11 @@ public class SignUpFragment extends Fragment
                 chooseImg();
             }
         });
-        progressBar = view.findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.INVISIBLE);
+        loadingBG = view.findViewById(R.id.loading_bg_sign_up);
+        loadingImage = view.findViewById(R.id.sign_up_loading_img);
+        Glide.with(this).load(R.raw.loading).into(loadingImage);
+//        progressBar = view.findViewById(R.id.progressbar);
+        loadingBG.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -163,14 +169,14 @@ public class SignUpFragment extends Fragment
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.INVISIBLE);
+                        loadingBG.setVisibility(View.INVISIBLE);
                         toast("Failed... " + e.getMessage());
                     }
                 })
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        progressBar.setVisibility(View.INVISIBLE);
+                        loadingBG.setVisibility(View.INVISIBLE);
                         toast("Successfully Uploaded");
                         FirebaseStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -192,11 +198,11 @@ public class SignUpFragment extends Fragment
             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
                 // TODO: delete?
-                double progress = (100.0 * taskSnapshot
-                        .getBytesTransferred()/taskSnapshot
-                        .getTotalByteCount());
-                progressBar.setProgress((int)progress);
-                Log.i(TAG, "onProgress: " + progress);
+//                double progress = (100.0 * taskSnapshot
+//                        .getBytesTransferred()/taskSnapshot
+//                        .getTotalByteCount());
+//                progressBar.setProgress((int)progress);
+//                Log.i(TAG, "onProgress: " + progress);
             }
         });
 
@@ -231,7 +237,7 @@ public class SignUpFragment extends Fragment
     public void onClick(View view) {
         InputHandler.hideSoftKeyBoard(getActivity());
         if (isValidInput()) {
-            progressBar.setVisibility(View.VISIBLE);
+            loadingBG.setVisibility(View.VISIBLE);
             final String name = nameField.getText().toString(),
                     email = emailField.getText().toString(),
                     password = pwField.getText().toString();
@@ -256,7 +262,7 @@ public class SignUpFragment extends Fragment
                                                     currentUser.getDisplayName(),
                                                     currentUser.getEmail());
                                             FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                                            progressBar.setVisibility(View.INVISIBLE);
+                                            loadingBG.setVisibility(View.INVISIBLE);
                                             ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                                         }
                                     }
@@ -264,14 +270,14 @@ public class SignUpFragment extends Fragment
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                progressBar.setVisibility(View.INVISIBLE);
+                                                loadingBG.setVisibility(View.INVISIBLE);
                                                 Log.i(TAG, "onFailure: 12345 " + e.getMessage());
                                                 toast("Failed to update the user profile.");
                                             }
                                         });
                             } else {
                                 // If sign in fails, display a message to the user.
-                                progressBar.setVisibility(View.INVISIBLE);
+                                loadingBG.setVisibility(View.INVISIBLE);
                                 Log.w(TAG, "createUserWithEmail:failure 12345", task.getException());
                                 toast("Authentication failed.");
                                 errorMsg.setText(task.getException().getMessage());

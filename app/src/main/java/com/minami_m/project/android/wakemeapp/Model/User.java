@@ -108,8 +108,8 @@ public class User {
     @Override
     public String toString() {
         String info = String.format(
-                "Name: %s\nEmail: %s\nIcon: %s\nStatus: %s\n",
-                this.name, this.email, this.icon, this.status);
+                "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nStatus: %s\n",
+                this.id, this.name, this.email, this.icon, this.status);
         return info;
     }
 
