@@ -3,6 +3,11 @@ package com.minami_m.project.android.wakemeapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+
+import java.util.Calendar;
+import java.util.Map;
+
 public class Alarm implements Parcelable{
     private boolean alarmIsOn;
     private boolean notificationIsOn;
@@ -157,5 +162,37 @@ public class Alarm implements Parcelable{
 
     public void setSun(boolean sun) {
         this.sun = sun;
+    }
+
+    @Override
+    public String toString() {
+        Map<String, String> formattedTime = DateAndTimeFormatHandler.generateFormattedAlarmTime(
+                this.hourOfDay,
+                this.minute);
+        return formattedTime.get("full time");
+    }
+
+    public String alarmInWeek() {
+        String weekStatement = "";
+        boolean[] repeatOnDay = new boolean[]{mon, tue, wed, thu, fri, sat, sun};
+        String[] weekdays = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+        for (int i = 0; i < repeatOnDay.length; i++) {
+            if (repeatOnDay[i]) {
+                weekStatement += weekdays[i] + ", ";
+            }
+        }
+        return weekStatement;
+    }
+
+    public String getTodayOrTomorrow() {
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        Calendar alarmTimeCalendar = Calendar.getInstance();
+        alarmTimeCalendar.set(Calendar.HOUR_OF_DAY, getHourOfDay());
+        alarmTimeCalendar.set(Calendar.MINUTE, getMinute());
+        if (currentTime < alarmTimeCalendar.getTimeInMillis()) {
+            return "Today";
+        } else {
+            return "Tomorrow";
+        }
     }
 }

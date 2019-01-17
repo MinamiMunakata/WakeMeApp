@@ -57,6 +57,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private Uri filePath;
     private TextView nickname, email, pw;
     private EditText nicknameTextField, emailTextField, pwTextField, timer_box;
+    private Alarm alarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,10 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+                if (alarm != null) {
+                    intent.putExtra("Alarm", alarm);
+                    System.out.println("print Extra");
+                }
                 startActivity(intent);
                 overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
             }
@@ -94,14 +99,16 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);                if (alarm != null) {
+                        intent.putExtra("Alarm", alarm);
+                        System.out.println("print Extra");
+                    }
                     startActivity(intent);
                     overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
                 }
             }
         });
         FontStyleHandler.setFont(this, timer_box, false, true);
-        // TODO: get an alarm set time from Firebase.
     }
 
     private void setupUserInfo() {
@@ -178,7 +185,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                                         @Override
                                         public void onComplete(@NonNull Task<Uri> task) {
                                             String downloadIconURL = task.getResult().toString();
-                                            // TODO: update data at firebase
                                             FirebaseRealtimeDatabaseHelper.updateIcon(currentUser, downloadIconURL);
                                         }
                                     });
@@ -220,17 +226,13 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 } else {
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
-                Alarm alarm = dataSnapshot.child("alarm").getValue(Alarm.class);
+                alarm = dataSnapshot.child("alarm").getValue(Alarm.class);
                 if (alarm != null) {
                     if (alarm.getAlarmIsOn()) {
                         timer_box.setTextColor(getResources().getColor(R.color.colorMyAccent));
                         timer_box.setAlpha(1);
                     }
-                    Map<String, String> formattedTime = DateAndTimeFormatHandler
-                            .generateFormattedAlarmTime(
-                                    alarm.getHourOfDay(),
-                                    alarm.getMinute());
-                    timer_box.setText(formattedTime.get("full time"));
+                    timer_box.setText(alarm.toString());
                 }
 
             }

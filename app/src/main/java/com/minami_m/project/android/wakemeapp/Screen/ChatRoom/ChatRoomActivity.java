@@ -148,11 +148,14 @@ public class ChatRoomActivity
     private void getDataFromMainActivity() {
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
-        chatRoomCard = data.getParcelable("ChatRoomCard");
-        chatRoomId = chatRoomCard.getChatRoomId();
-        receiverName = chatRoomCard.getReceiverName();
-        receiverIcon = chatRoomCard.getReceiverIcon();
-        receiverId = chatRoomCard.getReceiverId();
+        if (data != null) {
+            chatRoomCard = data.getParcelable("ChatRoomCard");
+            chatRoomId = chatRoomCard.getChatRoomId();
+            receiverName = chatRoomCard.getReceiverName();
+            receiverIcon = chatRoomCard.getReceiverIcon();
+            receiverId = chatRoomCard.getReceiverId();
+        }
+
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.Model.Alarm;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -73,6 +74,39 @@ public class FirebaseRealtimeDatabaseHelper {
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
+    }
+
+    public static void updateAlarm(FirebaseUser currentUser, final Alarm alarm) {
+        if (currentUser != null) {
+            USERS_REF.child(currentUser.getUid()).child("alarm").setValue(alarm, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    showResult(databaseError);
+                }
+            });
+            final Map<String, Object> childUpdates = new HashMap<>();
+            RECEIVER_PATH_REF.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot path: dataSnapshot.getChildren()) {
+                        childUpdates.put(path.getValue() + "/alarm", alarm);
+                    }
+                    FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            showResult(databaseError);
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                    Log.e(TAG, "onCancelled: ", databaseError.toException());
+                }
+            });
+        }
+
     }
 
     public static void updateStatusWithLoginTime(String userId, final long loginTime) {

@@ -46,8 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="08:00"
-            android:textColor="@color/colorMyAccent"
+            android:text="07:00"
+            android:textColor="@color/black"
+            android:alpha="0.3"
             android:textSize="50sp" />
 
         <TextView
@@ -58,14 +59,16 @@
             android:layout_marginHorizontal="@dimen/small_vertical_space_bw_item"
             android:layout_toEndOf="@+id/wake_up_time"
             android:text="AM"
-            android:textColor="@color/colorMyAccent"
+            android:textColor="@color/black"
+            android:alpha="0.3"
             android:textSize="@dimen/text_h4" />
     </RelativeLayout>
 
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        android:id="@+id/repeat_in_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mon, Tur, Wed, Thu, Fri, Sat, Sun"
+        android:visibility="gone"
         android:textSize="@dimen/text_h4" />
 
     <LinearLayout
@@ -282,6 +285,7 @@
     </LinearLayout>
 
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        android:id="@+id/change_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
