@@ -68,6 +68,11 @@ public class Alarm implements Parcelable{
     public Alarm() {
     }
 
+    public Alarm(int hourOfDay, int minute) {
+        this.hourOfDay = hourOfDay;
+        this.minute = minute;
+    }
+
     public int getHourOfDay() {
         return hourOfDay;
     }
@@ -174,12 +179,15 @@ public class Alarm implements Parcelable{
 
     public String alarmInWeek() {
         String weekStatement = "";
-        boolean[] repeatOnDay = new boolean[]{mon, tue, wed, thu, fri, sat, sun};
+        boolean[] repeatOnDay = myGetRepeatOnDay();
         String[] weekdays = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         for (int i = 0; i < repeatOnDay.length; i++) {
             if (repeatOnDay[i]) {
                 weekStatement += weekdays[i] + ", ";
             }
+        }
+        if (weekStatement.length() > 0) {
+            weekStatement = weekStatement.substring(0, weekStatement.length() - 2);
         }
         return weekStatement;
     }
@@ -195,4 +203,68 @@ public class Alarm implements Parcelable{
             return "Tomorrow";
         }
     }
+
+    public String getAlarmOnDayDescription() {
+        if (repeatIsOn) {
+            return alarmInWeek();
+        } else {
+            return getTodayOrTomorrow();
+        }
+    }
+
+    public  void turnOffAlarm() {
+        alarmIsOn = false;
+        notificationIsOn = false;
+        repeatIsOn = false;
+    }
+
+    public void turnOnRepeatingOnEveryday() {
+        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
+            myGetRepeatOnDay()[i] = true;
+        }
+    }
+
+    public boolean checkRepeatOnDayOfWeekIsAllOff() {
+        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
+            if (myGetRepeatOnDay()[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean[] myGetRepeatOnDay() {
+        return new boolean[]{mon, tue, wed, thu, fri, sat, sun};
+    }
+
+    public void toggleRepeatOnDayAt(int index) {
+        switch (index) {
+            case 0:
+                mon = !mon;
+                break;
+            case 1:
+                tue = !tue;
+                break;
+            case 2:
+                wed = !wed;
+                break;
+            case 3:
+                thu = !thu;
+                break;
+            case 4:
+                fri = !fri;
+                break;
+            case 5:
+                sat = !sat;
+                break;
+            case 6:
+                sun = !sun;
+                break;
+            default:
+                return;
+        }
+    }
+
+
+
 }

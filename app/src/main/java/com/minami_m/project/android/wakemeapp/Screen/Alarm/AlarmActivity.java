@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -28,7 +30,6 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
-import java.util.Calendar;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
@@ -36,11 +37,13 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private TextView wakeUpTime, wakeUpTimeAmPm, repeatInWeek;
     private CustomBasicTextView changeSettingsText;
     private LinearLayout config;
+    private GridLayout repeatOptions;
     private Alarm alarm;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
     private static final int DEFAULT_HOUR = 7;
     private static final int DEFAULT_MINUTE = 0;
+    private View[] optionButtons = new View[7];
 
 
     @Override
@@ -54,6 +57,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setupSwitches();
         setupWakeUpTime();
+        repeatOptions = findViewById(R.id.repeat_switch_options);
         repeatInWeek = findViewById(R.id.repeat_in_week);
         config = findViewById(R.id.config_alarm);
         changeSettingsText = findViewById(R.id.change_settings);
@@ -67,10 +71,12 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 }
             }
         });
-        getData();
+        createAlarm();
+        setupOptionButtons();
     }
 
-    private void getData() {
+    private void createAlarm() {
+        alarm = new Alarm(DEFAULT_HOUR, DEFAULT_MINUTE);
         Intent intent = getIntent();
         Bundle data = intent.getExtras();
         if (data != null) {
@@ -83,14 +89,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 wakeUpTime.setText(formattedTime.get("time"));
                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                 alarmSwitch.setChecked(alarm.getAlarmIsOn());
-                if (alarm.getRepeatIsOn()) {
-                    repeatInWeek.setText(alarm.alarmInWeek());
-                } else {
-                    repeatInWeek.setText(alarm.getTodayOrTomorrow());
-                }
+                notificationSwitch.setChecked(alarm.getNotificationIsOn());
+                repeatSwitch.setChecked(alarm.getRepeatIsOn());
+                repeatInWeek.setText(alarm.getAlarmOnDayDescription());
             }
-        } else {
-            System.out.println("NULL");
         }
     }
 
@@ -102,13 +104,13 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             wakeUpTime.setAlpha(1);
             wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.colorMyAccent));
             wakeUpTimeAmPm.setAlpha(1);
-            repeatInWeek.setVisibility(View.VISIBLE);
+            repeatInWeek.setAlpha(1);
         } else {
             wakeUpTime.setTextColor(getResources().getColor(R.color.black));
             wakeUpTime.setAlpha(0.3f);
             wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.black));
             wakeUpTimeAmPm.setAlpha(0.3f);
-            repeatInWeek.setVisibility(View.GONE);
+            repeatInWeek.setAlpha(0.3f);
         }
 
     }
@@ -138,7 +140,15 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setStyleAsAlarmOn(isChecked);
-                System.out.println("toggled");
+                if (isChecked) {
+                    alarm.setAlarmIsOn(isChecked);
+                } else {
+                    alarm.turnOffAlarm();
+                    notificationSwitch.setChecked(isChecked);
+                    repeatSwitch.setChecked(isChecked);
+                }
+                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
+
             }
         };
     }
@@ -147,7 +157,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                alarm.setNotificationIsOn(isChecked);
             }
         };
     }
@@ -156,7 +166,64 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                alarm.setRepeatIsOn(isChecked);
+                if (isChecked) {
+                    if (alarm.checkRepeatOnDayOfWeekIsAllOff()) {
+                        alarm.turnOnRepeatingOnEveryday();
+                    }
+                    changeVisibilityForAllOptions();
+                    repeatOptions.setVisibility(View.VISIBLE);
+                } else {
+                    repeatOptions.setVisibility(View.GONE);
+                }
+                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
+                repeatInWeek.setText(alarm.getAlarmOnDayDescription());
 
+            }
+        };
+    }
+
+    private void setupOptionButtons() {
+        for (int i = 0; i < repeatOptions.getChildCount(); i++) {
+            ViewGroup frameLayout = (ViewGroup) repeatOptions.getChildAt(i);
+            frameLayout.setTag(i);
+            frameLayout.setOnClickListener(toggleRepeatingOptions());
+            View optionButton = frameLayout.getChildAt(0);
+            if (alarm.myGetRepeatOnDay()[i]) {
+                optionButton.setVisibility(View.VISIBLE);
+            } else {
+                optionButton.setVisibility(View.INVISIBLE);
+            }
+            optionButtons[i] = optionButton;
+        }
+    }
+
+    private void changeVisibilityForAllOptions() {
+        for (int i = 0; i < repeatOptions.getChildCount(); i++) {
+            View optionButton = ((ViewGroup) repeatOptions.getChildAt(i)).getChildAt(0);
+            if (alarm.myGetRepeatOnDay()[i]) {
+                optionButton.setVisibility(View.VISIBLE);
+                alarm.myGetRepeatOnDay()[i] = true;
+            } else {
+                optionButton.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    private View.OnClickListener toggleRepeatingOptions() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View frameLayout) {
+                int index = (int) frameLayout.getTag();
+                View optionButton = optionButtons[index];
+                alarm.toggleRepeatOnDayAt(index);
+                if (optionButton.getVisibility() == View.VISIBLE) {
+                    optionButton.setVisibility(View.INVISIBLE);
+                } else {
+                    optionButton.setVisibility(View.VISIBLE);
+                }
+                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
+                repeatInWeek.setText(alarm.getAlarmOnDayDescription());
             }
         };
     }
@@ -165,13 +232,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int hour = DEFAULT_HOUR;
-                int minute = DEFAULT_MINUTE;
-                if (alarm != null) {
-                    hour = alarm.getHourOfDay();
-                    minute = alarm.getMinute();
-                }
                 TimePickerDialog dialog = new TimePickerDialog(
                         AlarmActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
@@ -185,19 +245,17 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTime.setAlpha(1);
                                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                                 wakeUpTimeAmPm.setAlpha(1);
-                                if (alarm == null) {
-                                    alarm = new Alarm();
-                                }
                                 alarm.setAlarmIsOn(true);
                                 alarm.setHourOfDay(hourOfDay);
                                 alarm.setMinute(minute);
                                 alarmSwitch.setChecked(true);
+                                repeatInWeek.setText(alarm.getAlarmOnDayDescription());
                                 FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
 
                             }
                         },
-                        hour,
-                        minute,
+                        alarm.getHourOfDay(),
+                        alarm.getMinute(),
                         false);
                 dialog.show();
             }
@@ -253,4 +311,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         Intent intent = new Intent(this, nextActivity);
         startActivity(intent);
     }
+
+
 }

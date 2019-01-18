@@ -89,7 +89,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
                 if (alarm != null) {
                     intent.putExtra("Alarm", alarm);
-                    System.out.println("print Extra");
                 }
                 startActivity(intent);
                 overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -101,7 +100,6 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 if (hasFocus) {
                     Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);                if (alarm != null) {
                         intent.putExtra("Alarm", alarm);
-                        System.out.println("print Extra");
                     }
                     startActivity(intent);
                     overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -231,6 +229,9 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                     if (alarm.getAlarmIsOn()) {
                         timer_box.setTextColor(getResources().getColor(R.color.colorMyAccent));
                         timer_box.setAlpha(1);
+                    } else {
+                        timer_box.setTextColor(getResources().getColor(R.color.black));
+                        timer_box.setAlpha(0.3f);
                     }
                     timer_box.setText(alarm.toString());
                 }

@@ -68,7 +68,6 @@
         android:id="@+id/repeat_in_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:textSize="@dimen/text_h4" />
 
     <LinearLayout
@@ -110,6 +109,8 @@
 
 
         <GridLayout
+            android:visibility="gone"
+            android:id="@+id/repeat_switch_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipChildren="false"
