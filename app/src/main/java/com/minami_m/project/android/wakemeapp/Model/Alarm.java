@@ -219,9 +219,13 @@ public class Alarm implements Parcelable{
     }
 
     public void turnOnRepeatingOnEveryday() {
-        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
-            myGetRepeatOnDay()[i] = true;
-        }
+        mon = true;
+        tue = true;
+        wed = true;
+        thu = true;
+        fri = true;
+        sat = true;
+        sun = true;
     }
 
     public boolean checkRepeatOnDayOfWeekIsAllOff() {

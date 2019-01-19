@@ -1,5 +1,7 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v4.view.MenuCompat;
@@ -158,6 +160,9 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 alarm.setNotificationIsOn(isChecked);
+                if (isChecked) {
+                    alarmSwitch.setChecked(isChecked);
+                }
             }
         };
     }
@@ -172,6 +177,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                         alarm.turnOnRepeatingOnEveryday();
                     }
                     changeVisibilityForAllOptions();
+                    alarmSwitch.setChecked(isChecked);
                     repeatOptions.setVisibility(View.VISIBLE);
                 } else {
                     repeatOptions.setVisibility(View.GONE);
@@ -222,8 +228,11 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 } else {
                     optionButton.setVisibility(View.VISIBLE);
                 }
-                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
+                if (alarm.checkRepeatOnDayOfWeekIsAllOff()) {
+                    repeatSwitch.setChecked(false);
+                }
                 repeatInWeek.setText(alarm.getAlarmOnDayDescription());
+                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, alarm);
             }
         };
     }
