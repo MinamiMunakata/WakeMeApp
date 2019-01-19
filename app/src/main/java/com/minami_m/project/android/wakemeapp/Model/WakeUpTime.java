@@ -8,15 +8,15 @@ import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHa
 import java.util.Calendar;
 import java.util.Map;
 
-public class Alarm implements Parcelable{
-    private boolean alarmIsOn;
+public class WakeUpTime implements Parcelable{
+    private boolean mustWakeUp;
     private boolean notificationIsOn;
     private boolean repeatIsOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
     private int hourOfDay, minute;
 
-    protected Alarm(Parcel in) {
-        alarmIsOn = in.readByte() != 0;
+    protected WakeUpTime(Parcel in) {
+        mustWakeUp = in.readByte() != 0;
         notificationIsOn = in.readByte() != 0;
         repeatIsOn = in.readByte() != 0;
         mon = in.readByte() != 0;
@@ -30,15 +30,15 @@ public class Alarm implements Parcelable{
         minute = in.readInt();
     }
 
-    public static final Creator<Alarm> CREATOR = new Creator<Alarm>() {
+    public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
         @Override
-        public Alarm createFromParcel(Parcel in) {
-            return new Alarm(in);
+        public WakeUpTime createFromParcel(Parcel in) {
+            return new WakeUpTime(in);
         }
 
         @Override
-        public Alarm[] newArray(int size) {
-            return new Alarm[size];
+        public WakeUpTime[] newArray(int size) {
+            return new WakeUpTime[size];
         }
     };
 
@@ -49,7 +49,7 @@ public class Alarm implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (alarmIsOn ? 1 : 0));
+        dest.writeByte((byte) (mustWakeUp ? 1 : 0));
         dest.writeByte((byte) (notificationIsOn ? 1 : 0));
         dest.writeByte((byte) (repeatIsOn ? 1 : 0));
         dest.writeByte((byte) (mon ? 1 : 0));
@@ -65,10 +65,10 @@ public class Alarm implements Parcelable{
 
 
 
-    public Alarm() {
+    public WakeUpTime() {
     }
 
-    public Alarm(int hourOfDay, int minute) {
+    public WakeUpTime(int hourOfDay, int minute) {
         this.hourOfDay = hourOfDay;
         this.minute = minute;
     }
@@ -89,12 +89,12 @@ public class Alarm implements Parcelable{
         this.minute = minute;
     }
 
-    public boolean getAlarmIsOn() {
-        return alarmIsOn;
+    public boolean getMustWakeUp() {
+        return mustWakeUp;
     }
 
-    public void setAlarmIsOn(boolean alarmIsOn) {
-        this.alarmIsOn = alarmIsOn;
+    public void setMustWakeUp(boolean mustWakeUp) {
+        this.mustWakeUp = mustWakeUp;
     }
 
     public boolean getNotificationIsOn() {
@@ -169,6 +169,8 @@ public class Alarm implements Parcelable{
         this.sun = sun;
     }
 
+
+
     @Override
     public String toString() {
         Map<String, String> formattedTime = DateAndTimeFormatHandler.generateFormattedAlarmTime(
@@ -177,7 +179,7 @@ public class Alarm implements Parcelable{
         return formattedTime.get("full time");
     }
 
-    public String alarmInWeek() {
+    public String mustWakeUpOnDayOfWeek() {
         String weekStatement = "";
         boolean[] repeatOnDay = myGetRepeatOnDay();
         String[] weekdays = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -206,14 +208,14 @@ public class Alarm implements Parcelable{
 
     public String getAlarmOnDayDescription() {
         if (repeatIsOn) {
-            return alarmInWeek();
+            return mustWakeUpOnDayOfWeek();
         } else {
             return getTodayOrTomorrow();
         }
     }
 
     public  void turnOffAlarm() {
-        alarmIsOn = false;
+        mustWakeUp = false;
         notificationIsOn = false;
         repeatIsOn = false;
     }

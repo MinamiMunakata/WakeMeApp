@@ -24,7 +24,7 @@
             android:id="@+id/toolbar_title_add_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Set a timer"
+            android:text="Wake up time"
             android:textAlignment="center"
             android:textColor="@color/colorMyAccent"
             android:textStyle="bold" />
@@ -88,10 +88,10 @@
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
 
             <Switch
-                android:id="@+id/switch_alarm"
+                android:id="@+id/switch_must_wake_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Alarm"
+                android:text="Must-wake-up"
                 android:switchPadding="10dp"
                 android:layout_gravity="center_horizontal"
                 />
@@ -296,6 +296,15 @@
         android:text="@string/_under_line"
         android:textColor="@color/colorMyAccent"
         android:textSize="@dimen/text_h4" />
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/alarm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_both_edges"
+        android:background="@drawable/rounded_button"
+        android:text="Set Alarm"
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>

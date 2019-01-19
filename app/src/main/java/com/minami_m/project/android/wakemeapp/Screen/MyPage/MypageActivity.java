@@ -31,12 +31,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
-import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.Model.Alarm;
+import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
@@ -45,7 +44,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
 
 public class MypageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
@@ -57,7 +55,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private Uri filePath;
     private TextView nickname, email, pw;
     private EditText nicknameTextField, emailTextField, pwTextField, timer_box;
-    private Alarm alarm;
+    private WakeUpTime wakeUpTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +85,10 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
-                if (alarm != null) {
-                    intent.putExtra("Alarm", alarm);
+                if (wakeUpTime != null) {
+                    intent.putExtra("WakeUpTime", wakeUpTime);
+                    System.out.println("not null");
+                    System.out.println(wakeUpTime);
                 }
                 startActivity(intent);
                 overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -98,8 +98,11 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);                if (alarm != null) {
-                        intent.putExtra("Alarm", alarm);
+                    Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+                    if (wakeUpTime != null) {
+                        intent.putExtra("WakeUpTime", wakeUpTime);
+                        System.out.println("not null");
+                        System.out.println(wakeUpTime);
                     }
                     startActivity(intent);
                     overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -224,16 +227,17 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 } else {
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
-                alarm = dataSnapshot.child("alarm").getValue(Alarm.class);
-                if (alarm != null) {
-                    if (alarm.getAlarmIsOn()) {
+                wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
+                System.out.println(wakeUpTime);
+                if (wakeUpTime != null) {
+                    if (wakeUpTime.getMustWakeUp()) {
                         timer_box.setTextColor(getResources().getColor(R.color.colorMyAccent));
                         timer_box.setAlpha(1);
                     } else {
                         timer_box.setTextColor(getResources().getColor(R.color.black));
                         timer_box.setAlpha(0.3f);
                     }
-                    timer_box.setText(alarm.toString());
+                    timer_box.setText(wakeUpTime.toString());
                 }
 
             }

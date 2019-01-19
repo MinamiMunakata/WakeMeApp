@@ -12,7 +12,7 @@ public class User {
     private boolean isSleeping;
     private long lastLogin;
     private long alarmTime;
-    private Alarm alarm;
+    private WakeUpTime wakeUpTime;
 
     public User() {
     }
@@ -106,12 +106,12 @@ public class User {
         this.status = status;
     }
 
-    public Alarm getAlarm() {
-        return alarm;
+    public WakeUpTime getWakeUpTime() {
+        return wakeUpTime;
     }
 
-    public void setAlarm(Alarm alarm) {
-        this.alarm = alarm;
+    public void setWakeUpTime(WakeUpTime wakeUpTime) {
+        this.wakeUpTime = wakeUpTime;
     }
 
     @Override
