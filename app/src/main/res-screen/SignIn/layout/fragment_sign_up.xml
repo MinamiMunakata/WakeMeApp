@@ -97,6 +97,7 @@
 
     </LinearLayout>
     <RelativeLayout
+        android:visibility="invisible"
         android:id="@+id/loading_bg_sign_up"
         android:layout_width="150dp"
         android:layout_height="150dp"

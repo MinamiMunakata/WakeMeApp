@@ -14,10 +14,10 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <LinearLayout
+            android:layout_marginTop="38dp"
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -130,14 +130,6 @@
                 android:paddingHorizontal="10dp"
 
                 android:background="@drawable/facebook_login_btn"/>
-            <TextView
-                android:paddingTop="2dp"
-                android:id="@+id/sign_in_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textSize="@dimen/text_small_default_12"
-                android:textColor="@color/red"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,11 +152,20 @@
                     android:textSize="@dimen/text_h4"/>
 
             </LinearLayout>
+            <TextView
+                android:paddingTop="2dp"
+                android:id="@+id/sign_in_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:textSize="@dimen/text_small_default_12"
+                android:textColor="@color/red"/>
 
         </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
+        android:visibility="invisible"
         android:id="@+id/loading_bg"
         android:layout_width="150dp"
         android:layout_height="150dp"

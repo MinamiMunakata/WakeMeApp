@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="radius_btn">10dp</dimen>
-    <dimen name="space_both_edges">30dp</dimen>
+    <dimen name="space_both_edges">33dp</dimen>
     <dimen name="text_h1">40sp</dimen>
     <dimen name="text_h2">30sp</dimen>
     <dimen name="text_h3">18sp</dimen>

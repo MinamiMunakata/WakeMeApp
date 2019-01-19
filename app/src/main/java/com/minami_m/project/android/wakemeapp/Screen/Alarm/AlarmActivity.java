@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.provider.AlarmClock;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,6 +76,18 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         });
         createAlarm();
         setupOptionButtons();
+//        createAlarm("test", 6, 30);
+    }
+
+    public void createAlarm(String message, int hour, int minutes) {
+        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
+                .putExtra(AlarmClock.EXTRA_MESSAGE, message)
+                .putExtra(AlarmClock.EXTRA_HOUR, hour)
+                .putExtra(AlarmClock.EXTRA_MINUTES, minutes)
+                .putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private void createAlarm() {
