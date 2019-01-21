@@ -2,16 +2,12 @@ package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
+import android.graphics.Paint;
 import android.provider.AlarmClock;
 import android.support.v4.view.MenuCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,14 +94,16 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         changeSettingsText = findViewById(R.id.change_settings);
     }
 
-    public void createAlarm(String message, int hour, int minutes) {
-        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
-                .putExtra(AlarmClock.EXTRA_MESSAGE, message)
-                .putExtra(AlarmClock.EXTRA_HOUR, hour)
-                .putExtra(AlarmClock.EXTRA_MINUTES, minutes)
-                .putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+    public void createAlarm(WakeUpTime wakeUpTime) {
+        Intent alarmIntent = new Intent(AlarmClock.ACTION_SET_ALARM)
+                .putExtra(AlarmClock.EXTRA_HOUR, wakeUpTime.getHourOfDay())
+                .putExtra(AlarmClock.EXTRA_MINUTES, wakeUpTime.getMinute())
+                .putExtra(AlarmClock.EXTRA_MESSAGE, "WakeMeApp");
+        if (wakeUpTime.getRepeatIsOn()) {
+            alarmIntent.putExtra(AlarmClock.EXTRA_DAYS, wakeUpTime.extraDays());
+        }
+        if (alarmIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(alarmIntent);
         }
     }
 
@@ -125,6 +123,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 mustWakeUpSwitch.setChecked(wakeUpTime.getMustWakeUp());
                 notificationSwitch.setChecked(wakeUpTime.getNotificationIsOn());
                 repeatSwitch.setChecked(wakeUpTime.getRepeatIsOn());
+                if (wakeUpTime.getRepeatIsOn()) repeatOptions.setVisibility(View.VISIBLE);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
             }
         }
@@ -150,8 +149,16 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     }
 
     private void setupWakeUpTime() {
+        wakeUpTimeTextView.setPaintFlags(wakeUpTimeTextView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         FontStyleHandler.setFont(this, wakeUpTimeTextView, false, true);
         FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
+        if (wakeUpTime.getMustWakeUp()){
+            wakeUpTimeTextView.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeTextView.setAlpha(1);
+            wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeAmPm.setAlpha(1);
+            repeatInWeek.setAlpha(1);
+        }
         wakeUpTimeTextView.setOnClickListener(showTimePicker());
     }
 
@@ -170,7 +177,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             @Override
             public void onClick(View v) {
                 if (wakeUpTime.getMustWakeUp()) {
-
+                    createAlarm(wakeUpTime);
                 } else {
                     mustWakeUpSwitch.setChecked(true);
                 }
@@ -191,7 +198,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     notificationSwitch.setChecked(isChecked);
                     repeatSwitch.setChecked(isChecked);
                 }
-                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, wakeUpTime);
+                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
 
             }
@@ -225,7 +232,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 } else {
                     repeatOptions.setVisibility(View.GONE);
                 }
-                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, wakeUpTime);
+                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
 
             }
@@ -275,7 +282,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     repeatSwitch.setChecked(false);
                 }
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
-                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, wakeUpTime);
+                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
             }
         };
     }
@@ -302,7 +309,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTime.setMinute(minute);
                                 mustWakeUpSwitch.setChecked(true);
                                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
-                                FirebaseRealtimeDatabaseHelper.updateAlarm(currentUser, wakeUpTime);
+                                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
 
                             }
                         },

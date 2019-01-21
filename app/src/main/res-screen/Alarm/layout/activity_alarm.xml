@@ -91,7 +91,7 @@
                 android:id="@+id/switch_must_wake_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Must-wake-up"
+                android:text="Set Time"
                 android:switchPadding="10dp"
                 android:layout_gravity="center_horizontal"
                 />
@@ -303,7 +303,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_both_edges"
         android:background="@drawable/rounded_button"
-        android:text="Set Alarm"
+        android:text="Set Alarm on Your Device"
         android:textColor="@color/white"/>
 
 

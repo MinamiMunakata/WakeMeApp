@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -241,6 +242,19 @@ public class WakeUpTime implements Parcelable{
 
     public boolean[] myGetRepeatOnDay() {
         return new boolean[]{mon, tue, wed, thu, fri, sat, sun};
+    }
+
+    public ArrayList<Integer> extraDays() {
+        Integer[] days = new Integer[]{
+                Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
+                Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY};
+        ArrayList<Integer> extraDays = new ArrayList<>();
+        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
+            if (myGetRepeatOnDay()[i]) {
+                extraDays.add(days[i]);
+            }
+        }
+        return extraDays;
     }
 
     public void toggleRepeatOnDayAt(int index) {

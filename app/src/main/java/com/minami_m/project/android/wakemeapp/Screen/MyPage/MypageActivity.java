@@ -227,6 +227,7 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
                 } else {
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
+                System.out.println(dataSnapshot.child("wakeUpTime").exists());
                 wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
                 System.out.println(wakeUpTime);
                 if (wakeUpTime != null) {
