@@ -76,9 +76,9 @@ public class FirebaseRealtimeDatabaseHelper {
         });
     }
 
-    public static void updateAlarm(FirebaseUser currentUser, final WakeUpTime wakeUpTime) {
+    public static void updateWakeUpTIme(FirebaseUser currentUser, final WakeUpTime wakeUpTime) {
         if (currentUser != null) {
-            USERS_REF.child(currentUser.getUid()).child("alarm").setValue(wakeUpTime, new DatabaseReference.CompletionListener() {
+            USERS_REF.child(currentUser.getUid()).child("wakeUpTime").setValue(wakeUpTime, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     showResult(databaseError);
@@ -89,7 +89,7 @@ public class FirebaseRealtimeDatabaseHelper {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot path: dataSnapshot.getChildren()) {
-                        childUpdates.put(path.getValue() + "/alarm", wakeUpTime);
+                        childUpdates.put(path.getValue() + "/wakeUpTime", wakeUpTime);
                     }
                     FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                         @Override
