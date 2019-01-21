@@ -176,11 +176,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (wakeUpTime.getMustWakeUp()) {
-                    createAlarm(wakeUpTime);
-                } else {
+                if (!wakeUpTime.getMustWakeUp()) {
                     mustWakeUpSwitch.setChecked(true);
                 }
+                createAlarm(wakeUpTime);
             }
         });
     }
