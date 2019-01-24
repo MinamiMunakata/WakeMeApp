@@ -1,9 +1,14 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
 import android.provider.AlarmClock;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +53,8 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private static final int DEFAULT_MINUTE = 0;
     private View[] optionButtons = new View[7];
     private Button alarmButton;
+    private static final String CHANNEL_ID = "alarm";
+    private static final int NOTIFICATION_ID = 100;
 
 
     @Override
@@ -176,12 +183,40 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!wakeUpTime.getMustWakeUp()) {
-                    mustWakeUpSwitch.setChecked(true);
-                }
-                createAlarm(wakeUpTime);
+//                if (!wakeUpTime.getMustWakeUp()) {
+//                    mustWakeUpSwitch.setChecked(true);
+//                }
+//                createAlarm(wakeUpTime);
+                NotificationCompat.Builder builder =
+                        new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setContentTitle("WakeMeApp")
+                                .setSmallIcon(R.drawable.ico_alart)
+                        .setContentText("Much longer text that cannot fit one line...")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("Much longer text that cannot fit one line..."))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
+                createNotificationChannel();
+                managerCompat.notify(NOTIFICATION_ID, builder.build());
+
             }
         });
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.app_name);
+            String description = getString(R.string.app_name);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private CompoundButton.OnCheckedChangeListener toggleMustWakeUp() {
