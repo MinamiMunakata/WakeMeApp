@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -39,6 +40,7 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
+import java.util.Calendar;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
@@ -186,6 +188,8 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 //                    mustWakeUpSwitch.setChecked(true);
 //                }
 //                createAlarm(wakeUpTime);
+                NotificationController notifier = NotificationController.newInstance(getApplicationContext());
+                notifier.setNotification(wakeUpTime);
 
             }
         });

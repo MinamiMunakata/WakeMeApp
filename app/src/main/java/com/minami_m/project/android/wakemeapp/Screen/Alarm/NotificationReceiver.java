@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.widget.Toast;
 
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
@@ -21,17 +22,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "Received!", Toast.LENGTH_SHORT).show();
 
         // Create an explicit intent for an Activity in your app
         Intent sendIntent = new Intent(context, MainActivity.class);
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, sendIntent, 0);
-
-//        Intent snoozeIntent = new Intent(this, MyBroadcastReceiver.class);
-//        snoozeIntent.setAction(ACTION_SNOOZE);
-//        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-//        PendingIntent snoozePendingIntent =
-//                PendingIntent.getBroadcast(this, 0, snoozeIntent, 0);
 
         NotificationCompat.Builder builder = getNotificationBuilder(context, pendingIntent);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
