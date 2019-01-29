@@ -257,8 +257,8 @@ public class WakeUpTime implements Parcelable{
         return extraDays;
     }
 
-    public void toggleRepeatOnDayAt(int index) {
-        switch (index) {
+    public void toggleRepeatOnDayAt(int tag) {
+        switch (tag) {
             case 0:
                 mon = !mon;
                 break;

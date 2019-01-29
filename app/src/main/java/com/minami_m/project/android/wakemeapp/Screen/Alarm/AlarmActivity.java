@@ -1,16 +1,9 @@
 package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 
-import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Build;
 import android.provider.AlarmClock;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +33,6 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
-import java.util.Calendar;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
@@ -56,6 +48,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private static final int DEFAULT_MINUTE = 0;
     private View[] optionButtons = new View[7];
     private Button alarmButton;
+    private NotificationController notifier;
 
 
     @Override
@@ -80,6 +73,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         });
         setupOptionButtons();
         setupAlarmButton();
+        notifier = NotificationController.newInstance(this);
     }
 
     private void setupToolBar() {
@@ -188,8 +182,8 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 //                    mustWakeUpSwitch.setChecked(true);
 //                }
 //                createAlarm(wakeUpTime);
-                NotificationController notifier = NotificationController.newInstance(getApplicationContext());
-                notifier.setNotification(wakeUpTime);
+                // TODO: Delete
+                notifier.checkIfNotificationIsWorking();
 
             }
         });
@@ -202,11 +196,13 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 setStyleDependsOnMustWakeUp(isChecked);
                 if (isChecked) {
                     wakeUpTime.setMustWakeUp(isChecked);
+                    notifier.setAllNotification(wakeUpTime);
 
                 } else {
                     wakeUpTime.turnOffAlarm();
                     notificationSwitch.setChecked(isChecked);
                     repeatSwitch.setChecked(isChecked);
+                    notifier.cancelAllNotification();
                 }
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
@@ -238,9 +234,11 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     }
                     changeVisibilityForAllOptions();
                     mustWakeUpSwitch.setChecked(isChecked);
+                    notifier.setAllNotification(wakeUpTime);
                     repeatOptions.setVisibility(View.VISIBLE);
                 } else {
                     repeatOptions.setVisibility(View.GONE);
+                    notifier.cancelIfRepeatOff(wakeUpTime);
                 }
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
@@ -283,10 +281,14 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 int index = (int) frameLayout.getTag();
                 View optionButton = optionButtons[index];
                 wakeUpTime.toggleRepeatOnDayAt(index);
+                int day = convertToDayOfWeek(index);
                 if (optionButton.getVisibility() == View.VISIBLE) {
                     optionButton.setVisibility(View.INVISIBLE);
+                    // TODO: cancel
+                    notifier.cancelAt(day);
                 } else {
                     optionButton.setVisibility(View.VISIBLE);
+                    notifier.setNotificationAt(wakeUpTime, day);
                 }
                 if (wakeUpTime.checkRepeatOnDayOfWeekIsAllOff()) {
                     repeatSwitch.setChecked(false);
@@ -295,6 +297,14 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
             }
         };
+    }
+
+    private int convertToDayOfWeek(int tag) {
+        if (tag == 6) {
+            return 1;
+        } else {
+            return tag + 2;
+        }
     }
 
     private View.OnClickListener showTimePicker() {
