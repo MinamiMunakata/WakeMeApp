@@ -27,7 +27,6 @@
         <activity android:name=".Screen.Main.MainActivity" />
         <activity android:name=".Screen.ChatRoom.ChatRoomActivity" />
         <activity android:name=".Screen.MyPage.MypageActivity" />
-        <activity android:name=".Screen.AlarmScheduleActivity"></activity>
         <activity android:name=".Screen.Alarm.AlarmActivity"></activity>
         <receiver android:name=".Screen.Alarm.NotificationReceiver" />
     </application>

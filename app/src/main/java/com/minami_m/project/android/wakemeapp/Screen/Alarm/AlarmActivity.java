@@ -36,7 +36,7 @@ import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
-    private Switch mustWakeUpSwitch, notificationSwitch, repeatSwitch;
+    private Switch mustWakeUpSwitch, repeatSwitch; // notificationSwitch
     private TextView wakeUpTimeTextView, wakeUpTimeAmPm, repeatInWeek;
     private CustomBasicTextView changeSettingsText;
     private LinearLayout config;
@@ -87,7 +87,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         alarmButton = findViewById(R.id.alarm_button);
         mustWakeUpSwitch = findViewById(R.id.switch_must_wake_up);
         repeatSwitch = findViewById(R.id.switch_repeat);
-        notificationSwitch = findViewById(R.id.switch_notification);
+//        notificationSwitch = findViewById(R.id.switch_notification);
         wakeUpTimeTextView = findViewById(R.id.wake_up_time);
         wakeUpTimeAmPm = findViewById(R.id.wake_up_time_am_pm);
         repeatOptions = findViewById(R.id.repeat_switch_options);
@@ -123,7 +123,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 wakeUpTimeTextView.setText(formattedTime.get("time"));
                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                 mustWakeUpSwitch.setChecked(wakeUpTime.getMustWakeUp());
-                notificationSwitch.setChecked(wakeUpTime.getNotificationIsOn());
+//                notificationSwitch.setChecked(wakeUpTime.getNotificationIsOn());
                 repeatSwitch.setChecked(wakeUpTime.getRepeatIsOn());
                 if (wakeUpTime.getRepeatIsOn()) repeatOptions.setVisibility(View.VISIBLE);
                 repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
@@ -167,8 +167,8 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private void setupSwitches() {
         FontStyleHandler.setFont(this, mustWakeUpSwitch, false, false);
         mustWakeUpSwitch.setOnCheckedChangeListener(toggleMustWakeUp());
-        FontStyleHandler.setFont(this, notificationSwitch, false, false);
-        notificationSwitch.setOnCheckedChangeListener(toggleNotification());
+//        FontStyleHandler.setFont(this, notificationSwitch, false, false);
+//        notificationSwitch.setOnCheckedChangeListener(toggleNotification());
         FontStyleHandler.setFont(this, repeatSwitch, false, false);
         repeatSwitch.setOnCheckedChangeListener(toggleRepeat());
     }
@@ -200,7 +200,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 
                 } else {
                     wakeUpTime.turnOffAlarm();
-                    notificationSwitch.setChecked(isChecked);
+//                    notificationSwitch.setChecked(isChecked);
                     repeatSwitch.setChecked(isChecked);
                     notifier.cancelAllNotification();
                 }
@@ -284,7 +284,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 int day = convertToDayOfWeek(index);
                 if (optionButton.getVisibility() == View.VISIBLE) {
                     optionButton.setVisibility(View.INVISIBLE);
-                    // TODO: cancel
                     notifier.cancelAt(day);
                 } else {
                     optionButton.setVisibility(View.VISIBLE);
