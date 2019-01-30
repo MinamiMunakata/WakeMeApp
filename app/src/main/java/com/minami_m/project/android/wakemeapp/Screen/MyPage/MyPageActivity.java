@@ -45,7 +45,7 @@ import com.squareup.picasso.Picasso;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class MypageActivity extends AppCompatActivity implements ActivityChangeListener {
+public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -53,8 +53,8 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private TextView profileName;
     private final int PICK_IMAGE_REQUEST = 6789;
     private Uri filePath;
-    private TextView nickname, email, pw;
-    private EditText nicknameTextField, emailTextField, pwTextField, timer_box;
+    private TextView displayName, email, pw;
+    private EditText displayNameTextField, emailTextField, pwTextField, timer_box;
     private WakeUpTime wakeUpTime;
 
     @Override
@@ -115,8 +115,8 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
     private void setupUserInfo() {
         profileName = findViewById(R.id.setting_profile_name);
         FontStyleHandler.setFont(this, profileName, true, true);
-        nicknameTextField = findViewById(R.id.edit_profile_name);
-        FontStyleHandler.setFont(this, nicknameTextField, false, false);
+        displayNameTextField = findViewById(R.id.edit_profile_name);
+        FontStyleHandler.setFont(this, displayNameTextField, false, false);
         emailTextField = findViewById(R.id.edit_profile_email);
         FontStyleHandler.setFont(this, emailTextField, false, false);
         pwTextField = findViewById(R.id.edit_profile_pw);
@@ -124,17 +124,17 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             profileName.setText(currentUser.getDisplayName());
-            nicknameTextField.setText(currentUser.getDisplayName());
+            displayNameTextField.setText(currentUser.getDisplayName());
             emailTextField.setText(currentUser.getEmail());
         }
 
     }
 
     private void setupUserInfoCategoryName() {
-        nickname = findViewById(R.id.profile_nickname);
+        displayName = findViewById(R.id.profile_nickname);
         email = findViewById(R.id.profile_email);
         pw = findViewById(R.id.profile_pw);
-        FontStyleHandler.setFont(this, nickname, false, true);
+        FontStyleHandler.setFont(this, displayName, false, true);
         FontStyleHandler.setFont(this, email, false, true);
         FontStyleHandler.setFont(this, pw, false, true);
     }
@@ -290,5 +290,21 @@ public class MypageActivity extends AppCompatActivity implements ActivityChangeL
 
     private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void toggleEditMode(View view) {
+        switch (view.getId()) {
+            case R.id.name_editor:
+                displayNameTextField.setEnabled(!displayNameTextField.isEnabled());
+                return;
+            case R.id.email_editor:
+                emailTextField.setEnabled(!emailTextField.isEnabled());
+                return;
+            case R.id.pw_editor:
+                pwTextField.setEnabled(!pwTextField.isEnabled());
+                return;
+            default:
+                return;
+        }
     }
 }

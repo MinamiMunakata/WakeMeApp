@@ -30,7 +30,7 @@ import com.minami_m.project.android.wakemeapp.CustomBasicTextView;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
-import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
+import com.minami_m.project.android.wakemeapp.Screen.MyPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.Map;
@@ -374,7 +374,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 launchActivity(MainActivity.class);
                 return true;
             case R.id.my_page_menu:
-                launchActivity(MypageActivity.class);
+                launchActivity(MyPageActivity.class);
                 return true;
             case R.id.logout_menu:
                 FirebaseAuth.getInstance().signOut();

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.MyPage.MypageActivity"
+    tools:context=".Screen.MyPage.MyPageActivity"
     android:background="@color/colorBackground">
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar_setting"
@@ -92,6 +92,8 @@
                 android:enabled="false"
                 android:textSize="@dimen/text_h4"/>
             <ImageView
+                android:id="@+id/name_editor"
+                android:onClick="toggleEditMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_edit"
@@ -118,6 +120,8 @@
                 android:enabled="false"
                 android:textSize="@dimen/text_h4"/>
             <ImageView
+                android:id="@+id/email_editor"
+                android:onClick="toggleEditMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_edit"
@@ -146,6 +150,8 @@
                 android:text="Registered"
                 android:textSize="@dimen/text_h4" />
             <ImageView
+                android:id="@+id/pw_editor"
+                android:onClick="toggleEditMode"
                 android:contentDescription="@string/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

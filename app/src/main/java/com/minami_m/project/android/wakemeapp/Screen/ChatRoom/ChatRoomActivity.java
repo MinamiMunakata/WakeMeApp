@@ -33,7 +33,7 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.Screen.MyPage.MypageActivity;
+import com.minami_m.project.android.wakemeapp.Screen.MyPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
@@ -207,7 +207,7 @@ public class ChatRoomActivity
                 launchActivity(MainActivity.class);
                 return true;
             case R.id.my_page_menu:
-                launchActivity(MypageActivity.class);
+                launchActivity(MyPageActivity.class);
                 return true;
             case R.id.logout_menu:
                 FirebaseAuth.getInstance().signOut();
