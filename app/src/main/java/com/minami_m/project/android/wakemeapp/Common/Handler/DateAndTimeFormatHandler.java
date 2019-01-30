@@ -20,10 +20,10 @@ public class DateAndTimeFormatHandler {
         long diff = now - time;
         if (diff < HOUR) {
             int min = (int) (diff / MINUTE);
-            return String.format(Locale.US,"Active %dm ago", min);
+            return String.format(Locale.US, "Active %dm ago", min);
         } else if (diff < DAY) {
-            int hour= (int)((now - time) / HOUR);
-            return String.format(Locale.US,"Active %dh ago", hour);
+            int hour = (int) ((now - time) / HOUR);
+            return String.format(Locale.US, "Active %dh ago", hour);
 
         } else {
             SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' HH:mm", Locale.US);

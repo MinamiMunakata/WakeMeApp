@@ -10,7 +10,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.Common.RealtimeDatabaseCallback;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;

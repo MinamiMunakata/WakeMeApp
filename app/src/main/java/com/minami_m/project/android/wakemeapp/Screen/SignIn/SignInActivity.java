@@ -47,15 +47,15 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 public class SignInActivity extends AppCompatActivity implements FragmentChangeListener,
         ActivityChangeListener, FacebookLoginListener {
 
-    CallbackManager callbackManager;
     private static final String EMAIL = "email";
+    static ProgressBar progressBar;
+    static ImageView loadingImage;
+    static RelativeLayout loadingBG;
+    CallbackManager callbackManager;
     AccessTokenTracker mAccessTokenTracker;
     ProfileTracker profileTracker;
     FirebaseAuth mAuth;
     Profile facebookProfile;
-    static ProgressBar progressBar;
-    static ImageView loadingImage;
-    static RelativeLayout loadingBG;
 
     public static void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
         loadingImage = loadingImg;
@@ -89,7 +89,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         // ------------------------------------------------------------------
         mAccessTokenTracker = new AccessTokenTracker() {
             @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken,AccessToken currentAccessToken) {
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 Log.i(TAG, "onCurrentAccessTokenChanged: 123456");
             }
         };
@@ -161,14 +161,14 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             loadingBG.setVisibility(View.VISIBLE);
         }
         mAuth = firebaseAuth;
-        if (AccessToken.getCurrentAccessToken() != null){
+        if (AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logOut();
 //            progressBar.setVisibility(View.INVISIBLE);
             loadingBG.setVisibility(View.INVISIBLE);
 
         } else {
             LoginManager.getInstance().logOut();
-            LoginManager.getInstance().logInWithReadPermissions(this,Arrays.asList(EMAIL));
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList(EMAIL));
         }
     }
 
