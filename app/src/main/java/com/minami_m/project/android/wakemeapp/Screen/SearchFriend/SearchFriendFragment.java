@@ -10,22 +10,33 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SearchFriendFragment extends Fragment implements InputValidationHandler {
-    EditText editText;
     private static final String TAG = "SearchFriendFragment";
+    EditText editText;
 
 
     public SearchFriendFragment() {
         // Required empty public constructor
     }
 
+    public static SearchFriendFragment newInstance() {
+        return new SearchFriendFragment();
+    }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        SearchFriendFragmentListener listener = (SearchFriendFragmentListener)getActivity();
+//        listener.resetSearchButton();
+//        editText.setText("");
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,22 +49,9 @@ public class SearchFriendFragment extends Fragment implements InputValidationHan
         return view;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        SearchFriendFragmentListener listener = (SearchFriendFragmentListener)getActivity();
-//        listener.resetSearchButton();
-//        editText.setText("");
-//    }
-
     @Override
     public boolean isValidInput() {
         return InputHandler.isValidFormEmail(editText);
-    }
-
-
-    public static SearchFriendFragment newInstance() {
-        return new SearchFriendFragment();
     }
 
 }

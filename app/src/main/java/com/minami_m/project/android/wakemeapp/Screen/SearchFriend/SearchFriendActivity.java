@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.Screen.SearchFriend;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.transition.Fade;
 import android.support.transition.TransitionSet;
@@ -8,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,32 +26,32 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
-import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.RealtimeDatabaseCallback;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
+import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
-import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
 import com.squareup.picasso.Picasso;
 
 public class SearchFriendActivity extends AppCompatActivity
         implements FragmentChangeListener, InputValidationHandler,
         SearchFriendFragmentListener, ActivityChangeListener {
+    private static final String TAG = "SearchFriendActivity";
+    private static final String DIALOG_TAG = "dialog";
     private Button search_btn;
     private EditText editEmail;
-    private static final String TAG = "SearchFriendActivity";
     private FirebaseUser currentUser;
     private String friendId;
     private User friend;
     private User mUser;
     private TextView toolbarTitle;
-    private static final String DIALOG_TAG = "dialog";
 
     public void setEditEmail(EditText editEmail) {
         this.editEmail = editEmail;
@@ -123,7 +123,7 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu,true);
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 

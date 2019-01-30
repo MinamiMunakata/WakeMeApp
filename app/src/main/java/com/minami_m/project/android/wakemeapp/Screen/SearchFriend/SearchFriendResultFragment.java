@@ -23,6 +23,9 @@ public class SearchFriendResultFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SearchFriendResultFragment newInstance() {
+        return new SearchFriendResultFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,12 +40,8 @@ public class SearchFriendResultFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        SearchFriendFragmentListener listener = (SearchFriendFragmentListener)getActivity();
+        SearchFriendFragmentListener listener = (SearchFriendFragmentListener) getActivity();
         listener.showFriend(iconHolder, nameHolder);
-    }
-
-    public static SearchFriendResultFragment newInstance() {
-        return new SearchFriendResultFragment();
     }
 
 }

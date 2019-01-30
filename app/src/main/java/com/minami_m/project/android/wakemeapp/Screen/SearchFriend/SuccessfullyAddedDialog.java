@@ -18,13 +18,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SuccessfullyAddedDialog extends DialogFragment implements ActivityChangeListener {
+    public static SuccessfullyAddedDialog newInstance() {
+        return new SuccessfullyAddedDialog();
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
         getDialog().getWindow().setBackgroundDrawableResource(R.drawable.rounded_dialog);
         getDialog().getWindow().setLayout(width, height);
-        Button okButton = ((AlertDialog)getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
+        Button okButton = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
         okButton.setTextColor(getResources().getColor(R.color.colorMyAccent));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) okButton.getLayoutParams();
         layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -70,10 +74,6 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
             }
         });
 
-    }
-
-    public static SuccessfullyAddedDialog newInstance() {
-        return new SuccessfullyAddedDialog();
     }
 
     @Override

@@ -16,9 +16,8 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
-    private static final String CHANNEL_ID = "alarm";
     public static final int NOTIFICATION_ID = 100;
-
+    private static final String CHANNEL_ID = "alarm";
 
     @Override
     public void onReceive(Context context, Intent intent) {
