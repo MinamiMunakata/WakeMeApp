@@ -1,166 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.MyPage.MyPageActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".Screen.MyPage.MyPageActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground">
-    </android.support.v7.widget.Toolbar>
+        android:background="@color/colorBackground"></android.support.v7.widget.Toolbar>
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/space_both_edges"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+        android:layout_marginHorizontal="@dimen/space_both_edges"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/setting_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_h3"
+            android:textAlignment="center"
             android:textColor="@color/colorMyAccent"
-            android:textAlignment="center"/>
+            android:textSize="@dimen/text_h3"
+            android:textStyle="bold" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_vertical_space_bw_item">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/setting_profile_icon"
-                android:src="@drawable/ico_default_avator"
                 android:layout_width="130dp"
-                android:layout_height="130dp" />
+                android:layout_height="130dp"
+                android:src="@drawable/ico_default_avator" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ico_camera"
-                android:layout_alignEnd="@+id/setting_profile_icon"
                 android:layout_alignBottom="@+id/setting_profile_icon"
-                />
+                android:layout_alignEnd="@+id/setting_profile_icon"
+                android:src="@drawable/ico_camera" />
         </RelativeLayout>
 
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_h4"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/small_vertical_space_bw_item">
 
-            <EditText
-                android:id="@+id/wake_up_time"
+            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="07:00 am"
-                android:textSize="@dimen/text_h2"
+                android:text="Time"
                 android:textColor="@color/black"
-                android:alpha="0.3"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ico_next"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@+id/wake_up_time"
-                android:paddingEnd="5dp"/>
-        </RelativeLayout>
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-            android:id="@+id/profile_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_h4"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edit_profile_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:enabled="false"
-                android:textSize="@dimen/text_h4"/>
-            <ImageView
-                android:id="@+id/name_editor"
-                android:onClick="toggleEditMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ico_edit"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@+id/edit_profile_name"
-                android:paddingEnd="5dp"/>
-        </RelativeLayout>
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-            android:id="@+id/profile_email"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="@dimen/text_h4"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edit_profile_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:enabled="false"
-                android:textSize="@dimen/text_h4"/>
-            <ImageView
-                android:id="@+id/email_editor"
-                android:onClick="toggleEditMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ico_edit"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@+id/edit_profile_email"
-                android:paddingEnd="5dp"/>
-        </RelativeLayout>
-
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-            android:id="@+id/profile_pw"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textSize="@dimen/text_h4"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edit_profile_pw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:enabled="false"
-                android:text="Registered"
                 android:textSize="@dimen/text_h4" />
-            <ImageView
-                android:id="@+id/pw_editor"
-                android:onClick="toggleEditMode"
-                android:contentDescription="@string/edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ico_edit"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@+id/edit_profile_pw"
-                android:paddingEnd="5dp"
-                tools:ignore="RtlSymmetry" />
-        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/wake_up_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.3"
+                    android:singleLine="true"
+                    android:text="07:00 am"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_h2" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/wake_up_time"
+                    android:layout_centerVertical="true"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/ico_next" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:id="@+id/profile_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_h4" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edit_profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_h4" />
+
+                    <ImageView
+                        android:id="@+id/name_editor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/edit_profile_name"
+                        android:layout_centerVertical="true"
+                        android:onClick="toggleEditMode"
+                        android:paddingEnd="5dp"
+                        android:src="@drawable/ico_edit" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:id="@+id/profile_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_h4" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edit_profile_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_h4" />
+
+                    <ImageView
+                        android:id="@+id/email_editor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/edit_profile_email"
+                        android:layout_centerVertical="true"
+                        android:onClick="toggleEditMode"
+                        android:paddingEnd="5dp"
+                        android:src="@drawable/ico_edit" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                    android:id="@+id/profile_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_h4" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/pw_text_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clipToPadding="false"
+                        android:gravity="bottom"
+                        android:paddingTop="4dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true">
+
+                        <EditText
+                            android:id="@+id/edit_profile_pw"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:enabled="false"
+                            android:hint="Enter new password"
+                            android:inputType="textPassword"
+                            android:paddingRight="30dp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/text_h4" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/pw_editor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/pw_text_layout"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/edit"
+                        android:onClick="toggleEditMode"
+                        android:paddingEnd="5dp"
+                        android:src="@drawable/ico_edit"
+                        tools:ignore="RtlSymmetry" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 

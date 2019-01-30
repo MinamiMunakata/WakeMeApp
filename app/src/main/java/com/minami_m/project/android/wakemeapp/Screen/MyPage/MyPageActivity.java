@@ -3,12 +3,12 @@ package com.minami_m.project.android.wakemeapp.Screen.MyPage;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
@@ -29,12 +29,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
-import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
-import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
@@ -47,11 +46,11 @@ import java.io.IOException;
 
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
+    private final int PICK_IMAGE_REQUEST = 6789;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private ImageView profileIcon;
     private TextView profileName;
-    private final int PICK_IMAGE_REQUEST = 6789;
     private Uri filePath;
     private TextView displayName, email, pw;
     private EditText displayNameTextField, emailTextField, pwTextField, timer_box;
@@ -191,12 +190,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                                     });
 
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            // TODO: Action on progress...
-                        }
                     });
         }
     }
@@ -255,7 +248,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu,true);
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 
