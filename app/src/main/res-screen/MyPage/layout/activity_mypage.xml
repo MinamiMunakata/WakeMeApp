@@ -42,11 +42,11 @@
                 android:src="@drawable/ico_default_avator" />
 
             <ImageView
-                android:contentDescription="upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/setting_profile_icon"
                 android:layout_alignEnd="@+id/setting_profile_icon"
+                android:contentDescription="upload"
                 android:src="@drawable/ico_camera" />
         </RelativeLayout>
 
@@ -68,11 +68,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:inputType="none"
                     android:id="@+id/wake_up_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.3"
+                    android:inputType="none"
                     android:singleLine="true"
                     android:text="07:00 am"
                     android:textColor="@color/black"
@@ -117,6 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
+                        android:focusable="true"
                         android:hint="@string/enter_your_name"
                         android:inputType="text"
                         android:singleLine="true"
@@ -158,6 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
+                        android:focusable="true"
                         android:hint="@string/enter_your_email_address"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
@@ -209,6 +211,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:enabled="false"
+                            android:focusable="true"
                             android:hint="@string/enter_new_password"
                             android:inputType="textPassword"
                             android:paddingRight="30dp"

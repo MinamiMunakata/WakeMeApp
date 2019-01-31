@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Screen.MyPage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,9 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +35,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
@@ -59,6 +64,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: REMOVE if it doesn't work
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_mypage);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -317,6 +324,19 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             if (editText != et) {
                 et.setEnabled(false);
             }
+        }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+                System.out.println("Enter");
+                // TODO: Input -> SignIn
+                InputHandler.hideSoftKeyBoard(this);
+                return true;
+            default:
+                return super.onKeyUp(keyCode, event);
         }
     }
 }
