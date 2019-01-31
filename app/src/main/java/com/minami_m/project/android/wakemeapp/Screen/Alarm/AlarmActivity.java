@@ -135,15 +135,15 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 
     private void setStyleDependsOnMustWakeUp(boolean on) {
         if (on) {
-            wakeUpTimeTextView.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeTextView.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeTextView.setAlpha(1);
-            wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeAmPm.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeAmPm.setAlpha(1);
             repeatInWeek.setAlpha(1);
         } else {
-            wakeUpTimeTextView.setTextColor(getResources().getColor(R.color.black));
+            wakeUpTimeTextView.setTextColor(getColor(R.color.black));
             wakeUpTimeTextView.setAlpha(0.3f);
-            wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.black));
+            wakeUpTimeAmPm.setTextColor(getColor(R.color.black));
             wakeUpTimeAmPm.setAlpha(0.3f);
             repeatInWeek.setAlpha(0.3f);
         }
@@ -155,9 +155,9 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         FontStyleHandler.setFont(this, wakeUpTimeTextView, false, true);
         FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
         if (wakeUpTime.getMustWakeUp()){
-            wakeUpTimeTextView.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeTextView.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeTextView.setAlpha(1);
-            wakeUpTimeAmPm.setTextColor(getResources().getColor(R.color.colorMyAccent));
+            wakeUpTimeAmPm.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeAmPm.setAlpha(1);
             repeatInWeek.setAlpha(1);
         }

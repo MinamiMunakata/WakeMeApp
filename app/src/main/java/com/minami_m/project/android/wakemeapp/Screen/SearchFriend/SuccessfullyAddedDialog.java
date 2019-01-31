@@ -63,7 +63,7 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
         getDialog().getWindow().setBackgroundDrawableResource(R.drawable.rounded_dialog);
         getDialog().getWindow().setLayout(width, height);
         Button okButton = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
-        okButton.setTextColor(getResources().getColor(R.color.colorMyAccent));
+        okButton.setTextColor(getContext().getColor(R.color.colorMyAccent));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) okButton.getLayoutParams();
         layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
         okButton.setLayoutParams(layoutParams);
