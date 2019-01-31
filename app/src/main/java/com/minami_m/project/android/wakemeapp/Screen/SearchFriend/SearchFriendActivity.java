@@ -199,7 +199,6 @@ public class SearchFriendActivity extends AppCompatActivity
         FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 
-    // TODO
     public void followNewFriend(final User mUser, final User friend) {
         FirebaseRealtimeDatabaseHelper.FRIEND_ID_LIST_REF
                 .child(mUser.getId())

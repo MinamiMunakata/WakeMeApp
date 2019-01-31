@@ -2,15 +2,14 @@ package com.minami_m.project.android.wakemeapp.Screen.SignIn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -31,43 +30,31 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FacebookLoginListener;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
-import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
-import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Common.Listener.SignInListener;
 import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 
 import java.util.Arrays;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
 public class SignInActivity extends AppCompatActivity implements FragmentChangeListener,
-        ActivityChangeListener, FacebookLoginListener {
+        ActivityChangeListener, FacebookLoginListener, SignInListener {
 
     private static final String EMAIL = "email";
-    static ProgressBar progressBar;
-    static ImageView loadingImage;
-    static RelativeLayout loadingBG;
+    ImageView loadingImage;
+    RelativeLayout loadingBG;
     CallbackManager callbackManager;
     AccessTokenTracker mAccessTokenTracker;
     ProfileTracker profileTracker;
     FirebaseAuth mAuth;
     Profile facebookProfile;
-
-    public static void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
-        loadingImage = loadingImg;
-        Glide.with(context).load(R.raw.loading).into(loadingImg);
-        loadingBG = loadingBackground;
-        loadingBG.setVisibility(View.INVISIBLE);
-    }
-//    public static void setProgressBar(ProgressBar bar) {
-//        progressBar = bar;
-//        bar.setVisibility(View.INVISIBLE);
-//        Glide.with(getApplicationContext()).load(R.raw.loading).into(loadingImage);
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +94,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             @Override
             public void onCancel() {
                 Log.i(TAG, "onCancel: 123456");
-//                progressBar.setVisibility(View.INVISIBLE);
                 loadingBG.setVisibility(View.INVISIBLE);
 
             }
@@ -116,7 +102,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             public void onError(FacebookException error) {
                 Log.i(TAG, "onError: 123456");
                 Log.i(TAG, "onError: " + error.getMessage());
-//                progressBar.setVisibility(View.INVISIBLE);
                 loadingBG.setVisibility(View.INVISIBLE);
             }
         });
@@ -131,10 +116,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
     @Override
     public void replaceFragment(Fragment newFragment) {
-        // TODO: pass data if required
-//        Bundle args = new Bundle();
-//        args.putInt(ArticleFragment.ARG_POSITION, position);
-//        newFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -155,15 +136,12 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
     @Override
     public void loginWithFacebook(FirebaseAuth firebaseAuth) {
-//        if (progressBar != null) {
         if (loadingBG != null) {
-//            progressBar.setVisibility(View.VISIBLE);
             loadingBG.setVisibility(View.VISIBLE);
         }
         mAuth = firebaseAuth;
         if (AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logOut();
-//            progressBar.setVisibility(View.INVISIBLE);
             loadingBG.setVisibility(View.INVISIBLE);
 
         } else {
@@ -192,12 +170,10 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                 newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
                                 FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
                             }
-//                            progressBar.setVisibility(View.INVISIBLE);
                             loadingBG.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);
 
                         } else {
-//                            progressBar.setVisibility(View.INVISIBLE);
                             loadingBG.setVisibility(View.INVISIBLE);
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -209,4 +185,11 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                 });
     }
 
+    @Override
+    public void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
+        this.loadingImage = loadingImg;
+        Glide.with(context).load(R.raw.loading).into(loadingImg);
+        this.loadingBG = loadingBackground;
+        this.loadingBG.setVisibility(View.INVISIBLE);
+    }
 }

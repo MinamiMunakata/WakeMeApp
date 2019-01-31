@@ -32,18 +32,17 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
-import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
-import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
-import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
-import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.User;
-import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 
 import java.io.IOException;
 
@@ -55,20 +54,18 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  */
 public class SignUpFragment extends Fragment
         implements InputValidationHandler, View.OnClickListener {
+    private static int PICK_IMAGE_REQUEST = 12345;
     private FirebaseAuth mAuth;
     private EditText nameField;
     private EditText emailField;
     private EditText pwField;
     private ImageView icon;
     private TextView errorMsg;
-    private static int PICK_IMAGE_REQUEST = 12345;
     private Uri filePath;
     private String downloadedIconUrl;
-    //    private ProgressBar progressBar;
     private ImageView loadingImage;
     private RelativeLayout loadingBG;
     private TextView signUp;
-
 
 
     public SignUpFragment() {
@@ -114,7 +111,6 @@ public class SignUpFragment extends Fragment
         loadingBG = view.findViewById(R.id.loading_bg_sign_up);
         loadingImage = view.findViewById(R.id.sign_up_loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
-//        progressBar = view.findViewById(R.id.progressbar);
         loadingBG.setVisibility(View.INVISIBLE);
         return view;
     }
@@ -180,31 +176,20 @@ public class SignUpFragment extends Fragment
                         toast("Successfully Uploaded");
                         FirebaseStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                downloadedIconUrl = task.getResult().toString();
-                                User newUser = new User(currentUser.getUid(),
-                                        currentUser.getDisplayName(),
-                                        currentUser.getEmail(),
-                                        downloadedIconUrl);
-                                newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
-                                FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                                ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
-                            }
-                        });
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        downloadedIconUrl = task.getResult().toString();
+                                        User newUser = new User(currentUser.getUid(),
+                                                currentUser.getDisplayName(),
+                                                currentUser.getEmail(),
+                                                downloadedIconUrl);
+                                        newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
+                                        FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                                    }
+                                });
                     }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                // TODO: delete?
-//                double progress = (100.0 * taskSnapshot
-//                        .getBytesTransferred()/taskSnapshot
-//                        .getTotalByteCount());
-//                progressBar.setProgress((int)progress);
-//                Log.i(TAG, "onProgress: " + progress);
-            }
-        });
+                });
 
     }
 
@@ -249,24 +234,24 @@ public class SignUpFragment extends Fragment
                                 final FirebaseUser currentUser = mAuth.getCurrentUser();
                                 UserProfileChangeRequest request =
                                         new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(name)
-                                        .build();
+                                                .setDisplayName(name)
+                                                .build();
                                 currentUser.updateProfile(request)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (filePath != null) {
-                                            writeNewUSerWithImg(currentUser);
-                                        } else {
-                                            User newUser = new User(currentUser.getUid(),
-                                                    currentUser.getDisplayName(),
-                                                    currentUser.getEmail());
-                                            FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
-                                            loadingBG.setVisibility(View.INVISIBLE);
-                                            ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
-                                        }
-                                    }
-                                })
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (filePath != null) {
+                                                    writeNewUSerWithImg(currentUser);
+                                                } else {
+                                                    User newUser = new User(currentUser.getUid(),
+                                                            currentUser.getDisplayName(),
+                                                            currentUser.getEmail());
+                                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                                    loadingBG.setVisibility(View.INVISIBLE);
+                                                    ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                                                }
+                                            }
+                                        })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {

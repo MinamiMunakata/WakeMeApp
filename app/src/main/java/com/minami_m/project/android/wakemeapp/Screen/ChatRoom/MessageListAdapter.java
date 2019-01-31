@@ -49,7 +49,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater
                     .from(parent.getContext())
-                    .inflate(R.layout.sent_message,parent,false);
+                    .inflate(R.layout.sent_message, parent, false);
             return new SentMessageViewHolder(view);
         } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             view = LayoutInflater
@@ -77,11 +77,11 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
-                ((SentMessageViewHolder)holder)
+                ((SentMessageViewHolder) holder)
                         .bind(message, mMessageList.size() == position + 1, isFirstChat);
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((ReceivedMessageViewHolder)holder).bind(message, receiverIcon, isFirstChat);
+                ((ReceivedMessageViewHolder) holder).bind(message, receiverIcon, isFirstChat);
                 break;
         }
 
@@ -90,6 +90,21 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mMessageList.size();
+    }
+
+    private void setDate(TextView dateView, Message message, boolean isFirstChat) {
+        if (isFirstChat) {
+            dateView.setVisibility(View.VISIBLE);
+            if (DateAndTimeFormatHandler.isToday(message.getCreatedAt())) {
+                dateView.setText(R.string.today);
+            } else if (DateAndTimeFormatHandler.isYesterday(message.getCreatedAt())) {
+                dateView.setText(R.string.yesterday);
+            } else {
+                dateView.setText(DateAndTimeFormatHandler.generateDateOfChat(message.getCreatedAt()));
+            }
+        } else {
+            dateView.setVisibility(View.GONE);
+        }
     }
 
     private class SentMessageViewHolder extends RecyclerView.ViewHolder {
@@ -113,21 +128,6 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             }
         }
 
-    }
-
-    private void setDate(TextView dateView, Message message, boolean isFirstChat) {
-        if (isFirstChat) {
-            dateView.setVisibility(View.VISIBLE);
-            if (DateAndTimeFormatHandler.isToday(message.getCreatedAt())) {
-                dateView.setText(R.string.today);
-            } else if (DateAndTimeFormatHandler.isYesterday(message.getCreatedAt())) {
-                dateView.setText(R.string.yesterday);
-            } else {
-                dateView.setText(DateAndTimeFormatHandler.generateDateOfChat(message.getCreatedAt()));
-            }
-        } else {
-            dateView.setVisibility(View.GONE);
-        }
     }
 
     private class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
