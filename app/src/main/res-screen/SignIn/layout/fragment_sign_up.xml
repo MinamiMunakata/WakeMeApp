@@ -1,131 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Screen.SignIn.SignUpFragment"
     android:background="@color/colorBackground"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".Screen.SignIn.SignUpFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-        <LinearLayout
+        android:layout_marginLeft="@dimen/space_both_edges"
+        android:layout_marginRight="@dimen/space_both_edges"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/sign_up"
+            android:textSize="@dimen/text_h2"
+            android:textStyle="bold" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/small_vertical_space_bw_item"
+            android:src="@drawable/img_add_picture" />
+
+
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_header"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/space_both_edges"
-            android:layout_marginRight="@dimen/space_both_edges"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="true"
+            android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/sign_up"
-                android:textSize="@dimen/text_h2"
-                android:textStyle="bold" />
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_header"
+            android:text="@string/email" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="@dimen/small_vertical_space_bw_item"
-                android:src="@drawable/img_add_picture" />
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="true"
+            android:inputType="textEmailAddress" />
 
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_header"
+            android:text="@string/password" />
 
-            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/input_header"
-                android:text="Name" />
+        <EditText
+            android:id="@+id/edit_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="true"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/edit_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/signup_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/vertical_space_bw_items"
+            android:background="@drawable/rounded_button"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
-            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/input_header"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/edit_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/input_header"
-                android:text="Password" />
-
-            <EditText
-                android:id="@+id/edit_pw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword" />
-
-            <Button
-                android:textAllCaps="false"
-                android:id="@+id/signup_btn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/vertical_space_bw_items"
-                android:background="@drawable/rounded_button"
-                android:text="@string/sign_up"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/sign_up_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/sign_up_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red" />
 
     </LinearLayout>
+
     <RelativeLayout
-        android:visibility="invisible"
         android:id="@+id/loading_bg_sign_up"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/loading_bg"
-            android:alpha="0.6"/>
+            android:alpha="0.6"
+            android:background="@drawable/loading_bg" />
+
         <ImageView
+            android:contentDescription="@string/loading"
             android:id="@+id/sign_up_loading_img"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
     </RelativeLayout>
     <!--<ProgressBar-->
-        <!--android:id="@+id/progressbar"-->
-        <!--android:indeterminateDrawable="@drawable/custom_progress_bar"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:indeterminate="true"-->
-        <!--android:max="100"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"/>-->
+    <!--android:id="@+id/progressbar"-->
+    <!--android:indeterminateDrawable="@drawable/custom_progress_bar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:indeterminate="true"-->
+    <!--android:max="100"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"/>-->
 
 </android.support.constraint.ConstraintLayout>
