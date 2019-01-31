@@ -288,19 +288,19 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     public void toggleEditMode(View view) {
         switch (view.getId()) {
             case R.id.name_editor:
-                removeFocus();
+                removeFocus(displayNameTextField);
                 setEditable(displayNameTextField);
-                return;
+                break;
             case R.id.email_editor:
-                removeFocus();
+                removeFocus(emailTextField);
                 setEditable(emailTextField);
-                return;
+                break;
             case R.id.pw_editor:
-                removeFocus();
+                removeFocus(pwTextField);
                 setEditable(pwTextField);
-                return;
+                break;
             default:
-                return;
+                break;
         }
     }
 
@@ -311,10 +311,12 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         }
     }
 
-    private void removeFocus() {
+    private void removeFocus(EditText editText) {
         EditText[] editTexts = new EditText[]{displayNameTextField, emailTextField, pwTextField};
         for (EditText et : editTexts) {
-            et.setEnabled(false);
+            if (editText != et) {
+                et.setEnabled(false);
+            }
         }
     }
 }
