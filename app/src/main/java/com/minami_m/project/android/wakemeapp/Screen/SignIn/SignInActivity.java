@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FacebookLoginListener;
@@ -60,6 +62,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // facebook
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
@@ -192,5 +195,16 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         Glide.with(context).load(R.raw.loading).into(loadingImg);
         this.loadingBG = loadingBackground;
         this.loadingBG.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_ENTER:
+                InputHandler.hideSoftKeyBoard(this);
+                return true;
+            default:
+                return super.onKeyUp(keyCode, event);
+        }
     }
 }

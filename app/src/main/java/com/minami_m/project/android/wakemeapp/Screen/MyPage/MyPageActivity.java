@@ -331,8 +331,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_ENTER:
-                System.out.println("Enter");
-                // TODO: Input -> SignIn
                 InputHandler.hideSoftKeyBoard(this);
                 return true;
             default:

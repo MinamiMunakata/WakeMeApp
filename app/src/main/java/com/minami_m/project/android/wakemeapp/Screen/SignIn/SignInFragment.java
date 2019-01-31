@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,6 +72,8 @@ public class SignInFragment extends Fragment implements
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         // Initialize Firebase Auth
+        TextView signUp = view.findViewById(R.id.sign_up);
+        FontStyleHandler.setFont(getContext(), signUp, true, true);
         signInBtn = view.findViewById(R.id.sign_in_btn);
         FontStyleHandler.setFont(getContext(), signInBtn, false, true);
         editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);

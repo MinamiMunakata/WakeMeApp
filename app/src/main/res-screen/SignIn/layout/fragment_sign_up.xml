@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/sign_up"
-            android:textSize="@dimen/text_h2"
-            android:textStyle="bold" />
+            android:textColor="@color/colorMyAccent"
+            android:textSize="@dimen/text_h2" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_icon"
