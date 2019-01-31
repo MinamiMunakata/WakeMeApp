@@ -255,12 +255,13 @@ public class SearchFriendActivity extends AppCompatActivity
     public void showFriend(ImageView iconHolder, TextView nameHolder) {
         if (friend == null) return;
         if (friend.getIcon() != null) {
-            Log.i(TAG, "showFriend: 123456" + friend.getIcon());
             Picasso.get()
-                    .load(friend.getIcon()) // TODO: set default image
-                    .error(R.drawable.ico_awake)
+                    .load(friend.getIcon())
+                    .error(R.drawable.ico_default_avator)
                     .into(iconHolder);
             nameHolder.setText(friend.getName());
+        } else {
+            iconHolder.setImageResource(R.drawable.ico_default_avator);
         }
     }
 

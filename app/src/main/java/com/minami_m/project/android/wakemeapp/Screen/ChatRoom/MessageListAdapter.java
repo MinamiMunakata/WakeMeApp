@@ -26,7 +26,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private String currentUserId;
     private String receiverIcon;
 
-    public MessageListAdapter(List<Message> messageList, String receiverId, String receiverIcon) {
+    MessageListAdapter(List<Message> messageList, String receiverId, String receiverIcon) {
         this.mMessageList = messageList;
         this.currentUserId = receiverId;
         this.receiverIcon = receiverIcon;
@@ -95,7 +95,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private class SentMessageViewHolder extends RecyclerView.ViewHolder {
         private TextView textView, dateView, seenHolder;
 
-        public SentMessageViewHolder(@NonNull View itemView) {
+        SentMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             dateView = itemView.findViewById(R.id.sender_date);
             textView = itemView.findViewById(R.id.sent_message_text);
@@ -103,7 +103,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         }
 
-        public void bind(Message message, boolean isLast, boolean isFirstChat) {
+        void bind(Message message, boolean isLast, boolean isFirstChat) {
             textView.setText(message.getText());
             setDate(dateView, message, isFirstChat);
             if (isLast && message.getIsSeen()) {
@@ -134,20 +134,24 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         private TextView textView, dateView;
         private CircleImageView imageView;
 
-        public ReceivedMessageViewHolder(@NonNull View itemView) {
+        ReceivedMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             dateView = itemView.findViewById(R.id.receiver_date);
             textView = itemView.findViewById(R.id.received_bubble);
             imageView = itemView.findViewById(R.id.receiver_bubble_icon);
         }
 
-        public void bind(Message message, String receiverIcon, boolean isFirstChat) {
+        void bind(Message message, String receiverIcon, boolean isFirstChat) {
             setDate(dateView, message, isFirstChat);
             textView.setText(message.getText());
-            Picasso.get()
-                    .load(receiverIcon)
-                    .error(R.drawable.ico_awake) // TODO: set default image
-                    .into(imageView);
+            if (receiverIcon != null) {
+                Picasso.get()
+                        .load(receiverIcon)
+                        .error(R.drawable.ico_default_avator)
+                        .into(imageView);
+            } else {
+                imageView.setImageResource(R.drawable.ico_default_avator);
+            }
         }
     }
 }
