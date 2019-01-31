@@ -225,10 +225,10 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 System.out.println(wakeUpTime);
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
-                        timer_box.setTextColor(getResources().getColor(R.color.colorMyAccent));
+                        timer_box.setTextColor(getColor(R.color.colorMyAccent));
                         timer_box.setAlpha(1);
                     } else {
-                        timer_box.setTextColor(getResources().getColor(R.color.black));
+                        timer_box.setTextColor(getColor(R.color.black));
                         timer_box.setAlpha(0.3f);
                     }
                     timer_box.setText(wakeUpTime.toString());
@@ -288,16 +288,33 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     public void toggleEditMode(View view) {
         switch (view.getId()) {
             case R.id.name_editor:
-                displayNameTextField.setEnabled(!displayNameTextField.isEnabled());
+                removeFocus();
+                setEditable(displayNameTextField);
                 return;
             case R.id.email_editor:
-                emailTextField.setEnabled(!emailTextField.isEnabled());
+                removeFocus();
+                setEditable(emailTextField);
                 return;
             case R.id.pw_editor:
-                pwTextField.setEnabled(!pwTextField.isEnabled());
+                removeFocus();
+                setEditable(pwTextField);
                 return;
             default:
                 return;
+        }
+    }
+
+    private void setEditable(EditText editText) {
+        editText.setEnabled(!editText.isEnabled());
+        if (editText.isEnabled()) {
+            editText.requestFocus();
+        }
+    }
+
+    private void removeFocus() {
+        EditText[] editTexts = new EditText[]{displayNameTextField, emailTextField, pwTextField};
+        for (EditText et : editTexts) {
+            et.setEnabled(false);
         }
     }
 }
