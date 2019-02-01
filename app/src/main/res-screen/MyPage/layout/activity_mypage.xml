@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/setting_profile_icon"
                 android:layout_alignEnd="@+id/setting_profile_icon"
-                android:contentDescription="upload"
+                android:contentDescription="@string/upload"
                 android:src="@drawable/ico_camera" />
         </RelativeLayout>
 
@@ -68,17 +68,19 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:hint="@string/wake_up_time"
                     android:id="@+id/wake_up_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.3"
                     android:inputType="none"
                     android:singleLine="true"
-                    android:text="07:00 am"
+                    android:text="@string/default_07_00_am"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_h2" />
 
                 <ImageView
+                    android:contentDescription="@string/set"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/wake_up_time"
@@ -104,7 +106,7 @@
                     android:id="@+id/profile_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_h4" />
 
@@ -146,7 +148,7 @@
                     android:id="@+id/profile_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_h4" />
 
@@ -188,7 +190,7 @@
                     android:id="@+id/profile_pw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_h4" />
 
@@ -214,7 +216,7 @@
                             android:focusable="true"
                             android:hint="@string/enter_new_password"
                             android:inputType="textPassword"
-                            android:paddingRight="30dp"
+                            android:paddingEnd="30dp"
                             android:singleLine="true"
                             android:textSize="@dimen/text_h4" />
                     </android.support.design.widget.TextInputLayout>
@@ -233,6 +235,13 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/my_page_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_small_default_12" />
 
 
     </LinearLayout>

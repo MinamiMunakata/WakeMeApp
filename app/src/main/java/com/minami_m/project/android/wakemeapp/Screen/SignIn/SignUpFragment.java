@@ -90,14 +90,14 @@ public class SignUpFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         mAuth = FirebaseAuth.getInstance();
-        signUp = view.findViewById(R.id.sign_up);
+        signUp = view.findViewById(R.id.sign_up_title);
         FontStyleHandler.setFont(getContext(), signUp, true, true);
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
         setEmailFromSignInForm();
         errorMsg = view.findViewById(R.id.sign_up_error);
         pwField = view.findViewById(R.id.edit_pw);
-        Button signUpButton = view.findViewById(R.id.signup_btn);
+        Button signUpButton = view.findViewById(R.id.sign_up_btn);
         FontStyleHandler.setFont(getContext(), signUpButton, false, true);
         FontStyleHandler.setFont(getContext(), signUpButton, false, true);
         signUpButton.setOnClickListener(this);

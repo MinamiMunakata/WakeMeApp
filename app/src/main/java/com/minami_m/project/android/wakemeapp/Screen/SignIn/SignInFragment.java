@@ -48,10 +48,8 @@ public class SignInFragment extends Fragment implements
 
     private FirebaseAuth mAuth;
     private Button signInBtn;
-    private EditText editTextEmail;
-    private EditText editTextPw;
-    private TextView signUpLink;
-    private TextView errorMsg;
+    private EditText editTextEmail, editTextPw;
+    private TextView signUpLink, errorMsg;
     private ProfileTracker profileTracker;
     private String emailForSignUp = null;
     private String passwordForSignUp = null;
@@ -72,8 +70,6 @@ public class SignInFragment extends Fragment implements
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         // Initialize Firebase Auth
-        TextView signUp = view.findViewById(R.id.sign_up);
-        FontStyleHandler.setFont(getContext(), signUp, true, true);
         signInBtn = view.findViewById(R.id.sign_in_btn);
         FontStyleHandler.setFont(getContext(), signInBtn, false, true);
         editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);

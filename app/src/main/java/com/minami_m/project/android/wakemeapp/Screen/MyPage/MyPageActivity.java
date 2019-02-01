@@ -1,6 +1,5 @@
 package com.minami_m.project.android.wakemeapp.Screen.MyPage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,8 +16,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,8 +27,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
@@ -48,6 +48,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
@@ -64,8 +66,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: REMOVE if it doesn't work
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_mypage);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -93,8 +93,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
                 if (wakeUpTime != null) {
                     intent.putExtra("WakeUpTime", wakeUpTime);
-                    System.out.println("not null");
-                    System.out.println(wakeUpTime);
                 }
                 startActivity(intent);
                 overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -107,8 +105,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
                     if (wakeUpTime != null) {
                         intent.putExtra("WakeUpTime", wakeUpTime);
-                        System.out.println("not null");
-                        System.out.println(wakeUpTime);
                     }
                     startActivity(intent);
                     overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
@@ -227,9 +223,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 } else {
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
-                System.out.println(dataSnapshot.child("wakeUpTime").exists());
                 wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
-                System.out.println(wakeUpTime);
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
                         timer_box.setTextColor(getColor(R.color.colorMyAccent));
@@ -297,14 +291,17 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             case R.id.name_editor:
                 removeFocus(displayNameTextField);
                 setEditable(displayNameTextField);
+                displayNameTextField.setText(currentUser.getDisplayName());
                 break;
             case R.id.email_editor:
                 removeFocus(emailTextField);
                 setEditable(emailTextField);
+                emailTextField.setText(currentUser.getEmail());
                 break;
             case R.id.pw_editor:
                 removeFocus(pwTextField);
                 setEditable(pwTextField);
+                pwTextField.setText("");
                 break;
             default:
                 break;
@@ -331,10 +328,78 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_ENTER:
+                switch (getCurrentFocus().getId()) {
+                    case R.id.edit_profile_name:
+                        updateName(((EditText) getCurrentFocus()).getText().toString());
+                        break;
+                    case R.id.edit_profile_email:
+                        break;
+                    case R.id.edit_profile_pw:
+                        break;
+                    default:
+                        System.out.println(getCurrentFocus().getId());
+                        System.out.println(displayNameTextField.getId());
+                        break;
+                }
                 InputHandler.hideSoftKeyBoard(this);
                 return true;
             default:
                 return super.onKeyUp(keyCode, event);
         }
     }
+
+    // TODO: Check validation.
+    public void updateName(final String input) {
+        UserProfileChangeRequest nameUpdateRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName(input)
+                .build();
+        currentUser.updateProfile(nameUpdateRequest)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile successfully updated.");
+                            displayNameTextField.setEnabled(false);
+                            saveNameToFB(input);
+                        } else {
+                            toast("Failed to update. Please re-login.");
+                        }
+                    }
+                });
+
+
+    }
+
+    private void saveNameToFB(final String input) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/" + currentUser.getUid() + "/name", input);
+        DatabaseReference receiverPathRef = database.getReference("ReceiverPaths");
+        receiverPathRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot path : dataSnapshot.getChildren()) {
+                    childUpdates.put(path.getValue() + "/name", input);
+                }
+                database.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            toast("Failed to update. Please re-login.");
+                            // TODO: Jump to a login page
+                        } else {
+                            toast("User name is successfully updated.");
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
+            }
+        });
+    }
+
 }

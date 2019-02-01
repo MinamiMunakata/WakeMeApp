@@ -62,7 +62,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // facebook
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
