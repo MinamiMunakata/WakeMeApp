@@ -59,7 +59,7 @@
             <com.minami_m.project.android.wakemeapp.CustomBasicTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time"
+                android:text="@string/time"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_h4" />
 
@@ -73,6 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.3"
+                    android:focusable="false"
                     android:inputType="none"
                     android:singleLine="true"
                     android:text="@string/default_07_00_am"
@@ -236,7 +237,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:id="@+id/my_page_error"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

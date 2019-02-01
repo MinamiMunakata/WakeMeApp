@@ -59,7 +59,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     private ImageView profileIcon;
     private TextView profileName;
     private Uri filePath;
-    private TextView displayName, email, pw;
+    private TextView displayName, email, pw, errorMsg;
     private EditText displayNameTextField, emailTextField, pwTextField, timer_box;
     private WakeUpTime wakeUpTime;
 
@@ -69,6 +69,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         setContentView(R.layout.activity_mypage);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        errorMsg = findViewById(R.id.my_page_error);
         profileIcon = findViewById(R.id.setting_profile_icon);
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,6 +313,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         editText.setEnabled(!editText.isEnabled());
         if (editText.isEnabled()) {
             editText.requestFocus();
+        } else {
+            errorMsg.setText("");
         }
     }
 
@@ -333,6 +336,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         updateName(((EditText) getCurrentFocus()).getText().toString());
                         break;
                     case R.id.edit_profile_email:
+                        updateEmail(((EditText) getCurrentFocus()).getText().toString());
                         break;
                     case R.id.edit_profile_pw:
                         break;
@@ -358,16 +362,66 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "User profile successfully updated.");
                             displayNameTextField.setEnabled(false);
                             saveNameToFB(input);
                         } else {
-                            toast("Failed to update. Please re-login.");
+                            toast("Failed to update.");
+                            errorMsg.setText(task.getException().getMessage());
+                            Log.e(TAG, "onComplete: ", task.getException());
                         }
                     }
                 });
 
 
+    }
+
+    public void updateEmail(final String input) {
+        currentUser.updateEmail(input).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    emailTextField.setEnabled(false);
+                    saveEmailToFB(input);
+                } else {
+                    toast("Failed to update");
+                    errorMsg.setText(task.getException().getMessage());
+                    Log.e(TAG, "onComplete: ", task.getException());
+                }
+            }
+        });
+    }
+
+    private void saveEmailToFB(final String input) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/" + currentUser.getUid() + "/email", input);
+        DatabaseReference receiverPathRef = database.getReference("ReceiverPaths");
+        receiverPathRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot path : dataSnapshot.getChildren()) {
+                    childUpdates.put(path.getValue() + "/email", input);
+                }
+                database.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            toast("Failed to update.");
+                            errorMsg.setText(databaseError.getMessage());
+                            Log.e(TAG, "onComplete: ", databaseError.toException());
+                        } else {
+                            toast("Email is successfully updated.");
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
+            }
+        });
     }
 
     private void saveNameToFB(final String input) {
@@ -385,8 +439,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         if (databaseError != null) {
-                            toast("Failed to update. Please re-login.");
-                            // TODO: Jump to a login page
+                            toast("Failed to update.");
+                            errorMsg.setText(databaseError.getMessage());
+                            Log.e(TAG, "onComplete: ", databaseError.toException());
                         } else {
                             toast("User name is successfully updated.");
                         }
@@ -402,4 +457,10 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("Stop");
+        errorMsg.setText("");
+    }
 }
