@@ -339,6 +339,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         updateEmail(((EditText) getCurrentFocus()).getText().toString());
                         break;
                     case R.id.edit_profile_pw:
+                        updatePassword(((EditText) getCurrentFocus()).getText().toString());
                         break;
                     default:
                         System.out.println(getCurrentFocus().getId());
@@ -352,27 +353,20 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         }
     }
 
-    // TODO: Check validation.
-    public void updateName(final String input) {
-        UserProfileChangeRequest nameUpdateRequest = new UserProfileChangeRequest.Builder()
-                .setDisplayName(input)
-                .build();
-        currentUser.updateProfile(nameUpdateRequest)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            displayNameTextField.setEnabled(false);
-                            saveNameToFB(input);
-                        } else {
-                            toast("Failed to update.");
-                            errorMsg.setText(task.getException().getMessage());
-                            Log.e(TAG, "onComplete: ", task.getException());
-                        }
-                    }
-                });
-
-
+    public void updatePassword(final String input) {
+        currentUser.updatePassword(input).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    pwTextField.setEnabled(false);
+                    toast("Password is successfully updated.");
+                } else {
+                    toast("Failed to update");
+                    errorMsg.setText(task.getException().getMessage());
+                    Log.e(TAG, "onComplete: ", task.getException());
+                }
+            }
+        });
     }
 
     public void updateEmail(final String input) {
@@ -422,6 +416,29 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
+    }
+
+    // TODO: Check validation.
+    public void updateName(final String input) {
+        UserProfileChangeRequest nameUpdateRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName(input)
+                .build();
+        currentUser.updateProfile(nameUpdateRequest)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            displayNameTextField.setEnabled(false);
+                            saveNameToFB(input);
+                        } else {
+                            toast("Failed to update.");
+                            errorMsg.setText(task.getException().getMessage());
+                            Log.e(TAG, "onComplete: ", task.getException());
+                        }
+                    }
+                });
+
+
     }
 
     private void saveNameToFB(final String input) {
