@@ -11,10 +11,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
-import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.Model.Message;
 import com.minami_m.project.android.wakemeapp.Model.User;
+import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,13 +22,13 @@ import java.util.List;
 import java.util.Map;
 
 public class FirebaseRealtimeDatabaseHelper {
-    private static final String TAG = "RealtimeDatabaseHelper";
     public static final FirebaseDatabase FIREBASE_DATABASE = FirebaseDatabase.getInstance();
     public static final DatabaseReference USERS_REF = FIREBASE_DATABASE.getReference("Users");
     public static final DatabaseReference MESSAGES_REF = FIREBASE_DATABASE.getReference("Messages");
-    private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
     public static final DatabaseReference FRIEND_ID_LIST_REF = FIREBASE_DATABASE.getReference("FriendIDList");
     public static final DatabaseReference CHAT_ROOM_ID_LIST_REF = FIREBASE_DATABASE.getReference("ChatRoomIDList");
+    private static final String TAG = "RealtimeDatabaseHelper";
+    private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
     private static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
 
     public static FirebaseRealtimeDatabaseHelper newInstance() {
@@ -46,18 +46,12 @@ public class FirebaseRealtimeDatabaseHelper {
     }
 
     public static void updateIcon(FirebaseUser currentUser, final String iconUrl) {
-        // TODO: Rewrite childUpdates to save at the same time
-        USERS_REF.child(currentUser.getUid()).child("icon").setValue(iconUrl, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                showResult(databaseError);
-            }
-        });
         final Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Users/" + currentUser.getUid() + "/icon", iconUrl);
         RECEIVER_PATH_REF.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot path: dataSnapshot.getChildren()) {
+                for (DataSnapshot path : dataSnapshot.getChildren()) {
                     childUpdates.put(path.getValue() + "/icon", iconUrl);
                 }
                 FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -78,17 +72,12 @@ public class FirebaseRealtimeDatabaseHelper {
 
     public static void updateWakeUpTIme(FirebaseUser currentUser, final WakeUpTime wakeUpTime) {
         if (currentUser != null) {
-            USERS_REF.child(currentUser.getUid()).child("wakeUpTime").setValue(wakeUpTime, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    showResult(databaseError);
-                }
-            });
             final Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/Users/" + currentUser.getUid() + "/wakeUpTime", wakeUpTime);
             RECEIVER_PATH_REF.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot path: dataSnapshot.getChildren()) {
+                    for (DataSnapshot path : dataSnapshot.getChildren()) {
                         childUpdates.put(path.getValue() + "/wakeUpTime", wakeUpTime);
                     }
                     FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -116,29 +105,29 @@ public class FirebaseRealtimeDatabaseHelper {
         childUpdates.put("/Users/" + userId + "/status", status);
         RECEIVER_PATH_REF.child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot path: dataSnapshot.getChildren()) {
-                    childUpdates.put(path.getValue() + "/lastLogin", loginTime);
-                    childUpdates.put(path.getValue() + "/status", status);
-                }
-                FIREBASE_DATABASE.getReference().updateChildren(
-                        childUpdates,
-                        new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onComplete(@Nullable DatabaseError databaseError,
-                                           @NonNull DatabaseReference databaseReference) {
-                        showResult(databaseError);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot path : dataSnapshot.getChildren()) {
+                            childUpdates.put(path.getValue() + "/lastLogin", loginTime);
+                            childUpdates.put(path.getValue() + "/status", status);
+                        }
+                        FIREBASE_DATABASE.getReference().updateChildren(
+                                childUpdates,
+                                new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError databaseError,
+                                                           @NonNull DatabaseReference databaseReference) {
+                                        showResult(databaseError);
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                        Log.e(TAG, "onCancelled: ", databaseError.toException());
                     }
                 });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
-                Log.e(TAG, "onCancelled: ", databaseError.toException());
-            }
-        });
 //        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
 //        USERS_REF.child(currentUserId).child("status").setValue(TimeHandler.generateStatus(loginTime));
     }
@@ -216,7 +205,7 @@ public class FirebaseRealtimeDatabaseHelper {
 
     public static void sendNewMessage(String chatRoomId, Message message) {
         String key = MESSAGES_REF.child(chatRoomId).push().getKey();
-        if (key != null){
+        if (key != null) {
             message.setId(key);
             MESSAGES_REF.child(chatRoomId).child(key)
                     .setValue(message, new DatabaseReference.CompletionListener() {
@@ -235,12 +224,12 @@ public class FirebaseRealtimeDatabaseHelper {
         Log.i(TAG, "updateStatusThatMessageHasSeen: 123456 is updated!");
         MESSAGES_REF.child(chatRoomId).child(message.getId()).child("isSeen")
                 .setValue(message.getIsSeen(), new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError,
-                                   @NonNull DatabaseReference databaseReference) {
-                showResult(databaseError);
-            }
-        });
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError,
+                                           @NonNull DatabaseReference databaseReference) {
+                        showResult(databaseError);
+                    }
+                });
     }
 
 
