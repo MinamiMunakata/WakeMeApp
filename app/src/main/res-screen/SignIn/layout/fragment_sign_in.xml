@@ -26,10 +26,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:contentDescription="@string/logo"
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/logo"
                     android:src="@drawable/img_bubble"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -48,11 +48,11 @@
                 </FrameLayout>
 
                 <ImageView
-                    android:contentDescription="@string/app_name"
                     android:id="@+id/app_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="false"
+                    android:contentDescription="@string/app_name"
                     android:src="@drawable/img_logo"
                     app:layout_constraintBottom_toTopOf="@id/center"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -72,10 +72,10 @@
                     android:layout_height="26dp">
 
                     <ImageView
-                        android:contentDescription="@string/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:contentDescription="@string/email"
                         android:src="@drawable/ico_email_gray" />
 
                 </FrameLayout>
@@ -104,10 +104,10 @@
                     android:layout_height="26dp">
 
                     <ImageView
-                        android:contentDescription="@string/password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:contentDescription="@string/password"
                         android:src="@drawable/ico_password_gray" />
                 </FrameLayout>
 
@@ -139,8 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/facebook_login_btn"
-                android:drawableStart="@drawable/ico_facebook_resize"
                 android:drawablePadding="2dp"
+                android:drawableStart="@drawable/ico_facebook_resize"
                 android:gravity="center"
                 android:paddingHorizontal="10dp"
                 android:text="@string/sign_in_with_facebook"
@@ -203,12 +203,22 @@
             android:background="@drawable/loading_bg" />
 
         <ImageView
-            android:contentDescription="@string/loading"
             android:id="@+id/sign_in_loading_img"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/loading" />
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/reset_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@android:drawable/ic_menu_help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
