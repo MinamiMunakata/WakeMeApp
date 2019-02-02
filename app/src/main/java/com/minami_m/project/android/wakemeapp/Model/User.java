@@ -5,13 +5,11 @@ import java.util.Date;
 public class User {
     private String id;
     private String name;
-    private String nickName;
     private String icon;
     private String email;
     private String status;
     private boolean isSleeping;
     private long lastLogin;
-    private long alarmTime;
     private WakeUpTime wakeUpTime;
 
     public User() {
@@ -20,7 +18,6 @@ public class User {
     public User(String id, String name, String email, String icon) {
         this.id = id;
         this.name = name;
-        this.nickName = name;
         this.icon = icon;
         this.email = email;
         this.lastLogin = new Date().getTime();
@@ -29,7 +26,6 @@ public class User {
     public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.nickName = name;
         this.email = email;
         this.lastLogin = new Date().getTime();
     }
@@ -48,14 +44,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getIcon() {
@@ -88,14 +76,6 @@ public class User {
 
     public void setLastLogin(long lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    public long getAlarmTime() {
-        return alarmTime;
-    }
-
-    public void setAlarmTime(long alarmTime) {
-        this.alarmTime = alarmTime;
     }
 
     public String getStatus() {
