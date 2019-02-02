@@ -460,6 +460,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                             errorMsg.setText(databaseError.getMessage());
                             Log.e(TAG, "onComplete: ", databaseError.toException());
                         } else {
+                            profileName.setText(input);
                             toast("User name is successfully updated.");
                         }
                     }

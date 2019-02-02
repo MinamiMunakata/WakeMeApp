@@ -126,7 +126,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 //                notificationSwitch.setChecked(wakeUpTime.getNotificationIsOn());
                 repeatSwitch.setChecked(wakeUpTime.getRepeatIsOn());
                 if (wakeUpTime.getRepeatIsOn()) repeatOptions.setVisibility(View.VISIBLE);
-                repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
+                repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
             }
         }
     }
@@ -205,7 +205,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     notifier.cancelAllNotification();
                 }
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
-                repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
+                repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
 
             }
         };
@@ -241,7 +241,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     notifier.cancelIfRepeatOff(wakeUpTime);
                 }
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
-                repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
+                repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
 
             }
         };
@@ -292,7 +292,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 if (wakeUpTime.checkRepeatOnDayOfWeekIsAllOff()) {
                     repeatSwitch.setChecked(false);
                 }
-                repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
+                repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
             }
         };
@@ -327,7 +327,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTime.setHourOfDay(hourOfDay);
                                 wakeUpTime.setMinute(minute);
                                 mustWakeUpSwitch.setChecked(true);
-                                repeatInWeek.setText(wakeUpTime.getAlarmOnDayDescription());
+                                repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
                                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
 
                             }

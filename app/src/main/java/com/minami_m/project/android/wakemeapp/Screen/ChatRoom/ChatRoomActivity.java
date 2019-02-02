@@ -1,15 +1,17 @@
 package com.minami_m.project.android.wakemeapp.Screen.ChatRoom;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,16 +25,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
-import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Model.Message;
-import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.MyPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
@@ -46,18 +47,22 @@ public class ChatRoomActivity
     public static final String TAG = "--ChatRoomActivity--";
     private List<Message> mMessageList;
     private MessageListAdapter adapter;
-    private String chatRoomId;
-    private String receiverIcon;
-    private String receiverName;
-    private String receiverId;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private RecyclerView recyclerView;
-    private ImageButton sendButton;
     private EditText editText;
     private TextView title;
     private TextView subtitle;
     private ChatRoomCard chatRoomCard;
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(html);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,7 @@ public class ChatRoomActivity
         FontStyleHandler.setFont(this, title, true, true);
         subtitle = findViewById(R.id.toolbar_subtitle_chat_room);
         FontStyleHandler.setFont(this, subtitle, false, false);
-        sendButton = findViewById(R.id.send_button);
+        ImageButton sendButton = findViewById(R.id.send_button);
         editText = findViewById(R.id.message_text_field);
         FontStyleHandler.setFont(this, editText, false, false);
         mMessageList = new ArrayList<>();
@@ -85,30 +90,12 @@ public class ChatRoomActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        title.setText(receiverName);
-        FirebaseRealtimeDatabaseHelper.USERS_REF.child(receiverId)
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i(TAG, "onDataChange: 1234567 id = " + receiverId);
-                Log.i(TAG, "onDataChange: 1234567" + dataSnapshot.getKey());
-                String status = dataSnapshot.child("status").getValue(String.class);
-                Log.i(TAG, "onDataChange: 1234567 name: " + dataSnapshot.getValue(User.class));
-                Log.i(TAG, "onDataChange: 1234567 status: " + status);
-                subtitle.setText(status);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        title.setText(chatRoomCard.getReceiverName());
+        subtitle.setText(chatRoomCard.getReceiverStatus());
     }
 
     private void setupRecyclerViewWithAdapter() {
         recyclerView = findViewById(R.id.recycler_message_list_view);
-//        recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -125,7 +112,7 @@ public class ChatRoomActivity
             Log.i(TAG, "setupRecyclerViewWithAdapter: " + e.getMessage());
             launchActivity(SignInActivity.class);
         }
-        adapter = new MessageListAdapter(mMessageList, currentUserId, receiverIcon);
+        adapter = new MessageListAdapter(mMessageList, currentUserId, chatRoomCard.getReceiverIcon());
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -138,7 +125,6 @@ public class ChatRoomActivity
                 if (lastVisiblePosition == -1 || (positionStart >= (messageCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     recyclerView.scrollToPosition(positionStart);
                 }
-
             }
         });
         recyclerView.setLayoutManager(layoutManager);
@@ -150,10 +136,9 @@ public class ChatRoomActivity
         Bundle data = intent.getExtras();
         if (data != null) {
             chatRoomCard = data.getParcelable("ChatRoomCard");
-            chatRoomId = chatRoomCard.getChatRoomId();
-            receiverName = chatRoomCard.getReceiverName();
-            receiverIcon = chatRoomCard.getReceiverIcon();
-            receiverId = chatRoomCard.getReceiverId();
+        }
+        if (chatRoomCard == null) {
+            launchActivity(SignInActivity.class);
         }
 
     }
@@ -164,33 +149,34 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
-        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomId)
+        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mMessageList.clear();
-                for (DataSnapshot messageSnapShot: dataSnapshot.getChildren()) {
-                    Message message = messageSnapShot.getValue(Message.class);
-                    if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
-                        message.setIsSeen(true);
-                        FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomId, message);
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mMessageList.clear();
+                        for (DataSnapshot messageSnapShot : dataSnapshot.getChildren()) {
+                            Message message = messageSnapShot.getValue(Message.class);
+                            if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
+                                message.setIsSeen(true);
+                                FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
+                            }
+                            mMessageList.add(message);
+                            adapter.notifyDataSetChanged();
+                            recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
+                        }
                     }
-                    mMessageList.add(message);
-                    adapter.notifyDataSetChanged();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                    }
+                });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu,true);
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 
@@ -237,13 +223,21 @@ public class ChatRoomActivity
 
     @Override
     public void onClick(View v) {
-//        InputHandler.hideSoftKeyBoard(this);
         if (isValidInput()) {
+//            Message message = new Message(
+//                    (editText.getText().toString()
+//                            + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;")),
+//                    currentUser.getUid(),
+//                    new Date().getTime());
             Message message = new Message(
-                    (editText.getText().toString() + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;")), currentUser.getUid(), new Date().getTime());
+                    editText.getText().toString()
+                            + fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;"),
+                    currentUser.getUid(),
+                    new Date().getTime()
+            );
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
-            FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomId, message);
+            FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {
