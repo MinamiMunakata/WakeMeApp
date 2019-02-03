@@ -15,6 +15,7 @@ public class WakeUpTime implements Parcelable{
     private boolean repeatIsOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
     private int hourOfDay, minute;
+    private long time;
 
     protected WakeUpTime(Parcel in) {
         mustWakeUp = in.readByte() != 0;
@@ -281,7 +282,7 @@ public class WakeUpTime implements Parcelable{
                 sun = !sun;
                 break;
             default:
-                return;
+                break;
         }
     }
 

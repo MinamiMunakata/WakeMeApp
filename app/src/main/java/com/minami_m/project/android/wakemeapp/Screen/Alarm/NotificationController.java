@@ -15,23 +15,26 @@ import java.util.Calendar;
 import static android.content.Context.ALARM_SERVICE;
 
 public class NotificationController {
-    private Context context;
     private static final int REQUEST_CODE_ONCE = 0;
     private static final long INTERVAL_WEEK = AlarmManager.INTERVAL_DAY * 7;
+    private Context context;
+    private String userId;
 
-    public static NotificationController newInstance(Context context) {
-        return new NotificationController(context);
-    }
-
+    // TODO: userId
     private NotificationController(Context context) {
         this.context = context;
+    }
+
+    // TODO: userId
+    public static NotificationController newInstance(Context context) {
+        return new NotificationController(context);
     }
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
         if (wakeUpTime.getMustWakeUp()) {
             if (wakeUpTime.getRepeatIsOn()) {
                 ArrayList<Integer> extraDays = wakeUpTime.extraDays();
-                for (Integer day: extraDays) {
+                for (Integer day : extraDays) {
                     setNotificationAt(wakeUpTime, day);
 
                 }
@@ -48,7 +51,7 @@ public class NotificationController {
     }
 
     public void checkIfNotificationIsWorking() {
-        //checking if alarm is working with pendingIntent
+        // Checking if alarm is working with pendingIntent
         for (int requestCode = 0; requestCode <= 7; requestCode++) {
             PendingIntent sender = generateSender(requestCode, PendingIntent.FLAG_NO_CREATE);
             boolean isWorking = (sender != null);//just changed the flag
@@ -71,10 +74,11 @@ public class NotificationController {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), INTERVAL_WEEK, sender);
     }
 
-    public void setNotificationOnce(WakeUpTime wakeUpTime) {
+    private void setNotificationOnce(WakeUpTime wakeUpTime) {
         // Set Time
         Calendar time = generateWakeUpTime(wakeUpTime);
         // Create Intent
+        // TODO: Put Extra
         PendingIntent sender = generateSender(REQUEST_CODE_ONCE, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
