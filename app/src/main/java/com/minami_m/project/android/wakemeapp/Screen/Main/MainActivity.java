@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 loadingImage.setVisibility(View.VISIBLE);
                 chatRoomCards.clear();
                 for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
+                    System.out.println(chatRoomIdSnapshot);
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
+                    System.out.println(receiver);
                     FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
                     ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                     chatRoomCards.add(roomCard);

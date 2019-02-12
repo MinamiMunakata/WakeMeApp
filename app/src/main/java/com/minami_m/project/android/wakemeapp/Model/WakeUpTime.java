@@ -10,6 +10,14 @@ import java.util.Calendar;
 import java.util.Map;
 
 public class WakeUpTime implements Parcelable {
+
+    private boolean mustWakeUp;
+    private boolean notificationIsOn;
+    private boolean repeatIsOn;
+    private boolean mon, tue, wed, thu, fri, sat, sun;
+    private int hourOfDay, minute;
+    private long wakeUpTimeInMillis;
+
     public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
         @Override
         public WakeUpTime createFromParcel(Parcel in) {
@@ -21,12 +29,6 @@ public class WakeUpTime implements Parcelable {
             return new WakeUpTime[size];
         }
     };
-    private boolean mustWakeUp;
-    private boolean notificationIsOn;
-    private boolean repeatIsOn;
-    private boolean mon, tue, wed, thu, fri, sat, sun;
-    private int hourOfDay, minute;
-    private long wakeUpTimeInMillis;
 
     public WakeUpTime() {
     }

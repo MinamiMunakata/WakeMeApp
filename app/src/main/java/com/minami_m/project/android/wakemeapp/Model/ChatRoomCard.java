@@ -6,17 +6,7 @@ import android.os.Parcelable;
 import java.util.Calendar;
 
 public class ChatRoomCard implements Parcelable {
-    public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
-        @Override
-        public ChatRoomCard createFromParcel(Parcel in) {
-            return new ChatRoomCard(in);
-        }
 
-        @Override
-        public ChatRoomCard[] newArray(int size) {
-            return new ChatRoomCard[size];
-        }
-    };
     private String chatRoomId;
     //    private User receiver;
     private String receiverId;
@@ -25,15 +15,6 @@ public class ChatRoomCard implements Parcelable {
     private String receiverStatus;
     private long oversleepTime;
     private boolean isReceiverSleeping;
-
-    protected ChatRoomCard(Parcel in) {
-        chatRoomId = in.readString();
-        receiverId = in.readString();
-        receiverName = in.readString();
-        receiverIcon = in.readString();
-        receiverStatus = in.readString();
-        isReceiverSleeping = in.readByte() != 0;
-    }
 
     public ChatRoomCard() {
     }
@@ -49,23 +30,31 @@ public class ChatRoomCard implements Parcelable {
         setupOversleepTime(receiver);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+
+    protected ChatRoomCard(Parcel in) {
+        chatRoomId = in.readString();
+        receiverId = in.readString();
+        receiverName = in.readString();
+        receiverIcon = in.readString();
+        receiverStatus = in.readString();
+        oversleepTime = in.readLong();
+        isReceiverSleeping = in.readByte() != 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
+        @Override
+        public ChatRoomCard createFromParcel(Parcel in) {
+            return new ChatRoomCard(in);
+        }
 
-        dest.writeString(chatRoomId);
-        dest.writeString(receiverId);
-        dest.writeString(receiverName);
-        dest.writeString(receiverIcon);
-        dest.writeString(receiverStatus);
-        dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
-    }
+        @Override
+        public ChatRoomCard[] newArray(int size) {
+            return new ChatRoomCard[size];
+        }
+    };
 
     // TODO: check if an user has overslept
+    // TODO: Parcel
     public void setupOversleepTime(User user) {
         WakeUpTime wakeUpTime = user.getWakeUpTime();
         Calendar currentTime = Calendar.getInstance();
@@ -167,7 +156,15 @@ public class ChatRoomCard implements Parcelable {
         isReceiverSleeping = receiverSleeping;
     }
 
-//    public User getReceiver() {
+    public long getOversleepTime() {
+        return oversleepTime;
+    }
+
+    public void setOversleepTime(long oversleepTime) {
+        this.oversleepTime = oversleepTime;
+    }
+
+    //    public User getReceiver() {
 //        return receiver;
 //    }
 
@@ -183,5 +180,21 @@ public class ChatRoomCard implements Parcelable {
                 this.receiverName,
                 this.receiverId,
                 this.receiverStatus);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(chatRoomId);
+        dest.writeString(receiverId);
+        dest.writeString(receiverName);
+        dest.writeString(receiverIcon);
+        dest.writeString(receiverStatus);
+        dest.writeLong(oversleepTime);
+        dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
     }
 }
