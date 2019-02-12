@@ -3,26 +3,9 @@ package com.minami_m.project.android.wakemeapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ChatRoomCard implements Parcelable{
-    private String chatRoomId;
-//    private User receiver;
-    private String receiverId;
+import java.util.Calendar;
 
-    private String receiverName;
-    private String receiverIcon;
-    private String receiverStatus;
-    private boolean isReceiverSleeping;
-
-
-    protected ChatRoomCard(Parcel in) {
-        chatRoomId = in.readString();
-        receiverId = in.readString();
-        receiverName = in.readString();
-        receiverIcon = in.readString();
-        receiverStatus = in.readString();
-        isReceiverSleeping = in.readByte() != 0;
-    }
-
+public class ChatRoomCard implements Parcelable {
     public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
         @Override
         public ChatRoomCard createFromParcel(Parcel in) {
@@ -34,6 +17,36 @@ public class ChatRoomCard implements Parcelable{
             return new ChatRoomCard[size];
         }
     };
+    private String chatRoomId;
+    //    private User receiver;
+    private String receiverId;
+    private String receiverName;
+    private String receiverIcon;
+    private String receiverStatus;
+    private long oversleepTime;
+    private boolean isReceiverSleeping;
+
+    protected ChatRoomCard(Parcel in) {
+        chatRoomId = in.readString();
+        receiverId = in.readString();
+        receiverName = in.readString();
+        receiverIcon = in.readString();
+        receiverStatus = in.readString();
+        isReceiverSleeping = in.readByte() != 0;
+    }
+
+    public ChatRoomCard() {
+    }
+
+    public ChatRoomCard(String chatRoomId, User receiver) {
+        this.chatRoomId = chatRoomId;
+//        this.receiver = receiver;
+        this.receiverId = receiver.getId();
+        this.receiverName = receiver.getName();
+        this.receiverIcon = receiver.getIcon();
+        this.receiverStatus = receiver.getStatus();
+        this.isReceiverSleeping = receiver.getIsSleeping();
+    }
 
     @Override
     public int describeContents() {
@@ -51,27 +64,42 @@ public class ChatRoomCard implements Parcelable{
         dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
     }
 
+    private void setupStatus(User user) {
 
-    public ChatRoomCard() {
     }
 
-    public ChatRoomCard(String chatRoomId, User receiver) {
-        this.chatRoomId = chatRoomId;
-//        this.receiver = receiver;
-        this.receiverId = receiver.getId();
-        this.receiverName = receiver.getName();
-        this.receiverIcon = receiver.getIcon();
-        this.receiverStatus = receiver.getStatus();
-        this.isReceiverSleeping = receiver.getIsSleeping();
+    // TODO: check if an user has overslept
+    public void setupOversleepTime(User user) {
+        WakeUpTime wakeUpTime = user.getWakeUpTime();
+        Calendar currentTime = Calendar.getInstance();
+        if (wakeUpTime.getMustWakeUp()) {
+            if (wakeUpTime.getRepeatIsOn()) {
+                if (mustWakeUpToday(wakeUpTime, currentTime)) {
+
+                } else {
+                    this.oversleepTime = 0;
+                }
+            } else {
+                if (user.getLastLogin() >= wakeUpTime.getWakeUpTimeInMillis()) {
+                    this.oversleepTime = 0;
+                } else {
+                    if (currentTime.getTimeInMillis() < wakeUpTime.getWakeUpTimeInMillis()) {
+                        this.oversleepTime = 0;
+                    }
+                }
+            }
+        } else {
+            this.oversleepTime = 0;
+        }
     }
 
-    public ChatRoomCard(User receiver) {
-//        this.receiver = receiver;
-        this.receiverId = receiver.getId();
-        this.receiverName = receiver.getName();
-        this.receiverIcon = receiver.getIcon();
-        this.receiverStatus = receiver.getStatus();
-        this.isReceiverSleeping = receiver.getIsSleeping();
+    private boolean mustWakeUpToday(WakeUpTime wakeUpTime, Calendar currentTime) {
+        for (Integer day : wakeUpTime.generateExtraDays()) {
+            if (day == currentTime.get(Calendar.DAY_OF_WEEK)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -134,11 +162,10 @@ public class ChatRoomCard implements Parcelable{
 
     @Override
     public String toString() {
-        String discription = String.format(
+        return String.format(
                 "\nReceiver: %s\nId: %s\nStatus: %s",
                 this.receiverName,
                 this.receiverId,
                 this.receiverStatus);
-        return discription;
     }
 }

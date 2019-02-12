@@ -9,13 +9,32 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
-public class WakeUpTime implements Parcelable{
+public class WakeUpTime implements Parcelable {
+    public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
+        @Override
+        public WakeUpTime createFromParcel(Parcel in) {
+            return new WakeUpTime(in);
+        }
+
+        @Override
+        public WakeUpTime[] newArray(int size) {
+            return new WakeUpTime[size];
+        }
+    };
     private boolean mustWakeUp;
     private boolean notificationIsOn;
     private boolean repeatIsOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
     private int hourOfDay, minute;
-    private long time;
+    private long wakeUpTimeInMillis;
+
+    public WakeUpTime() {
+    }
+
+    public WakeUpTime(int hourOfDay, int minute) {
+        this.hourOfDay = hourOfDay;
+        this.minute = minute;
+    }
 
     protected WakeUpTime(Parcel in) {
         mustWakeUp = in.readByte() != 0;
@@ -30,19 +49,8 @@ public class WakeUpTime implements Parcelable{
         sun = in.readByte() != 0;
         hourOfDay = in.readInt();
         minute = in.readInt();
+        wakeUpTimeInMillis = in.readLong();
     }
-
-    public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
-        @Override
-        public WakeUpTime createFromParcel(Parcel in) {
-            return new WakeUpTime(in);
-        }
-
-        @Override
-        public WakeUpTime[] newArray(int size) {
-            return new WakeUpTime[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -63,16 +71,7 @@ public class WakeUpTime implements Parcelable{
         dest.writeByte((byte) (sun ? 1 : 0));
         dest.writeInt(hourOfDay);
         dest.writeInt(minute);
-    }
-
-
-
-    public WakeUpTime() {
-    }
-
-    public WakeUpTime(int hourOfDay, int minute) {
-        this.hourOfDay = hourOfDay;
-        this.minute = minute;
+        dest.writeLong(wakeUpTimeInMillis);
     }
 
     public int getHourOfDay() {
@@ -97,6 +96,22 @@ public class WakeUpTime implements Parcelable{
 
     public void setMustWakeUp(boolean mustWakeUp) {
         this.mustWakeUp = mustWakeUp;
+    }
+
+    public void turnOnMustWakeUp(boolean mustWakeUp) {
+        this.mustWakeUp = mustWakeUp;
+        Calendar wakeUpTime = generateWakeUpTime();
+        this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
+    }
+
+    private Calendar generateWakeUpTime() {
+        Calendar time = Calendar.getInstance();
+        time.set(Calendar.HOUR_OF_DAY, getHourOfDay());
+        time.set(Calendar.MINUTE, getMinute());
+        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
+            time.add(Calendar.DATE, 1); // Tomorrow
+        }
+        return time;
     }
 
     public boolean getNotificationIsOn() {
@@ -171,14 +186,20 @@ public class WakeUpTime implements Parcelable{
         this.sun = sun;
     }
 
+    public long getWakeUpTimeInMillis() {
+        return wakeUpTimeInMillis;
+    }
 
+    public void setWakeUpTimeInMillis(long wakeUpTimeInMillis) {
+        this.wakeUpTimeInMillis = wakeUpTimeInMillis;
+    }
 
     @Override
     public String toString() {
         Map<String, String> formattedTime = DateAndTimeFormatHandler.generateFormattedAlarmTime(
                 this.hourOfDay,
                 this.minute);
-        return formattedTime.get("full time");
+        return formattedTime.get("full wakeUpTimeInMillis");
     }
 
     private String mustWakeUpOnDayOfWeek() {
@@ -216,7 +237,7 @@ public class WakeUpTime implements Parcelable{
         }
     }
 
-    public  void turnOffAlarm() {
+    public void turnOffAlarm() {
         mustWakeUp = false;
         notificationIsOn = false;
         repeatIsOn = false;
@@ -232,7 +253,7 @@ public class WakeUpTime implements Parcelable{
         sun = true;
     }
 
-    public boolean checkRepeatOnDayOfWeekIsAllOff() {
+    public boolean ifRepeatOnDayOfWeekIsAllOff() {
         for (int i = 0; i < myGetRepeatOnDay().length; i++) {
             if (myGetRepeatOnDay()[i]) {
                 return false;
@@ -245,7 +266,7 @@ public class WakeUpTime implements Parcelable{
         return new boolean[]{mon, tue, wed, thu, fri, sat, sun};
     }
 
-    public ArrayList<Integer> extraDays() {
+    public ArrayList<Integer> generateExtraDays() {
         Integer[] days = new Integer[]{
                 Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
                 Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY};
@@ -285,7 +306,6 @@ public class WakeUpTime implements Parcelable{
                 break;
         }
     }
-
 
 
 }

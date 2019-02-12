@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {

@@ -3,10 +3,10 @@ package com.minami_m.project.android.wakemeapp.Screen.Alarm;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +36,8 @@ import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
+    private static final int DEFAULT_HOUR = 7;
+    private static final int DEFAULT_MINUTE = 0;
     private Switch mustWakeUpSwitch, repeatSwitch; // notificationSwitch
     private TextView wakeUpTimeTextView, wakeUpTimeAmPm, repeatInWeek;
     private CustomBasicTextView changeSettingsText;
@@ -44,8 +46,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private WakeUpTime wakeUpTime;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
-    private static final int DEFAULT_HOUR = 7;
-    private static final int DEFAULT_MINUTE = 0;
     private View[] optionButtons = new View[7];
     private Button alarmButton;
     private NotificationController notifier;
@@ -102,7 +102,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 .putExtra(AlarmClock.EXTRA_MINUTES, wakeUpTime.getMinute())
                 .putExtra(AlarmClock.EXTRA_MESSAGE, "WakeMeApp");
         if (wakeUpTime.getRepeatIsOn()) {
-            alarmIntent.putExtra(AlarmClock.EXTRA_DAYS, wakeUpTime.extraDays());
+            alarmIntent.putExtra(AlarmClock.EXTRA_DAYS, wakeUpTime.generateExtraDays());
         }
         if (alarmIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(alarmIntent);
@@ -132,7 +132,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     }
 
 
-
     private void setStyleDependsOnMustWakeUp(boolean on) {
         if (on) {
             wakeUpTimeTextView.setTextColor(getColor(R.color.colorMyAccent));
@@ -151,10 +150,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     }
 
     private void setupWakeUpTime() {
-        wakeUpTimeTextView.setPaintFlags(wakeUpTimeTextView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        wakeUpTimeTextView.setPaintFlags(wakeUpTimeTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         FontStyleHandler.setFont(this, wakeUpTimeTextView, false, true);
         FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
-        if (wakeUpTime.getMustWakeUp()){
+        if (wakeUpTime.getMustWakeUp()) {
             wakeUpTimeTextView.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeTextView.setAlpha(1);
             wakeUpTimeAmPm.setTextColor(getColor(R.color.colorMyAccent));
@@ -195,7 +194,8 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setStyleDependsOnMustWakeUp(isChecked);
                 if (isChecked) {
-                    wakeUpTime.setMustWakeUp(isChecked);
+                    wakeUpTime.turnOnMustWakeUp(isChecked);
+//                    wakeUpTime.setMustWakeUp(isChecked);
                     notifier.setAllNotification(wakeUpTime);
 
                 } else {
@@ -229,7 +229,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 wakeUpTime.setRepeatIsOn(isChecked);
                 if (isChecked) {
-                    if (wakeUpTime.checkRepeatOnDayOfWeekIsAllOff()) {
+                    if (wakeUpTime.ifRepeatOnDayOfWeekIsAllOff()) {
                         wakeUpTime.turnOnRepeatingOnEveryday();
                     }
                     changeVisibilityForAllOptions();
@@ -289,7 +289,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     optionButton.setVisibility(View.VISIBLE);
                     notifier.setNotificationAt(wakeUpTime, day);
                 }
-                if (wakeUpTime.checkRepeatOnDayOfWeekIsAllOff()) {
+                if (wakeUpTime.ifRepeatOnDayOfWeekIsAllOff()) {
                     repeatSwitch.setChecked(false);
                 }
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
@@ -323,9 +323,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTimeTextView.setAlpha(1);
                                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                                 wakeUpTimeAmPm.setAlpha(1);
-                                wakeUpTime.setMustWakeUp(true);
+//                                wakeUpTime.setMustWakeUp(true);
                                 wakeUpTime.setHourOfDay(hourOfDay);
                                 wakeUpTime.setMinute(minute);
+                                wakeUpTime.turnOnMustWakeUp(true);
                                 mustWakeUpSwitch.setChecked(true);
                                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
                                 FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
@@ -341,11 +342,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu,true);
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 

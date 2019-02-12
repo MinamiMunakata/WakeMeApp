@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
@@ -33,7 +32,7 @@ public class NotificationController {
     public void setAllNotification(WakeUpTime wakeUpTime) {
         if (wakeUpTime.getMustWakeUp()) {
             if (wakeUpTime.getRepeatIsOn()) {
-                ArrayList<Integer> extraDays = wakeUpTime.extraDays();
+                ArrayList<Integer> extraDays = wakeUpTime.generateExtraDays();
                 for (Integer day : extraDays) {
                     setNotificationAt(wakeUpTime, day);
 
@@ -62,7 +61,9 @@ public class NotificationController {
 
     public void setNotificationAt(WakeUpTime wakeUpTime, Integer day) {
         // Create time
-        Calendar time = generateWakeUpTime(wakeUpTime);
+//        Calendar time = generateWakeUpTime(wakeUpTime);
+        Calendar time = Calendar.getInstance();
+        time.setTimeInMillis(wakeUpTime.getWakeUpTimeInMillis());
         // Search for coming day of week
         while (time.get(Calendar.DAY_OF_WEEK) != day) {
             time.add(Calendar.DATE, 1);
@@ -76,13 +77,14 @@ public class NotificationController {
 
     private void setNotificationOnce(WakeUpTime wakeUpTime) {
         // Set Time
-        Calendar time = generateWakeUpTime(wakeUpTime);
+//        Calendar time = generateWakeUpTime(wakeUpTime);
+
         // Create Intent
         // TODO: Put Extra
         PendingIntent sender = generateSender(REQUEST_CODE_ONCE, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), sender);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, wakeUpTime.getWakeUpTimeInMillis(), sender);
     }
 
     public void cancelAt(int requestCode) {
@@ -94,7 +96,7 @@ public class NotificationController {
 
     public void cancelIfRepeatOff(WakeUpTime wakeUpTime) {
         if (!wakeUpTime.getRepeatIsOn()) {
-            for (int day : wakeUpTime.extraDays()) {
+            for (int day : wakeUpTime.generateExtraDays()) {
                 cancelAt(day);
             }
             setNotificationOnce(wakeUpTime);
@@ -121,14 +123,14 @@ public class NotificationController {
                 flagUpdateCurrent);
     }
 
-    @NonNull
-    private Calendar generateWakeUpTime(WakeUpTime wakeUpTime) {
-        Calendar time = Calendar.getInstance();
-        time.set(Calendar.HOUR_OF_DAY, wakeUpTime.getHourOfDay());
-        time.set(Calendar.MINUTE, wakeUpTime.getMinute());
-        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
-            time.add(Calendar.DATE, 1); // Tomorrow
-        }
-        return time;
-    }
+//    @NonNull
+//    private Calendar generateWakeUpTime(WakeUpTime wakeUpTime) {
+//        Calendar time = Calendar.getInstance();
+//        time.set(Calendar.HOUR_OF_DAY, wakeUpTime.getHourOfDay());
+//        time.set(Calendar.MINUTE, wakeUpTime.getMinute());
+//        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
+//            time.add(Calendar.DATE, 1); // Tomorrow
+//        }
+//        return time;
+//    }
 }
