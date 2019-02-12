@@ -46,6 +46,7 @@ public class ChatRoomCard implements Parcelable {
         this.receiverIcon = receiver.getIcon();
         this.receiverStatus = receiver.getStatus();
         this.isReceiverSleeping = receiver.getIsSleeping();
+        setupOversleepTime(receiver);
     }
 
     @Override
@@ -64,30 +65,45 @@ public class ChatRoomCard implements Parcelable {
         dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
     }
 
-    private void setupStatus(User user) {
-
-    }
-
     // TODO: check if an user has overslept
     public void setupOversleepTime(User user) {
         WakeUpTime wakeUpTime = user.getWakeUpTime();
         Calendar currentTime = Calendar.getInstance();
-        if (wakeUpTime.getMustWakeUp()) {
-            if (wakeUpTime.getRepeatIsOn()) {
-                if (mustWakeUpToday(wakeUpTime, currentTime)) {
-
-                } else {
-                    this.oversleepTime = 0;
-                }
-            } else {
-                if (user.getLastLogin() >= wakeUpTime.getWakeUpTimeInMillis()) {
-                    this.oversleepTime = 0;
-                } else {
-                    if (currentTime.getTimeInMillis() < wakeUpTime.getWakeUpTimeInMillis()) {
+        if (wakeUpTime != null) {
+            if (wakeUpTime.getMustWakeUp()) {
+                if (wakeUpTime.getRepeatIsOn()) {
+                    if (mustWakeUpToday(wakeUpTime, currentTime)) {
+                        Calendar time = Calendar.getInstance();
+                        time.set(Calendar.HOUR_OF_DAY, wakeUpTime.getHourOfDay());
+                        time.set(Calendar.MINUTE, wakeUpTime.getMinute());
+                        long wakeUpTimeInMillis = time.getTimeInMillis();
+                        if (user.getLastLogin() >= wakeUpTimeInMillis) {
+                            this.oversleepTime = 0;
+                        } else {
+                            if (currentTime.getTimeInMillis() < wakeUpTimeInMillis) {
+                                this.oversleepTime = 0;
+                            } else {
+                                oversleepTime = currentTime.getTimeInMillis() - wakeUpTimeInMillis;
+                            }
+                        }
+                    } else {
                         this.oversleepTime = 0;
                     }
+                } else {
+                    if (user.getLastLogin() >= wakeUpTime.getWakeUpTimeInMillis()) {
+                        this.oversleepTime = 0;
+                    } else {
+                        if (currentTime.getTimeInMillis() < wakeUpTime.getWakeUpTimeInMillis()) {
+                            this.oversleepTime = 0;
+                        } else {
+                            oversleepTime = currentTime.getTimeInMillis() - wakeUpTime.getWakeUpTimeInMillis();
+                        }
+                    }
                 }
+            } else {
+                this.oversleepTime = 0;
             }
+            System.out.println(oversleepTime);
         } else {
             this.oversleepTime = 0;
         }

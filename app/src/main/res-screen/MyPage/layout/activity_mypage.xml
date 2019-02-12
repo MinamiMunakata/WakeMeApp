@@ -68,7 +68,6 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:hint="@string/wake_up_time"
                     android:id="@+id/wake_up_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,11 +80,11 @@
                     android:textSize="@dimen/text_h2" />
 
                 <ImageView
-                    android:contentDescription="@string/set"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/wake_up_time"
                     android:layout_centerVertical="true"
+                    android:contentDescription="@string/set"
                     android:paddingEnd="5dp"
                     android:src="@drawable/ico_next" />
             </RelativeLayout>
