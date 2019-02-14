@@ -211,17 +211,17 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         };
     }
 
-    private CompoundButton.OnCheckedChangeListener toggleNotification() {
-        return new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                wakeUpTime.setNotificationIsOn(isChecked);
-                if (isChecked) {
-                    mustWakeUpSwitch.setChecked(isChecked);
-                }
-            }
-        };
-    }
+//    private CompoundButton.OnCheckedChangeListener toggleNotification() {
+//        return new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                wakeUpTime.setNotificationIsOn(isChecked);
+//                if (isChecked) {
+//                    mustWakeUpSwitch.setChecked(isChecked);
+//                }
+//            }
+//        };
+//    }
 
     private CompoundButton.OnCheckedChangeListener toggleRepeat() {
         return new CompoundButton.OnCheckedChangeListener() {
@@ -229,7 +229,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 wakeUpTime.setRepeatIsOn(isChecked);
                 if (isChecked) {
-                    if (wakeUpTime.ifRepeatOnDayOfWeekIsAllOff()) {
+                    if (wakeUpTime.repeatOnDayOfWeekIsAllOff()) {
                         wakeUpTime.turnOnRepeatingOnEveryday();
                     }
                     changeVisibilityForAllOptions();
@@ -253,7 +253,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             frameLayout.setTag(i);
             frameLayout.setOnClickListener(toggleRepeatingOptions());
             View optionButton = frameLayout.getChildAt(0);
-            if (wakeUpTime.myGetRepeatOnDay()[i]) {
+            if (wakeUpTime.generateRepeatOnDay()[i]) {
                 optionButton.setVisibility(View.VISIBLE);
             } else {
                 optionButton.setVisibility(View.INVISIBLE);
@@ -265,9 +265,9 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private void changeVisibilityForAllOptions() {
         for (int i = 0; i < repeatOptions.getChildCount(); i++) {
             View optionButton = ((ViewGroup) repeatOptions.getChildAt(i)).getChildAt(0);
-            if (wakeUpTime.myGetRepeatOnDay()[i]) {
+            if (wakeUpTime.generateRepeatOnDay()[i]) {
                 optionButton.setVisibility(View.VISIBLE);
-                wakeUpTime.myGetRepeatOnDay()[i] = true;
+                wakeUpTime.generateRepeatOnDay()[i] = true;
             } else {
                 optionButton.setVisibility(View.INVISIBLE);
             }
@@ -289,7 +289,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     optionButton.setVisibility(View.VISIBLE);
                     notifier.setNotificationAt(wakeUpTime, day);
                 }
-                if (wakeUpTime.ifRepeatOnDayOfWeekIsAllOff()) {
+                if (wakeUpTime.repeatOnDayOfWeekIsAllOff()) {
                     repeatSwitch.setChecked(false);
                 }
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());

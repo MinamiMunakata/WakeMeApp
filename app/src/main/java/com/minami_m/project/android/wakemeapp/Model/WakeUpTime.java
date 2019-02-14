@@ -3,20 +3,12 @@ package com.minami_m.project.android.wakemeapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Map;
+import java.util.Locale;
 
+// TODO: parcel
 public class WakeUpTime implements Parcelable {
-
-    private boolean mustWakeUp;
-    private boolean notificationIsOn;
-    private boolean repeatIsOn;
-    private boolean mon, tue, wed, thu, fri, sat, sun;
-    private int hourOfDay, minute;
-    private long wakeUpTimeInMillis;
 
     public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
         @Override
@@ -30,17 +22,14 @@ public class WakeUpTime implements Parcelable {
         }
     };
 
-    public WakeUpTime() {
-    }
-
-    public WakeUpTime(int hourOfDay, int minute) {
-        this.hourOfDay = hourOfDay;
-        this.minute = minute;
-    }
+    private boolean mustWakeUp;
+    private boolean repeatIsOn;
+    private boolean mon, tue, wed, thu, fri, sat, sun;
+    private int hourOfDay, minute;
+    private long wakeUpTimeInMillis;
 
     protected WakeUpTime(Parcel in) {
         mustWakeUp = in.readByte() != 0;
-        notificationIsOn = in.readByte() != 0;
         repeatIsOn = in.readByte() != 0;
         mon = in.readByte() != 0;
         tue = in.readByte() != 0;
@@ -54,6 +43,14 @@ public class WakeUpTime implements Parcelable {
         wakeUpTimeInMillis = in.readLong();
     }
 
+    public WakeUpTime() {
+    }
+
+    public WakeUpTime(int hourOfDay, int minute) {
+        this.hourOfDay = hourOfDay;
+        this.minute = minute;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -62,7 +59,6 @@ public class WakeUpTime implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte((byte) (mustWakeUp ? 1 : 0));
-        dest.writeByte((byte) (notificationIsOn ? 1 : 0));
         dest.writeByte((byte) (repeatIsOn ? 1 : 0));
         dest.writeByte((byte) (mon ? 1 : 0));
         dest.writeByte((byte) (tue ? 1 : 0));
@@ -76,52 +72,12 @@ public class WakeUpTime implements Parcelable {
         dest.writeLong(wakeUpTimeInMillis);
     }
 
-    public int getHourOfDay() {
-        return hourOfDay;
-    }
-
-    public void setHourOfDay(int hourOfDay) {
-        this.hourOfDay = hourOfDay;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
     public boolean getMustWakeUp() {
         return mustWakeUp;
     }
 
     public void setMustWakeUp(boolean mustWakeUp) {
         this.mustWakeUp = mustWakeUp;
-    }
-
-    public void turnOnMustWakeUp(boolean mustWakeUp) {
-        this.mustWakeUp = mustWakeUp;
-        Calendar wakeUpTime = generateWakeUpTime();
-        this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
-    }
-
-    private Calendar generateWakeUpTime() {
-        Calendar time = Calendar.getInstance();
-        time.set(Calendar.HOUR_OF_DAY, getHourOfDay());
-        time.set(Calendar.MINUTE, getMinute());
-        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
-            time.add(Calendar.DATE, 1); // Tomorrow
-        }
-        return time;
-    }
-
-    public boolean getNotificationIsOn() {
-        return notificationIsOn;
-    }
-
-    public void setNotificationIsOn(boolean notificationIsOn) {
-        this.notificationIsOn = notificationIsOn;
     }
 
     public boolean getRepeatIsOn() {
@@ -188,6 +144,22 @@ public class WakeUpTime implements Parcelable {
         this.sun = sun;
     }
 
+    public int getHourOfDay() {
+        return hourOfDay;
+    }
+
+    public void setHourOfDay(int hourOfDay) {
+        this.hourOfDay = hourOfDay;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
     public long getWakeUpTimeInMillis() {
         return wakeUpTimeInMillis;
     }
@@ -196,30 +168,46 @@ public class WakeUpTime implements Parcelable {
         this.wakeUpTimeInMillis = wakeUpTimeInMillis;
     }
 
-    @Override
-    public String toString() {
-        Map<String, String> formattedTime = DateAndTimeFormatHandler.generateFormattedAlarmTime(
-                this.hourOfDay,
-                this.minute);
-        return formattedTime.get("full wakeUpTimeInMillis");
+
+    public void turnOnMustWakeUp(boolean mustWakeUp) {
+        this.mustWakeUp = mustWakeUp;
+        Calendar wakeUpTime = generateTimeToWakeUp();
+//        this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
     }
 
-    private String mustWakeUpOnDayOfWeek() {
-        String weekStatement = "";
-        boolean[] repeatOnDay = myGetRepeatOnDay();
+    private Calendar generateTimeToWakeUp() {
+        Calendar time = Calendar.getInstance();
+        time.set(Calendar.HOUR_OF_DAY, getHourOfDay());
+        time.set(Calendar.MINUTE, getMinute());
+        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
+            time.add(Calendar.DATE, 1); // Tomorrow
+        }
+        return time;
+    }
+
+
+    @Override
+    public String toString() {
+        return mustWakeUp ? String.format(Locale.US, "Hour: %d, Minute: %d", hourOfDay, minute) : "OFF";
+    }
+
+
+    public String mustWakeUpOnDayOfWeek() {
+        StringBuilder weekStatement = new StringBuilder();
+        boolean[] repeatOnDay = generateRepeatOnDay();
         String[] weekdays = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         for (int i = 0; i < repeatOnDay.length; i++) {
             if (repeatOnDay[i]) {
-                weekStatement += weekdays[i] + ", ";
+                weekStatement.append(weekdays[i]).append(", ");
             }
         }
         if (weekStatement.length() > 0) {
-            weekStatement = weekStatement.substring(0, weekStatement.length() - 2);
+            weekStatement = new StringBuilder(weekStatement.substring(0, weekStatement.length() - 2));
         }
-        return weekStatement;
+        return weekStatement.toString();
     }
 
-    private String generateTodayOrTomorrow() {
+    public String generateTodayOrTomorrow() {
         long currentTime = Calendar.getInstance().getTimeInMillis();
         Calendar alarmTimeCalendar = Calendar.getInstance();
         alarmTimeCalendar.set(Calendar.HOUR_OF_DAY, getHourOfDay());
@@ -241,7 +229,6 @@ public class WakeUpTime implements Parcelable {
 
     public void turnOffAlarm() {
         mustWakeUp = false;
-        notificationIsOn = false;
         repeatIsOn = false;
     }
 
@@ -255,16 +242,16 @@ public class WakeUpTime implements Parcelable {
         sun = true;
     }
 
-    public boolean ifRepeatOnDayOfWeekIsAllOff() {
-        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
-            if (myGetRepeatOnDay()[i]) {
+    public boolean repeatOnDayOfWeekIsAllOff() {
+        for (int i = 0; i < generateRepeatOnDay().length; i++) {
+            if (generateRepeatOnDay()[i]) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean[] myGetRepeatOnDay() {
+    public boolean[] generateRepeatOnDay() {
         return new boolean[]{mon, tue, wed, thu, fri, sat, sun};
     }
 
@@ -273,8 +260,8 @@ public class WakeUpTime implements Parcelable {
                 Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
                 Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY};
         ArrayList<Integer> extraDays = new ArrayList<>();
-        for (int i = 0; i < myGetRepeatOnDay().length; i++) {
-            if (myGetRepeatOnDay()[i]) {
+        for (int i = 0; i < generateRepeatOnDay().length; i++) {
+            if (generateRepeatOnDay()[i]) {
                 extraDays.add(days[i]);
             }
         }
@@ -308,6 +295,5 @@ public class WakeUpTime implements Parcelable {
                 break;
         }
     }
-
 
 }

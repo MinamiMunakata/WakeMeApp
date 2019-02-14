@@ -7,6 +7,17 @@ import java.util.Calendar;
 
 public class ChatRoomCard implements Parcelable {
 
+    public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
+        @Override
+        public ChatRoomCard createFromParcel(Parcel in) {
+            return new ChatRoomCard(in);
+        }
+
+        @Override
+        public ChatRoomCard[] newArray(int size) {
+            return new ChatRoomCard[size];
+        }
+    };
     private String chatRoomId;
     //    private User receiver;
     private String receiverId;
@@ -19,6 +30,7 @@ public class ChatRoomCard implements Parcelable {
     public ChatRoomCard() {
     }
 
+
     public ChatRoomCard(String chatRoomId, User receiver) {
         this.chatRoomId = chatRoomId;
 //        this.receiver = receiver;
@@ -26,10 +38,9 @@ public class ChatRoomCard implements Parcelable {
         this.receiverName = receiver.getName();
         this.receiverIcon = receiver.getIcon();
         this.receiverStatus = receiver.getStatus();
-        this.isReceiverSleeping = receiver.getIsSleeping();
+//        this.isReceiverSleeping = receiver.getIsSleeping();
         setupOversleepTime(receiver);
     }
-
 
     protected ChatRoomCard(Parcel in) {
         chatRoomId = in.readString();
@@ -40,18 +51,6 @@ public class ChatRoomCard implements Parcelable {
         oversleepTime = in.readLong();
         isReceiverSleeping = in.readByte() != 0;
     }
-
-    public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
-        @Override
-        public ChatRoomCard createFromParcel(Parcel in) {
-            return new ChatRoomCard(in);
-        }
-
-        @Override
-        public ChatRoomCard[] newArray(int size) {
-            return new ChatRoomCard[size];
-        }
-    };
 
     // TODO: check if an user has overslept
     // TODO: Parcel
@@ -156,15 +155,7 @@ public class ChatRoomCard implements Parcelable {
         isReceiverSleeping = receiverSleeping;
     }
 
-    public long getOversleepTime() {
-        return oversleepTime;
-    }
-
-    public void setOversleepTime(long oversleepTime) {
-        this.oversleepTime = oversleepTime;
-    }
-
-    //    public User getReceiver() {
+//    public User getReceiver() {
 //        return receiver;
 //    }
 

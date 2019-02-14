@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
@@ -50,6 +51,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+//import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
 
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
@@ -225,6 +228,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
                 wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
+                System.out.println(wakeUpTime.toString());
+                System.out.println(dataSnapshot.child("wakeUpTime"));
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
                         timer_box.setTextColor(getColor(R.color.colorMyAccent));
@@ -233,7 +238,11 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         timer_box.setTextColor(getColor(R.color.black));
                         timer_box.setAlpha(0.3f);
                     }
-                    timer_box.setText(wakeUpTime.toString());
+                    Map<String, String> formattedTime = DateAndTimeFormatHandler
+                            .generateFormattedAlarmTime(
+                                    wakeUpTime.getHourOfDay(),
+                                    wakeUpTime.getMinute());
+                    timer_box.setText(formattedTime.get("full time"));
                 }
 
             }
@@ -244,6 +253,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };
+
         FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
     }
 

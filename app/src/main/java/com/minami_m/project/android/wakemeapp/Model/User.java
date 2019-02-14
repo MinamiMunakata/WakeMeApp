@@ -1,6 +1,5 @@
 package com.minami_m.project.android.wakemeapp.Model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class User {
@@ -9,7 +8,7 @@ public class User {
     private String icon;
     private String email;
     private String status;
-    private boolean isSleeping;
+    //    private boolean isSleeping;
     private long lastLogin;
     private WakeUpTime wakeUpTime;
 
@@ -63,13 +62,13 @@ public class User {
         this.email = email;
     }
 
-    public boolean getIsSleeping() {
-        return isSleeping;
-    }
+//    public boolean getIsSleeping() {
+//        return isSleeping;
+//    }
 
-    public void setIsSleeping(boolean sleeping) {
-        isSleeping = sleeping;
-    }
+//    public void setIsSleeping(boolean sleeping) {
+//        isSleeping = sleeping;
+//    }
 
     public long getLastLogin() {
         return lastLogin;
@@ -97,10 +96,9 @@ public class User {
 
     @Override
     public String toString() {
-        String info = String.format(
-                "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nStatus: %s\n WakeUpTime: %s",
-                this.id, this.name, this.email, this.icon, this.status, this.wakeUpTime);
-        return info;
+        return String.format(
+                "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nStatus: %s\nWakeUpTime: %s",
+                this.id, this.name, this.email, this.icon, this.status, this.wakeUpTime.toString());
     }
 
 }

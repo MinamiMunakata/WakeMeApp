@@ -31,7 +31,7 @@ public class NotificationController {
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
         if (wakeUpTime.getMustWakeUp()) {
-            if (wakeUpTime.getRepeatIsOn()) {
+            if (wakeUpTime.getMustWakeUp()) {
                 ArrayList<Integer> extraDays = wakeUpTime.generateExtraDays();
                 for (Integer day : extraDays) {
                     setNotificationAt(wakeUpTime, day);

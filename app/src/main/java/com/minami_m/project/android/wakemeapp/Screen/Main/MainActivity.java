@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//import com.minami_m.project.android.wakemeapp.Screen.ChatRoom.ChatRoomActivity;
+
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
     private FirebaseAuth mAuth;
@@ -86,9 +88,9 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
                     ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                     chatRoomCards.add(roomCard);
-                    adapter.notifyDataSetChanged();
                 }
                 Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
+                adapter.notifyDataSetChanged();
                 loadingImage.setVisibility(View.GONE);
             }
 
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             launchActivity(SignInActivity.class);
         } else {
             FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(currentUser.getUid(), new Date().getTime());
+            Log.i(TAG, "onStart: " + currentUser.getUid());
         }
     }
 
@@ -187,6 +190,5 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         Intent intent = new Intent(this, ChatRoomActivity.class);
         intent.putExtra("ChatRoomCard", roomCard);
         startActivity(intent);
-//        finish();
     }
 }
