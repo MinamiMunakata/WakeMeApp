@@ -14,24 +14,21 @@ import java.util.Calendar;
 import static android.content.Context.ALARM_SERVICE;
 
 public class NotificationController {
+    private static final String TAG = "Notifier";
     private static final int REQUEST_CODE_ONCE = 0;
     private static final long INTERVAL_WEEK = AlarmManager.INTERVAL_DAY * 7;
     private Context context;
     private String userId;
 
     // TODO: userId
-    private NotificationController(Context context) {
+    public NotificationController(Context context) {
         this.context = context;
     }
 
-    // TODO: userId
-    public static NotificationController newInstance(Context context) {
-        return new NotificationController(context);
-    }
-
     public void setAllNotification(WakeUpTime wakeUpTime) {
+        Log.i(TAG, "setAllNotification: " + wakeUpTime);
         if (wakeUpTime.getMustWakeUp()) {
-            if (wakeUpTime.getMustWakeUp()) {
+            if (wakeUpTime.getRepeatIsOn()) {
                 ArrayList<Integer> extraDays = wakeUpTime.generateExtraDays();
                 for (Integer day : extraDays) {
                     setNotificationAt(wakeUpTime, day);

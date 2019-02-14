@@ -73,7 +73,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         });
         setupOptionButtons();
         setupAlarmButton();
-        notifier = NotificationController.newInstance(this);
+        notifier = new NotificationController(this);
     }
 
     private void setupToolBar() {

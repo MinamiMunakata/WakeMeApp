@@ -172,7 +172,7 @@ public class WakeUpTime implements Parcelable {
     public void turnOnMustWakeUp(boolean mustWakeUp) {
         this.mustWakeUp = mustWakeUp;
         Calendar wakeUpTime = generateTimeToWakeUp();
-//        this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
+        this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
     }
 
     private Calendar generateTimeToWakeUp() {

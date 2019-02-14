@@ -38,8 +38,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import com.minami_m.project.android.wakemeapp.Screen.ChatRoom.ChatRoomActivity;
-
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "---- MainActivity ----";
     private FirebaseAuth mAuth;
