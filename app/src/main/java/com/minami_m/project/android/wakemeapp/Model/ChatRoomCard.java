@@ -2,10 +2,11 @@ package com.minami_m.project.android.wakemeapp.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-public class ChatRoomCard implements Parcelable {
+public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
     public static final Creator<ChatRoomCard> CREATOR = new Creator<ChatRoomCard>() {
         @Override
@@ -187,5 +188,10 @@ public class ChatRoomCard implements Parcelable {
         dest.writeString(receiverStatus);
         dest.writeLong(oversleepTime);
         dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
+    }
+
+    @Override
+    public int compareTo(@NonNull ChatRoomCard chatRoomCard) {
+        return (int) (chatRoomCard.oversleepTime - this.oversleepTime);
     }
 }

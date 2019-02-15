@@ -228,8 +228,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
                 }
                 wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
-                System.out.println(wakeUpTime.toString());
-                System.out.println(dataSnapshot.child("wakeUpTime"));
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
                         timer_box.setTextColor(getColor(R.color.colorMyAccent));
