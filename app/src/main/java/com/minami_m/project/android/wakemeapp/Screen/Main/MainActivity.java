@@ -82,12 +82,14 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 loadingImage.setVisibility(View.VISIBLE);
                 chatRoomCards.clear();
                 for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
-                    System.out.println(chatRoomIdSnapshot);
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
-                    System.out.println(receiver);
-                    FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(receiver.getId(), receiver.getLastLogin());
-                    ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
-                    chatRoomCards.add(roomCard);
+                    if (receiver != null) {
+                        FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
+                                receiver.getId(),
+                                receiver.getLastLogin());
+                        ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
+                        chatRoomCards.add(roomCard);
+                    }
                 }
                 Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
                 Collections.sort(chatRoomCards);

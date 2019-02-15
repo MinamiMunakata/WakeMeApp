@@ -170,11 +170,13 @@ public class ChatRoomActivity
                 mMessageList.clear();
                 for (DataSnapshot messageSnapShot : dataSnapshot.getChildren()) {
                     Message message = messageSnapShot.getValue(Message.class);
-                    if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
-                        message.setIsSeen(true);
-                        FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
+                    if (message != null) {
+                        if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
+                            message.setIsSeen(true);
+                            FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
+                        }
+                        mMessageList.add(message);
                     }
-                    mMessageList.add(message);
                     adapter.notifyDataSetChanged();
                     recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
                 }

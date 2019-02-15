@@ -183,8 +183,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 profileIcon.setImageBitmap(bitmap);
                 uploadImage();
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
