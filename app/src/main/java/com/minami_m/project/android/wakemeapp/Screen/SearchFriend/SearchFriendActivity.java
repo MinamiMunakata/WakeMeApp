@@ -259,12 +259,15 @@ public class SearchFriendActivity extends AppCompatActivity
             if (friend.getName() != null && friend.getName().length() > 0) {
                 String[] fullName = friend.getName().split(" ");
                 StringBuilder displayName = new StringBuilder();
-                for (String name : fullName) {
+                for (int i = 0; i < fullName.length; i++) {
+                    String name = fullName[i];
                     if (name.length() > 0) {
                         displayName
                                 .append(name.substring(0, 1).toUpperCase())
-                                .append(name.substring(1))
-                                .append(" ");
+                                .append(name.substring(1));
+                    }
+                    if (i < fullName.length - 1) {
+                        displayName.append(" ");
                     }
                 }
                 nameHolder.setText(displayName);

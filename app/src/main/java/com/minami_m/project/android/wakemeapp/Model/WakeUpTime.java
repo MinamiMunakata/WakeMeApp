@@ -192,7 +192,7 @@ public class WakeUpTime implements Parcelable {
     }
 
 
-    public String mustWakeUpOnDayOfWeek() {
+    private String mustWakeUpOnDayOfWeek() {
         StringBuilder weekStatement = new StringBuilder();
         boolean[] repeatOnDay = generateRepeatOnDay();
         String[] weekdays = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -207,7 +207,7 @@ public class WakeUpTime implements Parcelable {
         return weekStatement.toString();
     }
 
-    public String generateTodayOrTomorrow() {
+    private String generateTodayOrTomorrow() {
         long currentTime = Calendar.getInstance().getTimeInMillis();
         Calendar alarmTimeCalendar = Calendar.getInstance();
         alarmTimeCalendar.set(Calendar.HOUR_OF_DAY, getHourOfDay());
@@ -230,6 +230,7 @@ public class WakeUpTime implements Parcelable {
     public void turnOffAlarm() {
         mustWakeUp = false;
         repeatIsOn = false;
+        wakeUpTimeInMillis = 0;
     }
 
     public void turnOnRepeatingOnEveryday() {

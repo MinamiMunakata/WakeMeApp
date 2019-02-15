@@ -31,14 +31,14 @@
             android:layout_height="wrap_content"
             android:text="@string/good_morning"
             android:textColor="@color/colorMyAccent"
-            android:textSize="@dimen/greeting_text_size" />
+            android:textSize="@dimen/text_h2" />
 
         <TextView
             android:id="@+id/current_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorMyAccent"
-            android:textSize="@dimen/greeting_text_size" />
+            android:textSize="@dimen/text_h2" />
 
         <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:layout_width="wrap_content"

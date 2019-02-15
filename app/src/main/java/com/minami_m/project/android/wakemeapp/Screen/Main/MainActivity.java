@@ -35,6 +35,7 @@ import com.minami_m.project.android.wakemeapp.Screen.SearchFriend.SearchFriendAc
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                     chatRoomCards.add(roomCard);
                 }
                 Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
+                Collections.sort(chatRoomCards);
                 adapter.notifyDataSetChanged();
                 loadingImage.setVisibility(View.GONE);
             }
@@ -118,18 +120,29 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             if (currentUser.getDisplayName() != null && currentUser.getDisplayName().length() > 0) {
                 String[] fullName = currentUser.getDisplayName().split(" ");
                 StringBuilder displayName = new StringBuilder();
-                for (String name : fullName) {
-                    if (name.length() > 0) {
-                        displayName
-                                .append(name.substring(0, 1).toUpperCase())
-                                .append(name.substring(1))
-                                .append(" ");
+                if (fullName[0].length() > 0) {
+                    displayName
+                            .append(fullName[0].substring(0, 1).toUpperCase())
+                            .append(fullName[0].substring(1));
+                } else {
+                    for (int i = 0; i < fullName.length; i++) {
+                        String name = fullName[i];
+                        if (name.length() > 0) {
+                            displayName
+                                    .append(name.substring(0, 1).toUpperCase())
+                                    .append(name.substring(1));
+                        }
+                        if (i < fullName.length - 1) {
+                            displayName.append(" ");
+                        }
                     }
                 }
+                displayName.append("!");
                 currentUserName.setText(displayName);
             } else {
                 currentUserName.setText(String.format("%s!", currentUser.getDisplayName()));
             }
+
         } catch (Exception e) {
             launchActivity(SignInActivity.class);
         }

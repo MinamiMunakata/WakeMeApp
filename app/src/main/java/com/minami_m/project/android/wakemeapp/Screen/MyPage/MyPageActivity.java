@@ -133,12 +133,15 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             if (currentUser.getDisplayName() != null && currentUser.getDisplayName().length() > 0) {
                 String[] fullName = currentUser.getDisplayName().split(" ");
                 StringBuilder displayName = new StringBuilder();
-                for (String name : fullName) {
+                for (int i = 0; i < fullName.length; i++) {
+                    String name = fullName[i];
                     if (name.length() > 0) {
                         displayName
                                 .append(name.substring(0, 1).toUpperCase())
-                                .append(name.substring(1))
-                                .append(" ");
+                                .append(name.substring(1));
+                    }
+                    if (i < fullName.length - 1) {
+                        displayName.append(" ");
                     }
                 }
                 profileName.setText(displayName);

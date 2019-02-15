@@ -42,15 +42,17 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
             if (fullName[0].length() > 0) {
                 displayName
                         .append(fullName[0].substring(0, 1).toUpperCase())
-                        .append(fullName[0].substring(1))
-                        .append(" ");
+                        .append(fullName[0].substring(1));
             } else {
-                for (String name : fullName) {
+                for (int i = 0; i < fullName.length; i++) {
+                    String name = fullName[i];
                     if (name.length() > 0) {
                         displayName
                                 .append(name.substring(0, 1).toUpperCase())
-                                .append(name.substring(1))
-                                .append(" ");
+                                .append(name.substring(1));
+                    }
+                    if (i < fullName.length - 1) {
+                        displayName.append(" ");
                     }
                 }
             }
@@ -58,7 +60,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         } else {
             viewHolder.nameView.setText(roomCard.getReceiverName());
         }
-        viewHolder.statusView.setText(roomCard.getReceiverStatus());
+        viewHolder.statusView.setText(roomCard.getOversleepTimeStatus());
         if (roomCard.getReceiverIcon() == null) {
             viewHolder.iconView.setImageResource(R.drawable.ico_default_avator);
         } else {
@@ -68,7 +70,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                     .into(viewHolder.iconView);
         }
 
-        if (roomCard.getIsReceiverSleeping()) {
+        if (roomCard.getOversleepTime() > 0) {
             viewHolder.alertView.setImageResource(R.drawable.ico_alart);
         } else {
             viewHolder.alertView.setImageResource(R.drawable.ico_awake);

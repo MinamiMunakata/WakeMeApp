@@ -91,12 +91,15 @@ public class ChatRoomActivity
         if (chatRoomCard.getReceiverName() != null && chatRoomCard.getReceiverName().length() > 0) {
             String[] fullName = chatRoomCard.getReceiverName().split(" ");
             StringBuilder displayName = new StringBuilder();
-            for (String name : fullName) {
+            for (int i = 0; i < fullName.length; i++) {
+                String name = fullName[i];
                 if (name.length() > 0) {
                     displayName
                             .append(name.substring(0, 1).toUpperCase())
-                            .append(name.substring(1))
-                            .append(" ");
+                            .append(name.substring(1));
+                }
+                if (i < fullName.length - 1) {
+                    displayName.append(" ");
                 }
             }
             title.setText(displayName);
