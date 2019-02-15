@@ -233,9 +233,6 @@ public class SearchFriendActivity extends AppCompatActivity
     public void replaceFragment(Fragment newFragment) {
         TransitionSet set = new TransitionSet();
         set.addTransition(new Fade());
-//        Slide slide = new Slide();
-//        slide.setSlideEdge(Gravity.BOTTOM);
-//        set.addTransition(slide);
         newFragment.setEnterTransition(set);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.search_friend_container, newFragment);
@@ -258,7 +255,22 @@ public class SearchFriendActivity extends AppCompatActivity
                     .load(friend.getIcon())
                     .error(R.drawable.ico_default_avator)
                     .into(iconHolder);
-            nameHolder.setText(friend.getName());
+            // Capitalize the first letter of an user name.
+            if (friend.getName() != null && friend.getName().length() > 0) {
+                String[] fullName = friend.getName().split(" ");
+                StringBuilder displayName = new StringBuilder();
+                for (String name : fullName) {
+                    if (name.length() > 0) {
+                        displayName
+                                .append(name.substring(0, 1).toUpperCase())
+                                .append(name.substring(1))
+                                .append(" ");
+                    }
+                }
+                nameHolder.setText(displayName);
+            } else {
+                nameHolder.setText(friend.getName());
+            }
         } else {
             iconHolder.setImageResource(R.drawable.ico_default_avator);
         }

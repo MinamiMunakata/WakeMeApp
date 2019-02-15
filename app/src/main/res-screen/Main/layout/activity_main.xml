@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.Main.MainActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".Screen.Main.MainActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar_main"
         android:layout_width="match_parent"
@@ -16,67 +16,73 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar_main"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/space_both_edges"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar_main">
+
         <TextView
             android:id="@+id/good_morning"
-            android:textColor="@color/colorMyAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/good_morning"
-            android:textSize="@dimen/text_h2"/>
+            android:textColor="@color/colorMyAccent"
+            android:textSize="@dimen/greeting_text_size" />
+
         <TextView
-            android:textColor="@color/colorMyAccent"
             android:id="@+id/current_user_name"
-            android:text="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_h2" />
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
             android:textColor="@color/colorMyAccent"
+            android:textSize="@dimen/greeting_text_size" />
+
+        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
             android:text="@string/who_is_still_sleeping"
-            android:textSize="@dimen/text_h3"/>
+            android:textColor="@color/colorMyAccent"
+            android:textSize="@dimen/text_h3" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
+            android:clipToPadding="false"
             android:paddingBottom="70dp"
-            android:clipToPadding="false">
+            android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>
 
 
     </LinearLayout>
+
     <ImageView
+        android:contentDescription="@string/loading"
         android:id="@+id/loading_img"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!--<ProgressBar-->
-        <!--android:id="@+id/progressbar_main"-->
-        <!--android:indeterminateDrawable="@drawable/custom_progress_bar"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:indeterminate="true"-->
-        <!--android:max="100"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"/>-->
+    <!--android:id="@+id/progressbar_main"-->
+    <!--android:indeterminateDrawable="@drawable/custom_progress_bar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:indeterminate="true"-->
+    <!--android:max="100"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"/>-->
     <ImageView
+        android:contentDescription="@string/search_for_friend"
         android:id="@+id/semicircle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

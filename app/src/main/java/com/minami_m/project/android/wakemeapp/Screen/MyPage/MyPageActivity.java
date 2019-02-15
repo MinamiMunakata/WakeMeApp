@@ -129,7 +129,22 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         FontStyleHandler.setFont(this, pwTextField, false, false);
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            profileName.setText(currentUser.getDisplayName());
+            // Capitalize the first letter of an user name.
+            if (currentUser.getDisplayName() != null && currentUser.getDisplayName().length() > 0) {
+                String[] fullName = currentUser.getDisplayName().split(" ");
+                StringBuilder displayName = new StringBuilder();
+                for (String name : fullName) {
+                    if (name.length() > 0) {
+                        displayName
+                                .append(name.substring(0, 1).toUpperCase())
+                                .append(name.substring(1))
+                                .append(" ");
+                    }
+                }
+                profileName.setText(displayName);
+            } else {
+                profileName.setText(currentUser.getDisplayName());
+            }
             displayNameTextField.setText(currentUser.getDisplayName());
             emailTextField.setText(currentUser.getEmail());
         }
@@ -208,7 +223,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             launchActivity(SignInActivity.class);
         }
         try {
-            profileName.setText(currentUser.getDisplayName());
             setIconAndAlarmTimeFromFB();
         } catch (Exception e) {
             launchActivity(SignInActivity.class);

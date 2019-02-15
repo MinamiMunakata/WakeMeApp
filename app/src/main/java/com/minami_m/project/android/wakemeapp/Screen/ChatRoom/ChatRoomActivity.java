@@ -54,14 +54,11 @@ public class ChatRoomActivity
     private TextView title;
     private TextView subtitle;
     private ChatRoomCard chatRoomCard;
+    private ValueEventListener listener;
 
     @SuppressWarnings("deprecation")
     public static Spanned fromHtml(String html) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            return Html.fromHtml(html);
-        }
+        return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
     }
 
     @Override
@@ -90,7 +87,22 @@ public class ChatRoomActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        title.setText(chatRoomCard.getReceiverName());
+        // Capitalize the first letter of an user name.
+        if (chatRoomCard.getReceiverName() != null && chatRoomCard.getReceiverName().length() > 0) {
+            String[] fullName = chatRoomCard.getReceiverName().split(" ");
+            StringBuilder displayName = new StringBuilder();
+            for (String name : fullName) {
+                if (name.length() > 0) {
+                    displayName
+                            .append(name.substring(0, 1).toUpperCase())
+                            .append(name.substring(1))
+                            .append(" ");
+                }
+            }
+            title.setText(displayName);
+        } else {
+            title.setText(chatRoomCard.getReceiverName());
+        }
         subtitle.setText(chatRoomCard.getReceiverStatus());
     }
 
@@ -149,28 +161,37 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
-        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        mMessageList.clear();
-                        for (DataSnapshot messageSnapShot : dataSnapshot.getChildren()) {
-                            Message message = messageSnapShot.getValue(Message.class);
-                            if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
-                                message.setIsSeen(true);
-                                FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
-                            }
-                            mMessageList.add(message);
-                            adapter.notifyDataSetChanged();
-                            recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
-                        }
+        listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mMessageList.clear();
+                for (DataSnapshot messageSnapShot : dataSnapshot.getChildren()) {
+                    Message message = messageSnapShot.getValue(Message.class);
+                    if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
+                        message.setIsSeen(true);
+                        FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
                     }
+                    mMessageList.add(message);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
+                }
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.i(TAG, "onCancelled: " + databaseError.getMessage());
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+            }
+        };
+
+        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
+                .addValueEventListener(listener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
+                .removeEventListener(listener);
     }
 
     @Override

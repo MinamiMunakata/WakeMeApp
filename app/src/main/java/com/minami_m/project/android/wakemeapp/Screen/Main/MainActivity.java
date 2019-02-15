@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private List<ChatRoomCard> chatRoomCards;
     private CardRecyclerAdapter adapter;
     private ImageView loadingImage;
+    private ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         Glide.with(this).load(R.raw.loading).into(loadingImage);
         setupGreetingHeaderMsg();
         setupAddFriendsButton();
-        setupRecyclerView();
+//        setupRecyclerView();
 
     }
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         adapter = new CardRecyclerAdapter(chatRoomCards, this);
         recyclerView.setAdapter(adapter);
-        ValueEventListener listener = new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 loadingImage.setVisibility(View.VISIBLE);
@@ -113,7 +114,22 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         TextView currentUserName = findViewById(R.id.current_user_name);
         FontStyleHandler.setFont(this, currentUserName, true, true);
         try {
-            currentUserName.setText(String.format("%s!", currentUser.getDisplayName()));
+            // Capitalize the first letter of an user name.
+            if (currentUser.getDisplayName() != null && currentUser.getDisplayName().length() > 0) {
+                String[] fullName = currentUser.getDisplayName().split(" ");
+                StringBuilder displayName = new StringBuilder();
+                for (String name : fullName) {
+                    if (name.length() > 0) {
+                        displayName
+                                .append(name.substring(0, 1).toUpperCase())
+                                .append(name.substring(1))
+                                .append(" ");
+                    }
+                }
+                currentUserName.setText(displayName);
+            } else {
+                currentUserName.setText(String.format("%s!", currentUser.getDisplayName()));
+            }
         } catch (Exception e) {
             launchActivity(SignInActivity.class);
         }
@@ -142,8 +158,17 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             launchActivity(SignInActivity.class);
         } else {
             FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(currentUser.getUid(), new Date().getTime());
+            setupRecyclerView();
             Log.i(TAG, "onStart: " + currentUser.getUid());
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                .removeEventListener(listener);
+        Log.i(TAG, "onStop: " + "Disconnect from FB");
     }
 
     @Override

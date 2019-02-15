@@ -35,4 +35,5 @@
     <dimen name="dialog_radius">18dp</dimen>
     <dimen name="sender_bubble_text_padding">8dp</dimen>
     <dimen name="ico_size">24dp</dimen>
+    <dimen name="greeting_text_size">28sp</dimen>
 </resources>

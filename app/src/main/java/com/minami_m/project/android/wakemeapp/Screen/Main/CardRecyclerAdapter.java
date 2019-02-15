@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ChatRoomCardClickListener;
+import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder> {
-    private List<ChatRoomCard> chatRoomCards;
     private static ChatRoomCardClickListener listener;
+    private List<ChatRoomCard> chatRoomCards;
 
     public CardRecyclerAdapter(List<ChatRoomCard> chatRoomCards, ChatRoomCardClickListener listener) {
         this.chatRoomCards = chatRoomCards;
-        this.listener = listener;
+        CardRecyclerAdapter.listener = listener;
     }
 
     @NonNull
@@ -35,7 +35,29 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         ChatRoomCard roomCard = chatRoomCards.get(position);
-        viewHolder.nameView.setText(roomCard.getReceiverName());
+        // Capitalize the first letter of an user name.
+        if (roomCard.getReceiverName() != null && roomCard.getReceiverName().length() > 0) {
+            String[] fullName = roomCard.getReceiverName().split(" ");
+            StringBuilder displayName = new StringBuilder();
+            if (fullName[0].length() > 0) {
+                displayName
+                        .append(fullName[0].substring(0, 1).toUpperCase())
+                        .append(fullName[0].substring(1))
+                        .append(" ");
+            } else {
+                for (String name : fullName) {
+                    if (name.length() > 0) {
+                        displayName
+                                .append(name.substring(0, 1).toUpperCase())
+                                .append(name.substring(1))
+                                .append(" ");
+                    }
+                }
+            }
+            viewHolder.nameView.setText(displayName);
+        } else {
+            viewHolder.nameView.setText(roomCard.getReceiverName());
+        }
         viewHolder.statusView.setText(roomCard.getReceiverStatus());
         if (roomCard.getReceiverIcon() == null) {
             viewHolder.iconView.setImageResource(R.drawable.ico_default_avator);
@@ -60,10 +82,10 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView iconView, alertView;
-        public TextView nameView, statusView;
+        ImageView iconView, alertView;
+        TextView nameView, statusView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             iconView = itemView.findViewById(R.id.card_icon);
             alertView = itemView.findViewById(R.id.card_alart);
