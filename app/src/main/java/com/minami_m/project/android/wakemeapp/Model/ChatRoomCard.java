@@ -8,6 +8,7 @@ import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHa
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Map;
 
 public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
@@ -79,7 +80,19 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
             } else {
                 if (wakeUpTime.getRepeatIsOn() && mustWakeUpToday(wakeUpTime, Calendar.getInstance())
                         || DateAndTimeFormatHandler.isToday(wakeUpTime.getWakeUpTimeInMillis())) {
-                    oversleepTimeStatus = "is already awake!";
+                    Calendar timeToWakeUp = Calendar.getInstance();
+                    timeToWakeUp.set(Calendar.HOUR_OF_DAY, wakeUpTime.getHourOfDay());
+                    timeToWakeUp.set(Calendar.MINUTE, wakeUpTime.getMinute());
+                    if (timeToWakeUp.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()
+                            || wakeUpTime.getWakeUpTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+                        Map<String, String> formattedTime = DateAndTimeFormatHandler
+                                .generateFormattedAlarmTime(
+                                        wakeUpTime.getHourOfDay(),
+                                        wakeUpTime.getMinute());
+                        oversleepTimeStatus = "will wake up at " + formattedTime.get("full time");
+                    } else {
+                        oversleepTimeStatus = "is already awake!";
+                    }
                 }
             }
         }
