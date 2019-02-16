@@ -8,7 +8,7 @@
     android:background="@color/colorBackground"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Screen.Alarm.AlarmActivity">
+    tools:context=".screen.alarm.AlarmActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_alarm"
@@ -24,7 +24,7 @@
             android:id="@+id/toolbar_title_add_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Wake up time"
+            android:text="@string/wake_up_time"
             android:textAlignment="center"
             android:textColor="@color/colorMyAccent"
             android:textStyle="bold" />
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_space_bw_items"
-        android:text="You want to wake up at..."
+        android:text="@string/you_want_to_wake_up_at"
         android:textSize="@dimen/text_h4" />
 
     <RelativeLayout
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:alpha="0.3"
-            android:text="07:00"
+            android:text="@string/default_07_00"
             android:textColor="@color/black"
             android:textSize="50sp" />
 
@@ -60,7 +60,7 @@
             android:layout_marginHorizontal="@dimen/small_vertical_space_bw_item"
             android:layout_toEndOf="@+id/wake_up_time"
             android:alpha="0.3"
-            android:text="AM"
+            android:text="@string/default_am"
             android:textColor="@color/black"
             android:textSize="@dimen/text_h4" />
     </RelativeLayout>
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0.3"
-        android:text="Tomorrow"
+        android:text="@string/tomorrow"
         android:textSize="@dimen/text_h4" />
 
     <LinearLayout
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:switchPadding="10dp"
-                android:text="Set Time" />
+                android:text="@string/set_time" />
 
             <!--<Switch-->
             <!--android:id="@+id/switch_notification"-->
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:switchPadding="10dp"
-                android:text="Repeat" />
+                android:text="@string/repeat" />
         </LinearLayout>
 
 
@@ -305,7 +305,7 @@
         android:layout_marginHorizontal="@dimen/space_both_edges"
         android:background="@drawable/rounded_button"
         android:paddingHorizontal="10dp"
-        android:text="Set Alarm on Your Device"
+        android:text="@string/set_alarm_on_your_device"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.ChatRoom.ChatRoomActivity"
+    tools:context=".screen.chatRoom.ChatRoomActivity"
     android:background="@color/colorBackground">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_chat_room"
@@ -33,7 +33,6 @@
             <TextView
                 android:id="@+id/toolbar_subtitle_chat_room"
                 android:textColor="@color/colorMyAccent"
-                android:text="status"
                 android:textSize="@dimen/text_small_default_12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +79,8 @@
             android:layout_gravity="bottom"
             android:background="@drawable/ico_send"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="@dimen/padding_rounded_field"/>
+            android:layout_marginStart="@dimen/padding_rounded_field"
+            android:contentDescription="@string/send" />
 
 
     </LinearLayout>

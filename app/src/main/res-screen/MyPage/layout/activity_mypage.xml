@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".Screen.MyPage.MyPageActivity">
+    tools:context=".screen.myPage.MyPageActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar_setting"
@@ -78,7 +78,8 @@
                     android:singleLine="true"
                     android:text="@string/default_07_00_am"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_h2" />
+                    android:textSize="@dimen/text_h2"
+                    tools:ignore="LabelFor" />
 
                 <ImageView
                     android:layout_width="wrap_content"

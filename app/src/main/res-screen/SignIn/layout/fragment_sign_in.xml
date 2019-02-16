@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".Screen.SignIn.SignInFragment">
+    tools:context=".screen.signIn.SignInFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screen.SearchFriend.SearchFriendResultFragment"
+    tools:context=".screen.searchFriend.SearchFriendResultFragment"
     android:background="@color/colorBackground"
     android:gravity="center_horizontal">
     <de.hdodenhof.circleimageview.CircleImageView
@@ -21,7 +21,7 @@
         android:textSize="@dimen/text_h3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name Name"/>
+        />
 
 
 </LinearLayout>
