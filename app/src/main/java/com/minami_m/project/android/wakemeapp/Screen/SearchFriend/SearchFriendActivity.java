@@ -29,8 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBCallback;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -174,7 +174,8 @@ public class SearchFriendActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean dataExist = false;
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    if (userSnapshot.child("email").getValue().equals(email)) {
+                    String mEmail = userSnapshot.child("email").getValue(String.class);
+                    if (mEmail != null && mEmail.equals(email)) {
                         Log.i(TAG, "onDataChange: " + userSnapshot.getKey());
                         friendId = userSnapshot.getKey();
                         friend = userSnapshot.getValue(User.class);

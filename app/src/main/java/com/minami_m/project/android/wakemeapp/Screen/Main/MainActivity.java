@@ -172,7 +172,24 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         } else {
-            FBRealTimeDBHelper.updateStatusWithLoginTime(currentUser.getUid(), new Date().getTime());
+            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        FBRealTimeDBHelper.updateStatusWithLoginTime(
+                                currentUser.getUid(),
+                                new Date().getTime());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                    Log.e(TAG, "onCancelled: ", databaseError.toException());
+                }
+            });
+
             setupRecyclerView();
             Log.i(TAG, "onStart: " + currentUser.getUid());
         }
