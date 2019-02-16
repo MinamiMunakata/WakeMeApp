@@ -23,7 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
                     if (receiver != null) {
-                        FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
+                        FBRealTimeDBHelper.updateStatusWithLoginTime(
                                 receiver.getId(),
                                 receiver.getLastLogin());
                         ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         };
 
         try {
-            FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+            FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
                     .addValueEventListener(listener);
         } catch (Exception e) {
             launchActivity(SignInActivity.class);
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         } else {
-            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(currentUser.getUid(), new Date().getTime());
+            FBRealTimeDBHelper.updateStatusWithLoginTime(currentUser.getUid(), new Date().getTime());
             setupRecyclerView();
             Log.i(TAG, "onStart: " + currentUser.getUid());
         }
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     @Override
     protected void onStop() {
         super.onStop();
-        FirebaseRealtimeDatabaseHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+        FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
                 .removeEventListener(listener);
         Log.i(TAG, "onStop: " + "Disconnect from FB");
     }

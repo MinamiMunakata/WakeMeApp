@@ -60,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/time"
+                android:labelFor="@+id/wake_up_time"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_h4" />
 
@@ -86,7 +87,8 @@
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/set"
                     android:paddingEnd="5dp"
-                    android:src="@drawable/ico_next" />
+                    android:src="@drawable/ico_next"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -121,6 +123,7 @@
                         android:enabled="false"
                         android:focusable="true"
                         android:hint="@string/enter_your_name"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:singleLine="true"
                         android:textSize="@dimen/text_h4" />
@@ -134,7 +137,8 @@
                         android:contentDescription="@string/edit"
                         android:onClick="toggleEditMode"
                         android:paddingEnd="5dp"
-                        android:src="@drawable/ico_edit" />
+                        android:src="@drawable/ico_edit"
+                        tools:ignore="RtlSymmetry" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -163,6 +167,7 @@
                         android:enabled="false"
                         android:focusable="true"
                         android:hint="@string/enter_your_email_address"
+                        android:imeOptions="actionDone"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
                         android:textSize="@dimen/text_h4" />
@@ -176,7 +181,8 @@
                         android:contentDescription="@string/edit"
                         android:onClick="toggleEditMode"
                         android:paddingEnd="5dp"
-                        android:src="@drawable/ico_edit" />
+                        android:src="@drawable/ico_edit"
+                        tools:ignore="RtlSymmetry" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -215,10 +221,12 @@
                             android:enabled="false"
                             android:focusable="true"
                             android:hint="@string/enter_new_password"
+                            android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:paddingEnd="30dp"
                             android:singleLine="true"
-                            android:textSize="@dimen/text_h4" />
+                            android:textSize="@dimen/text_h4"
+                            tools:ignore="RtlSymmetry" />
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView

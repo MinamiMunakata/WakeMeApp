@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -21,8 +24,9 @@ public class NotificationController {
     private String userId;
 
     // TODO: userId
-    public NotificationController(Context context) {
+    public NotificationController(Context context, String userId) {
         this.context = context;
+        this.userId = userId;
     }
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
@@ -65,11 +69,18 @@ public class NotificationController {
         while (time.get(Calendar.DAY_OF_WEEK) != day) {
             time.add(Calendar.DATE, 1);
         }
+        Map<String, String> formattedTime = DateAndTimeFormatHandler
+                .generateFormattedAlarmTime(
+                time.get(Calendar.HOUR_OF_DAY),
+                time.get(Calendar.MINUTE));
+        Log.i(TAG, "setNotificationAt: " + DateAndTimeFormatHandler.generateDateOfChat(time.getTimeInMillis()) + formattedTime.get("full time"));
         // Create Intent
         PendingIntent sender = generateSender(day, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), INTERVAL_WEEK, sender);
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(), INTERVAL_WEEK, sender);
+        }
     }
 
     private void setNotificationOnce(WakeUpTime wakeUpTime) {
@@ -81,14 +92,18 @@ public class NotificationController {
         PendingIntent sender = generateSender(REQUEST_CODE_ONCE, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, wakeUpTime.getWakeUpTimeInMillis(), sender);
+        if (alarmManager != null) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, wakeUpTime.getWakeUpTimeInMillis(), sender);
+        }
     }
 
     public void cancelAt(int requestCode) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent sender = generateSender(requestCode, PendingIntent.FLAG_UPDATE_CURRENT);
         sender.cancel();
-        alarmManager.cancel(sender);
+        if (alarmManager != null) {
+            alarmManager.cancel(sender);
+        }
     }
 
     public void cancelIfRepeatOff(WakeUpTime wakeUpTime) {
@@ -107,12 +122,16 @@ public class NotificationController {
         for (int requestCode = 0; requestCode <= 7; requestCode++) {
             PendingIntent sender = generateSender(requestCode, PendingIntent.FLAG_UPDATE_CURRENT);
             sender.cancel();
-            alarmManager.cancel(sender);
+            if (alarmManager != null) {
+                alarmManager.cancel(sender);
+            }
         }
     }
 
     private PendingIntent generateSender(Integer requestCode, int flagUpdateCurrent) {
         Intent intent = new Intent(context, NotificationReceiver.class);
+        intent.putExtra("userId", userId);
+        intent.putExtra("requestCode", requestCode);
         return PendingIntent.getBroadcast(
                 context,
                 requestCode,

@@ -104,6 +104,10 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
                 } else {
                     calculateOversleepTime(user, currentTime, wakeUpTime.getWakeUpTimeInMillis());
                 }
+            } else {
+                if (!wakeUpTime.getRepeatIsOn()) {
+                    calculateOversleepTime(user, currentTime, wakeUpTime.getWakeUpTimeInMillis());
+                }
             }
         }
         System.out.println(oversleepTime);

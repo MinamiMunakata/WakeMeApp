@@ -37,8 +37,8 @@ import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHa
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.User;
 import com.minami_m.project.android.wakemeapp.R;
@@ -161,7 +161,7 @@ public class SignUpFragment extends Fragment
 
     public void writeNewUSerWithImg(final FirebaseUser currentUser) {
         // upload image to Firebase Storage
-        FirebaseStorageHelper.ICON_REF(currentUser).putFile(filePath)
+        FBStorageHelper.ICON_REF(currentUser).putFile(filePath)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -174,7 +174,7 @@ public class SignUpFragment extends Fragment
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         loadingBG.setVisibility(View.INVISIBLE);
                         toast("Successfully Uploaded");
-                        FirebaseStorageHelper.ICON_REF(currentUser).getDownloadUrl()
+                        FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Uri> task) {
@@ -184,7 +184,7 @@ public class SignUpFragment extends Fragment
                                                 currentUser.getEmail(),
                                                 downloadedIconUrl);
                                         newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
-                                        FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                        FBRealTimeDBHelper.writeNewUser(newUser);
                                         ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                                     }
                                 });
@@ -246,7 +246,7 @@ public class SignUpFragment extends Fragment
                                                     User newUser = new User(currentUser.getUid(),
                                                             currentUser.getDisplayName(),
                                                             currentUser.getEmail());
-                                                    FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                                    FBRealTimeDBHelper.writeNewUser(newUser);
                                                     loadingBG.setVisibility(View.INVISIBLE);
                                                     ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
                                                 }

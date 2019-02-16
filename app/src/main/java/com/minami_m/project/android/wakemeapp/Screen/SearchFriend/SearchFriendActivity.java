@@ -29,8 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.Common.Helper.RealtimeDatabaseCallback;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBCallback;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.User;
@@ -74,7 +74,7 @@ public class SearchFriendActivity extends AppCompatActivity
         FontStyleHandler.setFont(this, search_btn, false, true);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            FirebaseRealtimeDatabaseHelper.readUserData(currentUser.getUid(), new RealtimeDatabaseCallback() {
+            FBRealTimeDBHelper.readUserData(currentUser.getUid(), new FBRealTimeDBCallback() {
                 @Override
                 public void retrieveUserData(User user) {
                     mUser = user;
@@ -194,13 +194,13 @@ public class SearchFriendActivity extends AppCompatActivity
                 Log.i(TAG, "onCancelled: " + databaseError.getMessage());
             }
         };
-        Log.i(TAG, "searchFriendByEmail: 12345" + FirebaseRealtimeDatabaseHelper.FIREBASE_DATABASE);
-        Log.i(TAG, "searchFriendByEmail: 12345" + FirebaseRealtimeDatabaseHelper.USERS_REF);
-        FirebaseRealtimeDatabaseHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
+        Log.i(TAG, "searchFriendByEmail: 12345" + FBRealTimeDBHelper.FIREBASE_DATABASE);
+        Log.i(TAG, "searchFriendByEmail: 12345" + FBRealTimeDBHelper.USERS_REF);
+        FBRealTimeDBHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 
     public void followNewFriend(final User mUser, final User friend) {
-        FirebaseRealtimeDatabaseHelper.FRIEND_ID_LIST_REF
+        FBRealTimeDBHelper.FRIEND_ID_LIST_REF
                 .child(mUser.getId())
                 .child(friend.getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -214,8 +214,8 @@ public class SearchFriendActivity extends AppCompatActivity
                             search_btn.setText(R.string.search_email);
 
                         } else {
-                            FirebaseRealtimeDatabaseHelper.followFriend(mUser.getId(), friendId);
-                            FirebaseRealtimeDatabaseHelper.createChatRoom(mUser, friend);
+                            FBRealTimeDBHelper.followFriend(mUser.getId(), friendId);
+                            FBRealTimeDBHelper.createChatRoom(mUser, friend);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
                         }

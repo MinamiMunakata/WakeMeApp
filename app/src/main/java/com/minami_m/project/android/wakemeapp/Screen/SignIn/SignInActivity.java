@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -34,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
@@ -171,7 +170,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                         user.getEmail(),
                                         avatar);
                                 newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
-                                FirebaseRealtimeDatabaseHelper.writeNewUser(newUser);
+                                FBRealTimeDBHelper.writeNewUser(newUser);
                             }
                             loadingBG.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);

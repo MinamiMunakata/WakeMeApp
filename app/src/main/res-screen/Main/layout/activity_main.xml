@@ -62,30 +62,20 @@
     </LinearLayout>
 
     <ImageView
-        android:contentDescription="@string/loading"
         android:id="@+id/loading_img"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
+        android:contentDescription="@string/loading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--<ProgressBar-->
-    <!--android:id="@+id/progressbar_main"-->
-    <!--android:indeterminateDrawable="@drawable/custom_progress_bar"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:indeterminate="true"-->
-    <!--android:max="100"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"/>-->
+
     <ImageView
-        android:contentDescription="@string/search_for_friend"
         android:id="@+id/semicircle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/search_for_friend"
         android:src="@drawable/img_add_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

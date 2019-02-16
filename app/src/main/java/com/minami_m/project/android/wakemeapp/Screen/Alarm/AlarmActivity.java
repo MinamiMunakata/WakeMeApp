@@ -19,12 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.CustomBasicTextView;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
@@ -73,7 +74,16 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         });
         setupOptionButtons();
         setupAlarmButton();
-        notifier = new NotificationController(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (currentUser == null) {
+            launchActivity(SignInActivity.class);
+        } else {
+            notifier = new NotificationController(this, currentUser.getUid());
+        }
     }
 
     private void setupToolBar() {
@@ -183,6 +193,15 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
 //                createAlarm(wakeUpTime);
                 // TODO: Delete
                 notifier.checkIfNotificationIsWorking();
+                Map<String, String> timeMap = DateAndTimeFormatHandler
+                        .generateFormattedAlarmTime(
+                                wakeUpTime.getHourOfDay(),
+                                wakeUpTime.getMinute());
+                StringBuilder time = new StringBuilder();
+                time.append(DateAndTimeFormatHandler.generateDateOfChat(wakeUpTime.getWakeUpTimeInMillis()));
+                time.append(" ");
+                time.append(timeMap.get("full time"));
+                Toast.makeText(getApplicationContext(), time, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -204,7 +223,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     repeatSwitch.setChecked(isChecked);
                     notifier.cancelAllNotification();
                 }
-                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
+                FBRealTimeDBHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
 
             }
@@ -240,7 +259,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     repeatOptions.setVisibility(View.GONE);
                     notifier.cancelIfRepeatOff(wakeUpTime);
                 }
-                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
+                FBRealTimeDBHelper.updateWakeUpTIme(currentUser, wakeUpTime);
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
 
             }
@@ -293,7 +312,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     repeatSwitch.setChecked(false);
                 }
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
-                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
+                FBRealTimeDBHelper.updateWakeUpTIme(currentUser, wakeUpTime);
             }
         };
     }
@@ -329,7 +348,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTime.turnOnMustWakeUp(true);
                                 mustWakeUpSwitch.setChecked(true);
                                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
-                                FirebaseRealtimeDatabaseHelper.updateWakeUpTIme(currentUser, wakeUpTime);
+                                FBRealTimeDBHelper.updateWakeUpTIme(currentUser, wakeUpTime);
 
                             }
                         },

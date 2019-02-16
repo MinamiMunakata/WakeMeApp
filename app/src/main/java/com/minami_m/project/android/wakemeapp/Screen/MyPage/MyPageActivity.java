@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,8 +38,8 @@ import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.Common.Handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseStorageHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBStorageHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.WakeUpTime;
 import com.minami_m.project.android.wakemeapp.R;
@@ -47,8 +48,8 @@ import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 import com.minami_m.project.android.wakemeapp.Screen.SignIn.SignInActivity;
 import com.squareup.picasso.Picasso;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ import java.util.Map;
 
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
+    private static final int NAME = 77, EMAIL = 78, PW = 79;
     private final int PICK_IMAGE_REQUEST = 6789;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -123,10 +125,13 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         FontStyleHandler.setFont(this, profileName, true, true);
         displayNameTextField = findViewById(R.id.edit_profile_name);
         FontStyleHandler.setFont(this, displayNameTextField, false, false);
+        displayNameTextField.setOnEditorActionListener(getOnEditorActionListener(NAME));
         emailTextField = findViewById(R.id.edit_profile_email);
         FontStyleHandler.setFont(this, emailTextField, false, false);
+        emailTextField.setOnEditorActionListener(getOnEditorActionListener(EMAIL));
         pwTextField = findViewById(R.id.edit_profile_pw);
         FontStyleHandler.setFont(this, pwTextField, false, false);
+        pwTextField.setOnEditorActionListener(getOnEditorActionListener(PW));
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             // Capitalize the first letter of an user name.
@@ -152,6 +157,31 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             emailTextField.setText(currentUser.getEmail());
         }
 
+    }
+
+    @NonNull
+    private TextView.OnEditorActionListener getOnEditorActionListener(final int field) {
+        return new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    switch (field) {
+                        case NAME:
+                            // TODO: input validation
+                            updateName(textView.getText().toString());
+                            return true;
+                        case EMAIL:
+                            updateEmail(textView.getText().toString());
+                            return true;
+                        case PW:
+                            updatePassword(textView.getText().toString());
+                            return true;
+                    }
+
+                }
+                return false;
+            }
+        };
     }
 
     private void setupUserInfoCategoryName() {
@@ -191,7 +221,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 
     private void uploadImage() {
         if (filePath != null) {
-            FirebaseStorageHelper.ICON_REF(currentUser).putFile(filePath)
+            FBStorageHelper.ICON_REF(currentUser).putFile(filePath)
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -203,12 +233,12 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             toast("Successfully Uploaded");
-                            FirebaseStorageHelper.ICON_REF(currentUser).getDownloadUrl()
+                            FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                     .addOnCompleteListener(new OnCompleteListener<Uri>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Uri> task) {
                                             String downloadIconURL = task.getResult().toString();
-                                            FirebaseRealtimeDatabaseHelper.updateIcon(currentUser, downloadIconURL);
+                                            FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
                                         }
                                     });
 
@@ -245,8 +275,13 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
-                        timer_box.setTextColor(getColor(R.color.colorMyAccent));
-                        timer_box.setAlpha(1);
+                        if (!wakeUpTime.getRepeatIsOn() &&
+                                wakeUpTime.getWakeUpTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {
+                            wakeUpTime.setMustWakeUp(false);
+                        } else {
+                            timer_box.setTextColor(getColor(R.color.colorMyAccent));
+                            timer_box.setAlpha(1);
+                        }
                     } else {
                         timer_box.setTextColor(getColor(R.color.black));
                         timer_box.setAlpha(0.3f);
@@ -267,7 +302,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             }
         };
 
-        FirebaseRealtimeDatabaseHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
+        FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
     }
 
     @Override

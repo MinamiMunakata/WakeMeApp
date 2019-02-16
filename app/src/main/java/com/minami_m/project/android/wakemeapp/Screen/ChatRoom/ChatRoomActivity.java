@@ -1,7 +1,6 @@
 package com.minami_m.project.android.wakemeapp.Screen.ChatRoom;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuCompat;
@@ -28,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.Model.Message;
@@ -173,7 +172,7 @@ public class ChatRoomActivity
                     if (message != null) {
                         if (!message.getSenderId().equals(currentUser.getUid()) && !message.getIsSeen()) {
                             message.setIsSeen(true);
-                            FirebaseRealtimeDatabaseHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
+                            FBRealTimeDBHelper.updateStatusThatMessageHasSeen(chatRoomCard.getChatRoomId(), message);
                         }
                         mMessageList.add(message);
                     }
@@ -188,14 +187,14 @@ public class ChatRoomActivity
             }
         };
 
-        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
+        FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        FirebaseRealtimeDatabaseHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
+        FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .removeEventListener(listener);
     }
 
@@ -263,7 +262,7 @@ public class ChatRoomActivity
             );
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
-            FirebaseRealtimeDatabaseHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
+            FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {

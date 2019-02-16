@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.Screen.Main.MainActivity;
 
@@ -32,6 +33,13 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         createNotificationChannel(context);
         managerCompat.notify(NOTIFICATION_ID, builder.build());
+
+        // Change 'mustWakeUp' -> false if the notification is only for ONCE.
+        String userId = intent.getStringExtra("userId");
+        int requestCode = intent.getIntExtra("requestCode", -1);
+        if (userId != null && requestCode == 0) {
+            FBRealTimeDBHelper.turnOffWakeUpTimeInFB(userId);
+        }
 
     }
 

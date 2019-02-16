@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.Common.Handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.Common.Handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.Common.Helper.FirebaseRealtimeDatabaseHelper;
+import com.minami_m.project.android.wakemeapp.Common.Helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.Common.Listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.Common.Listener.FragmentChangeListener;
@@ -65,7 +65,7 @@ public class SignInFragment extends Fragment implements
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
@@ -105,7 +105,7 @@ public class SignInFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
-            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
+            FBRealTimeDBHelper.updateStatusWithLoginTime(
                     mAuth.getCurrentUser().getUid(),
                     new Date().getTime());
             ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
@@ -140,7 +140,7 @@ public class SignInFragment extends Fragment implements
                                 passwordForSignUp = password;
                                 updateUI(false);
                             }
-                            FirebaseRealtimeDatabaseHelper.updateStatusWithLoginTime(
+                            FBRealTimeDBHelper.updateStatusWithLoginTime(
                                     currentUser.getUid(),
                                     new Date().getTime());
                             updateUI(true);
