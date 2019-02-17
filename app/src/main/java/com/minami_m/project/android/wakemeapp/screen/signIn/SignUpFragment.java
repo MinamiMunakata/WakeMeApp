@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -33,7 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.UploadTask;
-import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
@@ -41,7 +42,6 @@ import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.helper.FBStorageHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.model.User;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.io.IOException;
@@ -52,8 +52,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpFragment extends Fragment
-        implements InputValidationHandler, View.OnClickListener {
+public class SignUpFragment extends Fragment implements InputValidationHandler, View.OnClickListener {
     private static int PICK_IMAGE_REQUEST = 12345;
     private FirebaseAuth mAuth;
     private EditText nameField;
@@ -63,9 +62,8 @@ public class SignUpFragment extends Fragment
     private TextView errorMsg;
     private Uri filePath;
     private String downloadedIconUrl;
-    private ImageView loadingImage;
     private RelativeLayout loadingBG;
-    private TextView signUp;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     public SignUpFragment() {
@@ -85,34 +83,53 @@ public class SignUpFragment extends Fragment
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         mAuth = FirebaseAuth.getInstance();
-        signUp = view.findViewById(R.id.sign_up_title);
-        FontStyleHandler.setFont(getContext(), signUp, true, true);
-        nameField = view.findViewById(R.id.edit_name);
-        emailField = view.findViewById(R.id.edit_email);
-        setEmailFromSignInForm();
-        errorMsg = view.findViewById(R.id.sign_up_error);
-        pwField = view.findViewById(R.id.edit_pw);
-        Button signUpButton = view.findViewById(R.id.sign_up_btn);
-        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
-        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
-        signUpButton.setOnClickListener(this);
-        icon = view.findViewById(R.id.user_icon);
+        initialize(view);
+        setupSignUpButton(view);
+        setupLoadingImg(view);
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseImg();
             }
         });
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(requireContext());
+        Bundle params = new Bundle();
+        params.putString("image_name", "WakeMeApp");
+        params.putString("full_text", "Log events.");
+        mFirebaseAnalytics.logEvent("share_image", params);
+        return view;
+    }
+
+    private void initialize(View view) {
+        TextView signUp = view.findViewById(R.id.sign_up_title);
+        FontStyleHandler.setFont(getContext(), signUp, true, true);
+        nameField = view.findViewById(R.id.edit_name);
+        emailField = view.findViewById(R.id.edit_email);
+        // TODO: Remove if don't need it. Check 'newInstance'
+        setEmailFromSignInForm();
+        errorMsg = view.findViewById(R.id.sign_up_error);
+        pwField = view.findViewById(R.id.edit_pw);
+        icon = view.findViewById(R.id.user_icon);
+    }
+
+    private void setupSignUpButton(View view) {
+        Button signUpButton = view.findViewById(R.id.sign_up_btn);
+        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
+        FontStyleHandler.setFont(getContext(), signUpButton, false, true);
+        signUpButton.setOnClickListener(this);
+    }
+
+    private void setupLoadingImg(View view) {
         loadingBG = view.findViewById(R.id.loading_bg_sign_up);
-        loadingImage = view.findViewById(R.id.sign_up_loading_img);
+        ImageView loadingImage = view.findViewById(R.id.sign_up_loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
         loadingBG.setVisibility(View.INVISIBLE);
-        return view;
     }
 
     private void setEmailFromSignInForm() {
@@ -165,27 +182,28 @@ public class SignUpFragment extends Fragment
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        loadingBG.setVisibility(View.INVISIBLE);
-                        toast("Failed... " + e.getMessage());
+                        toast("Failed to upload the image.");
+                        saveToFBRealTimeDBAndMoveToMainActivity(currentUser);
+                        Log.w(TAG, "onFailure: ", e);
                     }
                 })
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         loadingBG.setVisibility(View.INVISIBLE);
-                        toast("Successfully Uploaded");
+                        Log.i(TAG, "onSuccess: The image is successfully Uploaded");
                         FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Uri> task) {
                                         downloadedIconUrl = task.getResult().toString();
-                                        User newUser = new User(currentUser.getUid(),
+                                        User newUser = new User(
+                                                currentUser.getUid(),
                                                 currentUser.getDisplayName(),
                                                 currentUser.getEmail(),
                                                 downloadedIconUrl);
-                                        newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
                                         FBRealTimeDBHelper.writeNewUser(newUser);
-                                        ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+                                        ((ActivityChangeListener) requireActivity()).launchActivity(MainActivity.class);
                                     }
                                 });
                     }
@@ -202,7 +220,7 @@ public class SignUpFragment extends Fragment
                 data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), filePath);
                 icon.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -220,7 +238,7 @@ public class SignUpFragment extends Fragment
 
     @Override
     public void onClick(View view) {
-        InputHandler.hideSoftKeyBoard(getActivity());
+        InputHandler.hideSoftKeyBoard(requireActivity());
         if (isValidInput()) {
             loadingBG.setVisibility(View.VISIBLE);
             final String name = nameField.getText().toString(),
@@ -232,40 +250,18 @@ public class SignUpFragment extends Fragment
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 final FirebaseUser currentUser = mAuth.getCurrentUser();
-                                UserProfileChangeRequest request =
-                                        new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(name)
-                                                .build();
-                                currentUser.updateProfile(request)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (filePath != null) {
-                                                    writeNewUSerWithImg(currentUser);
-                                                } else {
-                                                    User newUser = new User(currentUser.getUid(),
-                                                            currentUser.getDisplayName(),
-                                                            currentUser.getEmail());
-                                                    FBRealTimeDBHelper.writeNewUser(newUser);
-                                                    loadingBG.setVisibility(View.INVISIBLE);
-                                                    ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
-                                                }
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                loadingBG.setVisibility(View.INVISIBLE);
-                                                Log.i(TAG, "onFailure: 12345 " + e.getMessage());
-                                                toast("Failed to update the user profile.");
-                                            }
-                                        });
+                                if (currentUser != null) {
+                                    updateFBAuthWithNameAndSaveUserDataToFB(currentUser, name);
+                                }
+                                logEvents("Succeed.");
                             } else {
                                 // If sign in fails, display a message to the user.
                                 loadingBG.setVisibility(View.INVISIBLE);
-                                Log.w(TAG, "createUserWithEmail:failure 12345", task.getException());
+                                Log.w(TAG, "createUserWithEmail: ", task.getException());
                                 toast("Authentication failed.");
-                                errorMsg.setText(task.getException().getMessage());
+                                String error = task.getException() != null ? task.getException().getMessage() : "";
+                                errorMsg.setText(error);
+                                logEvents("Failed");
                             }
                         }
                     });
@@ -273,6 +269,42 @@ public class SignUpFragment extends Fragment
         } else {
             toast("Invalid Input");
         }
+    }
+
+    private void logEvents(String result) {
+        Bundle bundle = new Bundle();
+        bundle.putString(
+                FirebaseAnalytics.Param.METHOD,
+                "onClick: createUserWithEmailAndPassword\nResult: " + result);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
+    }
+
+    private void updateFBAuthWithNameAndSaveUserDataToFB(final FirebaseUser currentUser, String name) {
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+        currentUser.updateProfile(request).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if (filePath != null) { // Save with an icon.
+                    writeNewUSerWithImg(currentUser);
+                } else { // Save without an icon.
+                    saveToFBRealTimeDBAndMoveToMainActivity(currentUser);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loadingBG.setVisibility(View.INVISIBLE);
+                Log.i(TAG, "onFailure: " + e.getMessage());
+                toast("Failed to update the user profile.");
+            }
+        });
+    }
+
+    private void saveToFBRealTimeDBAndMoveToMainActivity(FirebaseUser currentUser) {
+        User newUser = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getEmail());
+        FBRealTimeDBHelper.writeNewUser(newUser);
+        loadingBG.setVisibility(View.INVISIBLE);
+        ((ActivityChangeListener) requireActivity()).launchActivity(MainActivity.class);
     }
 
     private void toast(String message) {
