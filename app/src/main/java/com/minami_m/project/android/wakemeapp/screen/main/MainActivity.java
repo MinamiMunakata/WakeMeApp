@@ -3,7 +3,6 @@ package com.minami_m.project.android.wakemeapp.screen.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         Glide.with(this).load(R.raw.loading).into(loadingImage);
         setupGreetingHeaderMsg();
         setupAddFriendsButton();
-//        setupRecyclerView();
 
     }
 
@@ -79,20 +77,17 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i(TAG, "onDataChange: Access to Firebase.");
                 loadingImage.setVisibility(View.VISIBLE);
                 chatRoomCards.clear();
                 for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
                     if (receiver != null) {
-//                        FBRealTimeDBHelper.updateLoginTime(
-//                                receiver.getId(),
-//                                receiver.getLastLogin());
                         ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                         chatRoomCards.add(roomCard);
                         Log.i(TAG, "onDataChange: " + roomCard.toString());
                     }
                 }
-                Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
                 Collections.sort(chatRoomCards);
 
                 adapter.notifyDataSetChanged();

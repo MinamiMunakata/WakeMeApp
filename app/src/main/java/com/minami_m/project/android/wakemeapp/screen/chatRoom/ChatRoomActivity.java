@@ -274,7 +274,7 @@ public class ChatRoomActivity
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {
-            Log.i(TAG, "onClick: 123456789 Invalid input");
+            Log.i(TAG, "onClick: Invalid input to send a message.");
         }
     }
 

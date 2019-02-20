@@ -2,16 +2,16 @@ package com.minami_m.project.android.wakemeapp.screen.searchFriend;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.R;
 
 
 /**
@@ -30,22 +30,13 @@ public class SearchFriendFragment extends Fragment implements InputValidationHan
         return new SearchFriendFragment();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        SearchFriendFragmentListener listener = (SearchFriendFragmentListener)getActivity();
-//        listener.resetSearchButton();
-//        editText.setText("");
-//    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_friend, container, false);
         editText = view.findViewById(R.id.search_by_email_text_field);
-        SearchFriendActivity activity = (SearchFriendActivity) getActivity();
+        SearchFriendActivity activity = (SearchFriendActivity) requireActivity();
         activity.setEditEmail(editText);
-        Log.i(TAG, "onCreateView: 12345 view?");
         return view;
     }
 
