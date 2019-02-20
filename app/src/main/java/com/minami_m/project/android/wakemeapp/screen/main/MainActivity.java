@@ -39,8 +39,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
-    public static final String TAG = "---- MainActivity ----";
-    private FirebaseAuth mAuth;
+    public static final String TAG = "MainActivity";
     private FirebaseUser currentUser;
     private List<ChatRoomCard> chatRoomCards;
     private CardRecyclerAdapter adapter;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         setupToolBar();
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         loadingImage = findViewById(R.id.loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
@@ -117,25 +116,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         try {
             // Capitalize the first letter of an user name.
             if (currentUser.getDisplayName() != null && currentUser.getDisplayName().length() > 0) {
-                String[] fullName = currentUser.getDisplayName().split(" ");
-                StringBuilder displayName = new StringBuilder();
-                if (fullName[0].length() > 0) {
-                    displayName
-                            .append(fullName[0].substring(0, 1).toUpperCase())
-                            .append(fullName[0].substring(1));
-                } else {
-                    for (int i = 0; i < fullName.length; i++) {
-                        String name = fullName[i];
-                        if (name.length() > 0) {
-                            displayName
-                                    .append(name.substring(0, 1).toUpperCase())
-                                    .append(name.substring(1));
-                        }
-                        if (i < fullName.length - 1) {
-                            displayName.append(" ");
-                        }
-                    }
-                }
+                StringBuilder displayName = getCapitalizedDisplayName();
                 displayName.append("!");
                 currentUserName.setText(displayName);
             } else {
@@ -145,6 +126,30 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         } catch (Exception e) {
             launchActivity(SignInActivity.class);
         }
+    }
+
+    @NonNull
+    private StringBuilder getCapitalizedDisplayName() {
+        String[] fullName = currentUser.getDisplayName().split(" ");
+        StringBuilder displayName = new StringBuilder();
+        if (fullName[0].length() > 0) {
+            displayName
+                    .append(fullName[0].substring(0, 1).toUpperCase())
+                    .append(fullName[0].substring(1));
+        } else {
+            for (int i = 0; i < fullName.length; i++) {
+                String name = fullName[i];
+                if (name.length() > 0) {
+                    displayName
+                            .append(name.substring(0, 1).toUpperCase())
+                            .append(name.substring(1));
+                }
+                if (i < fullName.length - 1) {
+                    displayName.append(" ");
+                }
+            }
+        }
+        return displayName;
     }
 
     private void setupAddFriendsButton() {
@@ -160,7 +165,10 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private void setupToolBar() {
         Toolbar toolbar = findViewById(R.id.my_toolbar_main);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(null);
+        }
+
     }
 
     @Override
@@ -182,13 +190,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                             Log.e(TAG, "onCancelled: ", databaseError.toException());
                         }
                     });
 
             setupRecyclerView();
-            Log.i(TAG, "onStart: " + currentUser.getUid());
         }
     }
 

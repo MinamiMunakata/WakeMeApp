@@ -97,12 +97,6 @@
                 android:switchPadding="10dp"
                 android:text="@string/set_time" />
 
-            <!--<Switch-->
-            <!--android:id="@+id/switch_notification"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:switchPadding="10dp"-->
-            <!--android:text="Notification" />-->
             <Switch
                 android:id="@+id/switch_repeat"
                 android:layout_width="match_parent"

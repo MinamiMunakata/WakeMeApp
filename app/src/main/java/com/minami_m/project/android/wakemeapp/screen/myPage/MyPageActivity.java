@@ -84,7 +84,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         setupUserInfo();
         Toolbar toolbar = findViewById(R.id.my_toolbar_setting);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(null);
+        }
         setupUserInfoCategoryName();
         setupTimeInfo();
     }
@@ -296,8 +298,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "onCancelled: ", databaseError.toException());
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         };
 
@@ -420,7 +421,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     toast("Password is successfully updated.");
                 } else {
                     toast("Failed to update");
-                    errorMsg.setText(task.getException().getMessage());
+                    if (task.getException() != null) {
+                        errorMsg.setText(task.getException().getMessage());
+                    }
                     Log.e(TAG, "onComplete: ", task.getException());
                 }
             }
@@ -436,7 +439,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     saveEmailToFB(input);
                 } else {
                     toast("Failed to update");
-                    errorMsg.setText(task.getException().getMessage());
+                    if (task.getException() != null) {
+                        errorMsg.setText(task.getException().getMessage());
+                    }
                     Log.e(TAG, "onComplete: ", task.getException());
                 }
             }
@@ -470,7 +475,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
@@ -490,7 +494,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                             saveNameToFB(input);
                         } else {
                             toast("Failed to update.");
-                            errorMsg.setText(task.getException().getMessage());
+                            if (task.getException() != null) {
+                                errorMsg.setText(task.getException().getMessage());
+                            }
                             Log.e(TAG, "onComplete: ", task.getException());
                         }
                     }
@@ -527,7 +533,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
@@ -536,7 +541,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     @Override
     protected void onStop() {
         super.onStop();
-        System.out.println("Stop");
         errorMsg.setText("");
     }
 }

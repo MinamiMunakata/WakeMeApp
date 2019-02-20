@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.AlarmClock;
-import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,13 +22,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.minami_m.project.android.wakemeapp.CustomBasicTextView;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
-import com.minami_m.project.android.wakemeapp.CustomBasicTextView;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
@@ -39,7 +38,7 @@ import java.util.Map;
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final int DEFAULT_HOUR = 7;
     private static final int DEFAULT_MINUTE = 0;
-    private Switch mustWakeUpSwitch, repeatSwitch; // notificationSwitch
+    private Switch mustWakeUpSwitch, repeatSwitch;
     private TextView wakeUpTimeTextView, wakeUpTimeAmPm, repeatInWeek;
     private CustomBasicTextView changeSettingsText;
     private LinearLayout config;
@@ -89,15 +88,16 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private void setupToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar_alarm);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
     }
 
     private void initialization() {
         alarmButton = findViewById(R.id.alarm_button);
         mustWakeUpSwitch = findViewById(R.id.switch_must_wake_up);
         repeatSwitch = findViewById(R.id.switch_repeat);
-//        notificationSwitch = findViewById(R.id.switch_notification);
         wakeUpTimeTextView = findViewById(R.id.wake_up_time);
         wakeUpTimeAmPm = findViewById(R.id.wake_up_time_am_pm);
         repeatOptions = findViewById(R.id.repeat_switch_options);
@@ -125,7 +125,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         Bundle data = intent.getExtras();
         if (data != null && data.getParcelable("WakeUpTime") != null) {
             wakeUpTime = data.getParcelable("WakeUpTime");
-            System.out.println(wakeUpTime);
             if (wakeUpTime != null) {
                 Map<String, String> formattedTime = DateAndTimeFormatHandler.generateFormattedAlarmTime(
                         wakeUpTime.getHourOfDay(),
@@ -133,7 +132,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 wakeUpTimeTextView.setText(formattedTime.get("time"));
                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                 mustWakeUpSwitch.setChecked(wakeUpTime.getMustWakeUp());
-//                notificationSwitch.setChecked(wakeUpTime.getNotificationIsOn());
                 repeatSwitch.setChecked(wakeUpTime.getRepeatIsOn());
                 if (wakeUpTime.getRepeatIsOn()) repeatOptions.setVisibility(View.VISIBLE);
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
@@ -176,8 +174,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     private void setupSwitches() {
         FontStyleHandler.setFont(this, mustWakeUpSwitch, false, false);
         mustWakeUpSwitch.setOnCheckedChangeListener(toggleMustWakeUp());
-//        FontStyleHandler.setFont(this, notificationSwitch, false, false);
-//        notificationSwitch.setOnCheckedChangeListener(toggleNotification());
         FontStyleHandler.setFont(this, repeatSwitch, false, false);
         repeatSwitch.setOnCheckedChangeListener(toggleRepeat());
     }
@@ -214,12 +210,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 setStyleDependsOnMustWakeUp(isChecked);
                 if (isChecked) {
                     wakeUpTime.turnOnMustWakeUp(isChecked);
-//                    wakeUpTime.setMustWakeUp(isChecked);
                     notifier.setAllNotification(wakeUpTime);
 
                 } else {
                     wakeUpTime.turnOffAlarm();
-//                    notificationSwitch.setChecked(isChecked);
                     repeatSwitch.setChecked(isChecked);
                     notifier.cancelAllNotification();
                 }
@@ -229,18 +223,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             }
         };
     }
-
-//    private CompoundButton.OnCheckedChangeListener toggleNotification() {
-//        return new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                wakeUpTime.setNotificationIsOn(isChecked);
-//                if (isChecked) {
-//                    mustWakeUpSwitch.setChecked(isChecked);
-//                }
-//            }
-//        };
-//    }
 
     private CompoundButton.OnCheckedChangeListener toggleRepeat() {
         return new CompoundButton.OnCheckedChangeListener() {
@@ -342,7 +324,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                                 wakeUpTimeTextView.setAlpha(1);
                                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
                                 wakeUpTimeAmPm.setAlpha(1);
-//                                wakeUpTime.setMustWakeUp(true);
                                 wakeUpTime.setHourOfDay(hourOfDay);
                                 wakeUpTime.setMinute(minute);
                                 wakeUpTime.turnOnMustWakeUp(true);

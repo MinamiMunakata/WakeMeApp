@@ -63,7 +63,6 @@ public class FBRealTimeDBHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
@@ -88,7 +87,6 @@ public class FBRealTimeDBHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         });
@@ -114,7 +112,6 @@ public class FBRealTimeDBHelper {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                     Log.e(TAG, "onCancelled: ", databaseError.toException());
                 }
             });
@@ -166,7 +163,7 @@ public class FBRealTimeDBHelper {
         });
     }
 
-    public static void createChatRoom(User mUser, User friend) {
+    private static void createChatRoom(User mUser, User friend) {
         final Map<String, Object> childUpdates = new HashMap<>();
         // (1) create a ChatRoom Obj and save it.
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
