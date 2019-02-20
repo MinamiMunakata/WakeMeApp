@@ -68,5 +68,5 @@ fastlane/readme.md
 .DS_Store
 
 # key word
-app/src/main/res/values/strings.xml
-app/src/main/res/values-ja/strings.xml
+# app/src/main/res/values/strings.xml
+# app/src/main/res/values-ja/strings.xml

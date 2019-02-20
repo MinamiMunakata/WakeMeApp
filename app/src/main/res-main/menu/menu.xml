@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/custom_menu"
         android:icon="@drawable/ico_menu"
-        android:visible="true"
         android:title=""
+        android:visible="true"
         app:showAsAction="always">
         <menu>
             <group android:id="@+id/group_home">
                 <item
                     android:id="@+id/home_menu"
                     android:icon="@drawable/ico_home"
-                    android:title="Home"
-                    />
+                    android:title="@string/home" />
             </group>
             <group android:id="@+id/group_mypage">
                 <item
                     android:id="@+id/my_page_menu"
                     android:icon="@drawable/ico_mypage"
-                    android:title="My Page" />
+                    android:title="@string/my_page" />
             </group>
             <group android:id="@+id/group_logout">
                 <item
                     android:id="@+id/logout_menu"
                     android:icon="@drawable/ico_logout"
-                    android:title="Logout" />
+                    android:title="@string/logout" />
             </group>
 
         </menu>
