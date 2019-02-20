@@ -123,17 +123,14 @@ public class FBRealTimeDBHelper {
     }
 
     public static void updateLoginTime(String userId, final long loginTime) {
-//        final String status = DateAndTimeFormatHandler.generateStatus(loginTime);
         final Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + userId + "/lastLogin", loginTime);
-//        childUpdates.put("/Users/" + userId + "/status", status);
         RECEIVER_PATH_REF.child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot path : dataSnapshot.getChildren()) {
                             childUpdates.put(path.getValue() + "/lastLogin", loginTime);
-//                            childUpdates.put(path.getValue() + "/status", status);
                         }
                         FIREBASE_DATABASE.getReference().updateChildren(
                                 childUpdates,
@@ -148,55 +145,50 @@ public class FBRealTimeDBHelper {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.i(TAG, "onCancelled: " + databaseError.getMessage());
                         Log.e(TAG, "onCancelled: ", databaseError.toException());
                     }
                 });
     }
 
-    public static void followFriend(final String currentUserId, final String friendId) {
-        FRIEND_ID_LIST_REF.child(currentUserId).child(friendId).setValue(true, new DatabaseReference.CompletionListener() {
+    public static void followFriend(final User currentUser, final User friendUser) {
+        final Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/FriendIDList/" + currentUser.getId() + "/" + friendUser.getId(), true);
+        childUpdates.put("/FriendIDList/" + friendUser.getId() + "/" + currentUser.getId(), true);
+        FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                showResult(databaseError);
-            }
-        });
-        FRIEND_ID_LIST_REF.child(friendId).child(currentUserId).setValue(true, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                showResult(databaseError);
+                if (databaseError != null) {
+                    Log.e(TAG, "onComplete: ", databaseError.toException());
+                } else {
+                    createChatRoom(currentUser, friendUser);
+                }
             }
         });
     }
 
     public static void createChatRoom(User mUser, User friend) {
+        final Map<String, Object> childUpdates = new HashMap<>();
         // (1) create a ChatRoom Obj and save it.
         String chatRoomId = CHAT_ROOMS_REF.push().getKey();
         if (chatRoomId != null) {
             String[] memberIds = {mUser.getId(), friend.getId()};
             List<String> memberIDList = Arrays.asList(memberIds);
             ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
-            CHAT_ROOMS_REF.child(chatRoomId).setValue(chatRoom);
+            childUpdates.put("/ChatRooms/" + chatRoomId, chatRoom);
 
             // (2) Save ChatRoom ID.
-            CHAT_ROOM_ID_LIST_REF.child(mUser.getId()).child(chatRoomId)
-                    .setValue(friend, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            showResult(databaseError);
-                        }
-                    });
-            CHAT_ROOM_ID_LIST_REF.child(friend.getId()).child(chatRoomId)
-                    .setValue(mUser, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            showResult(databaseError);
-                        }
-                    });
-
+            childUpdates.put("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId, friend);
+            childUpdates.put("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId, mUser);
             // (3) Save Receiver Path.
-            RECEIVER_PATH_REF.child(mUser.getId()).child(chatRoomId).setValue("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
-            RECEIVER_PATH_REF.child(friend.getId()).child(chatRoomId).setValue("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
+            childUpdates.put("/ReceiverPaths/" + mUser.getId() + "/" + chatRoomId, "/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
+            childUpdates.put("/ReceiverPaths/" + friend.getId() + "/" + chatRoomId, "/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
+            FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    showResult(databaseError);
+
+                }
+            });
         }
 
 
@@ -242,8 +234,6 @@ public class FBRealTimeDBHelper {
     }
 
     public static void updateStatusThatMessageHasSeen(String chatRoomId, Message message) {
-        Log.i(TAG, "updateStatusThatMessageHasSeen: 123456 " + message);
-        Log.i(TAG, "updateStatusThatMessageHasSeen: 123456 is updated!");
         MESSAGES_REF.child(chatRoomId).child(message.getId()).child("isSeen")
                 .setValue(message.getIsSeen(), new DatabaseReference.CompletionListener() {
                     @Override

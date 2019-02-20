@@ -215,8 +215,7 @@ public class SearchFriendActivity extends AppCompatActivity
                             search_btn.setText(R.string.search_email);
 
                         } else {
-                            FBRealTimeDBHelper.followFriend(mUser.getId(), friendId);
-                            FBRealTimeDBHelper.createChatRoom(mUser, friend);
+                            FBRealTimeDBHelper.followFriend(mUser, friend);
                             SuccessfullyAddedDialog.newInstance()
                                     .show(getSupportFragmentManager(), DIALOG_TAG);
                         }
