@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
@@ -31,7 +32,6 @@ import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeListener;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.util.Date;
@@ -121,7 +121,7 @@ public class SignInFragment extends Fragment implements
 
     @Override
     public void onClick(View view) {
-        InputHandler.hideSoftKeyBoard(getActivity());
+        InputHandler.hideSoftKeyBoard(requireActivity());
         if (isValidInput()) {
             final String email = editTextEmail.getText().toString(),
                     password = editTextPw.getText().toString();
@@ -163,7 +163,7 @@ public class SignInFragment extends Fragment implements
 
     private void updateUI(Boolean hasAccount) {
         if (hasAccount) {
-            ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+            ((ActivityChangeListener) requireActivity()).launchActivity(MainActivity.class);
         } else {
             displaySignUpForm();
         }
@@ -171,7 +171,7 @@ public class SignInFragment extends Fragment implements
 
     private void displaySignUpForm() {
         SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
-        FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
+        FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) requireActivity();
         fragmentChangeListener.replaceFragment(signUpFragment);
     }
 
@@ -185,5 +185,4 @@ public class SignInFragment extends Fragment implements
     private void toast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
-
 }

@@ -207,9 +207,9 @@ public class FBRealTimeDBHelper {
 
     private static void showResult(DatabaseError databaseError) {
         if (databaseError != null) {
-            System.out.println("Data could not be saved " + databaseError.getMessage());
+            Log.e(TAG, "showResult: ", databaseError.toException());
         } else {
-            System.out.println("Data saved successfully.");
+            Log.i(TAG, "showResult: Data saved successfully.");
         }
     }
 
