@@ -24,6 +24,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // supporting svc data
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -82,3 +83,15 @@ dependencies {
 // TODO: Delete it in the end
 apply plugin: 'com.google.gms.google-services'
 GoogleServicesPlugin.config.disableVersionCheck = true
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == "com.android.support") {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "27.1.+"
+            }
+        }
+    }
+}
+

@@ -307,7 +307,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu, true);
+//        SDK >= 28
+//        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 

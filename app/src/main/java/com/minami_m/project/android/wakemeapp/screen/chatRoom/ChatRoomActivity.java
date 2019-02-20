@@ -3,7 +3,6 @@ package com.minami_m.project.android.wakemeapp.screen.chatRoom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -213,7 +212,8 @@ public class ChatRoomActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu, true);
+//        SDK >= 28
+//        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 

@@ -25,15 +25,16 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         }
     };
     private String chatRoomId;
-    //    private User receiver;
+    private User receiver;
     private String receiverId;
     private String receiverName;
     private String receiverIcon;
     private long receiverLastLogin;
     //    private String receiverStatus;
     private long oversleepTime;
-    private String oversleepTimeStatus;
 //    private boolean isReceiverSleeping;
+    private String oversleepTimeStatus;
+
 
     public ChatRoomCard() {
     }
@@ -41,7 +42,7 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
     public ChatRoomCard(String chatRoomId, User receiver) {
         this.chatRoomId = chatRoomId;
-//        this.receiver = receiver;
+        this.receiver = receiver;
         this.receiverId = receiver.getId();
         this.receiverName = receiver.getName();
         this.receiverIcon = receiver.getIcon();
@@ -56,14 +57,13 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
     protected ChatRoomCard(Parcel in) {
         chatRoomId = in.readString();
+        receiver = in.readParcelable(User.class.getClassLoader());
         receiverId = in.readString();
         receiverName = in.readString();
         receiverIcon = in.readString();
         receiverLastLogin = in.readLong();
-//        receiverStatus = in.readString();
         oversleepTime = in.readLong();
         oversleepTimeStatus = in.readString();
-//        isReceiverSleeping = in.readByte() != 0;
     }
 
     private void setupStatus(User user) {
@@ -128,7 +128,6 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         if (!DateAndTimeFormatHandler.isLessThan24h(oversleepTime)) {
             oversleepTime = -1;
         }
-        System.out.println(oversleepTime);
     }
 
     private void calculateOversleepTime(User user, Calendar currentTime, long wakeUpTimeInMillis) {
@@ -234,9 +233,15 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     public String toString() {
         return String.format(
                 "\nReceiver: %s\nOversleepTime: %s\nStatus: %s",
-                this.receiverName,
+                this.receiver.getName(),
                 this.oversleepTime,
                 this.oversleepTimeStatus);
+    }
+
+
+    @Override
+    public int compareTo(@NonNull ChatRoomCard chatRoomCard) {
+        return (int) (chatRoomCard.oversleepTime - this.oversleepTime);
     }
 
     @Override
@@ -247,18 +252,12 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(chatRoomId);
+        dest.writeParcelable(receiver, flags);
         dest.writeString(receiverId);
         dest.writeString(receiverName);
         dest.writeString(receiverIcon);
-//        dest.writeString(receiverStatus);
         dest.writeLong(receiverLastLogin);
         dest.writeLong(oversleepTime);
         dest.writeString(oversleepTimeStatus);
-//        dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));
-    }
-
-    @Override
-    public int compareTo(@NonNull ChatRoomCard chatRoomCard) {
-        return (int) (chatRoomCard.oversleepTime - this.oversleepTime);
     }
 }

@@ -7,7 +7,6 @@ import android.support.transition.Fade;
 import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
@@ -34,7 +34,6 @@ import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.model.User;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
@@ -123,7 +122,8 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu, true);
+//        SDK >= 28
+//        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 

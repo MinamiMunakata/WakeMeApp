@@ -8,182 +8,178 @@
     android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context=".screen.signIn.SignInFragment">
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:layout_marginTop="38dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="38dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <android.support.constraint.ConstraintLayout
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/img_bubble"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/center"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/img_logo"
+                app:layout_constraintBottom_toTopOf="@id/center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:background="@drawable/sign_in_rounded_field"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="26dp"
+                android:layout_height="26dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/logo"
-                    android:src="@drawable/img_bubble"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/email"
+                    android:src="@drawable/ico_email_gray" />
 
-                <FrameLayout
-                    android:id="@+id/center"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+            </FrameLayout>
 
-                </FrameLayout>
+            <EditText
+                android:id="@+id/edit_text_email_for_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/fui_transparent"
+                android:focusable="true"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="@dimen/input_padding"
+                android:textSize="@dimen/text_size_sign_in_input" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_rounded_field"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="26dp"
+                android:layout_height="26dp">
 
                 <ImageView
-                    android:id="@+id/app_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="false"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/img_logo"
-                    app:layout_constraintBottom_toTopOf="@id/center"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/password"
+                    android:src="@drawable/ico_password_gray" />
+            </FrameLayout>
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/edit_text_password_for_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
-                android:background="@drawable/sign_in_rounded_field"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@color/fui_transparent"
+                android:focusable="true"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="@dimen/input_padding"
+                android:textSize="@dimen/text_size_sign_in_input" />
+        </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="26dp"
-                    android:layout_height="26dp">
+        <Button
+            android:id="@+id/sign_in_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+            android:background="@drawable/rounded_button"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h3" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/email"
-                        android:src="@drawable/ico_email_gray" />
+        <Button
+            android:id="@+id/fb_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/facebook_login_btn"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/ico_facebook_resize"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="@string/sign_in_with_facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
 
-                </FrameLayout>
+            android:textSize="@dimen/text_h3" />
 
-                <EditText
-                    android:id="@+id/edit_text_email_for_sign_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/fui_transparent"
-                    android:focusable="true"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:paddingHorizontal="@dimen/input_padding"
-                    android:textSize="@dimen/text_size_sign_in_input" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.minami_m.project.android.wakemeapp.CustomBasicTextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/sign_in_rounded_field"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <FrameLayout
-                    android:layout_width="26dp"
-                    android:layout_height="26dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/password"
-                        android:src="@drawable/ico_password_gray" />
-                </FrameLayout>
-
-                <EditText
-                    android:id="@+id/edit_text_password_for_sign_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/fui_transparent"
-                    android:focusable="true"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:paddingHorizontal="@dimen/input_padding"
-                    android:textSize="@dimen/text_size_sign_in_input" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/sign_in_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
-                android:background="@drawable/rounded_button"
-                android:text="@string/sign_in"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_h3" />
-
-            <Button
-                android:id="@+id/fb_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/facebook_login_btn"
-                android:drawablePadding="2dp"
-                android:drawableStart="@drawable/ico_facebook_resize"
-                android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/sign_in_with_facebook"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-
-                android:textSize="@dimen/text_h3" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/small_padding_text"
-                    android:text="@string/don_t_have_an_account"
-                    android:textSize="@dimen/text_h4" />
-
-                <TextView
-                    android:id="@+id/sign_up_link"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/small_padding_text"
-                    android:text="@string/sign_up_under_line"
-                    android:textColor="@color/colorMyAccent"
-                    android:textSize="@dimen/text_h4"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+                android:padding="@dimen/small_padding_text"
+                android:text="@string/don_t_have_an_account"
+                android:textSize="@dimen/text_h4" />
 
             <TextView
-                android:id="@+id/sign_in_error"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="2dp"
-                android:textColor="@color/red"
-                android:textSize="@dimen/text_small_default_12"
-                android:visibility="visible" />
+                android:id="@+id/sign_up_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding_text"
+                android:text="@string/sign_up_under_line"
+                android:textColor="@color/colorMyAccent"
+                android:textSize="@dimen/text_h4"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/sign_in_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="2dp"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_small_default_12"
+            android:visibility="visible" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -209,16 +205,5 @@
             android:layout_centerInParent="true"
             android:contentDescription="@string/loading" />
     </RelativeLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/reset_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:src="@android:drawable/ic_menu_help"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

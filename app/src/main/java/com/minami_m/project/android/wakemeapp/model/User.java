@@ -1,14 +1,26 @@
 package com.minami_m.project.android.wakemeapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class User {
+public class User implements Parcelable {
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
     private String id;
     private String name;
     private String icon;
     private String email;
-//    private String status;
-    //    private boolean isSleeping;
     private long lastLogin;
     private WakeUpTime wakeUpTime;
 
@@ -28,6 +40,30 @@ public class User {
         this.name = name;
         this.email = email;
         this.lastLogin = new Date().getTime();
+    }
+
+    protected User(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        icon = in.readString();
+        email = in.readString();
+        lastLogin = in.readLong();
+        wakeUpTime = in.readParcelable(WakeUpTime.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(icon);
+        dest.writeString(email);
+        dest.writeLong(lastLogin);
+        dest.writeParcelable(wakeUpTime, flags);
     }
 
     public String getId() {
@@ -62,14 +98,6 @@ public class User {
         this.email = email;
     }
 
-//    public boolean getIsSleeping() {
-//        return isSleeping;
-//    }
-
-//    public void setIsSleeping(boolean sleeping) {
-//        isSleeping = sleeping;
-//    }
-
     public long getLastLogin() {
         return lastLogin;
     }
@@ -77,14 +105,6 @@ public class User {
     public void setLastLogin(long lastLogin) {
         this.lastLogin = lastLogin;
     }
-
-//    public String getStatus() {
-//        return status;
-//    }
-
-//    public void setStatus(String status) {
-//        this.status = status;
-//    }
 
     public WakeUpTime getWakeUpTime() {
         return wakeUpTime;
@@ -100,5 +120,4 @@ public class User {
                 "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nWakeUpTime: %s",
                 this.id, this.name, this.email, this.icon, this.wakeUpTime.toString());
     }
-
 }

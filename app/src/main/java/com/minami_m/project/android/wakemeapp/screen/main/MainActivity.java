@@ -89,10 +89,12 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 //                                receiver.getLastLogin());
                         ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                         chatRoomCards.add(roomCard);
+                        Log.i(TAG, "onDataChange: " + roomCard.toString());
                     }
                 }
                 Log.i(TAG, "onDataChange: 123456789 Firebase: connected?");
                 Collections.sort(chatRoomCards);
+
                 adapter.notifyDataSetChanged();
                 loadingImage.setVisibility(View.GONE);
             }
@@ -206,7 +208,8 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        MenuCompat.setGroupDividerEnabled(menu, true);
+//        SDK >= 28
+//        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 
@@ -226,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 launchActivity(MyPageActivity.class);
                 return true;
             case R.id.logout_menu:
+                FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                        .removeEventListener(listener);
+                Log.i(TAG, "onStop: " + "Disconnect from FB");
                 FirebaseAuth.getInstance().signOut();
                 launchActivity(SignInActivity.class);
                 return true;
