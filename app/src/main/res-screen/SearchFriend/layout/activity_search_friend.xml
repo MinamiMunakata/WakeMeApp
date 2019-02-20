@@ -1,49 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.searchFriend.SearchFriendActivity"
-    android:background="@color/colorBackground">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_search_friend"
+    android:background="@color/colorBackground"
+    tools:context=".screen.searchFriend.SearchFriendActivity">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/MyAppTheme"
-        android:background="@color/white"
-        app:contentInsetStartWithNavigation="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetEnd="0dp">
-        <TextView
-            android:id="@+id/toolbar_title_add_friend"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_search_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/add_friend"
-            android:textStyle="bold"
-            android:textColor="@color/colorMyAccent" />
-    </android.support.v7.widget.Toolbar>
-    <FrameLayout
-        android:id="@+id/search_friend_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <fragment
-            android:id="@+id/search_friend_fragment"
+            android:background="@color/white"
+            android:theme="@style/MyAppTheme"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <TextView
+                android:id="@+id/toolbar_title_add_friend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_friend"
+                android:textAlignment="center"
+                android:textColor="@color/colorMyAccent"
+                android:textStyle="bold" />
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/search_friend_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.minami_m.project.android.wakemeapp.screen.searchFriend.SearchFriendFragment"
-            tools:layout="@layout/fragment_search_friend"/>
-    </FrameLayout>
-    <Button
-        android:textAllCaps="false"
-        android:id="@+id/search_button"
-        android:layout_marginLeft="@dimen/space_both_edges"
-        android:layout_marginRight="@dimen/space_both_edges"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button"
-        android:text="@string/search_email"
-        android:textColor="@color/white"
-        android:background="@drawable/rounded_button" />
-</LinearLayout>
+            android:layout_height="wrap_content">
+
+            <fragment
+                android:id="@+id/search_friend_fragment"
+                android:name="com.minami_m.project.android.wakemeapp.screen.searchFriend.SearchFriendFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_search_friend" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button"
+            android:layout_marginLeft="@dimen/space_both_edges"
+            android:layout_marginRight="@dimen/space_both_edges"
+            android:background="@drawable/rounded_button"
+            android:text="@string/search_email"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/loading_img_search_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:contentDescription="@string/loading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,7 +51,8 @@ public class SearchFriendActivity extends AppCompatActivity
     private String friendId;
     private User friend;
     private User mUser;
-    private TextView toolbarTitle;
+    private ImageView loadingImg;
+
 
     public void setEditEmail(EditText editEmail) {
         this.editEmail = editEmail;
@@ -63,7 +65,7 @@ public class SearchFriendActivity extends AppCompatActivity
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
-        toolbarTitle = findViewById(R.id.toolbar_title_add_friend);
+        TextView toolbarTitle = findViewById(R.id.toolbar_title_add_friend);
         FontStyleHandler.setFont(this, toolbarTitle, true, true);
         Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
         setSupportActionBar(toolbar);
@@ -71,6 +73,9 @@ public class SearchFriendActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         search_btn = findViewById(R.id.search_button);
         FontStyleHandler.setFont(this, search_btn, false, true);
+        loadingImg = findViewById(R.id.loading_img_search_friends);
+        Glide.with(this).load(R.raw.loading).into(loadingImg);
+        loadingImg.setVisibility(View.INVISIBLE);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             FBRealTimeDBHelper.readUserData(currentUser.getUid(), new FBRealTimeDBCallback() {
@@ -78,7 +83,6 @@ public class SearchFriendActivity extends AppCompatActivity
                 public void retrieveUserData(User user) {
                     mUser = user;
                     if (mUser == null) {
-                        Log.i(TAG, "onCreate: 123456789 the user doesn't exist.");
                         launchActivity(SignInActivity.class);
                     }
                 }
@@ -97,22 +101,19 @@ public class SearchFriendActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 if (search_btn.getText().equals(getResources().getString(R.string.search_email))) {
-                    Log.i(TAG, "onClick: 12345 no email field?");
                     if (editEmail != null) {
-                        Log.i(TAG, "onClick: 12345 success!");
                         if (isValidInput()) {
-                            Log.i(TAG, "onClick: " + editEmail.getText().toString());
+                            Log.i(TAG, "onClick: Search for " + editEmail.getText().toString());
                             searchFriendByEmail(editEmail.getText().toString());
                         } else {
-                            Log.i(TAG, "onClick: 123456789 Invalid input...");
+                            Log.i(TAG, "onClick: Invalid input.");
                         }
                     }
-                } else if (search_btn.getText()
-                        .equals(getResources().getString(R.string.add_as_friend))) {
+                } else if (search_btn.getText().equals(getResources().getString(R.string.add_as_friend))) {
                     followNewFriend(mUser, friend);
                 } else {
-                    // TODO: fix
-                    Log.i(TAG, "onClick: 123456 Something wrong...");
+                    Log.d(TAG, "onClick: Something wrong with a search button.");
+                    launchActivity(SignInActivity.class);
                 }
 
             }
@@ -161,14 +162,15 @@ public class SearchFriendActivity extends AppCompatActivity
         try {
             userEmail = currentUser.getEmail();
         } catch (Exception e) {
-            Log.i(TAG, "searchFriendByEmail: " + e.getMessage());
+            Log.e(TAG, "searchFriendByEmail: ", e);
             launchActivity(SignInActivity.class);
         }
         if (email.equals(userEmail)) {
-            Toast.makeText(this, "Search friend's ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter friend's email address.", Toast.LENGTH_SHORT).show();
+            loadingImg.setVisibility(View.INVISIBLE);
             return;
         }
-        // TODO: progressbar
+        loadingImg.setVisibility(View.VISIBLE);
         ValueEventListener searchListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -176,7 +178,6 @@ public class SearchFriendActivity extends AppCompatActivity
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String mEmail = userSnapshot.child("email").getValue(String.class);
                     if (mEmail != null && mEmail.equals(email)) {
-                        Log.i(TAG, "onDataChange: " + userSnapshot.getKey());
                         friendId = userSnapshot.getKey();
                         friend = userSnapshot.getValue(User.class);
                         search_btn.setText(R.string.add_as_friend);
@@ -185,18 +186,17 @@ public class SearchFriendActivity extends AppCompatActivity
                     }
                 }
                 if (!dataExist) {
-                    Log.i(TAG, "onDataChange: 123456789 no User?");
                     Toast.makeText(getApplicationContext(), R.string.email_not_match, Toast.LENGTH_SHORT).show();
                 }
+                loadingImg.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
+                loadingImg.setVisibility(View.INVISIBLE);
             }
         };
-        Log.i(TAG, "searchFriendByEmail: 12345" + FBRealTimeDBHelper.FIREBASE_DATABASE);
-        Log.i(TAG, "searchFriendByEmail: 12345" + FBRealTimeDBHelper.USERS_REF);
         FBRealTimeDBHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 
@@ -209,7 +209,7 @@ public class SearchFriendActivity extends AppCompatActivity
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             Toast.makeText(getApplicationContext(),
-                                    "Already following the currentUser",
+                                    "Search for new friend.",
                                     Toast.LENGTH_SHORT).show();
                             replaceFragment(SearchFriendFragment.newInstance());
                             search_btn.setText(R.string.search_email);
@@ -225,6 +225,7 @@ public class SearchFriendActivity extends AppCompatActivity
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        Log.e(TAG, "onCancelled: ", databaseError.toException());
                     }
                 });
 
@@ -297,5 +298,11 @@ public class SearchFriendActivity extends AppCompatActivity
     public void launchActivity(Class nextActivity) {
         Intent intent = new Intent(this, nextActivity);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        loadingImg.setVisibility(View.INVISIBLE);
     }
 }

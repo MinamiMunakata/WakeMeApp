@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         super.onStop();
         FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
                 .removeEventListener(listener);
+        loadingImage.setVisibility(View.INVISIBLE);
         Log.i(TAG, "onStop: " + "Disconnect from FB");
     }
 
