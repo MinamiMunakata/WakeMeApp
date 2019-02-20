@@ -51,8 +51,8 @@ public class SignInFragment extends Fragment implements
     private EditText editTextEmail, editTextPw;
     private TextView signUpLink, errorMsg;
     private ProfileTracker profileTracker;
-    private String emailForSignUp = null;
-    private String passwordForSignUp = null;
+    //    private String emailForSignUp = null;
+//    private String passwordForSignUp = null;
     private ImageView loadingImage;
     private RelativeLayout loadingBG;
 
@@ -93,7 +93,7 @@ public class SignInFragment extends Fragment implements
             @Override
             public void onClick(View view) {
                 ((SignInActivity) requireActivity()).setLoadingImage(loadingBG, loadingImage, getContext());
-                FacebookLoginListener facebookLoginListener = (FacebookLoginListener) getActivity();
+                FacebookLoginListener facebookLoginListener = (FacebookLoginListener) requireActivity();
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
         });
@@ -134,21 +134,21 @@ public class SignInFragment extends Fragment implements
                         // Sign in success, update UI with the signed-in user's information
                         final FirebaseUser currentUser = mAuth.getCurrentUser();
                         if (currentUser != null) {
-                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
-                                toast("Welcome! Please create an account here.");
-                                emailForSignUp = email;
-                                passwordForSignUp = password;
-                                updateUI(false);
-                            }
-                            FBRealTimeDBHelper.updateLoginTime(
-                                    currentUser.getUid(),
-                                    new Date().getTime());
+//                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+//                                toast("Please create an account.");
+//                                emailForSignUp = email;
+//                                passwordForSignUp = password;
+//                                updateUI(false);
+//                            }
+//                            FBRealTimeDBHelper.updateLoginTime(
+//                                    currentUser.getUid(),
+//                                    new Date().getTime());
                             updateUI(true);
                         }
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Log.e(TAG, "onComplete: ", task.getException());
                         toast("Authentication failed.");
                         errorMsg.setVisibility(View.VISIBLE);
                         errorMsg.setText(task.getException().getMessage());
@@ -170,7 +170,8 @@ public class SignInFragment extends Fragment implements
     }
 
     private void displaySignUpForm() {
-        SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
+        SignUpFragment signUpFragment = new SignUpFragment();
+//        SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) requireActivity();
         fragmentChangeListener.replaceFragment(signUpFragment);
     }

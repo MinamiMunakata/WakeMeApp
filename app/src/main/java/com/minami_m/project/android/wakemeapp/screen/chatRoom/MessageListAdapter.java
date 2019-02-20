@@ -18,7 +18,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
-    private static final String TAG = "--Adapter--123456";
+    private static final String TAG = "MessageListAdapter";
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
@@ -57,7 +57,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
                     .inflate(R.layout.received_message, parent, false);
             return new ReceivedMessageViewHolder(view);
         }
-        Log.i(TAG, "onCreateViewHolder: 123456789 Invalid ViewType");
+        Log.i(TAG, "onCreateViewHolder: Invalid ViewType is called.");
         return null;
     }
 

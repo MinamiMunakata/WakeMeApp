@@ -15,12 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,14 +28,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FacebookLoginListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.SignInListener;
 import com.minami_m.project.android.wakemeapp.model.User;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.util.Arrays;
@@ -51,8 +48,8 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     ImageView loadingImage;
     RelativeLayout loadingBG;
     CallbackManager callbackManager;
-    AccessTokenTracker mAccessTokenTracker;
-    ProfileTracker profileTracker;
+    //    AccessTokenTracker mAccessTokenTracker;
+//    ProfileTracker profileTracker;
     FirebaseAuth mAuth;
     Profile facebookProfile;
 
@@ -62,9 +59,41 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         // facebook
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
-        // ========
         setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_sign_in);
-        // --- create a new fragment to be placed in the activity layout ---
+        // create a new fragment to be placed in the activity layout
+        createNewFragment(savedInstanceState);
+//        mAccessTokenTracker = new AccessTokenTracker() {
+//            @Override
+//            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+//                Log.i(TAG, "onCurrentAccessTokenChanged: 123456");
+//            }
+//        };
+
+        callbackManager = CallbackManager.Factory.create();
+        // TODO: Test
+        LoginManager.getInstance().logOut();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.i(TAG, "onCancel: facebook login is canceled.");
+                loadingBG.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.e(TAG, "onError: ", error);
+                loadingBG.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    private void createNewFragment(Bundle savedInstanceState) {
         if (findViewById(R.id.signin_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -73,38 +102,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.signin_container, firstFragment).commit();
         }
-        // ------------------------------------------------------------------
-        mAccessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                Log.i(TAG, "onCurrentAccessTokenChanged: 123456");
-            }
-        };
-
-        callbackManager = CallbackManager.Factory.create();
-        // TODO: DELETE THE LINE BELOW LATER
-        LoginManager.getInstance().logOut();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.i(TAG, "onSuccess: 123456");
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Log.i(TAG, "onCancel: 123456");
-                loadingBG.setVisibility(View.INVISIBLE);
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.i(TAG, "onError: 123456");
-                Log.i(TAG, "onError: " + error.getMessage());
-                loadingBG.setVisibility(View.INVISIBLE);
-            }
-        });
     }
 
     @Override

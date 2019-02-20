@@ -27,7 +27,6 @@ public class CustomBasicTextView extends android.support.v7.widget.AppCompatText
     }
 
     private void setFont() {
-        Log.i("1234567890", "setFont: " + getContext().getAssets());
         Typeface font = createFromAsset(getContext().getAssets(), BASIC);
         setTypeface(font, Typeface.NORMAL);
     }

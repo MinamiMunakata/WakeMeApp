@@ -70,16 +70,16 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
         // Required empty public constructor
     }
 
-    public static SignUpFragment newInstance(@Nullable String email, @Nullable String pw) {
-        SignUpFragment fragment = new SignUpFragment();
-        if (email != null) {
-            Bundle data = new Bundle();
-            data.putString("email", email);
-            data.putString("pw", pw);
-            fragment.setArguments(data);
-        }
-        return fragment;
-    }
+//    public static SignUpFragment newInstance(@Nullable String email, @Nullable String pw) {
+//        SignUpFragment fragment = new SignUpFragment();
+//        if (email != null) {
+//            Bundle data = new Bundle();
+//            data.putString("email", email);
+//            data.putString("pw", pw);
+//            fragment.setArguments(data);
+//        }
+//        return fragment;
+//    }
 
 
     @Override
@@ -112,7 +112,7 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
         // TODO: Remove if don't need it. Check 'newInstance'
-        setEmailFromSignInForm();
+//        setEmailFromSignInForm();
         errorMsg = view.findViewById(R.id.sign_up_error);
         pwField = view.findViewById(R.id.edit_pw);
         icon = view.findViewById(R.id.user_icon);
@@ -132,41 +132,41 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
         loadingBG.setVisibility(View.INVISIBLE);
     }
 
-    private void setEmailFromSignInForm() {
-        Bundle data = getArguments();
-        if (data != null && data.containsKey("email") && data.containsKey("pw")) {
-            String email = data.getString("email");
-            String password = data.getString("pw");
-            emailField.setText(email);
-            FirebaseUser user = mAuth.getCurrentUser();
-            // Get auth credentials from the user for re-authentication. The example below shows
-            // email and password credentials but there are multiple possible providers,
-            // such as GoogleAuthProvider or FacebookAuthProvider.
-            AuthCredential credential = EmailAuthProvider
-                    .getCredential(email, password);
-
-            // Prompt the user to re-provide their sign-in credentials
-            user.reauthenticate(credential)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Log.d(TAG, "User re-authenticated.");
-                        }
-                    });
-            if (user != null) {
-                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.i(TAG, "User account deleted.");
-                        } else {
-                            Log.i(TAG, "onComplete: " + task.getException().getMessage());
-                        }
-                    }
-                });
-            }
-        }
-    }
+//    private void setEmailFromSignInForm() {
+//        Bundle data = getArguments();
+//        if (data != null && data.containsKey("email") && data.containsKey("pw")) {
+//            String email = data.getString("email");
+//            String password = data.getString("pw");
+//            emailField.setText(email);
+//            FirebaseUser user = mAuth.getCurrentUser();
+//            // Get auth credentials from the user for re-authentication. The example below shows
+//            // email and password credentials but there are multiple possible providers,
+//            // such as GoogleAuthProvider or FacebookAuthProvider.
+//            AuthCredential credential = EmailAuthProvider
+//                    .getCredential(email, password);
+//
+//            // Prompt the user to re-provide their sign-in credentials
+//            user.reauthenticate(credential)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            Log.d(TAG, "User re-authenticated.");
+//                        }
+//                    });
+//            if (user != null) {
+//                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            Log.i(TAG, "User account deleted.");
+//                        } else {
+//                            Log.i(TAG, "onComplete: " + task.getException().getMessage());
+//                        }
+//                    }
+//                });
+//            }
+//        }
+//    }
 
     public void chooseImg() {
         Intent intent = new Intent();
