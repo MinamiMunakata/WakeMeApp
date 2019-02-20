@@ -158,17 +158,19 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // Check if the usr sign in for the first time.
-                            boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
-                            if (isNewUser) {
-                                facebookProfile = Profile.getCurrentProfile();
-                                String avatar = facebookProfile.getProfilePictureUri(300, 300).toString();
-                                User newUser = new User(user.getUid(),
-                                        facebookProfile.getName(),
-                                        user.getEmail(),
-                                        avatar);
-                                newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
-                                FBRealTimeDBHelper.writeNewUser(newUser);
+                            if (user != null) {
+                                // Check if the usr sign in for the first time.
+                                boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                                if (isNewUser) {
+                                    facebookProfile = Profile.getCurrentProfile();
+                                    String avatar = facebookProfile.getProfilePictureUri(300, 300).toString();
+                                    User newUser = new User(user.getUid(),
+                                            facebookProfile.getName(),
+                                            user.getEmail(),
+                                            avatar);
+//                                newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
+                                    FBRealTimeDBHelper.writeNewUser(newUser);
+                                }
                             }
                             loadingBG.setVisibility(View.INVISIBLE);
                             launchActivity(MainActivity.class);

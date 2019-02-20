@@ -1,5 +1,6 @@
 package com.minami_m.project.android.wakemeapp.screen.main;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
-import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -70,10 +72,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                     .into(viewHolder.iconView);
         }
 
-        if (roomCard.getOversleepTime() > 0) {
+        if (roomCard.getOversleepTime() > 0 &&
+                DateAndTimeFormatHandler.isLessThan24h(roomCard.getOversleepTime())) {
             viewHolder.alertView.setImageResource(R.drawable.ico_alart);
+            viewHolder.statusView.setTextColor(Color.RED);
         } else {
             viewHolder.alertView.setImageResource(R.drawable.ico_awake);
+            viewHolder.statusView.setTextColor(Color.parseColor("#db8623"));
         }
 
     }

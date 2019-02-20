@@ -6,9 +6,10 @@ import android.support.annotation.NonNull;
 
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
@@ -28,7 +29,8 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     private String receiverId;
     private String receiverName;
     private String receiverIcon;
-    private String receiverStatus;
+    private long receiverLastLogin;
+    //    private String receiverStatus;
     private long oversleepTime;
     private String oversleepTimeStatus;
 //    private boolean isReceiverSleeping;
@@ -43,8 +45,9 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         this.receiverId = receiver.getId();
         this.receiverName = receiver.getName();
         this.receiverIcon = receiver.getIcon();
-        this.receiverStatus = receiver.getStatus();
-        this.oversleepTimeStatus = receiver.getStatus();
+        this.receiverLastLogin = receiver.getLastLogin();
+//        this.receiverStatus = receiver.getStatus();
+//        this.oversleepTimeStatus = receiver.getStatus();
 //        this.isReceiverSleeping = receiver.getIsSleeping();
         this.oversleepTime = -1;
         setupOversleepTime(receiver);
@@ -56,13 +59,15 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         receiverId = in.readString();
         receiverName = in.readString();
         receiverIcon = in.readString();
-        receiverStatus = in.readString();
+        receiverLastLogin = in.readLong();
+//        receiverStatus = in.readString();
         oversleepTime = in.readLong();
         oversleepTimeStatus = in.readString();
 //        isReceiverSleeping = in.readByte() != 0;
     }
 
     private void setupStatus(User user) {
+        oversleepTimeStatus = DateAndTimeFormatHandler.generateStatus(receiverLastLogin);
         final int SECOND = 1000;
         final int MINUTE = 60 * SECOND;
         final int HOUR = 60 * MINUTE;
@@ -85,11 +90,8 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
                     timeToWakeUp.set(Calendar.MINUTE, wakeUpTime.getMinute());
                     if (timeToWakeUp.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()
                             || wakeUpTime.getWakeUpTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
-                        Map<String, String> formattedTime = DateAndTimeFormatHandler
-                                .generateFormattedAlarmTime(
-                                        wakeUpTime.getHourOfDay(),
-                                        wakeUpTime.getMinute());
-                        oversleepTimeStatus = "will wake up at " + formattedTime.get("full time");
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm", Locale.US);
+                        oversleepTimeStatus = "wants to wake up at " + dateFormatter.format(new Date(timeToWakeUp.getTimeInMillis()));
                     } else {
                         oversleepTimeStatus = "is already awake!";
                     }
@@ -122,6 +124,9 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
                     calculateOversleepTime(user, currentTime, wakeUpTime.getWakeUpTimeInMillis());
                 }
             }
+        }
+        if (!DateAndTimeFormatHandler.isLessThan24h(oversleepTime)) {
+            oversleepTime = -1;
         }
         System.out.println(oversleepTime);
     }
@@ -175,12 +180,21 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         this.receiverIcon = receiverIcon;
     }
 
-    public String getReceiverStatus() {
-        return receiverStatus;
+//    public String getReceiverStatus() {
+//        return receiverStatus;
+//    }
+
+//    public void setReceiverStatus(String receiverStatus) {
+//        this.receiverStatus = receiverStatus;
+//    }
+
+
+    public long getReceiverLastLogin() {
+        return receiverLastLogin;
     }
 
-    public void setReceiverStatus(String receiverStatus) {
-        this.receiverStatus = receiverStatus;
+    public void setReceiverLastLogin(long receiverLastLogin) {
+        this.receiverLastLogin = receiverLastLogin;
     }
 
     public long getOversleepTime() {
@@ -236,7 +250,8 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         dest.writeString(receiverId);
         dest.writeString(receiverName);
         dest.writeString(receiverIcon);
-        dest.writeString(receiverStatus);
+//        dest.writeString(receiverStatus);
+        dest.writeLong(receiverLastLogin);
         dest.writeLong(oversleepTime);
         dest.writeString(oversleepTimeStatus);
 //        dest.writeByte((byte) (isReceiverSleeping ? 1 : 0));

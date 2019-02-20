@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -45,8 +46,8 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     private NotificationCompat.Builder getNotificationBuilder(Context context, PendingIntent pendingIntent) {
         return new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle(context.getString(R.string.app_name))
                 .setSmallIcon(R.drawable.ico_alart)
+                .setColor(context.getColor(R.color.colorMyAccent))
                 .setContentText(context.getString(R.string.notificationText))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(context.getString(R.string.notificationText)))

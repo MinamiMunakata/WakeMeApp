@@ -92,7 +92,7 @@ public class SignInFragment extends Fragment implements
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((SignInActivity) getActivity()).setLoadingImage(loadingBG, loadingImage, getContext());
+                ((SignInActivity) requireActivity()).setLoadingImage(loadingBG, loadingImage, getContext());
                 FacebookLoginListener facebookLoginListener = (FacebookLoginListener) getActivity();
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
@@ -105,10 +105,10 @@ public class SignInFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
-            FBRealTimeDBHelper.updateStatusWithLoginTime(
+            FBRealTimeDBHelper.updateLoginTime(
                     mAuth.getCurrentUser().getUid(),
                     new Date().getTime());
-            ((ActivityChangeListener) getActivity()).launchActivity(MainActivity.class);
+            ((ActivityChangeListener) requireActivity()).launchActivity(MainActivity.class);
         }
         signInBtn.setOnClickListener(this);
         signUpLink.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +140,7 @@ public class SignInFragment extends Fragment implements
                                 passwordForSignUp = password;
                                 updateUI(false);
                             }
-                            FBRealTimeDBHelper.updateStatusWithLoginTime(
+                            FBRealTimeDBHelper.updateLoginTime(
                                     currentUser.getUid(),
                                     new Date().getTime());
                             updateUI(true);

@@ -22,13 +22,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.model.User;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.chatRoom.ChatRoomActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.searchFriend.SearchFriendActivity;
@@ -84,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
                     User receiver = chatRoomIdSnapshot.getValue(User.class);
                     if (receiver != null) {
-                        FBRealTimeDBHelper.updateStatusWithLoginTime(
-                                receiver.getId(),
-                                receiver.getLastLogin());
+//                        FBRealTimeDBHelper.updateLoginTime(
+//                                receiver.getId(),
+//                                receiver.getLastLogin());
                         ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
                         chatRoomCards.add(roomCard);
                     }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 loadingImage.setVisibility(View.GONE);
-                Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         };
 
@@ -174,21 +174,21 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         } else {
             FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        FBRealTimeDBHelper.updateStatusWithLoginTime(
-                                currentUser.getUid(),
-                                new Date().getTime());
-                    }
-                }
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                FBRealTimeDBHelper.updateLoginTime(
+                                        currentUser.getUid(),
+                                        new Date().getTime());
+                            }
+                        }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.i(TAG, "onCancelled: " + databaseError.getMessage());
-                    Log.e(TAG, "onCancelled: ", databaseError.toException());
-                }
-            });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.i(TAG, "onCancelled: " + databaseError.getMessage());
+                            Log.e(TAG, "onCancelled: ", databaseError.toException());
+                        }
+                    });
 
             setupRecyclerView();
             Log.i(TAG, "onStart: " + currentUser.getUid());

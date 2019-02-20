@@ -7,7 +7,7 @@ public class User {
     private String name;
     private String icon;
     private String email;
-    private String status;
+//    private String status;
     //    private boolean isSleeping;
     private long lastLogin;
     private WakeUpTime wakeUpTime;
@@ -78,13 +78,13 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
-    public String getStatus() {
-        return status;
-    }
+//    public String getStatus() {
+//        return status;
+//    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 
     public WakeUpTime getWakeUpTime() {
         return wakeUpTime;
@@ -97,8 +97,8 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nStatus: %s\nWakeUpTime: %s",
-                this.id, this.name, this.email, this.icon, this.status, this.wakeUpTime.toString());
+                "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nWakeUpTime: %s",
+                this.id, this.name, this.email, this.icon, this.wakeUpTime.toString());
     }
 
 }

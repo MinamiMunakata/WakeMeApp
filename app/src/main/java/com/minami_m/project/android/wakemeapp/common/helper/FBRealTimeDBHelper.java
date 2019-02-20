@@ -10,7 +10,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.model.Message;
 import com.minami_m.project.android.wakemeapp.model.User;
@@ -123,18 +122,18 @@ public class FBRealTimeDBHelper {
 
     }
 
-    public static void updateStatusWithLoginTime(String userId, final long loginTime) {
-        final String status = DateAndTimeFormatHandler.generateStatus(loginTime);
+    public static void updateLoginTime(String userId, final long loginTime) {
+//        final String status = DateAndTimeFormatHandler.generateStatus(loginTime);
         final Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + userId + "/lastLogin", loginTime);
-        childUpdates.put("/Users/" + userId + "/status", status);
+//        childUpdates.put("/Users/" + userId + "/status", status);
         RECEIVER_PATH_REF.child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot path : dataSnapshot.getChildren()) {
                             childUpdates.put(path.getValue() + "/lastLogin", loginTime);
-                            childUpdates.put(path.getValue() + "/status", status);
+//                            childUpdates.put(path.getValue() + "/status", status);
                         }
                         FIREBASE_DATABASE.getReference().updateChildren(
                                 childUpdates,
@@ -153,8 +152,6 @@ public class FBRealTimeDBHelper {
                         Log.e(TAG, "onCancelled: ", databaseError.toException());
                     }
                 });
-//        USERS_REF.child(currentUserId).child("lastLogin").setValue(loginTime);
-//        USERS_REF.child(currentUserId).child("status").setValue(TimeHandler.generateStatus(loginTime));
     }
 
     public static void followFriend(final String currentUserId, final String friendId) {

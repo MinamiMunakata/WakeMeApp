@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
@@ -31,7 +33,6 @@ import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.model.Message;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
@@ -105,7 +106,8 @@ public class ChatRoomActivity
         } else {
             title.setText(chatRoomCard.getReceiverName());
         }
-        subtitle.setText(chatRoomCard.getReceiverStatus());
+        String status = DateAndTimeFormatHandler.generateStatus(chatRoomCard.getReceiverLastLogin());
+        subtitle.setText(status);
     }
 
     private void setupRecyclerViewWithAdapter() {
@@ -177,6 +179,7 @@ public class ChatRoomActivity
                         mMessageList.add(message);
                     }
                     adapter.notifyDataSetChanged();
+                    updateReceiverStatus(message);
                     recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
                 }
             }
@@ -189,6 +192,15 @@ public class ChatRoomActivity
 
         FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
+    }
+
+    private void updateReceiverStatus(Message message) {
+        Message lastMessage = mMessageList.get(mMessageList.size() - 1);
+        if (lastMessage.getSenderId().equals(chatRoomCard.getReceiverId())
+                && lastMessage.getCreatedAt() > chatRoomCard.getReceiverLastLogin()) {
+            String status = DateAndTimeFormatHandler.generateStatus(message.getCreatedAt());
+            subtitle.setText(status);
+        }
     }
 
     @Override
@@ -249,11 +261,6 @@ public class ChatRoomActivity
     @Override
     public void onClick(View v) {
         if (isValidInput()) {
-//            Message message = new Message(
-//                    (editText.getText().toString()
-//                            + Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;")),
-//                    currentUser.getUid(),
-//                    new Date().getTime());
             Message message = new Message(
                     editText.getText().toString()
                             + fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;"),
@@ -263,6 +270,7 @@ public class ChatRoomActivity
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
             FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
+            FBRealTimeDBHelper.updateLoginTime(currentUser.getUid(), message.getCreatedAt());
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {

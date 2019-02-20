@@ -15,19 +15,23 @@ public class DateAndTimeFormatHandler {
     private static final int HOUR = 60 * MINUTE;
     private static final int DAY = 24 * HOUR;
 
-    public static String generateStatus(long time) {
+    public static boolean isLessThan24h(long diff) {
+        return (diff < DAY);
+    }
+
+    public static String generateStatus(long lastLoginTime) {
         long now = new Date().getTime();
-        long diff = now - time;
+        long diff = now - lastLoginTime;
         if (diff < HOUR) {
             int min = (int) (diff / MINUTE);
             return String.format(Locale.US, "Active %dm ago", min);
         } else if (diff < DAY) {
-            int hour = (int) ((now - time) / HOUR);
+            int hour = (int) ((now - lastLoginTime) / HOUR);
             return String.format(Locale.US, "Active %dh ago", hour);
 
         } else {
             SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d 'at' HH:mm", Locale.US);
-            return String.format("Last seen %s", dateFormatter.format(new Date(time)));
+            return String.format("Last seen %s", dateFormatter.format(new Date(lastLoginTime)));
         }
     }
 
