@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:textSize="@dimen/input_title"
             android:hint="@string/hint_input_message"
             android:maxLines="4"
             android:inputType="textMultiLine"
