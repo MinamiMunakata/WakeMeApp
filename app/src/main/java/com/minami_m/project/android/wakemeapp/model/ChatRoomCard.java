@@ -101,8 +101,6 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 
     }
 
-    // TODO: check if an user has overslept
-    // TODO: Parcel
     private void setupOversleepTime(User user) {
         WakeUpTime wakeUpTime = user.getWakeUpTime();
         Calendar currentTime = Calendar.getInstance();
