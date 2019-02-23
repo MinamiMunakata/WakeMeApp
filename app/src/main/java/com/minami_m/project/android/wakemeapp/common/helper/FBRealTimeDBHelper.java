@@ -214,7 +214,7 @@ public class FBRealTimeDBHelper {
         });
     }
 
-    public static void sendNewMessage(String chatRoomId, Message message) {
+    public static void sendNewMessage(String chatRoomId, final Message message) {
         String key = MESSAGES_REF.child(chatRoomId).push().getKey();
         if (key != null) {
             message.setId(key);
@@ -223,7 +223,11 @@ public class FBRealTimeDBHelper {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError,
                                                @NonNull DatabaseReference databaseReference) {
-                            showResult(databaseError);
+                            if (databaseError != null) {
+                                Log.e(TAG, "onComplete: ", databaseError.toException());
+                            } else {
+                                updateLoginTime(message.getSenderId(), message.getCreatedAt());
+                            }
                         }
                     });
         }

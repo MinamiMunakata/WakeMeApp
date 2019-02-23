@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
@@ -270,12 +272,17 @@ public class ChatRoomActivity
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
             FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
-            FBRealTimeDBHelper.updateLoginTime(currentUser.getUid(), message.getCreatedAt());
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {
             Log.i(TAG, "onClick: Invalid input to send a message.");
         }
+    }
+
+    public void sendNotification(String chatRoomId) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference notificationRef = database.getReference("Notification");
+
     }
 
     // TODO: check validation
