@@ -1,14 +1,17 @@
 package com.minami_m.project.android.wakemeapp.common;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFMService";
-    private static final String WAKE_ME_APP_TOPIC = "wake_me_app";
+    private static final String WAKE_ME_APP_TOPIC = "messages";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -18,6 +21,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.i(TAG, "FCM Notification Message: " + remoteMessage.getNotification().getBody());
             Log.i(TAG, "FCM Data Message: " + remoteMessage.getData());
         }
+        // Once a token is generated, we subscribe to topic.
+        FirebaseMessaging.getInstance().subscribeToTopic(WAKE_ME_APP_TOPIC).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Log.d(TAG, "onComplete: DONE");
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "onComplete: succeed");
+                } else {
+                    Log.d(TAG, "onComplete: failed");
+                }
+            }
+        });
     }
 
     /**
@@ -37,4 +52,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     }
+
 }
