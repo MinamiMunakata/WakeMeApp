@@ -55,9 +55,10 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
 ## Specification
 
-Language: Java  
-Libraries:
-
+#### Language:
+- Java
+- JavaScript
+#### Libraries:
 - Android Support Library
 - [Picasso](https://github.com/square/picasso)
 - [Glide](https://github.com/bumptech/glide)
@@ -66,13 +67,16 @@ Libraries:
   - Authentication
   - Cloud Storage
   - Realtime Database
+  - Cloud Functions
+  - Cloud Messaging
+  - Crashlytics
 
 ## Architecture
 
 ✏️ TBA
 
 ## Data Architecture
-##### Firebase
+#### Firebase
 \* UID == Firebase Authentication user UID
 
 ```
