@@ -2,7 +2,7 @@
 
 ###### 🚧 This app is still a WIP 🚧
 
-###### [■■■■■■■■□□]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80% Completed!
+###### [■■■■■■■■■□]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90% Completed!
 
 ## Index
 
@@ -72,57 +72,62 @@ Libraries:
 ✏️ TBA
 
 ## Data Architecture
-
-✏️ WIP
-
 ##### Firebase
+\* UID == Firebase Authentication user UID
 
 ```
 root
   ├ ChatRoomIDList
-  |  └ xxxx
-  |     └ xxxx
+  |  └ {UID}
+  |     └ {chatRoomId}
+  |        └ [User object] *See a 'Users' reference below.
   |
   ├ ChatRooms
-  |  └ xxxx
-  |     └ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        └ xxxx
+  |  └ {chatRoomId}
+  |     |[ChatRoom object]
+  |     ├ id (== chatRoomId)
+  |     └ memberList
   |
   ├ FriendIDList
-  |  └ xxxx
-  |     └ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        └ xxxx
+  |  └ {UID}
+  |     └ {UID}: true
   |
   ├ Messages
-  |  └ xxxx
-  |     └ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        └ xxxx
+  |  └ {chatRoomId}
+  |     └ {pushId}
+  |        |[Message object]
+  |        ├ id (== pushId)
+  |        ├ text
+  |        ├ senderId
+  |        ├ createdAt
+  |        └ isSeen
   |
   ├ ReceiverPaths
-  |  └ xxxx
-  |     └ xxxx
-  |        ├ xxxx
-  |        ├ xxxx
-  |        └ xxxx
+  |  └ {UID}
+  |     └ {chatRoomId}: "xxxxxxxxxxxx"
   |
   └ Users
-     └ xxxx
-        └ xxxx
-           ├ xxxx
-           ├ xxxx
-           ├ xxxx
-           ├ xxxx
-           ├ xxxx
-           └ xxxx
+     └ {UID}
+         |[User object]
+         ├ id (== UID)
+         ├ name
+         ├ icon
+         ├ email
+         ├ lastLogin
+         └ wakeUpTime
+             |[WakeUpTime object]
+             ├ mustWakeUp
+             ├ repeatIsOn
+             ├ mon
+             ├ tue
+             ├ wed
+             ├ thu
+             ├ fri
+             ├ sat
+             ├ sun
+             ├ hourOfDay
+             ├ minute
+             └ wakeUpTimeInMillis
 ```
 
 ## Contributor
