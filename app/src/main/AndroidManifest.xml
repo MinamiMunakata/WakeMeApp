@@ -43,7 +43,7 @@
         <activity android:name=".screen.myPage.MyPageActivity" />
         <activity android:name=".screen.alarm.AlarmActivity" />
 
-        <receiver android:name=".screen.alarm.NotificationReceiver" />
+        <receiver android:name=".common.NotificationReceiver" />
 
         <service
             android:name=".common.MyFirebaseMessagingService"

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.minami_m.project.android.wakemeapp.common.NotificationReceiver;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
 

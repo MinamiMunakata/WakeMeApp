@@ -89,8 +89,9 @@ public class ChatRoomActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Capitalize the first letter of an user name.
-        if (chatRoomCard.getReceiverName() != null && chatRoomCard.getReceiverName().length() > 0) {
-            String[] fullName = chatRoomCard.getReceiverName().split(" ");
+        String rName = chatRoomCard.getReceiver().getName();
+        if (rName != null && rName.length() > 0) {
+            String[] fullName = rName.split(" ");
             StringBuilder displayName = new StringBuilder();
             for (int i = 0; i < fullName.length; i++) {
                 String name = fullName[i];
@@ -105,9 +106,9 @@ public class ChatRoomActivity
             }
             title.setText(displayName);
         } else {
-            title.setText(chatRoomCard.getReceiverName());
+            title.setText(rName);
         }
-        String status = DateAndTimeFormatHandler.generateStatus(chatRoomCard.getReceiverLastLogin());
+        String status = DateAndTimeFormatHandler.generateStatus(chatRoomCard.getReceiver().getLastLogin());
         subtitle.setText(status);
     }
 
@@ -129,7 +130,7 @@ public class ChatRoomActivity
             Log.i(TAG, "setupRecyclerViewWithAdapter: " + e.getMessage());
             launchActivity(SignInActivity.class);
         }
-        adapter = new MessageListAdapter(mMessageList, currentUserId, chatRoomCard.getReceiverIcon());
+        adapter = new MessageListAdapter(mMessageList, currentUserId, chatRoomCard.getReceiver().getIcon());
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -197,8 +198,8 @@ public class ChatRoomActivity
 
     private void updateReceiverStatus(Message message) {
         Message lastMessage = mMessageList.get(mMessageList.size() - 1);
-        if (lastMessage.getSenderId().equals(chatRoomCard.getReceiverId())
-                && lastMessage.getCreatedAt() > chatRoomCard.getReceiverLastLogin()) {
+        if (lastMessage.getSenderId().equals(chatRoomCard.getReceiver().getId())
+                && lastMessage.getCreatedAt() > chatRoomCard.getReceiver().getLastLogin()) {
             String status = DateAndTimeFormatHandler.generateStatus(message.getCreatedAt());
             subtitle.setText(status);
         }
@@ -271,7 +272,7 @@ public class ChatRoomActivity
             );
             mMessageList.add(message);
             adapter.notifyItemInserted(mMessageList.size() - 1);
-            FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message);
+            FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message, chatRoomCard.getReceiver().getId(), currentUser.getDisplayName());
             adapter.notifyDataSetChanged();
             editText.setText("");
         } else {

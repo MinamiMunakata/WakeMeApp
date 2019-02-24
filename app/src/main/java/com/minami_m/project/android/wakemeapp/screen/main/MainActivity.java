@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.MyFirebaseMessagingService;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private CardRecyclerAdapter adapter;
     private ImageView loadingImage;
     private ValueEventListener listener;
+    private MyFirebaseMessagingService fcm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +179,11 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         } else {
+            // Subscribe to a topic
+            if (fcm == null) {
+                fcm = new MyFirebaseMessagingService(currentUser.getUid());
+            }
+            // Update a login time
             FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

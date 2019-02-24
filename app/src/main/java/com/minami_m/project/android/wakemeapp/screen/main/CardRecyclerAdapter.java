@@ -38,8 +38,9 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         ChatRoomCard roomCard = chatRoomCards.get(position);
         // Capitalize the first letter of an user name.
-        if (roomCard.getReceiverName() != null && roomCard.getReceiverName().length() > 0) {
-            String[] fullName = roomCard.getReceiverName().split(" ");
+        String rName = roomCard.getReceiver().getName();
+        if (rName != null && rName.length() > 0) {
+            String[] fullName = rName.split(" ");
             StringBuilder displayName = new StringBuilder();
             if (fullName[0].length() > 0) {
                 displayName
@@ -60,14 +61,14 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
             }
             viewHolder.nameView.setText(displayName);
         } else {
-            viewHolder.nameView.setText(roomCard.getReceiverName());
+            viewHolder.nameView.setText(rName);
         }
         viewHolder.statusView.setText(roomCard.getOversleepTimeStatus());
-        if (roomCard.getReceiverIcon() == null) {
+        if (roomCard.getReceiver().getIcon() == null) {
             viewHolder.iconView.setImageResource(R.drawable.ico_default_avator);
         } else {
             Picasso.get()
-                    .load(roomCard.getReceiverIcon())
+                    .load(roomCard.getReceiver().getIcon())
                     .error(R.drawable.ico_default_avator)
                     .into(viewHolder.iconView);
         }

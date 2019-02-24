@@ -26,10 +26,10 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     };
     private String chatRoomId;
     private User receiver;
-    private String receiverId;
-    private String receiverName;
-    private String receiverIcon;
-    private long receiverLastLogin;
+//    private String receiverId;
+//    private String receiverName;
+//    private String receiverIcon;
+//    private long receiverLastLogin;
     //    private String receiverStatus;
     private long oversleepTime;
 //    private boolean isReceiverSleeping;
@@ -43,10 +43,10 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     public ChatRoomCard(String chatRoomId, User receiver) {
         this.chatRoomId = chatRoomId;
         this.receiver = receiver;
-        this.receiverId = receiver.getId();
-        this.receiverName = receiver.getName();
-        this.receiverIcon = receiver.getIcon();
-        this.receiverLastLogin = receiver.getLastLogin();
+//        this.receiverId = receiver.getId();
+//        this.receiverName = receiver.getName();
+//        this.receiverIcon = receiver.getIcon();
+//        this.receiverLastLogin = receiver.getLastLogin();
 //        this.receiverStatus = receiver.getStatus();
 //        this.oversleepTimeStatus = receiver.getStatus();
 //        this.isReceiverSleeping = receiver.getIsSleeping();
@@ -58,16 +58,16 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     protected ChatRoomCard(Parcel in) {
         chatRoomId = in.readString();
         receiver = in.readParcelable(User.class.getClassLoader());
-        receiverId = in.readString();
-        receiverName = in.readString();
-        receiverIcon = in.readString();
-        receiverLastLogin = in.readLong();
+//        receiverId = in.readString();
+//        receiverName = in.readString();
+//        receiverIcon = in.readString();
+//        receiverLastLogin = in.readLong();
         oversleepTime = in.readLong();
         oversleepTimeStatus = in.readString();
     }
 
     private void setupStatus(User user) {
-        oversleepTimeStatus = DateAndTimeFormatHandler.generateStatus(receiverLastLogin);
+        oversleepTimeStatus = DateAndTimeFormatHandler.generateStatus(receiver.getLastLogin());
         final int SECOND = 1000;
         final int MINUTE = 60 * SECOND;
         final int HOUR = 60 * MINUTE;
@@ -144,6 +144,13 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         return false;
     }
 
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
 
     public String getChatRoomId() {
         return chatRoomId;
@@ -152,30 +159,30 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     public void setChatRoomId(String chatRoomId) {
         this.chatRoomId = chatRoomId;
     }
-
-    public String getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(String receiverId) {
-        this.receiverId = receiverId;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
-    }
-
-    public String getReceiverIcon() {
-        return receiverIcon;
-    }
-
-    public void setReceiverIcon(String receiverIcon) {
-        this.receiverIcon = receiverIcon;
-    }
+//
+//    public String getReceiverId() {
+//        return receiverId;
+//    }
+//
+//    public void setReceiverId(String receiverId) {
+//        this.receiverId = receiverId;
+//    }
+//
+//    public String getReceiverName() {
+//        return receiverName;
+//    }
+//
+//    public void setReceiverName(String receiverName) {
+//        this.receiverName = receiverName;
+//    }
+//
+//    public String getReceiverIcon() {
+//        return receiverIcon;
+//    }
+//
+//    public void setReceiverIcon(String receiverIcon) {
+//        this.receiverIcon = receiverIcon;
+//    }
 
 //    public String getReceiverStatus() {
 //        return receiverStatus;
@@ -186,13 +193,13 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
 //    }
 
 
-    public long getReceiverLastLogin() {
-        return receiverLastLogin;
-    }
-
-    public void setReceiverLastLogin(long receiverLastLogin) {
-        this.receiverLastLogin = receiverLastLogin;
-    }
+//    public long getReceiverLastLogin() {
+//        return receiverLastLogin;
+//    }
+//
+//    public void setReceiverLastLogin(long receiverLastLogin) {
+//        this.receiverLastLogin = receiverLastLogin;
+//    }
 
     public long getOversleepTime() {
         return oversleepTime;
@@ -251,10 +258,10 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(chatRoomId);
         dest.writeParcelable(receiver, flags);
-        dest.writeString(receiverId);
-        dest.writeString(receiverName);
-        dest.writeString(receiverIcon);
-        dest.writeLong(receiverLastLogin);
+//        dest.writeString(receiverId);
+//        dest.writeString(receiverName);
+//        dest.writeString(receiverIcon);
+//        dest.writeLong(receiverLastLogin);
         dest.writeLong(oversleepTime);
         dest.writeString(oversleepTimeStatus);
     }
