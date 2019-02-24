@@ -23,6 +23,7 @@ public class WakeUpTime implements Parcelable {
     };
 
     private boolean mustWakeUp;
+    // TODO: -> isRepeatOn
     private boolean repeatIsOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
     private int hourOfDay, minute;
