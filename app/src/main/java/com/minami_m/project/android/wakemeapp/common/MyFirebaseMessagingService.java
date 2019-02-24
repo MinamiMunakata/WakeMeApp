@@ -11,7 +11,30 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFMService";
-    private static final String WAKE_ME_APP_TOPIC = "messages";
+    //    private static final String WAKE_ME_APP_TOPIC = "messages";
+    private String topic;
+
+    public MyFirebaseMessagingService() {
+    }
+
+    public MyFirebaseMessagingService(String uId) {
+        this.topic = uId;
+    }
+
+    private void subscribe() {
+        // Once a token is generated, we subscribe to topic.
+        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Log.d(TAG, "onComplete: DONE");
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "onComplete: Successfully subscribed to \"" + topic + "\"");
+                } else {
+                    Log.d(TAG, "onComplete: Subscribe failed");
+                }
+            }
+        });
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -21,18 +44,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.i(TAG, "FCM Notification Message: " + remoteMessage.getNotification().getBody());
             Log.i(TAG, "FCM Data Message: " + remoteMessage.getData());
         }
-        // Once a token is generated, we subscribe to topic.
-        FirebaseMessaging.getInstance().subscribeToTopic(WAKE_ME_APP_TOPIC).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.d(TAG, "onComplete: DONE");
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "onComplete: succeed");
-                } else {
-                    Log.d(TAG, "onComplete: failed");
-                }
-            }
-        });
     }
 
     /**
@@ -48,7 +59,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.i(TAG, "FCM Token: " + token);
 
         // Once a token is generated, we subscribe to topic.
-        FirebaseMessaging.getInstance().subscribeToTopic(WAKE_ME_APP_TOPIC);
+        subscribe();
 
 
     }

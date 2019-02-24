@@ -5,18 +5,6 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-//// Take the text parameter passed to this HTTP endpoint and insert it into the
-//// Realtime Database under the path functions/messages/:pushId/original
-//exports.addMessage = functions.https.onRequest((req, res) => {
-//    // Grab the text parameter.
-//    const original = req.query.text;
-//    // Push the new message into the Realtime Database using the Firebase Admin SDK.
-//    return admin.database().ref('functions/messages').push({original: original}).then((snapshot) => {
-//        // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-//        return res.redirect(303, snapshot.ref.toString());
-//    });
-//});
-//
 //// Listens for new messages added to /functions/messages/:pushId/original and creates an
 //// uppercase version of the message to /functions/messages/:pushId/uppercase
 //exports.makeUppercase = functions.database.ref('/functions/messages/{pushId}/original')
@@ -31,31 +19,21 @@ admin.initializeApp();
 //    });
 //
 //// ------------------------
-/*
-    TODO:
-    1. Observe firebase realtime database if a new message is added.
-    2. if 1 == true -> check if it is seen.
-    3. if 2 == false -> send a notification.
-    */
-/*
-    TODO:
-    1. Modify architecture. You may need a notification node in realtime database.
-*/
-exports.sendNotification = functions.database.ref('/Messages/{chatRoomId}/{pushId}')
+
+// Listens for new messages added to /Notification/{receiverId}/{chatRoomId}/{pushId}
+exports.sendNotification = functions.database.ref('/Notification/{receiverId}/{chatRoomId}/{pushId}')
     .onCreate((snap, context) => {
         const val = snap.val();
         console.log('snap', val);
-        const text = val.text;
-        const senderId = val.senderId;
+        const title = val.title;
+        const body = val.body;
+        const topic = val.topic;
 
-        console.log('chatRoomId', context.params.chatRoomId);
         // The topic name can be optionally prefixed with "/topics/".
-        var topic = 'messages';
-
         var payload = {
             notification: {
-            title: "You've gotta mail!",
-            body: text
+            title: title,
+            body: body
             },
             topic: topic
         };

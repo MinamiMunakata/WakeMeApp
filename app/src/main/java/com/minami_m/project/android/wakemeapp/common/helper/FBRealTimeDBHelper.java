@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.model.ChatRoom;
 import com.minami_m.project.android.wakemeapp.model.Message;
+import com.minami_m.project.android.wakemeapp.model.Notification;
 import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
 
@@ -26,6 +27,7 @@ public class FBRealTimeDBHelper {
     public static final DatabaseReference MESSAGES_REF = FIREBASE_DATABASE.getReference("Messages");
     public static final DatabaseReference FRIEND_ID_LIST_REF = FIREBASE_DATABASE.getReference("FriendIDList");
     public static final DatabaseReference CHAT_ROOM_ID_LIST_REF = FIREBASE_DATABASE.getReference("ChatRoomIDList");
+    public static final DatabaseReference NOTIFICATION_REF = FIREBASE_DATABASE.getReference("Notification");
     private static final String TAG = "RealTimeDatabaseHelper";
     private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
     private static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
@@ -214,7 +216,7 @@ public class FBRealTimeDBHelper {
         });
     }
 
-    public static void sendNewMessage(String chatRoomId, final Message message) {
+    public static void sendNewMessage(final String chatRoomId, final Message message, final String receiverId, final String senderName) {
         String key = MESSAGES_REF.child(chatRoomId).push().getKey();
         if (key != null) {
             message.setId(key);
@@ -227,6 +229,11 @@ public class FBRealTimeDBHelper {
                                 Log.e(TAG, "onComplete: ", databaseError.toException());
                             } else {
                                 updateLoginTime(message.getSenderId(), message.getCreatedAt());
+                                String pushId = NOTIFICATION_REF.child(receiverId).child(chatRoomId).push().getKey();
+                                Notification notification = new Notification(pushId, receiverId, senderName, message.getText());
+                                if (pushId != null) {
+                                    NOTIFICATION_REF.child(pushId).setValue(notification);
+                                }
                             }
                         }
                     });

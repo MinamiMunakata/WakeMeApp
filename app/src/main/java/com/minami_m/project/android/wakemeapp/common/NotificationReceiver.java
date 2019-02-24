@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.screen.alarm;
+package com.minami_m.project.android.wakemeapp.common;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
