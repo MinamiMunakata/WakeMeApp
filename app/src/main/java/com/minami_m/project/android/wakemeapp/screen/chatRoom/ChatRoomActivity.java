@@ -86,8 +86,10 @@ public class ChatRoomActivity
     private void setupToolbar() {
         final Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         // Capitalize the first letter of an user name.
         String rName = chatRoomCard.getReceiver().getName();
         if (rName != null && rName.length() > 0) {

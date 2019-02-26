@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
     public static final String TAG = "MainActivity";
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
     @NonNull
     private StringBuilder getCapitalizedDisplayName() {
-        String[] fullName = currentUser.getDisplayName().split(" ");
+        String[] fullName = Objects.requireNonNull(currentUser.getDisplayName()).split(" ");
         StringBuilder displayName = new StringBuilder();
         if (fullName[0].length() > 0) {
             displayName
