@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
@@ -39,6 +40,8 @@ import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
 import com.squareup.picasso.Picasso;
+
+import java.util.Map;
 
 public class SearchFriendActivity extends AppCompatActivity
         implements FragmentChangeListener, InputValidationHandler,
@@ -67,10 +70,8 @@ public class SearchFriendActivity extends AppCompatActivity
         setContentView(R.layout.activity_search_friend);
         TextView toolbarTitle = findViewById(R.id.toolbar_title_add_friend);
         FontStyleHandler.setFont(this, toolbarTitle, true, true);
-        Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setupToolBar();
+
         search_btn = findViewById(R.id.search_button);
         FontStyleHandler.setFont(this, search_btn, false, true);
         loadingImg = findViewById(R.id.loading_img_search_friends);
@@ -78,20 +79,37 @@ public class SearchFriendActivity extends AppCompatActivity
         loadingImg.setVisibility(View.INVISIBLE);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            FBRealTimeDBHelper.readUserData(currentUser.getUid(), new FBRealTimeDBCallback() {
-                @Override
-                public void retrieveUserData(User user) {
-                    mUser = user;
-                    if (mUser == null) {
-                        launchActivity(SignInActivity.class);
-                    }
-                }
-            });
+            Intent intent = getIntent();
+            Bundle data = intent.getExtras();
+            if (data != null && data.getParcelable("User") != null) {
+                mUser = data.getParcelable("User");
+                System.out.println(mUser);
+            } else {
+                launchActivity(SignInActivity.class);
+            }
+//            FBRealTimeDBHelper.readUserData(currentUser.getUid(), new FBRealTimeDBCallback() {
+//                @Override
+//                public void retrieveUserData(User user) {
+//                    mUser = user;
+//                    if (mUser == null) {
+//                        launchActivity(SignInActivity.class);
+//                    }
+//                }
+//            });
 
         } else {
             launchActivity(SignInActivity.class);
         }
 
+    }
+
+    private void setupToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_search_friend);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
     }
 
     @Override

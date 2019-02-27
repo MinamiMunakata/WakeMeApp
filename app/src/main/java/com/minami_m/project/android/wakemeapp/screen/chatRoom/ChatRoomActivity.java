@@ -169,6 +169,8 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
+        // TODO: Delete notification?
+        // TODO: show unread icon if notification exists?
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

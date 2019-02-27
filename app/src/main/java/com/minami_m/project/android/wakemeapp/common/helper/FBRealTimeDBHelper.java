@@ -30,7 +30,7 @@ public class FBRealTimeDBHelper {
     public static final DatabaseReference NOTIFICATION_REF = FIREBASE_DATABASE.getReference("Notification");
     private static final String TAG = "RealTimeDatabaseHelper";
     private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
-    private static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
+    public static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
 
     public static FBRealTimeDBHelper newInstance() {
         return new FBRealTimeDBHelper();
@@ -41,7 +41,7 @@ public class FBRealTimeDBHelper {
 
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                showResult(databaseError);
+                showResult(databaseError, "Register new user");
             }
         });
     }
@@ -58,7 +58,7 @@ public class FBRealTimeDBHelper {
                 FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        showResult(databaseError);
+                        showResult(databaseError, "Update icon");
                     }
                 });
             }
@@ -82,7 +82,7 @@ public class FBRealTimeDBHelper {
                 FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        showResult(databaseError);
+                        showResult(databaseError, "Turn Off WakeUpTime");
                     }
                 });
             }
@@ -107,7 +107,7 @@ public class FBRealTimeDBHelper {
                     FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            showResult(databaseError);
+                            showResult(databaseError, "Update WakeUpTime");
                         }
                     });
                 }
@@ -137,7 +137,7 @@ public class FBRealTimeDBHelper {
                                     @Override
                                     public void onComplete(@Nullable DatabaseError databaseError,
                                                            @NonNull DatabaseReference databaseReference) {
-                                        showResult(databaseError);
+                                        showResult(databaseError, "Update login.");
                                     }
                                 });
                     }
@@ -184,7 +184,7 @@ public class FBRealTimeDBHelper {
             FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    showResult(databaseError);
+                    showResult(databaseError, "Create a chatRoom");
 
                 }
             });
@@ -193,14 +193,15 @@ public class FBRealTimeDBHelper {
 
     }
 
-    private static void showResult(DatabaseError databaseError) {
+    private static void showResult(DatabaseError databaseError, String msg) {
         if (databaseError != null) {
             Log.e(TAG, "showResult: ", databaseError.toException());
         } else {
-            Log.i(TAG, "showResult: Data saved successfully.");
+            Log.i(TAG, "showResult: " + msg);
         }
     }
 
+    // onDataChange cannot return anything because this is a read-only method.
     public static void readUserData(String id, final FBRealTimeDBCallback callback) {
         USERS_REF.child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -211,7 +212,7 @@ public class FBRealTimeDBHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                showResult(databaseError);
+                showResult(databaseError, "Read user data");
             }
         });
     }
@@ -247,7 +248,7 @@ public class FBRealTimeDBHelper {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError,
                                            @NonNull DatabaseReference databaseReference) {
-                        showResult(databaseError);
+                        showResult(databaseError, "Update to 'Seen");
                     }
                 });
     }

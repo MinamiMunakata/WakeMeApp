@@ -3,6 +3,7 @@ package com.minami_m.project.android.wakemeapp.screen.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,19 +15,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.common.service.MyFirebaseMessagingService;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.ChatRoomCardClickListener;
+import com.minami_m.project.android.wakemeapp.common.service.MyFirebaseMessagingService;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
 import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.screen.chatRoom.ChatRoomActivity;
@@ -37,7 +41,9 @@ import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements ActivityChangeListener, ChatRoomCardClickListener {
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private ImageView loadingImage;
     private ValueEventListener listener;
     private MyFirebaseMessagingService fcm;
+    private ImageView button;
+    private boolean isListening;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         loadingImage = findViewById(R.id.loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
         setupGreetingHeaderMsg();
-        setupAddFriendsButton();
 
     }
 
@@ -79,21 +86,23 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i(TAG, "onDataChange: Access to Firebase.");
-                loadingImage.setVisibility(View.VISIBLE);
-                chatRoomCards.clear();
-                for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
-                    User receiver = chatRoomIdSnapshot.getValue(User.class);
-                    if (receiver != null) {
-                        ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
-                        chatRoomCards.add(roomCard);
-                        Log.i(TAG, "onDataChange: " + roomCard.toString());
+                if (isListening) {
+                    Log.i(TAG, "onDataChange: Access to Firebase.");
+                    loadingImage.setVisibility(View.VISIBLE);
+                    chatRoomCards.clear();
+                    for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
+                        User receiver = chatRoomIdSnapshot.getValue(User.class);
+                        if (receiver != null) {
+                            ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
+                            chatRoomCards.add(roomCard);
+                            Log.i(TAG, "onDataChange: " + roomCard.toString());
+                        }
                     }
-                }
-                Collections.sort(chatRoomCards);
+                    Collections.sort(chatRoomCards);
 
-                adapter.notifyDataSetChanged();
-                loadingImage.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                    loadingImage.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -104,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         };
 
         try {
+            isListening = true;
             FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
                     .addValueEventListener(listener);
         } catch (Exception e) {
@@ -155,14 +165,61 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         return displayName;
     }
 
-    private void setupAddFriendsButton() {
-        ImageView button = findViewById(R.id.semicircle_btn);
-        button.setOnClickListener(new View.OnClickListener() {
+    private void readUserAndSetupButton() {
+        button = findViewById(R.id.semicircle_btn);
+        if (currentUser != null) {
+            isListening = true;
+            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
+                    .addListenerForSingleValueEvent(generateEventListener(button));
+        } else {
+            launchActivity(SignInActivity.class);
+        }
+
+    }
+
+    @NonNull
+    private ValueEventListener generateEventListener(final ImageView button) {
+        return new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                launchActivity(SearchFriendActivity.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (isListening) {
+                    final User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        // Update login time.
+                        final Map<String, Object> childUpdates = new HashMap<>();
+                        final long loginTime = new Date().getTime();
+                        childUpdates.put("/Users/" + user.getId() + "/lastLogin", loginTime);
+                        FBRealTimeDBHelper.updateLoginTime(currentUser.getUid(), new Date().getTime());
+                        // Setup a button to add friends.
+                        setupButton(user);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, sign in again.",
+                                Toast.LENGTH_SHORT)
+                                .show();
+
+                        launchActivity(SignInActivity.class);
+                    }
+                }
+
             }
-        });
+
+            private void setupButton(final User user) {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), SearchFriendActivity.class);
+                        intent.putExtra("User", user);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: ", databaseError.toException());
+            }
+        };
     }
 
     private void setupToolBar() {
@@ -185,22 +242,23 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 fcm = new MyFirebaseMessagingService(currentUser.getUid());
             }
             // Update a login time
-            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                FBRealTimeDBHelper.updateLoginTime(
-                                        currentUser.getUid(),
-                                        new Date().getTime());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.e(TAG, "onCancelled: ", databaseError.toException());
-                        }
-                    });
+            readUserAndSetupButton();
+//            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
+//                    .addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            if (dataSnapshot.exists()) {
+//                                FBRealTimeDBHelper.updateLoginTime(
+//                                        currentUser.getUid(),
+//                                        new Date().getTime());
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            Log.e(TAG, "onCancelled: ", databaseError.toException());
+//                        }
+//                    });
 
             setupRecyclerView();
         }
@@ -209,10 +267,17 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     @Override
     protected void onStop() {
         super.onStop();
-        FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
-                .removeEventListener(listener);
+        isListening = false;
+        removeListeners();
         loadingImage.setVisibility(View.INVISIBLE);
         Log.i(TAG, "onStop: " + "Disconnect from FB");
+    }
+
+    private void removeListeners() {
+        FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+                .removeEventListener(listener);
+        FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
+                .removeEventListener(generateEventListener(button));
     }
 
     @Override
@@ -239,11 +304,10 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 launchActivity(MyPageActivity.class);
                 return true;
             case R.id.logout_menu:
-                FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
-                        .removeEventListener(listener);
-                Log.i(TAG, "onStop: " + "Disconnect from FB");
-                FirebaseAuth.getInstance().signOut();
+                isListening = false;
+                removeListeners();
                 launchActivity(SignInActivity.class);
+                FirebaseAuth.getInstance().signOut();
                 return true;
         }
         return super.onOptionsItemSelected(item);
