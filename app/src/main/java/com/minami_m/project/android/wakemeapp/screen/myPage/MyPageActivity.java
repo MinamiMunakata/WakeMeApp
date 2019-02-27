@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -35,13 +34,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.helper.FBStorageHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
-import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.alarm.AlarmActivity;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
@@ -66,6 +65,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     private TextView displayName, email, pw, errorMsg;
     private EditText displayNameTextField, emailTextField, pwTextField, timer_box;
     private WakeUpTime wakeUpTime;
+    private ValueEventListener listener;
+    private boolean isListening;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,14 +235,23 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             toast("Successfully Uploaded");
-                            FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
-                                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Uri> task) {
-                                            String downloadIconURL = task.getResult().toString();
-                                            FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
-                                        }
-                                    });
+                            FBStorageHelper.ICON_REF(currentUser).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String downloadIconURL = uri.toString();
+                                    System.out.println("DL -> " + downloadIconURL);
+                                    FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
+                                }
+                            });
+//                            FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
+//                                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Uri> task) {
+//                                            String downloadIconURL = task.getResult().toString();
+//                                            System.out.println();
+//                                            FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
+//                                        }
+//                                    });
 
                         }
                     });
@@ -264,16 +274,17 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     }
 
     private void setIconAndAlarmTimeFromFB() {
-        ValueEventListener listener = new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String path = dataSnapshot.child("icon").getValue(String.class);
-                if (path == null) {
-                    profileIcon.setImageResource(R.drawable.ico_default_avator);
-                } else {
-                    Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
+                if (isListening) {
+                    setupIcon(dataSnapshot);
+                    wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
+                    setupWakeUpTime();
                 }
-                wakeUpTime = dataSnapshot.child("wakeUpTime").getValue(WakeUpTime.class);
+            }
+
+            private void setupWakeUpTime() {
                 if (wakeUpTime != null) {
                     if (wakeUpTime.getMustWakeUp()) {
                         if (!wakeUpTime.getRepeatIsOn() &&
@@ -293,7 +304,15 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                                     wakeUpTime.getMinute());
                     timer_box.setText(formattedTime.get("full time"));
                 }
+            }
 
+            private void setupIcon(@NonNull DataSnapshot dataSnapshot) {
+                String path = dataSnapshot.child("icon").getValue(String.class);
+                if (path == null) {
+                    profileIcon.setImageResource(R.drawable.ico_default_avator);
+                } else {
+                    Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
+                }
             }
 
             @Override
@@ -301,7 +320,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                 Log.e(TAG, "onCancelled: ", databaseError.toException());
             }
         };
-
+        isListening = true;
         FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid()).addValueEventListener(listener);
     }
 
@@ -328,6 +347,8 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             case R.id.my_page_menu:
                 return true;
             case R.id.logout_menu:
+                isListening = false;
+                FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid()).removeEventListener(listener);
                 FirebaseAuth.getInstance().signOut();
                 launchActivity(SignInActivity.class);
                 finish();
