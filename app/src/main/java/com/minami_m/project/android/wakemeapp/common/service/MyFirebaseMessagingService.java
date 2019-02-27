@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.common;
+package com.minami_m.project.android.wakemeapp.common.service;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.minami_m.project.android.wakemeapp.common.NotificationReceiver;
+import com.minami_m.project.android.wakemeapp.common.receiver.NotificationReceiver;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
 
@@ -21,12 +21,9 @@ public class NotificationController {
     private static final int REQUEST_CODE_ONCE = 0;
     private static final long INTERVAL_WEEK = AlarmManager.INTERVAL_DAY * 7;
     private Context context;
-    private String userId;
 
-    // TODO: userId
-    NotificationController(Context context, String userId) {
+    NotificationController(Context context) {
         this.context = context;
-        this.userId = userId;
     }
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
@@ -71,8 +68,8 @@ public class NotificationController {
         }
         Map<String, String> formattedTime = DateAndTimeFormatHandler
                 .generateFormattedAlarmTime(
-                time.get(Calendar.HOUR_OF_DAY),
-                time.get(Calendar.MINUTE));
+                        time.get(Calendar.HOUR_OF_DAY),
+                        time.get(Calendar.MINUTE));
         Log.i(TAG, "setNotificationAt: " + DateAndTimeFormatHandler.generateDateOfChat(time.getTimeInMillis()) + formattedTime.get("full time"));
         // Create Intent
         PendingIntent sender = generateSender(day, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -130,8 +127,6 @@ public class NotificationController {
 
     private PendingIntent generateSender(Integer requestCode, int flagUpdateCurrent) {
         Intent intent = new Intent(context, NotificationReceiver.class);
-        intent.putExtra("userId", userId);
-        intent.putExtra("requestCode", requestCode);
         return PendingIntent.getBroadcast(
                 context,
                 requestCode,

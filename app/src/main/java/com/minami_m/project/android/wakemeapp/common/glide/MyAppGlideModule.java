@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.common;
+package com.minami_m.project.android.wakemeapp.common.glide;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

@@ -43,10 +43,10 @@
         <activity android:name=".screen.myPage.MyPageActivity" />
         <activity android:name=".screen.alarm.AlarmActivity" />
 
-        <receiver android:name=".common.NotificationReceiver" />
+        <receiver android:name=".common.receiver.NotificationReceiver" />
 
         <service
-            android:name=".common.MyFirebaseMessagingService"
+            android:name=".common.service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

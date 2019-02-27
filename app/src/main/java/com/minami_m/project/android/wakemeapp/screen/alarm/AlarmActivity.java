@@ -81,7 +81,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         } else {
-            notifier = new NotificationController(this, currentUser.getUid());
+            notifier = new NotificationController(this);
         }
     }
 
@@ -209,12 +209,12 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setStyleDependsOnMustWakeUp(isChecked);
                 if (isChecked) {
-                    wakeUpTime.turnOnMustWakeUp(isChecked);
+                    wakeUpTime.turnOnMustWakeUp(true);
                     notifier.setAllNotification(wakeUpTime);
 
                 } else {
                     wakeUpTime.turnOffAlarm();
-                    repeatSwitch.setChecked(isChecked);
+                    repeatSwitch.setChecked(false);
                     notifier.cancelAllNotification();
                 }
                 FBRealTimeDBHelper.updateWakeUpTIme(currentUser, wakeUpTime);
@@ -234,7 +234,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                         wakeUpTime.turnOnRepeatingOnEveryday();
                     }
                     changeVisibilityForAllOptions();
-                    mustWakeUpSwitch.setChecked(isChecked);
+                    mustWakeUpSwitch.setChecked(true);
                     notifier.setAllNotification(wakeUpTime);
                     repeatOptions.setVisibility(View.VISIBLE);
                 } else {

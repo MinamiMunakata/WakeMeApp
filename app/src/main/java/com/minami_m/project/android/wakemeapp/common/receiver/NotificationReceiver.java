@@ -1,4 +1,4 @@
-package com.minami_m.project.android.wakemeapp.common;
+package com.minami_m.project.android.wakemeapp.common.receiver;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -69,7 +69,9 @@ public class NotificationReceiver extends BroadcastReceiver {
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
         }
     }
 }

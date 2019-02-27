@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-// TODO: parcel
 public class WakeUpTime implements Parcelable {
 
     public static final Creator<WakeUpTime> CREATOR = new Creator<WakeUpTime>() {
