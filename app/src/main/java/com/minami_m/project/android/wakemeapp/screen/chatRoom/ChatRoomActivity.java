@@ -196,7 +196,7 @@ public class ChatRoomActivity
 
         FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
-        // TODO: Delete notification
+        // Delete notification
         FBRealTimeDBHelper.deletNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
     }
 

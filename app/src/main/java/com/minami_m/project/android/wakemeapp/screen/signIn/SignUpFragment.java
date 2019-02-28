@@ -96,8 +96,6 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
         FontStyleHandler.setFont(getContext(), signUp, true, true);
         nameField = view.findViewById(R.id.edit_name);
         emailField = view.findViewById(R.id.edit_email);
-        // TODO: Remove if don't need it. Check 'newInstance'
-//        setEmailFromSignInForm();
         errorMsg = view.findViewById(R.id.sign_up_error);
         pwField = view.findViewById(R.id.edit_pw);
         icon = view.findViewById(R.id.user_icon);

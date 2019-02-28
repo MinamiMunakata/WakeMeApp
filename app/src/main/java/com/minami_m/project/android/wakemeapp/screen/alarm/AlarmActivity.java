@@ -183,24 +183,29 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (!wakeUpTime.getIsAlarmOn()) {
-//                    mustWakeUpSwitch.setChecked(true);
-//                }
-//                createAlarm(wakeUpTime);
-                // TODO: Delete
-                notifier.checkIfNotificationIsWorking();
-                Map<String, String> timeMap = DateAndTimeFormatHandler
-                        .generateFormattedAlarmTime(
-                                wakeUpTime.getHourOfDay(),
-                                wakeUpTime.getMinute());
-                StringBuilder time = new StringBuilder();
-                time.append(DateAndTimeFormatHandler.generateDateOfChat(wakeUpTime.getWakeUpTimeInMillis()));
-                time.append(" ");
-                time.append(timeMap.get("full time"));
-                Toast.makeText(getApplicationContext(), time, Toast.LENGTH_SHORT).show();
+                if (!wakeUpTime.getIsAlarmOn()) {
+                    mustWakeUpSwitch.setChecked(true);
+                }
+                createAlarm(wakeUpTime);
+//                TODO: Delete
+//                debuggerMethodToCheckNotification();
+
 
             }
         });
+    }
+
+    private void debuggerMethodToCheckNotification() {
+        notifier.checkIfNotificationIsWorking();
+        Map<String, String> timeMap = DateAndTimeFormatHandler
+                .generateFormattedAlarmTime(
+                        wakeUpTime.getHourOfDay(),
+                        wakeUpTime.getMinute());
+        StringBuilder time = new StringBuilder();
+        time.append(DateAndTimeFormatHandler.generateDateOfChat(wakeUpTime.getWakeUpTimeInMillis()));
+        time.append(" ");
+        time.append(timeMap.get("full time"));
+        Toast.makeText(getApplicationContext(), time, Toast.LENGTH_SHORT).show();
     }
 
     private CompoundButton.OnCheckedChangeListener toggleMustWakeUp() {
