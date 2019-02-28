@@ -21,16 +21,15 @@ public class WakeUpTime implements Parcelable {
         }
     };
 
-    private boolean mustWakeUp;
-    // TODO: -> isRepeatOn
-    private boolean repeatIsOn;
+    private boolean isAlarmOn;
+    private boolean isRepeatModeOn;
     private boolean mon, tue, wed, thu, fri, sat, sun;
     private int hourOfDay, minute;
     private long wakeUpTimeInMillis;
 
     protected WakeUpTime(Parcel in) {
-        mustWakeUp = in.readByte() != 0;
-        repeatIsOn = in.readByte() != 0;
+        isAlarmOn = in.readByte() != 0;
+        isRepeatModeOn = in.readByte() != 0;
         mon = in.readByte() != 0;
         tue = in.readByte() != 0;
         wed = in.readByte() != 0;
@@ -58,8 +57,8 @@ public class WakeUpTime implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (mustWakeUp ? 1 : 0));
-        dest.writeByte((byte) (repeatIsOn ? 1 : 0));
+        dest.writeByte((byte) (isAlarmOn ? 1 : 0));
+        dest.writeByte((byte) (isRepeatModeOn ? 1 : 0));
         dest.writeByte((byte) (mon ? 1 : 0));
         dest.writeByte((byte) (tue ? 1 : 0));
         dest.writeByte((byte) (wed ? 1 : 0));
@@ -72,20 +71,20 @@ public class WakeUpTime implements Parcelable {
         dest.writeLong(wakeUpTimeInMillis);
     }
 
-    public boolean getMustWakeUp() {
-        return mustWakeUp;
+    public boolean getIsAlarmOn() {
+        return isAlarmOn;
     }
 
-    public void setMustWakeUp(boolean mustWakeUp) {
-        this.mustWakeUp = mustWakeUp;
+    public void setIsAlarmOn(boolean alarmOn) {
+        this.isAlarmOn = alarmOn;
     }
 
-    public boolean getRepeatIsOn() {
-        return repeatIsOn;
+    public boolean getIsRepeatModeOn() {
+        return isRepeatModeOn;
     }
 
-    public void setRepeatIsOn(boolean repeatIsOn) {
-        this.repeatIsOn = repeatIsOn;
+    public void setIsRepeatModeOn(boolean repeatModeOn) {
+        this.isRepeatModeOn = repeatModeOn;
     }
 
     public boolean getMon() {
@@ -169,8 +168,8 @@ public class WakeUpTime implements Parcelable {
     }
 
 
-    public void turnOnMustWakeUp(boolean mustWakeUp) {
-        this.mustWakeUp = mustWakeUp;
+    public void turnOnMustWakeUp(boolean on) {
+        this.isAlarmOn = on;
         Calendar wakeUpTime = generateTimeToWakeUp();
         this.wakeUpTimeInMillis = wakeUpTime.getTimeInMillis();
     }
@@ -188,7 +187,7 @@ public class WakeUpTime implements Parcelable {
 
     @Override
     public String toString() {
-        return mustWakeUp ? String.format(Locale.US, "Hour: %d, Minute: %d", hourOfDay, minute) : "OFF";
+        return isAlarmOn ? String.format(Locale.US, "Hour: %d, Minute: %d", hourOfDay, minute) : "OFF";
     }
 
 
@@ -220,7 +219,7 @@ public class WakeUpTime implements Parcelable {
     }
 
     public String generateAlarmOnDayDescription() {
-        if (repeatIsOn) {
+        if (isRepeatModeOn) {
             return mustWakeUpOnDayOfWeek();
         } else {
             return generateTodayOrTomorrow();
@@ -228,8 +227,8 @@ public class WakeUpTime implements Parcelable {
     }
 
     public void turnOffAlarm() {
-        mustWakeUp = false;
-        repeatIsOn = false;
+        isAlarmOn = false;
+        isRepeatModeOn = false;
         wakeUpTimeInMillis = 0;
     }
 

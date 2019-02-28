@@ -32,6 +32,7 @@ import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeList
 import com.minami_m.project.android.wakemeapp.common.listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.common.service.MyFirebaseMessagingService;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
+import com.minami_m.project.android.wakemeapp.model.RoomNamePlate;
 import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.screen.chatRoom.ChatRoomActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
@@ -65,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         setupToolBar();
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    isListening = false;
+                }
+            }
+        });
         currentUser = mAuth.getCurrentUser();
         loadingImage = findViewById(R.id.loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
@@ -86,14 +95,16 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i(TAG, "onDataChange: \n" + isListening);
                 if (isListening) {
                     Log.i(TAG, "onDataChange: Access to Firebase.");
                     loadingImage.setVisibility(View.VISIBLE);
                     chatRoomCards.clear();
-                    for (DataSnapshot chatRoomIdSnapshot : dataSnapshot.getChildren()) {
-                        User receiver = chatRoomIdSnapshot.getValue(User.class);
+                    for (DataSnapshot receiverSnapshot : dataSnapshot.getChildren()) {
+                        User receiver = receiverSnapshot.child("receiver").getValue(User.class);
+                        Log.i(TAG, "onDataChange: " + receiverSnapshot);
                         if (receiver != null) {
-                            ChatRoomCard roomCard = new ChatRoomCard(chatRoomIdSnapshot.getKey(), receiver);
+                            ChatRoomCard roomCard = new ChatRoomCard(receiverSnapshot.getKey(), receiver, receiverSnapshot.child("notifications").exists());
                             chatRoomCards.add(roomCard);
                             Log.i(TAG, "onDataChange: " + roomCard.toString());
                         }
@@ -114,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
         try {
             isListening = true;
-            FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+            FirebaseDatabase.getInstance().getReference("Receivers").child(currentUser.getUid())
                     .addValueEventListener(listener);
         } catch (Exception e) {
             launchActivity(SignInActivity.class);
@@ -168,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     private void readUserAndSetupButton() {
         button = findViewById(R.id.semicircle_btn);
         if (currentUser != null) {
-            isListening = true;
             FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
                     .addListenerForSingleValueEvent(generateEventListener(button));
         } else {
@@ -208,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        isListening = false;
                         Intent intent = new Intent(getApplicationContext(), SearchFriendActivity.class);
                         intent.putExtra("User", user);
                         startActivity(intent);
@@ -241,25 +252,8 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
             if (fcm == null) {
                 fcm = new MyFirebaseMessagingService(currentUser.getUid());
             }
-            // Update a login time
+            // Update a login time and setup a button.
             readUserAndSetupButton();
-//            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
-//                    .addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            if (dataSnapshot.exists()) {
-//                                FBRealTimeDBHelper.updateLoginTime(
-//                                        currentUser.getUid(),
-//                                        new Date().getTime());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            Log.e(TAG, "onCancelled: ", databaseError.toException());
-//                        }
-//                    });
-
             setupRecyclerView();
         }
     }
@@ -321,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
 
     @Override
     public void onChatRoomCardClicked(View v, int position) {
+        isListening = false;
         ChatRoomCard roomCard = chatRoomCards.get(position);
         Intent intent = new Intent(this, ChatRoomActivity.class);
         intent.putExtra("ChatRoomCard", roomCard);

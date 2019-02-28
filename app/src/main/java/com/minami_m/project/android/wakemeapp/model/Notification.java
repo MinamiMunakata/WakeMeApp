@@ -17,11 +17,7 @@ public class Notification {
         this.id = id;
         this.topic = receiverId;
         this.title = senderName;
-        if (text.length() > 140) {
-            this.body = text.substring(0, 140) + "…";
-        } else {
-            this.body = text;
-        }
+        this.body = text;
 
     }
 

@@ -28,8 +28,8 @@ public class NotificationController {
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
         Log.i(TAG, "setAllNotification: " + wakeUpTime);
-        if (wakeUpTime.getMustWakeUp()) {
-            if (wakeUpTime.getRepeatIsOn()) {
+        if (wakeUpTime.getIsAlarmOn()) {
+            if (wakeUpTime.getIsRepeatModeOn()) {
                 ArrayList<Integer> extraDays = wakeUpTime.generateExtraDays();
                 for (Integer day : extraDays) {
                     setNotificationAt(wakeUpTime, day);
@@ -104,7 +104,7 @@ public class NotificationController {
     }
 
     public void cancelIfRepeatOff(WakeUpTime wakeUpTime) {
-        if (!wakeUpTime.getRepeatIsOn()) {
+        if (!wakeUpTime.getIsRepeatModeOn()) {
             for (int day : wakeUpTime.generateExtraDays()) {
                 cancelAt(day);
             }

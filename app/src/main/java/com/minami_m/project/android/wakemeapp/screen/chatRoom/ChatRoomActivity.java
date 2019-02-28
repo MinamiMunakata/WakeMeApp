@@ -169,8 +169,6 @@ public class ChatRoomActivity
         if (currentUser == null) {
             launchActivity(SignInActivity.class);
         }
-        // TODO: Delete notification?
-        // TODO: show unread icon if notification exists?
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -198,6 +196,8 @@ public class ChatRoomActivity
 
         FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
+        // TODO: Delete notification
+        FBRealTimeDBHelper.deletNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
     }
 
     private void updateReceiverStatus(Message message) {
@@ -282,12 +282,6 @@ public class ChatRoomActivity
         } else {
             Log.i(TAG, "onClick: Invalid input to send a message.");
         }
-    }
-
-    public void sendNotification(String chatRoomId) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference notificationRef = database.getReference("Notification");
-
     }
 
     // TODO: check validation

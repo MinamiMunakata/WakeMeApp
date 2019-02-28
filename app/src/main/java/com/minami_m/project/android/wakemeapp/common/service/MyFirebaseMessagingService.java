@@ -19,21 +19,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public MyFirebaseMessagingService(String uId) {
         this.topic = uId;
+        subscribe();
     }
 
     private void subscribe() {
         // Once a token is generated, we subscribe to topic.
-        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.d(TAG, "onComplete: DONE");
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "onComplete: Successfully subscribed to \"" + topic + "\"");
-                } else {
-                    Log.d(TAG, "onComplete: Subscribe failed");
+        if (topic != null) {
+            FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Log.d(TAG, "onComplete: DONE");
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "onComplete: Successfully subscribed to \"" + topic + "\"");
+                    } else {
+                        Log.d(TAG, "onComplete: Subscribe failed");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

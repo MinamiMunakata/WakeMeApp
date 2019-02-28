@@ -120,8 +120,8 @@ root
          ├ lastLogin
          └ wakeUpTime
              |[WakeUpTime object]
-             ├ mustWakeUp
-             ├ repeatIsOn
+             ├ alarmOn
+             ├ repeatModeOn
              ├ mon
              ├ tue
              ├ wed

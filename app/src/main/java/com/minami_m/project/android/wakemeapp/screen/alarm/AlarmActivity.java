@@ -111,7 +111,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                 .putExtra(AlarmClock.EXTRA_HOUR, wakeUpTime.getHourOfDay())
                 .putExtra(AlarmClock.EXTRA_MINUTES, wakeUpTime.getMinute())
                 .putExtra(AlarmClock.EXTRA_MESSAGE, "WakeMeApp");
-        if (wakeUpTime.getRepeatIsOn()) {
+        if (wakeUpTime.getIsRepeatModeOn()) {
             alarmIntent.putExtra(AlarmClock.EXTRA_DAYS, wakeUpTime.generateExtraDays());
         }
         if (alarmIntent.resolveActivity(getPackageManager()) != null) {
@@ -131,9 +131,9 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                         wakeUpTime.getMinute());
                 wakeUpTimeTextView.setText(formattedTime.get("time"));
                 wakeUpTimeAmPm.setText(formattedTime.get("am_pm"));
-                mustWakeUpSwitch.setChecked(wakeUpTime.getMustWakeUp());
-                repeatSwitch.setChecked(wakeUpTime.getRepeatIsOn());
-                if (wakeUpTime.getRepeatIsOn()) repeatOptions.setVisibility(View.VISIBLE);
+                mustWakeUpSwitch.setChecked(wakeUpTime.getIsAlarmOn());
+                repeatSwitch.setChecked(wakeUpTime.getIsRepeatModeOn());
+                if (wakeUpTime.getIsRepeatModeOn()) repeatOptions.setVisibility(View.VISIBLE);
                 repeatInWeek.setText(wakeUpTime.generateAlarmOnDayDescription());
             }
         }
@@ -161,7 +161,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         wakeUpTimeTextView.setPaintFlags(wakeUpTimeTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         FontStyleHandler.setFont(this, wakeUpTimeTextView, false, true);
         FontStyleHandler.setFont(this, wakeUpTimeAmPm, false, true);
-        if (wakeUpTime.getMustWakeUp()) {
+        if (wakeUpTime.getIsAlarmOn()) {
             wakeUpTimeTextView.setTextColor(getColor(R.color.colorMyAccent));
             wakeUpTimeTextView.setAlpha(1);
             wakeUpTimeAmPm.setTextColor(getColor(R.color.colorMyAccent));
@@ -183,7 +183,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (!wakeUpTime.getMustWakeUp()) {
+//                if (!wakeUpTime.getIsAlarmOn()) {
 //                    mustWakeUpSwitch.setChecked(true);
 //                }
 //                createAlarm(wakeUpTime);
@@ -228,7 +228,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                wakeUpTime.setRepeatIsOn(isChecked);
+                wakeUpTime.setIsRepeatModeOn(isChecked);
                 if (isChecked) {
                     if (wakeUpTime.repeatOnDayOfWeekIsAllOff()) {
                         wakeUpTime.turnOnRepeatingOnEveryday();

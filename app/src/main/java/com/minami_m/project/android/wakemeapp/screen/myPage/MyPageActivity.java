@@ -286,10 +286,10 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 
             private void setupWakeUpTime() {
                 if (wakeUpTime != null) {
-                    if (wakeUpTime.getMustWakeUp()) {
-                        if (!wakeUpTime.getRepeatIsOn() &&
+                    if (wakeUpTime.getIsAlarmOn()) {
+                        if (!wakeUpTime.getIsRepeatModeOn() &&
                                 wakeUpTime.getWakeUpTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {
-                            wakeUpTime.setMustWakeUp(false);
+                            wakeUpTime.setIsAlarmOn(false);
                         } else {
                             timer_box.setTextColor(getColor(R.color.colorMyAccent));
                             timer_box.setAlpha(1);

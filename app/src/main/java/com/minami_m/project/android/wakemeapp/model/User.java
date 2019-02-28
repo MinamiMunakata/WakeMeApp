@@ -118,6 +118,6 @@ public class User implements Parcelable {
     public String toString() {
         return String.format(
                 "ID: %s\nName: %s\nEmail: %s\nIcon: %s\nWakeUpTime: %s",
-                this.id, this.name, this.email, this.icon, this.wakeUpTime.toString());
+                this.id, this.name, this.email, this.icon, this.wakeUpTime != null ? this.wakeUpTime.toString() : "Null");
     }
 }

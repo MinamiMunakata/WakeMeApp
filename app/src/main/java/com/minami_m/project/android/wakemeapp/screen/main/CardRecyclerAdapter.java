@@ -75,11 +75,24 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         if (roomCard.getOversleepTime() > 0 &&
                 DateAndTimeFormatHandler.isLessThan24h(roomCard.getOversleepTime())) {
-            viewHolder.alertView.setImageResource(R.drawable.ico_alart);
+            if (roomCard.getUnread()) {
+                viewHolder.alertView.setColorFilter(Color.parseColor("#db8623"));
+                viewHolder.alertView.setImageResource(R.drawable.ic_baseline_chat_24px);
+            } else {
+                viewHolder.alertView.clearColorFilter();
+                viewHolder.alertView.setImageResource(R.drawable.ico_alart);
+            }
+
             viewHolder.statusView.setTextColor(Color.RED);
         } else {
-            viewHolder.alertView.setImageResource(R.drawable.ico_awake);
-            viewHolder.statusView.setTextColor(Color.parseColor("#db8623"));
+            if (roomCard.getUnread()) {
+                viewHolder.alertView.setColorFilter(Color.parseColor("#db8623"));
+                viewHolder.alertView.setImageResource(R.drawable.ic_baseline_chat_24px);
+            } else {
+                viewHolder.alertView.setImageResource(R.drawable.ico_awake);
+                viewHolder.statusView.setTextColor(Color.parseColor("#db8623"));
+            }
+
         }
 
     }

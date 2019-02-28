@@ -21,7 +21,8 @@ admin.initializeApp();
 //// ------------------------
 
 // Listens for new messages added to /Notification/{receiverId}/{chatRoomId}/{pushId}
-exports.sendNotification = functions.database.ref('/Notification/{receiverId}/{chatRoomId}/{pushId}')
+// Listens for new messages added to /Receiver/{UID}/{chatRoomId}/notification/{pushId}
+exports.sendNotification = functions.database.ref('/Receivers/{UID}/{chatRoomId}/notifications/{pushId}')
     .onCreate((snap, context) => {
         const val = snap.val();
         console.log('snap', val);
@@ -48,3 +49,4 @@ exports.sendNotification = functions.database.ref('/Notification/{receiverId}/{c
                 return console.log('Error sending message:', error);
             });
     });
+
