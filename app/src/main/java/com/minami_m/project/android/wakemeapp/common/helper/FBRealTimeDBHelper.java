@@ -22,13 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FBRealTimeDBHelper {
-    public static final FirebaseDatabase FIREBASE_DATABASE = FirebaseDatabase.getInstance();
+    private static final FirebaseDatabase FIREBASE_DATABASE = FirebaseDatabase.getInstance();
     public static final DatabaseReference USERS_REF = FIREBASE_DATABASE.getReference("Users");
     public static final DatabaseReference MESSAGES_REF = FIREBASE_DATABASE.getReference("Messages");
     public static final DatabaseReference FRIEND_ID_LIST_REF = FIREBASE_DATABASE.getReference("FriendIDList");
-    public static final DatabaseReference CHAT_ROOM_ID_LIST_REF = FIREBASE_DATABASE.getReference("ChatRoomIDList");
-    public static final DatabaseReference NOTIFICATION_REF = FIREBASE_DATABASE.getReference("Notification");
-    public static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
+    private static final DatabaseReference NOTIFICATION_REF = FIREBASE_DATABASE.getReference("Notification");
+    private static final DatabaseReference RECEIVER_PATH_REF = FIREBASE_DATABASE.getReference("ReceiverPaths");
     public static final DatabaseReference RECEIVER_REF = FIREBASE_DATABASE.getReference("Receivers");
     private static final String TAG = "RealTimeDatabaseHelper";
     private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
@@ -130,7 +129,7 @@ public class FBRealTimeDBHelper {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot path : dataSnapshot.getChildren()) {
-                            childUpdates.put(path.getValue() + "/receiver/lastLogin", loginTime);
+                            childUpdates.put(path.getValue() + "/lastLogin", loginTime);
                         }
                         FIREBASE_DATABASE.getReference().updateChildren(
                                 childUpdates,
@@ -166,7 +165,7 @@ public class FBRealTimeDBHelper {
         });
     }
 
-    // /Receiver/{UID}/{chatRoomId}/receiver/{friendUID}
+    // /Receiver/{UID}/{chatRoomId}/receiver/
     //                             /notification/{pushId}
     private static void createChatRoom(User mUser, User friend) {
         final Map<String, Object> childUpdates = new HashMap<>();
@@ -182,8 +181,8 @@ public class FBRealTimeDBHelper {
             childUpdates.put("/Receivers/" + mUser.getId() + "/" + chatRoomId + "/receiver", friend);
             childUpdates.put("/Receivers/" + friend.getId() + "/" + chatRoomId + "/receiver", mUser);
             // (3) Save Receiver Path.
-            childUpdates.put("/ReceiverPaths/" + mUser.getId() + "/" + chatRoomId, "/Receivers/" + friend.getId() + "/" + chatRoomId);
-            childUpdates.put("/ReceiverPaths/" + friend.getId() + "/" + chatRoomId, "/Receivers/" + mUser.getId() + "/" + chatRoomId);
+            childUpdates.put("/ReceiverPaths/" + mUser.getId() + "/" + chatRoomId, "/Receivers/" + friend.getId() + "/" + chatRoomId + "/receiver");
+            childUpdates.put("/ReceiverPaths/" + friend.getId() + "/" + chatRoomId, "/Receivers/" + mUser.getId() + "/" + chatRoomId + "/receiver");
             FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -193,31 +192,6 @@ public class FBRealTimeDBHelper {
             });
         }
     }
-//    private static void createChatRoom(User mUser, User friend) {
-//        final Map<String, Object> childUpdates = new HashMap<>();
-//        // (1) create a ChatRoom Obj and save it.
-//        String chatRoomId = CHAT_ROOMS_REF.push().getKey();
-//        if (chatRoomId != null) {
-//            String[] memberIds = {mUser.getId(), friend.getId()};
-//            List<String> memberIDList = Arrays.asList(memberIds);
-//            ChatRoom chatRoom = new ChatRoom(chatRoomId, memberIDList);
-//            childUpdates.put("/ChatRooms/" + chatRoomId, chatRoom);
-//
-//            // (2) Save ChatRoom ID.
-//            childUpdates.put("/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId, friend);
-//            childUpdates.put("/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId, mUser);
-//            // (3) Save Receiver Path.
-//            childUpdates.put("/ReceiverPaths/" + mUser.getId() + "/" + chatRoomId, "/ChatRoomIDList/" + friend.getId() + "/" + chatRoomId);
-//            childUpdates.put("/ReceiverPaths/" + friend.getId() + "/" + chatRoomId, "/ChatRoomIDList/" + mUser.getId() + "/" + chatRoomId);
-//            FIREBASE_DATABASE.getReference().updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
-//                @Override
-//                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-//                    showResult(databaseError, "Create a chatRoom");
-//
-//                }
-//            });
-//        }
-//    }
 
     private static void showResult(DatabaseError databaseError, String msg) {
         if (databaseError != null) {

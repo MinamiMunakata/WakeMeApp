@@ -3,7 +3,6 @@ package com.minami_m.project.android.wakemeapp.screen.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
@@ -32,7 +30,6 @@ import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeList
 import com.minami_m.project.android.wakemeapp.common.listener.ChatRoomCardClickListener;
 import com.minami_m.project.android.wakemeapp.common.service.MyFirebaseMessagingService;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
-import com.minami_m.project.android.wakemeapp.model.RoomNamePlate;
 import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.screen.chatRoom.ChatRoomActivity;
 import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
@@ -104,7 +101,10 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
                         User receiver = receiverSnapshot.child("receiver").getValue(User.class);
                         Log.i(TAG, "onDataChange: " + receiverSnapshot);
                         if (receiver != null) {
-                            ChatRoomCard roomCard = new ChatRoomCard(receiverSnapshot.getKey(), receiver, receiverSnapshot.child("notifications").exists());
+                            ChatRoomCard roomCard = new ChatRoomCard(
+                                    receiverSnapshot.getKey(),
+                                    receiver,
+                                    receiverSnapshot.child("notifications").exists());
                             chatRoomCards.add(roomCard);
                             Log.i(TAG, "onDataChange: " + roomCard.toString());
                         }
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     }
 
     private void removeListeners() {
-        FBRealTimeDBHelper.CHAT_ROOM_ID_LIST_REF.child(currentUser.getUid())
+        FBRealTimeDBHelper.RECEIVER_REF.child(currentUser.getUid())
                 .removeEventListener(listener);
         FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid())
                 .removeEventListener(generateEventListener(button));

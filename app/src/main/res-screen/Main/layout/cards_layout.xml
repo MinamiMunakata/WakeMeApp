@@ -14,74 +14,56 @@
         card_view:cardCornerRadius="@dimen/radius_btn"
         card_view:cardUseCompatPadding="true">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_dialog"
+            android:weightSum="12">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/card_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:src="@drawable/ico_default_avator" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_dialog"
-                android:weightSum="12">
+                android:orientation="vertical"
+                android:padding="@dimen/padding_dialog_text">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/card_icon"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:src="@drawable/ico_default_avator" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/card_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="8"
+                    android:layout_marginVertical="2dp"
                     android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_dialog_text">
+                    android:textColor="@color/colorMyAccent"
+                    android:textSize="@dimen/text_h3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/card_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="2dp"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorMyAccent"
-                        android:textSize="@dimen/text_h3"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/card_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="2dp"
-                        android:textColor="@color/colorMyAccent"
-                        android:textSize="@dimen/text_small_default_12" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/card_alart"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/card_status"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/oversleep" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="2dp"
+                    android:textColor="@color/colorMyAccent"
+                    android:textSize="@dimen/text_small_default_12" />
             </LinearLayout>
 
-        </android.support.constraint.ConstraintLayout>
-
-        <ImageView
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:scaleX="-1"
-            android:src="@drawable/ic_baseline_chat_bubble_24px"
-            android:tint="#c25e00"
-            android:contentDescription="@string/unread" />
-
-
+            <ImageView
+                android:id="@+id/card_alart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/oversleep" />
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

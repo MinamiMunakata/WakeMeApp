@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.minami_m.project.android.wakemeapp.common.receiver.NotificationReceiver;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
+import com.minami_m.project.android.wakemeapp.common.receiver.NotificationReceiver;
 import com.minami_m.project.android.wakemeapp.model.WakeUpTime;
 
 import java.util.ArrayList;
@@ -134,14 +134,4 @@ public class NotificationController {
                 flagUpdateCurrent);
     }
 
-//    @NonNull
-//    private Calendar generateWakeUpTime(WakeUpTime wakeUpTime) {
-//        Calendar time = Calendar.getInstance();
-//        time.set(Calendar.HOUR_OF_DAY, wakeUpTime.getHourOfDay());
-//        time.set(Calendar.MINUTE, wakeUpTime.getMinute());
-//        if (time.getTimeInMillis() <= Calendar.getInstance().getTimeInMillis()) {
-//            time.add(Calendar.DATE, 1); // Tomorrow
-//        }
-//        return time;
-//    }
 }

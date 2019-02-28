@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,9 +26,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -69,18 +66,6 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
     public SignUpFragment() {
         // Required empty public constructor
     }
-
-//    public static SignUpFragment newInstance(@Nullable String email, @Nullable String pw) {
-//        SignUpFragment fragment = new SignUpFragment();
-//        if (email != null) {
-//            Bundle data = new Bundle();
-//            data.putString("email", email);
-//            data.putString("pw", pw);
-//            fragment.setArguments(data);
-//        }
-//        return fragment;
-//    }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -132,42 +117,6 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
         loadingBG.setVisibility(View.INVISIBLE);
     }
 
-//    private void setEmailFromSignInForm() {
-//        Bundle data = getArguments();
-//        if (data != null && data.containsKey("email") && data.containsKey("pw")) {
-//            String email = data.getString("email");
-//            String password = data.getString("pw");
-//            emailField.setText(email);
-//            FirebaseUser user = mAuth.getCurrentUser();
-//            // Get auth credentials from the user for re-authentication. The example below shows
-//            // email and password credentials but there are multiple possible providers,
-//            // such as GoogleAuthProvider or FacebookAuthProvider.
-//            AuthCredential credential = EmailAuthProvider
-//                    .getCredential(email, password);
-//
-//            // Prompt the user to re-provide their sign-in credentials
-//            user.reauthenticate(credential)
-//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            Log.d(TAG, "User re-authenticated.");
-//                        }
-//                    });
-//            if (user != null) {
-//                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            Log.i(TAG, "User account deleted.");
-//                        } else {
-//                            Log.i(TAG, "onComplete: " + task.getException().getMessage());
-//                        }
-//                    }
-//                });
-//            }
-//        }
-//    }
-
     public void chooseImg() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -193,10 +142,10 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
                         loadingBG.setVisibility(View.INVISIBLE);
                         Log.i(TAG, "onSuccess: The image is successfully Uploaded");
                         FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
-                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Uri> task) {
-                                        downloadedIconUrl = task.getResult().toString();
+                                    public void onSuccess(Uri uri) {
+                                        downloadedIconUrl = uri.toString();
                                         User newUser = new User(
                                                 currentUser.getUid(),
                                                 currentUser.getDisplayName(),

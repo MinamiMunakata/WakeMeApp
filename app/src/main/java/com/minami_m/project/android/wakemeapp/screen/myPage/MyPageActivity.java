@@ -51,7 +51,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-//import com.minami_m.project.android.wakemeapp.Screen.Alarm.AlarmActivity;
 
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
@@ -243,15 +242,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                                     FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
                                 }
                             });
-//                            FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
-//                                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Uri> task) {
-//                                            String downloadIconURL = task.getResult().toString();
-//                                            System.out.println();
-//                                            FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
-//                                        }
-//                                    });
+//
 
                         }
                     });

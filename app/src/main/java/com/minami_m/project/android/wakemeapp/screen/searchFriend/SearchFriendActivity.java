@@ -27,11 +27,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
-import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBCallback;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeListener;
@@ -41,8 +39,6 @@ import com.minami_m.project.android.wakemeapp.screen.myPage.MyPageActivity;
 import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
 import com.squareup.picasso.Picasso;
 
-import java.util.Map;
-
 public class SearchFriendActivity extends AppCompatActivity
         implements FragmentChangeListener, InputValidationHandler,
         SearchFriendFragmentListener, ActivityChangeListener {
@@ -51,7 +47,6 @@ public class SearchFriendActivity extends AppCompatActivity
     private Button search_btn;
     private EditText editEmail;
     private FirebaseUser currentUser;
-    private String friendId;
     private User friend;
     private User mUser;
     private ImageView loadingImg;
@@ -61,7 +56,6 @@ public class SearchFriendActivity extends AppCompatActivity
         this.editEmail = editEmail;
     }
 
-    // TODO: Implement BACK or CANCEL to input search field again.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,19 +77,9 @@ public class SearchFriendActivity extends AppCompatActivity
             Bundle data = intent.getExtras();
             if (data != null && data.getParcelable("User") != null) {
                 mUser = data.getParcelable("User");
-                System.out.println(mUser);
             } else {
                 launchActivity(SignInActivity.class);
             }
-//            FBRealTimeDBHelper.readUserData(currentUser.getUid(), new FBRealTimeDBCallback() {
-//                @Override
-//                public void retrieveUserData(User user) {
-//                    mUser = user;
-//                    if (mUser == null) {
-//                        launchActivity(SignInActivity.class);
-//                    }
-//                }
-//            });
 
         } else {
             launchActivity(SignInActivity.class);
@@ -196,8 +180,8 @@ public class SearchFriendActivity extends AppCompatActivity
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String mEmail = userSnapshot.child("email").getValue(String.class);
                     if (mEmail != null && mEmail.equals(email)) {
-                        friendId = userSnapshot.getKey();
                         friend = userSnapshot.getValue(User.class);
+                        System.out.println(friend);
                         search_btn.setText(R.string.add_as_friend);
                         dataExist = true;
                         replaceFragment(SearchFriendResultFragment.newInstance());
@@ -269,30 +253,30 @@ public class SearchFriendActivity extends AppCompatActivity
     @Override
     public void showFriend(ImageView iconHolder, TextView nameHolder) {
         if (friend == null) return;
+        // Capitalize the first letter of an user name.
+        if (friend.getName() != null && friend.getName().length() > 0) {
+            String[] fullName = friend.getName().split(" ");
+            StringBuilder displayName = new StringBuilder();
+            for (int i = 0; i < fullName.length; i++) {
+                String name = fullName[i];
+                if (name.length() > 0) {
+                    displayName
+                            .append(name.substring(0, 1).toUpperCase())
+                            .append(name.substring(1));
+                }
+                if (i < fullName.length - 1) {
+                    displayName.append(" ");
+                }
+            }
+            nameHolder.setText(displayName);
+        } else {
+            nameHolder.setText(friend.getName());
+        }
         if (friend.getIcon() != null) {
             Picasso.get()
                     .load(friend.getIcon())
                     .error(R.drawable.ico_default_avator)
                     .into(iconHolder);
-            // Capitalize the first letter of an user name.
-            if (friend.getName() != null && friend.getName().length() > 0) {
-                String[] fullName = friend.getName().split(" ");
-                StringBuilder displayName = new StringBuilder();
-                for (int i = 0; i < fullName.length; i++) {
-                    String name = fullName[i];
-                    if (name.length() > 0) {
-                        displayName
-                                .append(name.substring(0, 1).toUpperCase())
-                                .append(name.substring(1));
-                    }
-                    if (i < fullName.length - 1) {
-                        displayName.append(" ");
-                    }
-                }
-                nameHolder.setText(displayName);
-            } else {
-                nameHolder.setText(friend.getName());
-            }
         } else {
             iconHolder.setImageResource(R.drawable.ico_default_avator);
         }

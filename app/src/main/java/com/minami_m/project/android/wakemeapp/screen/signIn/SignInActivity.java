@@ -48,26 +48,15 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     ImageView loadingImage;
     RelativeLayout loadingBG;
     CallbackManager callbackManager;
-    //    AccessTokenTracker mAccessTokenTracker;
-//    ProfileTracker profileTracker;
     FirebaseAuth mAuth;
     Profile facebookProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // facebook
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
         setContentView(com.minami_m.project.android.wakemeapp.R.layout.activity_sign_in);
         // create a new fragment to be placed in the activity layout
         createNewFragment(savedInstanceState);
-//        mAccessTokenTracker = new AccessTokenTracker() {
-//            @Override
-//            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-//                Log.i(TAG, "onCurrentAccessTokenChanged: 123456");
-//            }
-//        };
 
         callbackManager = CallbackManager.Factory.create();
         // TODO: Test
@@ -165,7 +154,6 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                             facebookProfile.getName(),
                                             user.getEmail(),
                                             avatar);
-//                                newUser.setStatus(DateAndTimeFormatHandler.generateStatus(newUser.getLastLogin()));
                                     FBRealTimeDBHelper.writeNewUser(newUser);
                                 }
                             }
