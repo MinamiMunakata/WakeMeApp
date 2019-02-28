@@ -35,6 +35,7 @@ import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeList
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.util.Date;
+import java.util.Objects;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -49,15 +50,9 @@ public class SignInFragment extends Fragment implements
     private FirebaseAuth mAuth;
     private Button signInBtn;
     private EditText editTextEmail, editTextPw;
-    private TextView signUpLink, errorMsg;
-    private ProfileTracker profileTracker;
-    //    private String emailForSignUp = null;
-//    private String passwordForSignUp = null;
+    private TextView signUpLink, errorMsg, resetLink;
     private ImageView loadingImage;
     private RelativeLayout loadingBG;
-
-    private CallbackManager mCallbackManager;
-    private AccessTokenTracker mAccessTokenTracker;
 
     public SignInFragment() {
         // Required empty public constructor
@@ -78,6 +73,8 @@ public class SignInFragment extends Fragment implements
         FontStyleHandler.setFont(getContext(), editTextPw, false, false);
         signUpLink = view.findViewById(R.id.sign_up_link);
         FontStyleHandler.setFont(getContext(), signUpLink, false, true);
+        // TODO: reset
+        resetLink = view.findViewById(R.id.reset_password);
         loadingBG = view.findViewById(R.id.loading_bg);
         loadingImage = view.findViewById(R.id.sign_in_loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
@@ -134,15 +131,6 @@ public class SignInFragment extends Fragment implements
                         // Sign in success, update UI with the signed-in user's information
                         final FirebaseUser currentUser = mAuth.getCurrentUser();
                         if (currentUser != null) {
-//                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
-//                                toast("Please create an account.");
-//                                emailForSignUp = email;
-//                                passwordForSignUp = password;
-//                                updateUI(false);
-//                            }
-//                            FBRealTimeDBHelper.updateLoginTime(
-//                                    currentUser.getUid(),
-//                                    new Date().getTime());
                             updateUI(true);
                         }
 
@@ -151,7 +139,7 @@ public class SignInFragment extends Fragment implements
                         Log.e(TAG, "onComplete: ", task.getException());
                         toast("Authentication failed.");
                         errorMsg.setVisibility(View.VISIBLE);
-                        errorMsg.setText(task.getException().getMessage());
+                        errorMsg.setText(Objects.requireNonNull(task.getException()).getMessage());
                     }
                 }
             });
