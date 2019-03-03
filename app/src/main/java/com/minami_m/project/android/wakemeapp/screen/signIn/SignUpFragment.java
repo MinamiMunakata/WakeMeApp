@@ -2,6 +2,7 @@ package com.minami_m.project.android.wakemeapp.screen.signIn;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,10 +10,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,8 +36,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.UploadTask;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.helper.FBStorageHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
@@ -42,6 +43,7 @@ import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -49,7 +51,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpFragment extends Fragment implements InputValidationHandler, View.OnClickListener {
+public class SignUpFragment extends Fragment implements View.OnClickListener {
     private static int PICK_IMAGE_REQUEST = 12345;
     private FirebaseAuth mAuth;
     private EditText nameField;
@@ -176,21 +178,14 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
     }
 
     @Override
-    public boolean isValidInput() {
-        if (!InputHandler.isValidFormName(nameField)) return false;
-        if (!InputHandler.isValidFormEmail(emailField)) return false;
-        if (!InputHandler.isValidFormPW(pwField)) return false;
-        return true;
-    }
-
-    @Override
     public void onClick(View view) {
-        InputHandler.hideSoftKeyBoard(requireActivity());
-        if (isValidInput()) {
+        hideSoftKeyBoard();
+        if (!TextUtils.isEmpty(nameField.getText())
+                && !TextUtils.isEmpty(emailField.getText()) && !TextUtils.isEmpty(pwField.getText())) {
             loadingBG.setVisibility(View.VISIBLE);
-            final String name = nameField.getText().toString(),
-                    email = emailField.getText().toString(),
-                    password = pwField.getText().toString();
+            final String name = nameField.getText().toString().trim(),
+                    email = emailField.getText().toString().trim(),
+                    password = pwField.getText().toString().trim();
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -214,7 +209,14 @@ public class SignUpFragment extends Fragment implements InputValidationHandler, 
                     });
 
         } else {
-            toast("Invalid Input");
+            toast("Fill in a form.");
+        }
+    }
+
+    private void hideSoftKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (Objects.requireNonNull(imm).isAcceptingText()) {
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(requireActivity().getCurrentFocus()).getWindowToken(), 0);
         }
     }
 

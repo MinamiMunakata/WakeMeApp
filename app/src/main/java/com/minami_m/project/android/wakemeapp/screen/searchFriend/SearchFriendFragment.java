@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.minami_m.project.android.wakemeapp.R;
-import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFriendFragment extends Fragment implements InputValidationHandler {
+public class SearchFriendFragment extends Fragment {
     private static final String TAG = "SearchFriendFragment";
     EditText editText;
 
@@ -38,11 +36,6 @@ public class SearchFriendFragment extends Fragment implements InputValidationHan
         SearchFriendActivity activity = (SearchFriendActivity) requireActivity();
         activity.setEditEmail(editText);
         return view;
-    }
-
-    @Override
-    public boolean isValidInput() {
-        return InputHandler.isValidFormEmail(editText);
     }
 
 }

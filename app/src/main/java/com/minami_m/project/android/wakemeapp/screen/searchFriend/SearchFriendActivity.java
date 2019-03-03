@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,8 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FragmentChangeListener;
@@ -40,8 +39,7 @@ import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
 import com.squareup.picasso.Picasso;
 
 public class SearchFriendActivity extends AppCompatActivity
-        implements FragmentChangeListener, InputValidationHandler,
-        SearchFriendFragmentListener, ActivityChangeListener {
+        implements FragmentChangeListener, SearchFriendFragmentListener, ActivityChangeListener {
     private static final String TAG = "SearchFriendActivity";
     private static final String DIALOG_TAG = "dialog";
     private Button search_btn;
@@ -103,13 +101,10 @@ public class SearchFriendActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 if (search_btn.getText().equals(getResources().getString(R.string.search_email))) {
-                    if (editEmail != null) {
-                        if (isValidInput()) {
-                            Log.i(TAG, "onClick: Search for " + editEmail.getText().toString());
-                            searchFriendByEmail(editEmail.getText().toString());
-                        } else {
-                            Log.i(TAG, "onClick: Invalid input.");
-                        }
+                    if (!TextUtils.isEmpty(editEmail.getText())) {
+                        searchFriendByEmail(editEmail.getText().toString().trim());
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Enter email.", Toast.LENGTH_SHORT).show();
                     }
                 } else if (search_btn.getText().equals(getResources().getString(R.string.add_as_friend))) {
                     followNewFriend(mUser, friend);
@@ -245,29 +240,10 @@ public class SearchFriendActivity extends AppCompatActivity
 
 
     @Override
-    public boolean isValidInput() {
-        return InputHandler.isValidFormEmail(editEmail);
-    }
-
-
-    @Override
     public void showFriend(ImageView iconHolder, TextView nameHolder) {
         if (friend == null) return;
-        // Capitalize the first letter of an user name.
         if (friend.getName() != null && friend.getName().length() > 0) {
-            String[] fullName = friend.getName().split(" ");
-            StringBuilder displayName = new StringBuilder();
-            for (int i = 0; i < fullName.length; i++) {
-                String name = fullName[i];
-                if (name.length() > 0) {
-                    displayName
-                            .append(name.substring(0, 1).toUpperCase())
-                            .append(name.substring(1));
-                }
-                if (i < fullName.length - 1) {
-                    displayName.append(" ");
-                }
-            }
+            StringBuilder displayName = capitalizeFirstLetter();
             nameHolder.setText(displayName);
         } else {
             nameHolder.setText(friend.getName());
@@ -280,6 +256,25 @@ public class SearchFriendActivity extends AppCompatActivity
         } else {
             iconHolder.setImageResource(R.drawable.ico_default_avator);
         }
+    }
+
+    @NonNull
+    private StringBuilder capitalizeFirstLetter() {
+        // Capitalize the first letter of an user name.
+        String[] fullName = friend.getName().split(" ");
+        StringBuilder displayName = new StringBuilder();
+        for (int i = 0; i < fullName.length; i++) {
+            String name = fullName[i];
+            if (name.length() > 0) {
+                displayName
+                        .append(name.substring(0, 1).toUpperCase())
+                        .append(name.substring(1));
+            }
+            if (i < fullName.length - 1) {
+                displayName.append(" ");
+            }
+        }
+        return displayName;
     }
 
     @Override

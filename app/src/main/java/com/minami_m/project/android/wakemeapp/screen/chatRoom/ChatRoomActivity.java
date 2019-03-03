@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,14 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.model.ChatRoomCard;
@@ -44,7 +41,7 @@ import java.util.List;
 
 public class ChatRoomActivity
         extends AppCompatActivity
-        implements ActivityChangeListener, View.OnClickListener, InputValidationHandler {
+        implements ActivityChangeListener, View.OnClickListener {
     public static final String TAG = "--ChatRoomActivity--";
     private List<Message> mMessageList;
     private MessageListAdapter adapter;
@@ -267,9 +264,9 @@ public class ChatRoomActivity
 
     @Override
     public void onClick(View v) {
-        if (isValidInput()) {
+        if (!TextUtils.isEmpty(editText.getText())) {
             Message message = new Message(
-                    editText.getText().toString()
+                    editText.getText().toString().trim()
                             + fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;"),
                     currentUser.getUid(),
                     new Date().getTime()
@@ -282,11 +279,5 @@ public class ChatRoomActivity
         } else {
             Log.i(TAG, "onClick: Invalid input to send a message.");
         }
-    }
-
-    // TODO: check validation
-    @Override
-    public boolean isValidInput() {
-        return InputHandler.isValidFormName(editText);
     }
 }

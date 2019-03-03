@@ -1,13 +1,16 @@
 package com.minami_m.project.android.wakemeapp.screen.signIn;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,9 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
-import com.facebook.ProfileTracker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,8 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputHandler;
-import com.minami_m.project.android.wakemeapp.common.handler.InputValidationHandler;
 import com.minami_m.project.android.wakemeapp.common.helper.FBRealTimeDBHelper;
 import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.common.listener.FacebookLoginListener;
@@ -44,8 +42,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class SignInFragment extends Fragment implements
-        View.OnClickListener,
-        InputValidationHandler {
+        View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private Button signInBtn;
@@ -64,26 +61,46 @@ public class SignInFragment extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-        // Initialize Firebase Auth
         signInBtn = view.findViewById(R.id.sign_in_btn);
         FontStyleHandler.setFont(getContext(), signInBtn, false, true);
+        setupInputFields(view);
+        setupLoadingImage(view);
+        // Initialize an error message field.
+        errorMsg = view.findViewById(R.id.sign_in_error);
+        errorMsg.setVisibility(View.GONE);
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // Facebook login
+        setupFBLoginButton(view);
+        // TODO: reset
+        resetLink = view.findViewById(R.id.reset_password);
+        resetLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        return view;
+    }
+
+    private void setupInputFields(View view) {
         editTextEmail = view.findViewById(R.id.edit_text_email_for_sign_in);
         FontStyleHandler.setFont(getContext(), editTextEmail, false, false);
         editTextPw = view.findViewById(R.id.edit_text_password_for_sign_in);
         FontStyleHandler.setFont(getContext(), editTextPw, false, false);
         signUpLink = view.findViewById(R.id.sign_up_link);
         FontStyleHandler.setFont(getContext(), signUpLink, false, true);
-        // TODO: reset
-        resetLink = view.findViewById(R.id.reset_password);
+    }
+
+    private void setupLoadingImage(View view) {
         loadingBG = view.findViewById(R.id.loading_bg);
         loadingImage = view.findViewById(R.id.sign_in_loading_img);
         Glide.with(this).load(R.raw.loading).into(loadingImage);
         loadingBG.setVisibility(View.INVISIBLE);
-        errorMsg = view.findViewById(R.id.sign_in_error);
-        errorMsg.setVisibility(View.GONE);
+    }
 
-        mAuth = FirebaseAuth.getInstance();
-
+    private void setupFBLoginButton(View view) {
         Button loginButton = view.findViewById(R.id.fb_login_button);
         FontStyleHandler.setFont(getContext(), loginButton, false, true);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +111,6 @@ public class SignInFragment extends Fragment implements
                 facebookLoginListener.loginWithFacebook(mAuth);
             }
         });
-
-        return view;
     }
 
     @Override
@@ -118,10 +133,10 @@ public class SignInFragment extends Fragment implements
 
     @Override
     public void onClick(View view) {
-        InputHandler.hideSoftKeyBoard(requireActivity());
-        if (isValidInput()) {
-            final String email = editTextEmail.getText().toString(),
-                    password = editTextPw.getText().toString();
+        hideSoftKeyBoard();
+        if (!TextUtils.isEmpty(editTextEmail.getText()) && !TextUtils.isEmpty(editTextPw.getText())) {
+            final String email = editTextEmail.getText().toString().trim(),
+                    password = editTextPw.getText().toString().trim();
             loadingBG.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -144,9 +159,16 @@ public class SignInFragment extends Fragment implements
                 }
             });
         } else {
-            toast("Invalid Input");
+            toast("Enter both email and password.");
         }
 
+    }
+
+    private void hideSoftKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (Objects.requireNonNull(imm).isAcceptingText()) {
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(requireActivity().getCurrentFocus()).getWindowToken(), 0);
+        }
     }
 
     private void updateUI(Boolean hasAccount) {
@@ -162,13 +184,6 @@ public class SignInFragment extends Fragment implements
 //        SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) requireActivity();
         fragmentChangeListener.replaceFragment(signUpFragment);
-    }
-
-    @Override
-    public boolean isValidInput() {
-        if (!InputHandler.isValidFormEmail(editTextEmail)) return false;
-        if (!InputHandler.isValidFormPW(editTextPw)) return false;
-        return true;
     }
 
     private void toast(String message) {
