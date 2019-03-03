@@ -81,10 +81,17 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
 ```
 root
-  ├ ChatRoomIDList
+  ├ Receivers
   |  └ {UID}
   |     └ {chatRoomId}
-  |        └ [User object] *See a 'Users' reference below.
+  |         ├ receiver: [User object] *See a 'Users' reference below.
+  |         └ notification
+  |            └ {pushId}
+  |                |[Notification object]
+  |                ├ id (== pushId)
+  
+  
+  |                └ 
   |
   ├ ChatRooms
   |  └ {chatRoomId}
