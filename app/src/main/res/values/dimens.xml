@@ -14,7 +14,7 @@
     <dimen name="button">50dp</dimen>
     <dimen name="input_header">10dp</dimen>
     <dimen name="signup_top">30dp</dimen>
-    <dimen name="small_vertical_space_bw_item">10dp</dimen>
+    <dimen name="small_vertical_space_bw_item">11dp</dimen>
     <dimen name="semicircle_radius">200dp</dimen>
     <dimen name="padding_rounded_field">10dp</dimen>
     <dimen name="padding_dialog_text">10dp</dimen>
