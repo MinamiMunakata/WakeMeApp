@@ -38,6 +38,7 @@ import com.minami_m.project.android.wakemeapp.model.User;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
@@ -59,7 +60,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         createNewFragment(savedInstanceState);
 
         callbackManager = CallbackManager.Factory.create();
-        // TODO: Test
+        // There is an error with out logout
         LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -146,7 +147,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 // Check if the usr sign in for the first time.
-                                boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                                boolean isNewUser = Objects.requireNonNull(task.getResult()).getAdditionalUserInfo().isNewUser();
                                 if (isNewUser) {
                                     facebookProfile = Profile.getCurrentProfile();
                                     String avatar = facebookProfile.getProfilePictureUri(300, 300).toString();

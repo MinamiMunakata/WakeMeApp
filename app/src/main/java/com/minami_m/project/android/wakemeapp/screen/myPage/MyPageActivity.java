@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -165,17 +166,16 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         return new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (!TextUtils.isEmpty(textView.getText()) && actionId == EditorInfo.IME_ACTION_DONE) {
                     switch (field) {
                         case NAME:
-                            // TODO: input validation
-                            updateName(textView.getText().toString());
+                            updateName(textView.getText().toString().trim());
                             return true;
                         case EMAIL:
-                            updateEmail(textView.getText().toString());
+                            updateEmail(textView.getText().toString().trim());
                             return true;
                         case PW:
-                            updatePassword(textView.getText().toString());
+                            updatePassword(textView.getText().toString().trim());
                             return true;
                     }
 
@@ -492,7 +492,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         });
     }
 
-    // TODO: Check validation.
     public void updateName(final String input) {
         UserProfileChangeRequest nameUpdateRequest = new UserProfileChangeRequest.Builder()
                 .setDisplayName(input)

@@ -42,9 +42,6 @@ public class NotificationController {
 
             }
         }
-        // TODO: Remove it later
-        checkIfNotificationIsWorking();
-
     }
 
     public void checkIfNotificationIsWorking() {
@@ -81,11 +78,7 @@ public class NotificationController {
     }
 
     private void setNotificationOnce(WakeUpTime wakeUpTime) {
-        // Set Time
-//        Calendar time = generateWakeUpTime(wakeUpTime);
-
         // Create Intent
-        // TODO: Put Extra
         PendingIntent sender = generateSender(REQUEST_CODE_ONCE, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
