@@ -21,6 +21,8 @@ import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeList
 import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -33,9 +35,9 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.dialog_successfully_added, null))
@@ -55,15 +57,15 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
     @Override
     public void onStart() {
         super.onStart();
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Display display = requireActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int width = (int) (size.x * 0.8);
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        getDialog().getWindow().setBackgroundDrawableResource(R.drawable.rounded_dialog);
+        Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawableResource(R.drawable.rounded_dialog);
         getDialog().getWindow().setLayout(width, height);
         Button okButton = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
-        okButton.setTextColor(getContext().getColor(R.color.colorMyAccent));
+        okButton.setTextColor(requireContext().getColor(R.color.colorMyAccent));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) okButton.getLayoutParams();
         layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
         okButton.setLayoutParams(layoutParams);
