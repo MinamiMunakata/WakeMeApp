@@ -2,9 +2,12 @@ package com.minami_m.project.android.wakemeapp.screen.signIn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -180,6 +183,14 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         this.loadingBG = loadingBackground;
         this.loadingBG.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void showDialog() {
+        FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
+        ResetPasswordDialogFragment dialog = new ResetPasswordDialogFragment();
+        dialog.show(manager, "Dialog");
+    }
+
 
 //    @Override
 //    public boolean onKeyUp(int keyCode, KeyEvent event) {

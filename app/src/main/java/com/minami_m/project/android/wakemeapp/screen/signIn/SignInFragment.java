@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,8 +49,8 @@ public class SignInFragment extends Fragment implements
     private FirebaseAuth mAuth;
     private Button signInBtn;
     private EditText editTextEmail, editTextPw;
-    private TextView signUpLink, errorMsg, resetLink;
-    private ImageView loadingImage;
+    private TextView signUpLink, errorMsg;
+    private ImageView loadingImage, helpIconToResetPW;
     private RelativeLayout loadingBG;
 
     public SignInFragment() {
@@ -58,7 +60,7 @@ public class SignInFragment extends Fragment implements
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         signInBtn = view.findViewById(R.id.sign_in_btn);
@@ -73,11 +75,12 @@ public class SignInFragment extends Fragment implements
         // Facebook login
         setupFBLoginButton(view);
         // TODO: reset
-        resetLink = view.findViewById(R.id.reset_password);
-        resetLink.setOnClickListener(new View.OnClickListener() {
+        helpIconToResetPW = view.findViewById(R.id.help_to_reset_password);
+        helpIconToResetPW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SignInActivity activity = (SignInActivity) requireActivity();
+                activity.showDialog();
             }
         });
 

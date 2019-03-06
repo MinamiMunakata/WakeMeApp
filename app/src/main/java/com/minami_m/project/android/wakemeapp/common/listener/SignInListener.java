@@ -6,5 +6,6 @@ import android.widget.RelativeLayout;
 
 public interface SignInListener {
     void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context);
+    void showDialog();
 
 }

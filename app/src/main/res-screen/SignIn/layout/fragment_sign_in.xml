@@ -114,14 +114,27 @@
 
             <EditText
                 android:id="@+id/edit_text_password_for_sign_in"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@color/fui_transparent"
                 android:focusable="true"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingHorizontal="@dimen/input_padding"
                 android:textSize="@dimen/text_size_sign_in_input" />
+            <FrameLayout
+                android:layout_width="26dp"
+                android:layout_height="26dp">
+                <ImageView
+                    android:id="@+id/help_to_reset_password"
+                    android:tint="@color/grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/help"
+                    android:src="@drawable/ic_round_help_outline_24px"/>
+            </FrameLayout>
         </LinearLayout>
 
         <Button
@@ -174,15 +187,6 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
-        <com.minami_m.project.android.wakemeapp.CustomBasicTextView
-            android:id="@+id/reset_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reset?"
-            android:textAlignment="center"
-            android:textColor="@color/red"
-            android:textSize="@dimen/text_h4" />
 
         <TextView
             android:id="@+id/sign_in_error"
