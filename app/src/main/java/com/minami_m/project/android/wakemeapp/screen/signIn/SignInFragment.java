@@ -74,7 +74,7 @@ public class SignInFragment extends Fragment implements
         mAuth = FirebaseAuth.getInstance();
         // Facebook login
         setupFBLoginButton(view);
-        // TODO: reset
+        // Reset
         helpIconToResetPW = view.findViewById(R.id.help_to_reset_password);
         helpIconToResetPW.setOnClickListener(new View.OnClickListener() {
             @Override
