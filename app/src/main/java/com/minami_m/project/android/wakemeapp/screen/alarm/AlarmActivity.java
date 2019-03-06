@@ -364,7 +364,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override

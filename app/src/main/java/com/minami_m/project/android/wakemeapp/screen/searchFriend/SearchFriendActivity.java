@@ -284,7 +284,7 @@ public class SearchFriendActivity extends AppCompatActivity
             search_btn.setText(R.string.search_email);
             friend = null;
         } else {
-            overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
     }

@@ -103,7 +103,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                     intent.putExtra("WakeUpTime", wakeUpTime);
                 }
                 startActivity(intent);
-                overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
             }
         });
         timer_box.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -115,7 +115,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         intent.putExtra("WakeUpTime", wakeUpTime);
                     }
                     startActivity(intent);
-                    overridePendingTransition(R.animator.slide_out_left, R.animator.slide_in_right);
+                    overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 }
             }
         });
