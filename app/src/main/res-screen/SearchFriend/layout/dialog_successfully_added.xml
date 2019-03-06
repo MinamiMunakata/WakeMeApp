@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center">
     <ImageView
+        android:contentDescription="@string/successfully_added"
         android:layout_marginTop="@dimen/vertical_space_bw_items"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +18,7 @@
         android:text="@string/successfully_added"
         android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
         android:layout_marginHorizontal="@dimen/vertical_space_bw_items"/>
-    
+
 
 
 </LinearLayout>

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="@dimen/padding_bubbles"
-    android:background="@color/colorBackground"
     android:clipToPadding="false">
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView
         android:id="@+id/sender_date"

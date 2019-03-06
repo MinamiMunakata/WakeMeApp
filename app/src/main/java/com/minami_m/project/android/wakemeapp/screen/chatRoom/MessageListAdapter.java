@@ -58,7 +58,12 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             return new ReceivedMessageViewHolder(view);
         }
         Log.i(TAG, "onCreateViewHolder: Invalid ViewType is called.");
-        return null;
+        return new RecyclerView.ViewHolder(parent) {
+            @Override
+            public String toString() {
+                return "Invalid login, please try again";
+            }
+        };
     }
 
     @Override

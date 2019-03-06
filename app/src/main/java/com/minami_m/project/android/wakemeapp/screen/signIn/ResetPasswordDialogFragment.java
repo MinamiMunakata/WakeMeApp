@@ -1,8 +1,8 @@
 package com.minami_m.project.android.wakemeapp.screen.signIn;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class ResetPasswordDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View view = inflater.inflate(R.layout.fragment_reset_password_dialog, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.fragment_reset_password_dialog, null);
         final EditText editText = view.findViewById(R.id.email_to_reset_password);
         Button button = view.findViewById(R.id.send_to_reset_password);
         button.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class ResetPasswordDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
-        builder.setView(view)   ;
+        builder.setView(view);
         // Get the layout inflater
         return builder.create();
     }

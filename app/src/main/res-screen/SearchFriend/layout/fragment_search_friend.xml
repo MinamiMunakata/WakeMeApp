@@ -3,37 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:orientation="vertical"
+    android:paddingHorizontal="@dimen/space_both_edges"
+    android:paddingTop="@dimen/vertical_space_bw_items"
     tools:context=".screen.searchFriend.SearchFriendFragment">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/space_both_edges"
-        android:layout_marginRight="@dimen/space_both_edges"
-        android:layout_marginTop="@dimen/vertical_space_bw_items"
-        android:orientation="vertical">
+        android:layout_marginBottom="@dimen/input_header"
+        android:text="@string/enter_email_to_search"
+        android:textSize="@dimen/input_title" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/input_header"
-            android:text="@string/enter_email_to_search"
-            android:textSize="@dimen/input_title" />
-
-        <EditText
-            android:id="@+id/search_by_email_text_field"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button"
-            android:layout_marginBottom="@dimen/vertical_space_bw_items"
-            android:background="@drawable/rounded_field"
-            android:ems="10"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/input_padding"
-            android:textSize="@dimen/input_title" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/search_by_email_text_field"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button"
+        android:layout_marginBottom="@dimen/vertical_space_bw_items"
+        android:background="@drawable/rounded_field"
+        android:ems="10"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/input_padding"
+        android:textSize="@dimen/input_title" />
 
 
 </LinearLayout>

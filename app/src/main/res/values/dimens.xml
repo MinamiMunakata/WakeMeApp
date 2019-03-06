@@ -2,7 +2,7 @@
 <resources>
     <dimen name="radius_btn">10dp</dimen>
     <dimen name="space_both_edges">33dp</dimen>
-    <dimen name="text_h1">40sp</dimen>
+    <!--<dimen name="text_h1">40sp</dimen>-->
     <dimen name="text_h2">30sp</dimen>
     <dimen name="text_h3">18sp</dimen>
     <dimen name="text_h4">15sp</dimen>
@@ -13,20 +13,14 @@
     <dimen name="input_padding">10dp</dimen>
     <dimen name="button">50dp</dimen>
     <dimen name="input_header">10dp</dimen>
-    <dimen name="signup_top">30dp</dimen>
     <dimen name="small_vertical_space_bw_item">11dp</dimen>
-    <dimen name="semicircle_radius">200dp</dimen>
     <dimen name="padding_rounded_field">10dp</dimen>
     <dimen name="padding_dialog_text">10dp</dimen>
     <dimen name="padding_dialog">13dp</dimen>
-    <dimen name="card_view_height">120dp</dimen>
-    <dimen name="padding_send_icon">10dp</dimen>
     <dimen name="input_message_box_margin">8dp</dimen>
     <dimen name="message_text_size">18sp</dimen>
     <dimen name="elevation">2dp</dimen>
     <dimen name="padding_bubbles">10dp</dimen>
-    <dimen name="pudding_bubbles_to_wall">15dp</dimen>
-    <dimen name="padding_bubbles_to_the_other_side">60dp</dimen>
     <dimen name="message_avatar">34dp</dimen>
     <dimen name="margin_bw_items">10dp</dimen>
     <dimen name="padding_inside_bubble">13dp</dimen>

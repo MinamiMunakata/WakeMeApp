@@ -1,6 +1,7 @@
 package com.minami_m.project.android.wakemeapp.screen.searchFriend;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
         return new SuccessfullyAddedDialog();
     }
 
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

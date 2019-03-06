@@ -50,7 +50,7 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 - Track the last-seen status.
 - Create an account with Email and Password.
 - Facebook login.
-- Configure your profile. (Name/ Profile picture/ Email/ Passward)
+- Configure your profile. (Name/ Profile picture/ Email/ Password)
 - Search for friends by Email.
 
 ## Specification
@@ -150,9 +150,9 @@ Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 > <img src="../media/friend_list.png?raw=true" width="200px" alt="Friend List Page Image"><img src="../media/chat.png?raw=true" width="200px" alt="Chat Page Image" hspace="50"><img src="../media/mypage.png?raw=true" width="200px" alt="Mypage Image">
 
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
-When I first told you the idea, you immidiately understood the consepts and gave me a lot of advice as a designer. Whenever I asked you for additional design work, you were always flexible and dealt with my requests.  
+When I first told you the idea, you immediately understood the concepts and gave me a lot of advice as a designer. Whenever I asked you for additional design work, you were always flexible and dealt with my requests.
 Thank you so much for your help, and please let me know if I can return the favor!
 
 ## Note
 
-⚠️The `google-services.json` from Firebase which is nessesary to run this app is not included in this repository for security reasons.
+⚠️The `google-services.json` from Firebase which is necessary to run this app is not included in this repository for security reasons.

@@ -194,7 +194,7 @@ public class ChatRoomActivity
         FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
         // Delete notification
-        FBRealTimeDBHelper.deletNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
+        FBRealTimeDBHelper.deleteNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
     }
 
     private void updateReceiverStatus(Message message) {
@@ -253,7 +253,7 @@ public class ChatRoomActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override

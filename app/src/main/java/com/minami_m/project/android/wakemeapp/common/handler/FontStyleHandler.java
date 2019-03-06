@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.minami_m.project.android.wakemeapp.CustomTypefaceSpan;
 import com.minami_m.project.android.wakemeapp.R;
 
-import javax.annotation.Nullable;
-
 import static android.graphics.Typeface.createFromAsset;
 
 public class FontStyleHandler {

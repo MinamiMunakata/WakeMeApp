@@ -3,8 +3,6 @@ package com.minami_m.project.android.wakemeapp;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.widget.TextView;
 
 import static android.graphics.Typeface.createFromAsset;
 

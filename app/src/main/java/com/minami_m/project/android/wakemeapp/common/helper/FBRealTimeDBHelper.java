@@ -243,7 +243,7 @@ public class FBRealTimeDBHelper {
 
     }
 
-    public static void deletNotification(String receiverId, String chatRoomId) {
+    public static void deleteNotification(String receiverId, String chatRoomId) {
         RECEIVER_REF.child(receiverId).child(chatRoomId).child("notifications").removeValue();
     }
 
