@@ -1,0 +1,9 @@
+# All folder
+*/
+
+# android studio
+*.iml
+*.properties
+
+# mac
+.DS_Store
