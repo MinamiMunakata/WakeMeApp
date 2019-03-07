@@ -50,8 +50,11 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 - Track the last-seen status.
 - Create an account with Email and Password.
 - Facebook login.
-- Configure your profile. (Name/ Profile picture/ Email/ Password)
+- Configure your profile. (Name/ Email/ Password)
+- Upload a profile picture from a device.
 - Search for friends by Email.
+- Send a notification to a backgrounded app when it gets a new message.
+- Reset a password.
 
 ## Specification
 
