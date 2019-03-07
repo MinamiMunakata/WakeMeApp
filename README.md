@@ -70,6 +70,9 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
   - Cloud Functions
   - Cloud Messaging
   - Crashlytics
+  
+#### Test Tool:
+- [Monkey](https://developer.android.com/studio/test/monkey)
 
 ## Architecture
 
@@ -84,14 +87,15 @@ root
   ├ Receivers
   |  └ {UID}
   |     └ {chatRoomId}
-  |         ├ receiver: [User object] *See a 'Users' reference below.
-  |         └ notification
-  |            └ {pushId}
-  |                |[Notification object]
-  |                ├ id (== pushId)
-  
-  
-  |                └ 
+  |         ├ notifications
+  |         |  └ {pushId}
+  |         |      |[Notification object]
+  |         |      ├ id (== pushId)
+  |         |      ├ topic
+  |         |      ├ title
+  |         |      └ body
+  |         |
+  |         └ receiver: [User object] *See a 'Users' reference below.
   |
   ├ ChatRooms
   |  └ {chatRoomId}
