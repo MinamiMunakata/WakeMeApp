@@ -36,12 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <fragment
-                android:id="@+id/search_friend_fragment"
-                android:name="com.minami_m.project.android.wakemeapp.screen.searchFriend.SearchFriendFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_search_friend" />
+            <!--<fragment-->
+                <!--android:id="@+id/search_friend_fragment"-->
+                <!--android:name="com.minami_m.project.android.wakemeapp.screen.searchFriend.SearchFriendFragment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--tools:layout="@layout/fragment_search_friend" />-->
         </FrameLayout>
 
         <Button

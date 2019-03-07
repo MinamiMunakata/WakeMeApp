@@ -16,7 +16,6 @@ import com.minami_m.project.android.wakemeapp.R;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFriendFragment extends Fragment {
-    private static final String TAG = "SearchFriendFragment";
     EditText editText;
 
 

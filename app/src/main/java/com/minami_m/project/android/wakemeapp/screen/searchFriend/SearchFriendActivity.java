@@ -3,8 +3,6 @@ package com.minami_m.project.android.wakemeapp.screen.searchFriend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.transition.Fade;
-import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +58,14 @@ public class SearchFriendActivity extends AppCompatActivity
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
+        if (findViewById(R.id.search_friend_container) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.search_friend_container, SearchFriendFragment.newInstance()).commit();
+        }
+
         TextView toolbarTitle = findViewById(R.id.toolbar_title_add_friend);
         FontStyleHandler.setFont(this, toolbarTitle, true, true);
         setupToolBar();
@@ -229,9 +235,10 @@ public class SearchFriendActivity extends AppCompatActivity
 
     @Override
     public void replaceFragment(Fragment newFragment) {
-        TransitionSet set = new TransitionSet();
-        set.addTransition(new Fade());
-        newFragment.setEnterTransition(set);
+        // Fade animation
+//        TransitionSet set = new TransitionSet();
+//        set.addTransition(new Fade());
+//        newFragment.setEnterTransition(set);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.search_friend_container, newFragment);
         transaction.addToBackStack(null);
