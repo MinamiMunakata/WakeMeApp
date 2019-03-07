@@ -80,7 +80,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                 viewHolder.alertView.setImageResource(R.drawable.ic_baseline_chat_24px);
             } else {
                 viewHolder.alertView.clearColorFilter();
-                viewHolder.alertView.setImageResource(R.drawable.ico_alart);
+                viewHolder.alertView.setImageResource(R.drawable.ico_alert);
             }
 
             viewHolder.statusView.setTextColor(Color.RED);

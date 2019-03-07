@@ -45,7 +45,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     private NotificationCompat.Builder getNotificationBuilder(Context context, PendingIntent pendingIntent) {
         return new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ico_alart)
+                .setSmallIcon(R.drawable.ico_alert)
                 .setColor(context.getColor(R.color.colorMyAccent))
                 .setContentText(context.getString(R.string.notificationText))
                 .setStyle(new NotificationCompat.BigTextStyle()
