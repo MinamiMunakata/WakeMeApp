@@ -152,7 +152,7 @@ Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 > ### UI Design
 >
 > <img src="../media/sign_in.png?raw=true" width="100px" alt="Sign-in Page"><img src="../media/friend_list.png?raw=true" width="100px" alt="Friend-list Page" hspace="50"><img src="../media/chat.png?raw=true" width="100px" alt="Chat Page" hspace="50"><img src="../media/my_page.png?raw=true" width="100px" alt="Mypage">  
-> <img src="../media/sign_in.png?raw=true" width="100px" alt="Sign-in Page"><img src="../media/friend_list.png?raw=true" width="100px" alt="Friend-list Page" hspace="50"><img src="../media/chat.png?raw=true" width="100px" alt="Chat Page" hspace="50"><img src="../media/my_page.png?raw=true" width="100px" alt="Mypage">
+> <img src="../media/search_friend.png?raw=true" width="100px" alt="Search-friend Page"><img src="../media/add_friend.png?raw=true" width="100px" alt="Search-result Page" hspace="50"><img src="../media/add_friend_success.png?raw=true" width="100px" alt="Success-message Dialog" hspace="50"><img src="../media/Timer.png?raw=true" width="100px" alt="Set-time Page">
 
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
 When I first told you the idea, you immediately understood the concepts and gave me a lot of advice as a designer. Whenever I asked you for additional design work, you were always flexible and dealt with my requests.
