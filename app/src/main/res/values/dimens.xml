@@ -25,7 +25,7 @@
     <dimen name="margin_bw_items">10dp</dimen>
     <dimen name="padding_inside_bubble">13dp</dimen>
     <dimen name="text_size_sign_in_input">15sp</dimen>
-    <dimen name="small_padding_text">3dp</dimen>
+    <dimen name="small_padding_text">5dp</dimen>
     <dimen name="dialog_radius">18dp</dimen>
     <dimen name="sender_bubble_text_padding">8dp</dimen>
     <dimen name="ico_size">24dp</dimen>

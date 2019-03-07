@@ -286,18 +286,16 @@
         android:id="@+id/change_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/small_vertical_space_bw_item"
+        android:layout_marginVertical="@dimen/vertical_space_bw_items"
         android:text="@string/_under_line"
         android:textColor="@color/colorMyAccent"
         android:textSize="@dimen/text_h4" />
 
     <Button
         android:id="@+id/alarm_button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/space_both_edges"
         android:background="@drawable/rounded_button"
-        android:paddingHorizontal="10dp"
         android:text="@string/set_alarm"
         android:textAllCaps="false"
         android:textColor="@color/white" />
