@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.handler.FontStyleHandler;
 
 import java.util.Objects;
 
@@ -44,7 +45,9 @@ public class ResetPasswordDialogFragment extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.fragment_reset_password_dialog, null);
         final EditText editText = view.findViewById(R.id.email_to_reset_password);
+        FontStyleHandler.setFont(requireActivity(), editText, false, false);
         Button button = view.findViewById(R.id.send_to_reset_password);
+        FontStyleHandler.setFont(requireActivity(), button, false, false);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
