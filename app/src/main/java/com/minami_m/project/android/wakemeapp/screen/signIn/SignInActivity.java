@@ -46,11 +46,11 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         ActivityChangeListener, FacebookLoginListener, SignInListener {
 
     private static final String EMAIL = "email";
-    ImageView loadingImage;
-    RelativeLayout loadingBG;
-    CallbackManager callbackManager;
-    FirebaseAuth mAuth;
-    Profile facebookProfile;
+    private ImageView loadingImage;
+    private RelativeLayout loadingBG;
+    private CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
+    private Profile facebookProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +176,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     @Override
     public void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
         this.loadingImage = loadingImg;
-        Glide.with(context).load(R.raw.loading).into(loadingImg);
+        Glide.with(context).load(R.raw.loading).into(loadingImage);
         this.loadingBG = loadingBackground;
         this.loadingBG.setVisibility(View.INVISIBLE);
     }

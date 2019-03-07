@@ -16,7 +16,7 @@ import com.minami_m.project.android.wakemeapp.R;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFriendFragment extends Fragment {
-    EditText editText;
+    private EditText editText;
 
 
     public SearchFriendFragment() {

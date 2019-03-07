@@ -106,7 +106,7 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
         changeSettingsText = findViewById(R.id.change_settings);
     }
 
-    public void createAlarm(WakeUpTime wakeUpTime) {
+    private void createAlarm(WakeUpTime wakeUpTime) {
         Intent alarmIntent = new Intent(AlarmClock.ACTION_SET_ALARM)
                 .putExtra(AlarmClock.EXTRA_HOUR, wakeUpTime.getHourOfDay())
                 .putExtra(AlarmClock.EXTRA_MINUTES, wakeUpTime.getMinute())

@@ -160,7 +160,7 @@ public class SearchFriendActivity extends AppCompatActivity
         return true;
     }
 
-    public void searchFriendByEmail(final String email) {
+    private void searchFriendByEmail(final String email) {
         String userEmail = null;
         try {
             userEmail = currentUser.getEmail();
@@ -203,7 +203,7 @@ public class SearchFriendActivity extends AppCompatActivity
         FBRealTimeDBHelper.USERS_REF.addListenerForSingleValueEvent(searchListener);
     }
 
-    public void followNewFriend(final User mUser, final User friend) {
+    private void followNewFriend(final User mUser, final User friend) {
         FBRealTimeDBHelper.FRIEND_ID_LIST_REF
                 .child(mUser.getId())
                 .child(friend.getId())

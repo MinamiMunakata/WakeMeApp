@@ -62,7 +62,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     private ImageView profileIcon;
     private TextView profileName;
     private Uri filePath;
-    private TextView displayName, email, pw, errorMsg;
+    private TextView errorMsg;
     private EditText displayNameTextField, emailTextField, pwTextField, timer_box;
     private WakeUpTime wakeUpTime;
     private ValueEventListener listener;
@@ -186,9 +186,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
     }
 
     private void setupUserInfoCategoryName() {
-        displayName = findViewById(R.id.profile_nickname);
-        email = findViewById(R.id.profile_email);
-        pw = findViewById(R.id.profile_pw);
+        TextView displayName = findViewById(R.id.profile_nickname);
+        TextView email = findViewById(R.id.profile_email);
+        TextView pw = findViewById(R.id.profile_pw);
         FontStyleHandler.setFont(this, displayName, false, true);
         FontStyleHandler.setFont(this, email, false, true);
         FontStyleHandler.setFont(this, pw, false, true);
@@ -424,7 +424,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
 //        }
 //    }
 
-    public void updatePassword(final String input) {
+    private void updatePassword(final String input) {
         currentUser.updatePassword(input).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -442,7 +442,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         });
     }
 
-    public void updateEmail(final String input) {
+    private void updateEmail(final String input) {
         currentUser.updateEmail(input).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -492,7 +492,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         });
     }
 
-    public void updateName(final String input) {
+    private void updateName(final String input) {
         UserProfileChangeRequest nameUpdateRequest = new UserProfileChangeRequest.Builder()
                 .setDisplayName(input)
                 .build();

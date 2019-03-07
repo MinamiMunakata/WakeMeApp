@@ -48,7 +48,7 @@ public class SignInFragment extends Fragment implements
     private Button signInBtn;
     private EditText editTextEmail, editTextPw;
     private TextView signUpLink, errorMsg;
-    private ImageView loadingImage, helpIconToResetPW;
+    private ImageView loadingImage;
     private RelativeLayout loadingBG;
 
     public SignInFragment() {
@@ -73,7 +73,7 @@ public class SignInFragment extends Fragment implements
         // Facebook login
         setupFBLoginButton(view);
         // Reset
-        helpIconToResetPW = view.findViewById(R.id.help_to_reset_password);
+        ImageView helpIconToResetPW = view.findViewById(R.id.help_to_reset_password);
         helpIconToResetPW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

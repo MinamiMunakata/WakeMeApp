@@ -45,7 +45,6 @@ public class ChatRoomActivity
     public static final String TAG = "--ChatRoomActivity--";
     private List<Message> mMessageList;
     private MessageListAdapter adapter;
-    private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private RecyclerView recyclerView;
     private EditText editText;
@@ -55,7 +54,7 @@ public class ChatRoomActivity
     private ValueEventListener listener;
 
     @SuppressWarnings("deprecation")
-    public static Spanned fromHtml(String html) {
+    private static Spanned fromHtml(String html) {
         return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
     }
 
@@ -73,7 +72,7 @@ public class ChatRoomActivity
         FontStyleHandler.setFont(this, editText, false, false);
         mMessageList = new ArrayList<>();
         sendButton.setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         setupToolbar();
         setupRecyclerViewWithAdapter();

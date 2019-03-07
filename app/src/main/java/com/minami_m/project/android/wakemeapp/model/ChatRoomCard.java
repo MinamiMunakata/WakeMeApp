@@ -52,7 +52,7 @@ public class ChatRoomCard implements Parcelable, Comparable<ChatRoomCard> {
         setupStatus(receiver);
     }
 
-    protected ChatRoomCard(Parcel in) {
+    private ChatRoomCard(Parcel in) {
         chatRoomId = in.readString();
         receiver = in.readParcelable(User.class.getClassLoader());
         unread = in.readByte() != 0;

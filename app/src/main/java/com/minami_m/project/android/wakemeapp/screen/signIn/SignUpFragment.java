@@ -117,7 +117,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         loadingBG.setVisibility(View.INVISIBLE);
     }
 
-    public void chooseImg() {
+    private void chooseImg() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -125,7 +125,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 PICK_IMAGE_REQUEST);
     }
 
-    public void writeNewUSerWithImg(final FirebaseUser currentUser) {
+    private void writeNewUSerWithImg(final FirebaseUser currentUser) {
         // upload image to Firebase Storage
         FBStorageHelper.ICON_REF(currentUser).putFile(filePath)
                 .addOnFailureListener(new OnFailureListener() {
