@@ -16,7 +16,6 @@ import com.minami_m.project.android.wakemeapp.R;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFriendFragment extends Fragment {
-    private EditText editText;
 
 
     public SearchFriendFragment() {
@@ -31,7 +30,7 @@ public class SearchFriendFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_friend, container, false);
-        editText = view.findViewById(R.id.search_by_email_text_field);
+        EditText editText = view.findViewById(R.id.search_by_email_text_field);
         SearchFriendActivity activity = (SearchFriendActivity) requireActivity();
         activity.setEditEmail(editText);
         return view;

@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.minami_m.project.android.wakemeapp.R;
 import com.minami_m.project.android.wakemeapp.common.handler.DateAndTimeFormatHandler;
 import com.minami_m.project.android.wakemeapp.model.Message;
-import com.minami_m.project.android.wakemeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,9 +22,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
-    private List<Message> mMessageList;
-    private String currentUserId;
-    private String receiverIcon;
+    private final List<Message> mMessageList;
+    private final String currentUserId;
+    private final String receiverIcon;
 
     MessageListAdapter(List<Message> messageList, String receiverId, String receiverIcon) {
         this.mMessageList = messageList;
@@ -113,7 +113,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     private class SentMessageViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView, dateView, seenHolder;
+        private final TextView textView;
+        private final TextView dateView;
+        private final TextView seenHolder;
 
         SentMessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -136,8 +138,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     private class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView, dateView;
-        private CircleImageView imageView;
+        private final TextView textView;
+        private final TextView dateView;
+        private final CircleImageView imageView;
 
         ReceivedMessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -152,10 +155,10 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             if (receiverIcon != null) {
                 Picasso.get()
                         .load(receiverIcon)
-                        .error(R.drawable.ico_default_avator)
+                        .error(R.drawable.ico_default_avatar)
                         .into(imageView);
             } else {
-                imageView.setImageResource(R.drawable.ico_default_avator);
+                imageView.setImageResource(R.drawable.ico_default_avatar);
             }
         }
     }

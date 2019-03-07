@@ -20,7 +20,7 @@ public class NotificationController {
     private static final String TAG = "Notifier";
     private static final int REQUEST_CODE_ONCE = 0;
     private static final long INTERVAL_WEEK = AlarmManager.INTERVAL_DAY * 7;
-    private Context context;
+    private final Context context;
 
     NotificationController(Context context) {
         this.context = context;

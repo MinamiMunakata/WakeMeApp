@@ -18,8 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.R;
+import com.minami_m.project.android.wakemeapp.common.listener.ActivityChangeListener;
 import com.minami_m.project.android.wakemeapp.screen.main.MainActivity;
 
 import java.util.Objects;
@@ -28,6 +28,9 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class SuccessfullyAddedDialog extends DialogFragment implements ActivityChangeListener {
+
+    public static final double WIDTH_RATIO = 0.8;
+
     public static SuccessfullyAddedDialog newInstance() {
         return new SuccessfullyAddedDialog();
     }
@@ -62,7 +65,7 @@ public class SuccessfullyAddedDialog extends DialogFragment implements ActivityC
         Display display = requireActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = (int) (size.x * 0.8);
+        int width = (int) (size.x * WIDTH_RATIO);
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
         Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawableResource(R.drawable.rounded_dialog);
         getDialog().getWindow().setLayout(width, height);

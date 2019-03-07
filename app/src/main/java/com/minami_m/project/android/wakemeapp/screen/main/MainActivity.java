@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
     }
 
     @Override
-    public void onChatRoomCardClicked(View v, int position) {
+    public void onChatRoomCardClicked(int position) {
         isListening = false;
         ChatRoomCard roomCard = chatRoomCards.get(position);
         Intent intent = new Intent(this, ChatRoomActivity.class);

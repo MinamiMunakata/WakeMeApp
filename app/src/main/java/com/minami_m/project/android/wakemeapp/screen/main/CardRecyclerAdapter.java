@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder> {
     private static ChatRoomCardClickListener listener;
-    private List<ChatRoomCard> chatRoomCards;
+    private final List<ChatRoomCard> chatRoomCards;
 
     CardRecyclerAdapter(List<ChatRoomCard> chatRoomCards, ChatRoomCardClickListener listener) {
         this.chatRoomCards = chatRoomCards;
@@ -65,11 +65,11 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         }
         viewHolder.statusView.setText(roomCard.getOversleepTimeStatus());
         if (roomCard.getReceiver().getIcon() == null) {
-            viewHolder.iconView.setImageResource(R.drawable.ico_default_avator);
+            viewHolder.iconView.setImageResource(R.drawable.ico_default_avatar);
         } else {
             Picasso.get()
                     .load(roomCard.getReceiver().getIcon())
-                    .error(R.drawable.ico_default_avator)
+                    .error(R.drawable.ico_default_avatar)
                     .into(viewHolder.iconView);
         }
 
@@ -103,13 +103,15 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView iconView, alertView;
-        TextView nameView, statusView;
+        final ImageView iconView;
+        final ImageView alertView;
+        final TextView nameView;
+        final TextView statusView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             iconView = itemView.findViewById(R.id.card_icon);
-            alertView = itemView.findViewById(R.id.card_alart);
+            alertView = itemView.findViewById(R.id.card_alert);
             nameView = itemView.findViewById(R.id.card_name);
             statusView = itemView.findViewById(R.id.card_status);
             itemView.setOnClickListener(this);
@@ -118,7 +120,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         @Override
         public void onClick(View v) {
-            listener.onChatRoomCardClicked(v, this.getLayoutPosition());
+            listener.onChatRoomCardClicked(this.getLayoutPosition());
         }
     }
 }

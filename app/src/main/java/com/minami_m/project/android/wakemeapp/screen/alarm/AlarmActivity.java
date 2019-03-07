@@ -36,17 +36,18 @@ import com.minami_m.project.android.wakemeapp.screen.signIn.SignInActivity;
 import java.util.Map;
 
 public class AlarmActivity extends AppCompatActivity implements ActivityChangeListener {
+    public static final float ALPHA = 0.3f;
     private static final int DEFAULT_HOUR = 7;
     private static final int DEFAULT_MINUTE = 0;
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final View[] optionButtons = new View[7];
     private Switch mustWakeUpSwitch, repeatSwitch;
     private TextView wakeUpTimeTextView, wakeUpTimeAmPm, repeatInWeek;
     private CustomBasicTextView changeSettingsText;
     private LinearLayout config;
     private GridLayout repeatOptions;
     private WakeUpTime wakeUpTime;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
-    private View[] optionButtons = new View[7];
     private Button alarmButton;
     private NotificationController notifier;
 
@@ -149,10 +150,10 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
             repeatInWeek.setAlpha(1);
         } else {
             wakeUpTimeTextView.setTextColor(getColor(R.color.black));
-            wakeUpTimeTextView.setAlpha(0.3f);
+            wakeUpTimeTextView.setAlpha(ALPHA);
             wakeUpTimeAmPm.setTextColor(getColor(R.color.black));
-            wakeUpTimeAmPm.setAlpha(0.3f);
-            repeatInWeek.setAlpha(0.3f);
+            wakeUpTimeAmPm.setAlpha(ALPHA);
+            repeatInWeek.setAlpha(ALPHA);
         }
 
     }
@@ -187,8 +188,6 @@ public class AlarmActivity extends AppCompatActivity implements ActivityChangeLi
                     mustWakeUpSwitch.setChecked(true);
                 }
                 createAlarm(wakeUpTime);
-//                TODO: Delete
-//                debuggerMethodToCheckNotification();
 
 
             }

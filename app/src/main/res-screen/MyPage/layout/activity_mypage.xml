@@ -38,7 +38,7 @@
                 android:id="@+id/setting_profile_icon"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:src="@drawable/ico_default_avator" />
+                android:src="@drawable/ico_default_avatar" />
 
             <ImageView
                 android:layout_width="wrap_content"

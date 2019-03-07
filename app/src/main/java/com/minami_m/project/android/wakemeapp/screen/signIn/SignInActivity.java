@@ -46,7 +46,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
         ActivityChangeListener, FacebookLoginListener, SignInListener {
 
     private static final String EMAIL = "email";
-    private ImageView loadingImage;
+    public static final int ICON_SIZE = 300;
     private RelativeLayout loadingBG;
     private CallbackManager callbackManager;
     private FirebaseAuth mAuth;
@@ -84,13 +84,13 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
     }
 
     private void createNewFragment(Bundle savedInstanceState) {
-        if (findViewById(R.id.signin_container) != null) {
+        if (findViewById(R.id.sign_in_container) != null) {
             if (savedInstanceState != null) {
                 return;
             }
             SignInFragment firstFragment = new SignInFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.signin_container, firstFragment).commit();
+                    .add(R.id.sign_in_container, firstFragment).commit();
         }
     }
 
@@ -108,7 +108,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.signin_container, newFragment);
+        transaction.replace(R.id.sign_in_container, newFragment);
         transaction.addToBackStack(null);
 
         // Commit the transaction
@@ -150,7 +150,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
                                 boolean isNewUser = Objects.requireNonNull(task.getResult()).getAdditionalUserInfo().isNewUser();
                                 if (isNewUser) {
                                     facebookProfile = Profile.getCurrentProfile();
-                                    String avatar = facebookProfile.getProfilePictureUri(300, 300).toString();
+                                    String avatar = facebookProfile.getProfilePictureUri(ICON_SIZE, ICON_SIZE).toString();
                                     User newUser = new User(user.getUid(),
                                             facebookProfile.getName(),
                                             user.getEmail(),
@@ -175,8 +175,7 @@ public class SignInActivity extends AppCompatActivity implements FragmentChangeL
 
     @Override
     public void setLoadingImage(RelativeLayout loadingBackground, ImageView loadingImg, Context context) {
-        this.loadingImage = loadingImg;
-        Glide.with(context).load(R.raw.loading).into(loadingImage);
+        Glide.with(context).load(R.raw.loading).into(loadingImg);
         this.loadingBG = loadingBackground;
         this.loadingBG.setVisibility(View.INVISIBLE);
     }

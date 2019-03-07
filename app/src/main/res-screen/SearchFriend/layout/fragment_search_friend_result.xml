@@ -12,7 +12,7 @@
         android:id="@+id/icon_holder"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ico_default_avator"
+        android:src="@drawable/ico_default_avatar"
         android:backgroundTint="@color/colorBackground"
         android:layout_marginVertical="@dimen/vertical_space_bw_items"/>
     <com.minami_m.project.android.wakemeapp.CustomBasicTextView

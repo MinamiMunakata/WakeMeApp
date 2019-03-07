@@ -26,7 +26,7 @@
             android:layout_height="@dimen/message_avatar"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/ico_default_avator" />
+            android:src="@drawable/ico_default_avatar" />
 
         <com.minami_m.project.android.wakemeapp.CustomBasicTextView
             android:id="@+id/received_bubble"

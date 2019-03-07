@@ -14,6 +14,7 @@ public class DateAndTimeFormatHandler {
     private static final int MINUTE = 60 * SECOND;
     private static final int HOUR = 60 * MINUTE;
     private static final int DAY = 24 * HOUR;
+    private static final int NOON = 12;
 
     public static boolean isLessThan24h(long diff) {
         return (diff < DAY);
@@ -89,13 +90,13 @@ public class DateAndTimeFormatHandler {
         String AM_PM = "AM";
         String zeroMin = "";
         String zeroHour = "";
-        if (hourOfDay >= 12) {
+        if (hourOfDay >= NOON) {
             AM_PM = "PM";
-            if (hourOfDay >= 13) {
-                hourOfDay -= 12;
+            if (hourOfDay > NOON) {
+                hourOfDay -= NOON;
             }
         } else if (hourOfDay == 0) {
-            hourOfDay = 12;
+            hourOfDay = NOON;
         } else if (hourOfDay < 10) {
             zeroHour = "0";
         }

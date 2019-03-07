@@ -56,6 +56,7 @@ import java.util.Map;
 public class MyPageActivity extends AppCompatActivity implements ActivityChangeListener {
     private static final String TAG = "SettingActivity";
     private static final int NAME = 77, EMAIL = 78, PW = 79;
+    public static final float ALPHA = 0.3f;
     private final int PICK_IMAGE_REQUEST = 6789;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -238,7 +239,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String downloadIconURL = uri.toString();
-                                    System.out.println("DL -> " + downloadIconURL);
                                     FBRealTimeDBHelper.updateIcon(currentUser, downloadIconURL);
                                 }
                             });
@@ -287,7 +287,7 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
                         }
                     } else {
                         timer_box.setTextColor(getColor(R.color.black));
-                        timer_box.setAlpha(0.3f);
+                        timer_box.setAlpha(ALPHA);
                     }
                     Map<String, String> formattedTime = DateAndTimeFormatHandler
                             .generateFormattedAlarmTime(
@@ -300,9 +300,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
             private void setupIcon(@NonNull DataSnapshot dataSnapshot) {
                 String path = dataSnapshot.child("icon").getValue(String.class);
                 if (path == null) {
-                    profileIcon.setImageResource(R.drawable.ico_default_avator);
+                    profileIcon.setImageResource(R.drawable.ico_default_avatar);
                 } else {
-                    Picasso.get().load(path).error(R.drawable.ico_default_avator).into(profileIcon);
+                    Picasso.get().load(path).error(R.drawable.ico_default_avatar).into(profileIcon);
                 }
             }
 

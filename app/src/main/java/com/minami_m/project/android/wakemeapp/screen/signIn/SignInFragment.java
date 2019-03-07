@@ -182,7 +182,6 @@ public class SignInFragment extends Fragment implements
 
     private void displaySignUpForm() {
         SignUpFragment signUpFragment = new SignUpFragment();
-//        SignUpFragment signUpFragment = SignUpFragment.newInstance(emailForSignUp, passwordForSignUp);
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) requireActivity();
         fragmentChangeListener.replaceFragment(signUpFragment);
     }

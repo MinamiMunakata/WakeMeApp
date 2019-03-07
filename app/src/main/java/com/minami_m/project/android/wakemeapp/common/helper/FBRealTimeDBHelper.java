@@ -32,10 +32,6 @@ public class FBRealTimeDBHelper {
     private static final String TAG = "RealTimeDatabaseHelper";
     private static final DatabaseReference CHAT_ROOMS_REF = FIREBASE_DATABASE.getReference("ChatRooms");
 
-    public static FBRealTimeDBHelper newInstance() {
-        return new FBRealTimeDBHelper();
-    }
-
     public static void writeNewUser(User newUser) {
         USERS_REF.child(newUser.getId()).setValue(newUser, new DatabaseReference.CompletionListener() {
 
@@ -199,22 +195,6 @@ public class FBRealTimeDBHelper {
         } else {
             Log.i(TAG, "showResult: " + msg);
         }
-    }
-
-    // onDataChange cannot return anything because this is a read-only method.
-    public static void readUserData(String id, final FBRealTimeDBCallback callback) {
-        USERS_REF.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                callback.retrieveUserData(user);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                showResult(databaseError, "Read user data");
-            }
-        });
     }
 
     public static void sendNewMessage(final String chatRoomId, final Message message, final String receiverId, final String senderName) {

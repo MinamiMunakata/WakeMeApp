@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:src="@drawable/ico_default_avator" />
+                android:src="@drawable/ico_default_avatar" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -58,7 +58,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/card_alart"
+                android:id="@+id/card_alert"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

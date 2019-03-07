@@ -52,7 +52,7 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class SignUpFragment extends Fragment implements View.OnClickListener {
-    private static int PICK_IMAGE_REQUEST = 12345;
+    private static final int PICK_IMAGE_REQUEST = 12345;
     private FirebaseAuth mAuth;
     private EditText nameField;
     private EditText emailField;

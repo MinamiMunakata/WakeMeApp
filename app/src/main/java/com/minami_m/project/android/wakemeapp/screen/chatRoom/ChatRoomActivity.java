@@ -54,8 +54,8 @@ public class ChatRoomActivity
     private ValueEventListener listener;
 
     @SuppressWarnings("deprecation")
-    private static Spanned fromHtml(String html) {
-        return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+    private static Spanned fromHtml() {
+        return Html.fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;", Html.FROM_HTML_MODE_LEGACY);
     }
 
     @Override
@@ -266,7 +266,7 @@ public class ChatRoomActivity
         if (!TextUtils.isEmpty(editText.getText())) {
             Message message = new Message(
                     editText.getText().toString().trim()
-                            + fromHtml("&#160;&#160;&#160;&#160;&#160;&#160;&#160;"),
+                            + fromHtml(),
                     currentUser.getUid(),
                     new Date().getTime()
             );

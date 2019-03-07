@@ -182,7 +182,6 @@ public class SearchFriendActivity extends AppCompatActivity
                     String mEmail = userSnapshot.child("email").getValue(String.class);
                     if (mEmail != null && mEmail.equals(email)) {
                         friend = userSnapshot.getValue(User.class);
-                        System.out.println(friend);
                         search_btn.setText(R.string.add_as_friend);
                         dataExist = true;
                         replaceFragment(SearchFriendResultFragment.newInstance());
@@ -258,10 +257,10 @@ public class SearchFriendActivity extends AppCompatActivity
         if (friend.getIcon() != null) {
             Picasso.get()
                     .load(friend.getIcon())
-                    .error(R.drawable.ico_default_avator)
+                    .error(R.drawable.ico_default_avatar)
                     .into(iconHolder);
         } else {
-            iconHolder.setImageResource(R.drawable.ico_default_avator);
+            iconHolder.setImageResource(R.drawable.ico_default_avatar);
         }
     }
 

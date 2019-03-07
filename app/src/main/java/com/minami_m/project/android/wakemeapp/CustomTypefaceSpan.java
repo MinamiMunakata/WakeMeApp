@@ -7,7 +7,8 @@ import android.text.style.MetricAffectingSpan;
 
 public class CustomTypefaceSpan extends MetricAffectingSpan {
 
-    private Typeface typeface;
+    private static final float SKEW_X = -0.25f;
+    private final Typeface typeface;
 
     public CustomTypefaceSpan(Typeface typeface) {
         this.typeface = typeface;
@@ -32,7 +33,7 @@ public class CustomTypefaceSpan extends MetricAffectingSpan {
             paint.setFakeBoldText(true);
         }
         if ((fakeStyle & Typeface.ITALIC) != 0) {
-            paint.setTextSkewX(-0.25f);
+            paint.setTextSkewX(SKEW_X);
         }
         paint.setTypeface(typeface);
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".screen.signIn.SignInActivity">
     <FrameLayout
-        android:id="@+id/signin_container"
+        android:id="@+id/sign_in_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
