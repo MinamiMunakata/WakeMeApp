@@ -298,7 +298,7 @@
         android:layout_marginHorizontal="@dimen/space_both_edges"
         android:background="@drawable/rounded_button"
         android:paddingHorizontal="10dp"
-        android:text="@string/set_alarm_on_your_device"
+        android:text="@string/set_alarm"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

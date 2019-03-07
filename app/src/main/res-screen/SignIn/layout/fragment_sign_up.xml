@@ -42,7 +42,7 @@
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
             android:focusable="true"
             android:inputType="textPersonName"
@@ -58,7 +58,7 @@
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
             android:focusable="true"
             android:inputType="textEmailAddress"
@@ -71,14 +71,23 @@
             android:labelFor="@+id/edit_pw"
             android:text="@string/password" />
 
-        <EditText
-            android:id="@+id/edit_pw"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:focusable="true"
-            android:inputType="textPassword"
-            tools:ignore="LabelFor" />
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_pw"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:focusable="true"
+                android:inputType="textPassword"
+                tools:ignore="LabelFor" />
+
+        </android.support.design.widget.TextInputLayout>
+
 
         <Button
             android:id="@+id/sign_up_btn"
