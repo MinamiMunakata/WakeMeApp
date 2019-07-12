@@ -50,8 +50,11 @@ Designed by [Natsumi Kobayashi](https://github.com/coooopeeeer)
 - Track the last-seen status.
 - Create an account with Email and Password.
 - Facebook login.
-- Configure your profile. (Name/ Profile picture/ Email/ Password)
+- Configure your profile. (Name/ Email/ Password)
+- Upload a profile picture from a device.
 - Search for friends by Email.
+- Send a notification to a backgrounded app when it gets a new message.
+- Reset a password.
 
 ## Specification
 
@@ -151,7 +154,9 @@ Designer: [Natsumi Kobayashi](https://github.com/coooopeeeer)
 
 > ### UI Design
 >
-> <img src="../media/friend_list.png?raw=true" width="200px" alt="Friend List Page Image"><img src="../media/chat.png?raw=true" width="200px" alt="Chat Page Image" hspace="50"><img src="../media/mypage.png?raw=true" width="200px" alt="Mypage Image">
+> <img src="../media/sign_in.png?raw=true" width="100px" alt="Sign-in Page" hspace="50"><img src="../media/friend_list.png?raw=true" width="100px" alt="Friend-list Page"><img src="../media/chat.png?raw=true" width="100px" alt="Chat Page" hspace="50"><img src="../media/my_page.png?raw=true" width="100px" alt="Mypage">  
+> <img src="../media/search_friend.png?raw=true" width="100px" alt="Search-friend Page" hspace="50"><img src="../media/add_friend.png?raw=true" width="100px" alt="Search-result Page"><img src="../media/add_friend_success.png?raw=true" width="100px" alt="Success-message Dialog" hspace="50"><img src="../media/Timer.png?raw=true" width="100px" alt="Set-time Page">  
+> ##### Click to see a larger image.
 
 Thank you [@Natsumi](https://github.com/coooopeeeer) for designing all layouts of WakeMeApp. The design is really well-organized, user-friendly, and beautiful.  
 When I first told you the idea, you immediately understood the concepts and gave me a lot of advice as a designer. Whenever I asked you for additional design work, you were always flexible and dealt with my requests.
