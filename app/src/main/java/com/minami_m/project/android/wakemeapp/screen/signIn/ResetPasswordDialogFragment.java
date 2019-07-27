@@ -2,7 +2,9 @@ package com.minami_m.project.android.wakemeapp.screen.signIn;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class ResetPasswordDialogFragment extends DialogFragment {
+    private Context context;
 
 
     public ResetPasswordDialogFragment() {
@@ -38,6 +41,7 @@ public class ResetPasswordDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Activity activity = getActivity();
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -52,7 +56,7 @@ public class ResetPasswordDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(editText.getText())) {
-                    toast("Enter email");
+                    Toast.makeText(activity, "Enter email", Toast.LENGTH_LONG).show();
                 } else {
                     String email = editText.getText().toString().trim();
                     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,7 +65,7 @@ public class ResetPasswordDialogFragment extends DialogFragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        toast("Email has sent.");
+                                        Toast.makeText(activity, "Email has sent.", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -80,8 +84,5 @@ public class ResetPasswordDialogFragment extends DialogFragment {
         Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    private void toast(String message) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
-    }
 
 }
