@@ -92,21 +92,17 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i(TAG, "onDataChange: \n" + isListening);
                 if (isListening) {
-                    Log.i(TAG, "onDataChange: Access to Firebase.");
                     loadingImage.setVisibility(View.VISIBLE);
                     chatRoomCards.clear();
                     for (DataSnapshot receiverSnapshot : dataSnapshot.getChildren()) {
                         User receiver = receiverSnapshot.child("receiver").getValue(User.class);
-                        Log.i(TAG, "onDataChange: " + receiverSnapshot);
                         if (receiver != null) {
                             ChatRoomCard roomCard = new ChatRoomCard(
                                     receiverSnapshot.getKey(),
                                     receiver,
                                     receiverSnapshot.child("notifications").exists());
                             chatRoomCards.add(roomCard);
-                            Log.i(TAG, "onDataChange: " + roomCard.toString());
                         }
                     }
                     Collections.sort(chatRoomCards);
@@ -264,7 +260,6 @@ public class MainActivity extends AppCompatActivity implements ActivityChangeLis
         isListening = false;
         removeListeners();
         loadingImage.setVisibility(View.INVISIBLE);
-        Log.i(TAG, "onStop: " + "Disconnect from FB");
     }
 
     private void removeListeners() {

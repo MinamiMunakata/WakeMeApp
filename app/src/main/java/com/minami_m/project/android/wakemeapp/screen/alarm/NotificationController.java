@@ -27,7 +27,6 @@ public class NotificationController {
     }
 
     public void setAllNotification(WakeUpTime wakeUpTime) {
-        Log.i(TAG, "setAllNotification: " + wakeUpTime);
         if (wakeUpTime.getIsAlarmOn()) {
             if (wakeUpTime.getIsRepeatModeOn()) {
                 ArrayList<Integer> extraDays = wakeUpTime.generateExtraDays();
@@ -67,7 +66,6 @@ public class NotificationController {
                 .generateFormattedAlarmTime(
                         time.get(Calendar.HOUR_OF_DAY),
                         time.get(Calendar.MINUTE));
-        Log.i(TAG, "setNotificationAt: " + DateAndTimeFormatHandler.generateDateOfChat(time.getTimeInMillis()) + formattedTime.get("full time"));
         // Create Intent
         PendingIntent sender = generateSender(day, PendingIntent.FLAG_UPDATE_CURRENT);
         // Let know AlarmManager

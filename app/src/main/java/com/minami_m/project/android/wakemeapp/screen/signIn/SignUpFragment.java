@@ -140,7 +140,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         loadingBG.setVisibility(View.INVISIBLE);
-                        Log.i(TAG, "onSuccess: The image is successfully Uploaded");
                         FBStorageHelper.ICON_REF(currentUser).getDownloadUrl()
                                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override

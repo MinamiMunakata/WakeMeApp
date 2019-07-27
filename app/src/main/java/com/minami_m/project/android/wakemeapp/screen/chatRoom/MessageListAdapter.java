@@ -57,7 +57,6 @@ public class MessageListAdapter extends RecyclerView.Adapter {
                     .inflate(R.layout.received_message, parent, false);
             return new ReceivedMessageViewHolder(view);
         }
-        Log.i(TAG, "onCreateViewHolder: Invalid ViewType is called.");
         return new RecyclerView.ViewHolder(parent) {
             @Override
             public String toString() {

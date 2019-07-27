@@ -125,7 +125,6 @@ public class ChatRoomActivity
         try {
             currentUserId = currentUser.getUid();
         } catch (Exception e) {
-            Log.i(TAG, "setupRecyclerViewWithAdapter: " + e.getMessage());
             launchActivity(SignInActivity.class);
         }
         adapter = new MessageListAdapter(mMessageList, currentUserId, chatRoomCard.getReceiver().getIcon());
@@ -275,8 +274,6 @@ public class ChatRoomActivity
             FBRealTimeDBHelper.sendNewMessage(chatRoomCard.getChatRoomId(), message, chatRoomCard.getReceiver().getId(), currentUser.getDisplayName());
             adapter.notifyDataSetChanged();
             editText.setText("");
-        } else {
-            Log.i(TAG, "onClick: Invalid input to send a message.");
         }
     }
 }

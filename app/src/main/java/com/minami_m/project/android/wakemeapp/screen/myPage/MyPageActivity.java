@@ -398,32 +398,6 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         }
     }
 
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//        switch (keyCode) {
-//            case KeyEvent.KEYCODE_ENTER:
-//                switch (getCurrentFocus().getId()) {
-//                    case R.id.edit_profile_name:
-//                        updateName(((EditText) getCurrentFocus()).getText().toString());
-//                        break;
-//                    case R.id.edit_profile_email:
-//                        updateEmail(((EditText) getCurrentFocus()).getText().toString());
-//                        break;
-//                    case R.id.edit_profile_pw:
-//                        updatePassword(((EditText) getCurrentFocus()).getText().toString());
-//                        break;
-//                    default:
-//                        System.out.println(getCurrentFocus().getId());
-//                        System.out.println(displayNameTextField.getId());
-//                        break;
-//                }
-//                InputHandler.hideSoftKeyBoard(this);
-//                return true;
-//            default:
-//                return super.onKeyUp(keyCode, event);
-//        }
-//    }
-
     private void updatePassword(final String input) {
         currentUser.updatePassword(input).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
