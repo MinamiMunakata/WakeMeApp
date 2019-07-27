@@ -554,7 +554,9 @@ public class MyPageActivity extends AppCompatActivity implements ActivityChangeL
         super.onStop();
         errorMsg.setText("");
         isListening = false;
-        FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid()).removeEventListener(listener);
+        if (currentUser != null) {
+            FBRealTimeDBHelper.USERS_REF.child(currentUser.getUid()).removeEventListener(listener);
+        }
 
     }
 }
