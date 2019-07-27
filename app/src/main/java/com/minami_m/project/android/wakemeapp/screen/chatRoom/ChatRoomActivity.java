@@ -182,6 +182,8 @@ public class ChatRoomActivity
                     updateReceiverStatus(message);
                     recyclerView.smoothScrollToPosition(mMessageList.size() - 1);
                 }
+                // Delete notification
+                FBRealTimeDBHelper.deleteNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
             }
 
             @Override
@@ -192,8 +194,6 @@ public class ChatRoomActivity
 
         FBRealTimeDBHelper.MESSAGES_REF.child(chatRoomCard.getChatRoomId())
                 .addValueEventListener(listener);
-        // Delete notification
-        FBRealTimeDBHelper.deleteNotification(currentUser.getUid(), chatRoomCard.getChatRoomId());
     }
 
     private void updateReceiverStatus(Message message) {
