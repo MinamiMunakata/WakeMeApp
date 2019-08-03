@@ -1,8 +1,6 @@
 # WakeMeApp
 
-###### 🚧 This app is still a WIP 🚧
-
-###### [■■■■■■■■■□]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90% Completed!
+## 👉 [Download WakeMeApp](https://play.google.com/store/apps/details?id=com.minami_m.project.android.wakemeapp)
 
 ## Index
 
