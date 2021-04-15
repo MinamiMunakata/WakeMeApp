@@ -165,4 +165,3 @@ Thank you so much for your help, and please let me know if I can return the favo
 ⚠️The `google-services.json` from Firebase which is necessary to run this app is not included in this repository for security reasons.
 
 This app is a WIP.
-~~👉 Download WakeMeApp(https://play.google.com/store/apps/details?id=com.minami_m.project.android.wakemeapp)~~
